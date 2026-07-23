@@ -71,10 +71,11 @@ structure the internal→external map destroys.
 
 **Sequencing (load-bearing):** Arm T's P1 + P3 first — laptop, existing
 data, produces the writeup's tables and the capacity curve. Then stand up
-the NDIF substrate **once** (§4). Then run Arm T's P2 and Arm G on that
-one substrate. Do not build Arm G first: it is a multi-week infrastructure
-build, and running it ahead of the cheap decisive results recreates the
-exact drift this program was carved out of.
+the activation-capture pipeline **once** on the pilot rung
+(Colab-A100-8B bf16, §7b) and run Arm T's P2 and Arm G on it; escalate to
+NDIF only for optional scale confirmation. Do not build Arm G first: it is
+a multi-week infrastructure build, and running it ahead of the cheap
+decisive results recreates the exact drift this program was carved out of.
 
 ## 3. Evidence to date (v0)
 
@@ -199,16 +200,23 @@ Same episodes both sides; per task family:
 - Claim **refuted** if external mean cross-task ≥ internal − 0.1.
 - In between: report as-is; no re-framing to rescue the thesis.
 
-Substrate: **NDIF via nnsight, remote** (§7b) — not a rented GPU. NDIF
-serves Llama-3.1 at multiple sizes and DeepSeek-R1 in full precision, free
-(NSF-funded, US-resident), so activations come with no quantization
-confound and no local VRAM ceiling. Local hardware here is an M4 / 24 GB /
-no CUDA, which makes remote mandatory past a tiny dev model. 8B pilot
-first; if the gap doesn't appear at 8B that is a scale finding, not a
-failure. (Note: Apollo's rollouts are llama-3.3-70B; NDIF exposes the
-3.1 line — so P2 either regenerates rollouts on an NDIF-served model or
-applies to whichever Apollo variants NDIF can act as. Pin the model ID and
-never mix acting model across the two banks — see Arm G §2.1 analogue.)
+Substrate (two rungs — see §7b for the full rationale):
+- **Pilot rung — Colab Pro+ (A100-40GB, bf16), Llama-3.1-8B.** The 8B
+  pilot and all of Arm G run here. bf16 is non-negotiable: the activations
+  *are* the measurement, so the T4/4-bit path (free & standard Pro) is
+  debug-only and its numbers do not count. A rented A100-80GB
+  (Lambda/Runpod, ~$1–2/hr) is the same rung with more disk and no session
+  drops. If the gap doesn't appear at 8B, that is a scale finding, not a
+  failure — an 8B-only result is publishable.
+- **Scale rung — NDIF via nnsight, remote.** Only after the 8B pilot says
+  something. NDIF hosts the models Colab can't (70B, DeepSeek-R1) in full
+  precision, free (NSF-funded, US-resident). This is the *only* path to
+  the full-scale model; it is not the pilot substrate.
+
+Note: Apollo's released rollouts are llama-3.3-70B; the 8B pilot uses
+llama-3.1-8B, so P2 regenerates rollouts on the pilot model (the acting
+model must match the activations — §2.1). Pin the model ID; never mix
+acting model across the two banks or across rungs.
 
 ### P3 — The Φ-shaped-ceiling curve (the killer figure if E5 holds)
 
@@ -223,7 +231,8 @@ than monitor capacity — also informative.
 
 ## 6b. Arm G — goal persistence (the expensive arm)
 
-Runs only after Arm T's P1/P3 land and the NDIF substrate is standing.
+Runs only after Arm T's P1/P3 land and the pilot rung (Colab-A100-8B bf16,
+§7b) is standing with controls green.
 Question: when a model is given an improbable goal achievable only by
 breaking a stated rule, does its residual stream carry a
 linearly-decodable, turn-persistent representation of that goal — in cases
@@ -271,9 +280,10 @@ not a failure to hide.
 `emergent` benign directives with planted out-of-scope distractors and
 fake secrets — are close to the matched-benign condition already. The
 improbable variant (goal reachable only by touching the distractor/secret)
-must be *authored*; rollouts must be *regenerated* on an NDIF-served model
-(the existing transcripts are haiku/sonnet — closed, no activations, and
-G1-forbidden as activation input).
+must be *authored*; rollouts must be *regenerated* on the pilot-rung acting
+model (Llama-3.1-8B, Colab/rented A100) so activations come from the model
+that acted — the existing transcripts are haiku/sonnet (closed, no
+activations, G1-forbidden as activation input).
 
 ## 6. Payoff table (either way, this pays)
 
@@ -315,13 +325,25 @@ Arm G's discovery phase, answered where the answer is already on disk:
 - **Activation tooling.** No `nnsight` / `gemma-scope` / `sae-lens` /
   `resid_post` / `TransformerLens` in either repo — confirmed absent, as
   expected. Arm G/P2 introduce nnsight fresh, pinned.
-- **Local hardware.** Apple M4, 24 GB unified memory, **no CUDA**. A local
-  dev model must fit in ~24 GB shared and runs on MPS, not CUDA — so the
-  handoff's "Qwen2.5-1.5B on the local GPU" becomes "small model on MPS,"
-  and anything real is NDIF-remote. No 4-bit-local headline numbers.
+- **Local hardware.** Apple M4, 24 GB unified memory, **no CUDA**. Good
+  for P1/P3 (CPU embeddings + APIs) and MPS pipeline dev on a tiny model.
+  Not for activation capture on an 8B+ acting model — that goes to a rung
+  below.
+- **Substrate decision (two rungs).** *Pilot:* Colab Pro+ A100-40GB in
+  bf16 (Llama-3.1-8B). Chosen over NDIF for the pilot because the model is
+  local in the notebook, so Arm G's agentic generate→tool→generate loop
+  runs with zero per-turn queue latency — the exact cost NDIF imposes on
+  multi-turn. bf16 mandatory (4-bit confounds the activations, which are
+  the measurement); T4/free/standard-Pro = debug only. Watch: A100
+  availability fluctuates even on Pro+ (confirm you can get one before
+  committing), sessions drop (checkpoint activations to Drive
+  incrementally), and the layer×position×rollout sweep is large float —
+  be selective or stream/downcast against Colab's ~100 GB ephemeral disk.
+  A rented A100-80GB is the same rung with more disk and no drops.
+  *Scale:* NDIF, only for models Colab can't hold (70B/DeepSeek-R1).
 - **NDIF.** `NDIF_API_KEY` **not set**. Sign-up at `login.ndif.us` (free,
-  US-resident) is a prerequisite gating every remote run; do it before
-  P2/Arm G, not during.
+  US-resident) — needed only when the work reaches the scale rung, not for
+  the pilot. Not a blocker for P1/P3/8B-pilot.
 - **Scenario source** (Arm G): `frontier-ops/eval/drift_harness/
   scenarios.py`, `emergent` mode — benign directive + planted
   out-of-scope distractors + fake secrets. Usable as source; improbable
@@ -332,15 +354,23 @@ Arm G's discovery phase, answered where the answer is already on disk:
 
 1. This document sharpened until it can be disagreed with. ← you are here
 2. **Arm T, P1** — exact pairing (removes the variant caveat; laptop, cached data).
-3. **Arm T, P3 external leg** — embedding-capacity curve (API calls, no GPU).
-4. NDIF onboarding (`login.ndif.us`, set `NDIF_API_KEY`) — the one-time gate.
-5. **Arm T, P2** — 8B pilot on NDIF, then the full model.
-6. **Arm G** — scenario harness → single-turn probe + baseline + Δ →
+3. **Arm T, P3 external leg** — embedding-capacity curve (laptop, API calls, no GPU).
+4. **Pilot rung up** — Colab Pro+ (confirm A100 availability) or a rented
+   A100-80GB; stand up the nnsight activation-capture pipeline on
+   Llama-3.1-8B bf16 with the positive/null/random controls green.
+5. **Arm T, P2 (8B pilot)** — matched-methodology transfer Δ on the pilot rung.
+6. **Arm G** — scenario harness → single-turn probe + same-rollout Δ →
    cross-family → multi-turn (only on signal). The expensive arm; last.
-7. The paper is this document plus the P1/P3 tables and the Arm-T/Arm-G Δ's.
+7. **Scale rung (optional, on signal)** — NDIF onboarding
+   (`login.ndif.us`, `NDIF_API_KEY`), re-run the decisive Δ at 70B /
+   DeepSeek-R1 for scale evidence.
+8. The paper is this document plus the P1/P3 tables and the Arm-T/Arm-G Δ's;
+   the scale rung strengthens it but the 8B result stands on its own.
 
-Arms T and G share one repo (this one) and one substrate. There is no
-separate `goal-probe` repo — that was the pre-consolidation plan; the
+Arms T and G share one repo (this one) and one substrate ladder. There is
+no separate `goal-probe` repo — that was the pre-consolidation plan; the
 handoff's methodology (matched controls, same-rollout Δ, family split,
-control triad, no-fabrication, null-is-success) is absorbed here as Arm G,
-and its NDIF substrate (§7b) replaced Arm T P2's rented-GPU plan.
+control triad, no-fabrication, null-is-success) is absorbed here as Arm G.
+Substrate: Colab-A100-8B bf16 is the pilot rung (better than NDIF for
+Arm G's agentic loop — no per-turn queue); NDIF is demoted to the
+optional scale rung for models Colab can't hold.
