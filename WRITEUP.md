@@ -358,10 +358,14 @@ Arm G's discovery phase, answered where the answer is already on disk:
    internal row re-derived from released scores (0.925/0.998/0.911), E4 gap
    ~0.36 on matched variants. *Remaining:* the per-sample Apollo join for a
    paired delta + CI (needs their `deception_detection` loader).
-3. **Arm T, P3 external leg** — **local capacity legs done 2026-07-22**:
-   flat curve, cross-task transfer pinned at chance across 384→768→1024
-   while in-task rises — capacity in the fixed-feature range does not close
-   the gap. *Remaining:* frontier-API + LLM-judge legs (need keys).
+3. **Arm T, P3 external leg** — **done 2026-07-22** (`results/RESULTS.md`).
+   Local capacity legs: flat, cross-task transfer at chance across
+   384→768→1024 while in-task rises. LLM-judge leg (via Claude Code OAuth,
+   sonnet-5, no API key): mean 0.76 across the four families with one
+   untuned prompt — a three-tier result: fixed-feature cross-task ~0.47 <
+   judge 0.76 < internal 0.91–0.99. E5 confirmed (a mind escapes the
+   fixed-feature ceiling) and sharpened (it does not reach the internal
+   one). *Remaining:* full-N judge run + CIs; frontier embedding-API leg.
 4. **Pilot rung up** — Colab Pro+ (confirm A100 availability) or a rented
    A100-80GB; stand up the nnsight activation-capture pipeline on
    Llama-3.1-8B bf16 with the positive/null/random controls green.
