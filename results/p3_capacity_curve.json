@@ -1,0 +1,35 @@
+{
+  "curve": [
+    {
+      "mean_in_task_auroc": 0.7388,
+      "mean_offdiag_transfer_auroc": 0.4848,
+      "mean_offdiag_abs_cos": 0.0711,
+      "encoder": "all-MiniLM-L6-v2",
+      "dim": 384
+    },
+    {
+      "mean_in_task_auroc": 0.7746,
+      "mean_offdiag_transfer_auroc": 0.4858,
+      "mean_offdiag_abs_cos": 0.0372,
+      "encoder": "BAAI/bge-base-en-v1.5",
+      "dim": 768
+    },
+    {
+      "mean_in_task_auroc": 0.8057,
+      "mean_offdiag_transfer_auroc": 0.4605,
+      "mean_offdiag_abs_cos": 0.0435,
+      "encoder": "BAAI/bge-large-en-v1.5",
+      "dim": 1024
+    }
+  ],
+  "blocked_upper_legs": [
+    {
+      "leg": "frontier embedding API (~3072-d)",
+      "reason": "needs OPENAI/VOYAGE/COHERE key"
+    },
+    {
+      "leg": "LLM judge zero-shot",
+      "reason": "needs ANTHROPIC/OPENAI key"
+    }
+  ]
+}

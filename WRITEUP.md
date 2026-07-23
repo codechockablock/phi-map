@@ -352,9 +352,16 @@ Arm G's discovery phase, answered where the answer is already on disk:
 
 ## 8. Order of work
 
-1. This document sharpened until it can be disagreed with. ← you are here
-2. **Arm T, P1** — exact pairing (removes the variant caveat; laptop, cached data).
-3. **Arm T, P3 external leg** — embedding-capacity curve (laptop, API calls, no GPU).
+1. This document sharpened until it can be disagreed with. ✅
+2. **Arm T, P1** — exact pairing. **Laptop legs done 2026-07-22**
+   (`results/RESULTS.md`): external reproduces bit-identically (Δcos 0.0),
+   internal row re-derived from released scores (0.925/0.998/0.911), E4 gap
+   ~0.36 on matched variants. *Remaining:* the per-sample Apollo join for a
+   paired delta + CI (needs their `deception_detection` loader).
+3. **Arm T, P3 external leg** — **local capacity legs done 2026-07-22**:
+   flat curve, cross-task transfer pinned at chance across 384→768→1024
+   while in-task rises — capacity in the fixed-feature range does not close
+   the gap. *Remaining:* frontier-API + LLM-judge legs (need keys).
 4. **Pilot rung up** — Colab Pro+ (confirm A100 availability) or a rented
    A100-80GB; stand up the nnsight activation-capture pipeline on
    Llama-3.1-8B bf16 with the positive/null/random controls green.

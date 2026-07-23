@@ -1,0 +1,134 @@
+{
+  "provenance": {
+    "apollo": "/Users/joseph/frontier-ops-v3/eval/data/deception-detection",
+    "encoder": "all-MiniLM-L6-v2"
+  },
+  "external_n": {
+    "roleplaying": {
+      "n": 287,
+      "dec": 203,
+      "hon": 84
+    },
+    "ai_liar": {
+      "n": 53,
+      "dec": 18,
+      "hon": 35
+    },
+    "insider_trading": {
+      "n": 171,
+      "dec": 91,
+      "hon": 80
+    },
+    "sandbagging": {
+      "n": 932,
+      "dec": 420,
+      "hon": 512
+    }
+  },
+  "P1a_external_in_task_cv_auroc": {
+    "roleplaying": 0.6771,
+    "ai_liar": 0.6429,
+    "insider_trading": 0.667,
+    "sandbagging": 0.9684
+  },
+  "P1a_external_transfer_auroc": {
+    "roleplaying": {
+      "roleplaying": 0.8554,
+      "ai_liar": 0.5587,
+      "insider_trading": 0.5661,
+      "sandbagging": 0.5553
+    },
+    "ai_liar": {
+      "roleplaying": 0.5337,
+      "ai_liar": 0.927,
+      "insider_trading": 0.5431,
+      "sandbagging": 0.3299
+    },
+    "insider_trading": {
+      "roleplaying": 0.5534,
+      "ai_liar": 0.5159,
+      "insider_trading": 0.7618,
+      "sandbagging": 0.3355
+    },
+    "sandbagging": {
+      "roleplaying": 0.5398,
+      "ai_liar": 0.3984,
+      "insider_trading": 0.3882,
+      "sandbagging": 0.9715
+    }
+  },
+  "P1a_external_cosine": [
+    [
+      1.0,
+      0.0785,
+      0.0768,
+      0.0467
+    ],
+    [
+      0.0785,
+      1.0,
+      0.0294,
+      -0.0891
+    ],
+    [
+      0.0768,
+      0.0294,
+      1.0,
+      -0.1063
+    ],
+    [
+      0.0467,
+      -0.0891,
+      -0.1063,
+      1.0
+    ]
+  ],
+  "P1a_mean_offdiag_abs_cos": 0.0711,
+  "P1a_null_offdiag_d384": 0.0407,
+  "P1a_reproduction_max_abs_cos_delta": 0.0,
+  "P1b_internal_roleplaying_row_auroc": {
+    "ai_liar": {
+      "auroc": 0.9251,
+      "n": 266,
+      "dec": 93,
+      "variant_matched_to_external": true,
+      "apollo_dataset_key": "ai_liar__original_without_answers"
+    },
+    "insider_trading": {
+      "auroc": 0.9983,
+      "n": 1005,
+      "dec": 336,
+      "variant_matched_to_external": false,
+      "apollo_dataset_key": "insider_trading__upscale"
+    },
+    "sandbagging": {
+      "auroc": 0.9109,
+      "n": 931,
+      "dec": 420,
+      "variant_matched_to_external": true,
+      "apollo_dataset_key": "sandbagging_v2__wmdp_mmlu"
+    }
+  },
+  "P1c_E4_pair_dataset_level": {
+    "ai_liar": {
+      "internal": 0.9251,
+      "external": 0.5587,
+      "variant_matched": true
+    },
+    "insider_trading": {
+      "internal": 0.9983,
+      "external": 0.5661,
+      "variant_matched": false
+    },
+    "sandbagging": {
+      "internal": 0.9109,
+      "external": 0.5553,
+      "variant_matched": true
+    }
+  },
+  "caveats": {
+    "per_sample_join": "NOT established (record/gen/expected flattenings ~0.54 vs Apollo labels); dataset-level AUROC comparison only, no paired delta.",
+    "insider_variant": "internal=upscale (only variant Apollo scored), external=onpolicy (upscale rollout text is a 157-byte stub on disk). NOT matched.",
+    "aggregation": "internal per-token scores mean-aggregated per sample."
+  }
+}
