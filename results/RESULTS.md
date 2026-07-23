@@ -129,3 +129,44 @@ allowance (not literal $; see claude.ai/settings/usage).
   not the internal one (vs 0.91–0.99) — three-tier result.
 - P1 remaining: the per-sample Apollo join (for a paired delta + CI).
 - P3 remaining: full-N judge run + CIs; the frontier embedding-API leg (key).
+
+## P2 — matched-methodology harness built + control-validated (2026-07-22)
+
+`p2_harness.py` — model-agnostic activation extraction (all layers, mean +
+last read positions), mean-diff prototype **and** logistic-probe estimators,
+4×4 transfer + cosine per side, Δ statistic, decision rule. Ran on the M4
+against a small ungated dev model (Qwen2.5-0.5B-Instruct) — the
+pre-registered laptop job.
+
+**Control triad (green):** positive 0.970 (≥0.95 ✓), null 0.460
+(∈[0.45,0.55] ✓), random-direction 0.512 (✓). The extraction→probe→transfer
+→control machinery works end to end. Dev-model deception AUROCs (internal
+0.473 / external 0.485, Δ −0.01) are **not a result** — a 0.5B model barely
+represents deception; decision rule correctly returns N/A for a dev model.
+
+**What's reusable:** the probe + transfer + control + decision machinery
+(the analysis half of P2) is done and validated. Only the extraction
+front-end is substrate-dependent.
+
+**The real-run requirement the dev run sidesteps (§2.1 / G1):** activations
+must come from the ACTING model. `--model <8B>` over the *existing* rollout
+texts is INVALID for the claim — that reads llama-70B's text through a
+different model (cross-model reading, not the generating model's internal
+state). Two valid paths, each gated:
+  (a) extract from **llama-3.3-70B** (the model that generated Apollo's
+      rollouts) via NDIF or a ≥2×80GB box — cleanest, matches Apollo's
+      own probes; needs NDIF signup / big GPU. Requires an nnsight
+      extraction front-end (not the transformers path used for dev).
+  (b) **regenerate rollouts on the 8B pilot model**, then probe its own
+      activations (acting = probed) — Colab-A100 path, reuses this harness's
+      extract() after a generation step.
+The acting-model decision + GPU/NDIF access are the two human-gated
+prerequisites before the real P2 numbers exist. The decision rule
+(Δ≥0.2, internal≥0.8, external≤0.65 → SUPPORTED) is wired and will fire
+automatically on a real-model run.
+
+## Status
+
+- E1–E5: computed on-machine (above).
+- P2: analysis machinery built + control-validated; real numbers gated on
+  acting-model choice + GPU/NDIF.

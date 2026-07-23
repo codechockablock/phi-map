@@ -1,0 +1,328 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "device": "mps",
+  "dtype": "torch.float32",
+  "cap_per_class": 40,
+  "IS_DEV_PIPELINE_VALIDATION_NOT_RESULT": true,
+  "n_layers_plus1": 25,
+  "control_positive_max_auroc": 0.9704,
+  "control_null_shuffled_auroc": 0.4604,
+  "control_random_dir_mean_auroc": 0.5117,
+  "internal_layer_sweep": {
+    "mean": [
+      {
+        "layer": 0,
+        "mean_in_task": 0.6625,
+        "mean_cross_task": 0.4709
+      },
+      {
+        "layer": 1,
+        "mean_in_task": 0.7248,
+        "mean_cross_task": 0.4732
+      },
+      {
+        "layer": 2,
+        "mean_in_task": 0.68,
+        "mean_cross_task": 0.4783
+      },
+      {
+        "layer": 3,
+        "mean_in_task": 0.6465,
+        "mean_cross_task": 0.4967
+      },
+      {
+        "layer": 4,
+        "mean_in_task": 0.6329,
+        "mean_cross_task": 0.5077
+      },
+      {
+        "layer": 5,
+        "mean_in_task": 0.6342,
+        "mean_cross_task": 0.5034
+      },
+      {
+        "layer": 6,
+        "mean_in_task": 0.6349,
+        "mean_cross_task": 0.5034
+      },
+      {
+        "layer": 7,
+        "mean_in_task": 0.629,
+        "mean_cross_task": 0.498
+      },
+      {
+        "layer": 8,
+        "mean_in_task": 0.6404,
+        "mean_cross_task": 0.5007
+      },
+      {
+        "layer": 9,
+        "mean_in_task": 0.6468,
+        "mean_cross_task": 0.5035
+      },
+      {
+        "layer": 10,
+        "mean_in_task": 0.6501,
+        "mean_cross_task": 0.5055
+      },
+      {
+        "layer": 11,
+        "mean_in_task": 0.6532,
+        "mean_cross_task": 0.5058
+      },
+      {
+        "layer": 12,
+        "mean_in_task": 0.658,
+        "mean_cross_task": 0.5039
+      },
+      {
+        "layer": 13,
+        "mean_in_task": 0.6624,
+        "mean_cross_task": 0.5068
+      },
+      {
+        "layer": 14,
+        "mean_in_task": 0.6636,
+        "mean_cross_task": 0.5031
+      },
+      {
+        "layer": 15,
+        "mean_in_task": 0.6747,
+        "mean_cross_task": 0.4858
+      },
+      {
+        "layer": 16,
+        "mean_in_task": 0.6742,
+        "mean_cross_task": 0.4922
+      },
+      {
+        "layer": 17,
+        "mean_in_task": 0.6696,
+        "mean_cross_task": 0.4876
+      },
+      {
+        "layer": 18,
+        "mean_in_task": 0.6792,
+        "mean_cross_task": 0.4797
+      },
+      {
+        "layer": 19,
+        "mean_in_task": 0.6821,
+        "mean_cross_task": 0.4767
+      },
+      {
+        "layer": 20,
+        "mean_in_task": 0.6842,
+        "mean_cross_task": 0.4757
+      },
+      {
+        "layer": 21,
+        "mean_in_task": 0.705,
+        "mean_cross_task": 0.4638
+      },
+      {
+        "layer": 22,
+        "mean_in_task": 0.6883,
+        "mean_cross_task": 0.4783
+      },
+      {
+        "layer": 23,
+        "mean_in_task": 0.7049,
+        "mean_cross_task": 0.4724
+      },
+      {
+        "layer": 24,
+        "mean_in_task": 0.6781,
+        "mean_cross_task": 0.4694
+      }
+    ],
+    "last": [
+      {
+        "layer": 0,
+        "mean_in_task": 0.6004,
+        "mean_cross_task": 0.4733
+      },
+      {
+        "layer": 1,
+        "mean_in_task": 0.6371,
+        "mean_cross_task": 0.5472
+      },
+      {
+        "layer": 2,
+        "mean_in_task": 0.6164,
+        "mean_cross_task": 0.5489
+      },
+      {
+        "layer": 3,
+        "mean_in_task": 0.6591,
+        "mean_cross_task": 0.5874
+      },
+      {
+        "layer": 4,
+        "mean_in_task": 0.6643,
+        "mean_cross_task": 0.5255
+      },
+      {
+        "layer": 5,
+        "mean_in_task": 0.7001,
+        "mean_cross_task": 0.5348
+      },
+      {
+        "layer": 6,
+        "mean_in_task": 0.7146,
+        "mean_cross_task": 0.4905
+      },
+      {
+        "layer": 7,
+        "mean_in_task": 0.7131,
+        "mean_cross_task": 0.4944
+      },
+      {
+        "layer": 8,
+        "mean_in_task": 0.7102,
+        "mean_cross_task": 0.5407
+      },
+      {
+        "layer": 9,
+        "mean_in_task": 0.7022,
+        "mean_cross_task": 0.5331
+      },
+      {
+        "layer": 10,
+        "mean_in_task": 0.6839,
+        "mean_cross_task": 0.6026
+      },
+      {
+        "layer": 11,
+        "mean_in_task": 0.6839,
+        "mean_cross_task": 0.5801
+      },
+      {
+        "layer": 12,
+        "mean_in_task": 0.6759,
+        "mean_cross_task": 0.5812
+      },
+      {
+        "layer": 13,
+        "mean_in_task": 0.7096,
+        "mean_cross_task": 0.5528
+      },
+      {
+        "layer": 14,
+        "mean_in_task": 0.713,
+        "mean_cross_task": 0.5464
+      },
+      {
+        "layer": 15,
+        "mean_in_task": 0.6993,
+        "mean_cross_task": 0.6034
+      },
+      {
+        "layer": 16,
+        "mean_in_task": 0.697,
+        "mean_cross_task": 0.5893
+      },
+      {
+        "layer": 17,
+        "mean_in_task": 0.6935,
+        "mean_cross_task": 0.578
+      },
+      {
+        "layer": 18,
+        "mean_in_task": 0.6737,
+        "mean_cross_task": 0.5484
+      },
+      {
+        "layer": 19,
+        "mean_in_task": 0.6641,
+        "mean_cross_task": 0.5652
+      },
+      {
+        "layer": 20,
+        "mean_in_task": 0.6512,
+        "mean_cross_task": 0.55
+      },
+      {
+        "layer": 21,
+        "mean_in_task": 0.6659,
+        "mean_cross_task": 0.5879
+      },
+      {
+        "layer": 22,
+        "mean_in_task": 0.6726,
+        "mean_cross_task": 0.5969
+      },
+      {
+        "layer": 23,
+        "mean_in_task": 0.677,
+        "mean_cross_task": 0.5347
+      },
+      {
+        "layer": 24,
+        "mean_in_task": 0.6948,
+        "mean_cross_task": 0.5448
+      }
+    ]
+  },
+  "internal_best_by_in_task": {
+    "pos": "mean",
+    "layer": 1,
+    "in_task": 0.72485,
+    "mean_cross_task": 0.4731500000000001
+  },
+  "internal_best_transfer_matrix": {
+    "roleplaying": {
+      "roleplaying": 0.5575,
+      "ai_liar": 0.3349,
+      "insider_trading": 0.5363,
+      "sandbagging": 0.6475
+    },
+    "ai_liar": {
+      "roleplaying": 0.4681,
+      "ai_liar": 0.7143,
+      "insider_trading": 0.4675,
+      "sandbagging": 0.4688
+    },
+    "insider_trading": {
+      "roleplaying": 0.4706,
+      "ai_liar": 0.4397,
+      "insider_trading": 0.7063,
+      "sandbagging": 0.4469
+    },
+    "sandbagging": {
+      "roleplaying": 0.5475,
+      "ai_liar": 0.4,
+      "insider_trading": 0.45,
+      "sandbagging": 0.9213
+    }
+  },
+  "internal_best_cosine": [
+    [
+      1.0,
+      -0.0633,
+      0.0223,
+      0.0478
+    ],
+    [
+      -0.0633,
+      1.0,
+      -0.0304,
+      -0.0708
+    ],
+    [
+      0.0223,
+      -0.0304,
+      1.0,
+      -0.0502
+    ],
+    [
+      0.0478,
+      -0.0708,
+      -0.0502,
+      1.0
+    ]
+  ],
+  "external_mean_cross_task": 0.4848,
+  "delta_internal_minus_external_cross_task": -0.0117,
+  "decision": "N/A \u2014 dev model, pipeline validation only"
+}

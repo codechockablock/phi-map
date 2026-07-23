@@ -369,7 +369,13 @@ Arm G's discovery phase, answered where the answer is already on disk:
 4. **Pilot rung up** — Colab Pro+ (confirm A100 availability) or a rented
    A100-80GB; stand up the nnsight activation-capture pipeline on
    Llama-3.1-8B bf16 with the positive/null/random controls green.
-5. **Arm T, P2 (8B pilot)** — matched-methodology transfer Δ on the pilot rung.
+5. **Arm T, P2 (8B pilot)** — matched-methodology transfer Δ. **Harness
+   built + control-validated on-machine 2026-07-22** (`p2_harness.py`;
+   positive 0.97 / null 0.46 / random 0.51). Analysis machinery reusable;
+   real numbers gated on two human calls: the acting-model choice
+   (llama-3.3-70B via NDIF, matching Apollo — OR regenerate on 8B and probe
+   its own activations; `--model 8B` over existing 70B text is §2.1-invalid)
+   and GPU/NDIF access.
 6. **Arm G** — scenario harness → single-turn probe + same-rollout Δ →
    cross-family → multi-turn (only on signal). The expensive arm; last.
 7. **Scale rung (optional, on signal)** — NDIF onboarding
