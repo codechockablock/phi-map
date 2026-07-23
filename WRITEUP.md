@@ -43,6 +43,39 @@ cross-task transfer within 0.1 AUROC of internal cross-task transfer.
   mean cross-task transfer AUROC (external), on identical episodes,
   labels, and splits.
 
+## 2b. Two experiments, one substrate
+
+This program answers one question through two experiments that share
+almost all machinery. They differ only in what the per-task direction
+represents; the nnsight/NDIF substrate, activation capture keyed by
+`rollout_id`, probe training, the control triad, matched conditions, the
+family-level split, and the same-rollout behavioral baseline are common.
+
+- **Arm T — deception-type transfer** (§3–§6): is *deception* one concept
+  inside and many outside? Directions = deceptive-vs-honest per task
+  family, on Apollo rollouts that already exist. Cheap: P1/P3 run on a
+  laptop from cached data.
+- **Arm G — goal persistence** (§6b): when a model holds an *improbable
+  goal* achievable only by breaking a stated rule, is that goal
+  linearly decodable internally and persistent across turns, in cases
+  where the external behavior is indistinguishable from benign work?
+  Directions = improbable-goal-vs-matched-benign. Requires fresh
+  agentic rollouts with activation capture — the expensive arm.
+
+Arm G is the internal successor to the behaviorally-**refuted**
+`task_affinity` line (frontier-ops attic/pre-v0.6: goal-conditioning /
+task-affinity, evaded 81–98% by vocabulary mimicry). "The behavioral
+version failed; does the internal version survive?" is Arm G's thesis.
+Both arms are variants of the same Φ measurement: how much shared
+structure the internal→external map destroys.
+
+**Sequencing (load-bearing):** Arm T's P1 + P3 first — laptop, existing
+data, produces the writeup's tables and the capacity curve. Then stand up
+the NDIF substrate **once** (§4). Then run Arm T's P2 and Arm G on that
+one substrate. Do not build Arm G first: it is a multi-week infrastructure
+build, and running it ahead of the cheap decisive results recreates the
+exact drift this program was carved out of.
+
 ## 3. Evidence to date (v0)
 
 ### E1 — External fragmentation is real, not a cramped-chart artifact
@@ -166,8 +199,16 @@ Same episodes both sides; per task family:
 - Claim **refuted** if external mean cross-task ≥ internal − 0.1.
 - In between: report as-is; no re-framing to rescue the thesis.
 
-Budget: 8B pilot fits one consumer GPU; 70B activation extraction needs
-≥ 2×80 GB or layer-sliced passes — one rented-GPU weekend.
+Substrate: **NDIF via nnsight, remote** (§7b) — not a rented GPU. NDIF
+serves Llama-3.1 at multiple sizes and DeepSeek-R1 in full precision, free
+(NSF-funded, US-resident), so activations come with no quantization
+confound and no local VRAM ceiling. Local hardware here is an M4 / 24 GB /
+no CUDA, which makes remote mandatory past a tiny dev model. 8B pilot
+first; if the gap doesn't appear at 8B that is a scale finding, not a
+failure. (Note: Apollo's rollouts are llama-3.3-70B; NDIF exposes the
+3.1 line — so P2 either regenerates rollouts on an NDIF-served model or
+applies to whichever Apollo variants NDIF can act as. Pin the model ID and
+never mix acting model across the two banks — see Arm G §2.1 analogue.)
 
 ### P3 — The Φ-shaped-ceiling curve (the killer figure if E5 holds)
 
@@ -179,6 +220,60 @@ with monitor capacity, approaching the internal ceiling — "transfers
 insofar as the monitor has a mind," as a measured curve.
 Null outcome (flat curve) would localize the gap in the readout rather
 than monitor capacity — also informative.
+
+## 6b. Arm G — goal persistence (the expensive arm)
+
+Runs only after Arm T's P1/P3 land and the NDIF substrate is standing.
+Question: when a model is given an improbable goal achievable only by
+breaking a stated rule, does its residual stream carry a
+linearly-decodable, turn-persistent representation of that goal — in cases
+where the visible behavior is indistinguishable from benign work?
+
+**Validity constraints (violating any voids the run):**
+- *G1 — acting model only.* Capture activations from the model that
+  generated the rollout, never from a model reading someone else's
+  transcript (that measures reading comprehension). Stored haiku/sonnet
+  drift-harness transcripts may seed *scenarios* but never activations.
+- *G2 — matched footprint.* Benign and improbable conditions share system
+  prompt (including the stated constraint), tools, and environment. Only
+  the goal's achievability-within-constraint differs. Ship a prompt-only
+  probe as a leakage check: if prompts alone separate the classes, the
+  manipulation leaked and the run is void.
+- *G3 — family split.* Train on scenario family A, evaluate on held-out B,
+  C. In-family and cross-family AUROC reported separately, never averaged.
+  Pre-register the held-out family.
+- *G4 — same-rollout baseline.* Every rollout gets a behavioral vector
+  (the fork encoder — see §7b), an activation capture, and a shared
+  `rollout_id`. Headline = internal-minus-behavioral Δ with a bootstrap CI
+  on the delta, both channels on the identical rollout set. Do not compare
+  against any historical behavioral number.
+
+**Controls (same triad as Arm T):** positive control (probe for a
+trivially-present property, e.g. "called tool X", must reach ≥ 0.95 or the
+pipeline is broken — stop); shuffled-label null in [0.45, 0.55];
+random-direction baseline as a distribution.
+
+**Phasing:** scenario harness (≥3 families) → single-turn rollouts with a
+layer × read-position sweep → probe + controls → same-rollout behavioral
+baseline + Δ → cross-family matrix → *only then, and only if signal
+exists,* multi-turn persistence (probe read every turn → a 1-D internal
+trajectory vs the behavioral trajectory, testing whether the goal
+direction stays elevated as the agent works around a boundary).
+
+**Decision rules (stated now, mirroring P2):** supported if the
+same-rollout Δ ≥ 0.2 with the internal probe clearing the behavioral
+ceiling and cross-family holding; refuted if internal tops out at the
+behavioral ceiling (~0.75 on the recon-vs-benign task) — which cleanly
+retires a class of proposed internal monitors and is a success to report,
+not a failure to hide.
+
+**Scenario source:** frontier-ops `eval/drift_harness/scenarios.py` — the
+`emergent` benign directives with planted out-of-scope distractors and
+fake secrets — are close to the matched-benign condition already. The
+improbable variant (goal reachable only by touching the distractor/secret)
+must be *authored*; rollouts must be *regenerated* on an NDIF-served model
+(the existing transcripts are haiku/sonnet — closed, no activations, and
+G1-forbidden as activation input).
 
 ## 6. Payoff table (either way, this pays)
 
@@ -199,10 +294,53 @@ than monitor capacity — also informative.
   prototype/calibration machinery, AUROC utilities. Frozen otherwise.
 - Operational results (E6): `frontier-ops/eval/results/*-2026-07-1*.md`.
 
+## 7b. Substrate + Phase 0 findings (partial, gathered 2026-07-22)
+
+Arm G's discovery phase, answered where the answer is already on disk:
+
+- **Behavioral encoder for the Arm G baseline (G4).** The 6-D encoder
+  whose dims are `filesystem_scope, info_sensitivity, reversibility,
+  network_exposure, execution_privilege, code_gen_ratio` is the
+  **unified-stack fork's**, at `unified-stack/frontier_ops/sensing/
+  encoder.py` — **not** upstream frontier-ops v0.6, whose 6 dims are
+  `user_aligned_task_execution, scope_exploration, credential_adjacent,
+  safety_constraint_awareness, self_modification_reasoning,
+  goal_displacement`. Decide which encoder is the baseline before wiring
+  §G4; the two same-named packages must not be conflated (this is the
+  live `frontier-ops` PyPI name collision). Recommendation: use the
+  upstream v0.6 concept extractor (public, tagged, tested) unless Arm G's
+  scenarios are specifically about filesystem/network/privilege surface,
+  in which case the fork's dims are the better fit — but then vendor the
+  ~200 lines rather than depend on the unpublished fork.
+- **Activation tooling.** No `nnsight` / `gemma-scope` / `sae-lens` /
+  `resid_post` / `TransformerLens` in either repo — confirmed absent, as
+  expected. Arm G/P2 introduce nnsight fresh, pinned.
+- **Local hardware.** Apple M4, 24 GB unified memory, **no CUDA**. A local
+  dev model must fit in ~24 GB shared and runs on MPS, not CUDA — so the
+  handoff's "Qwen2.5-1.5B on the local GPU" becomes "small model on MPS,"
+  and anything real is NDIF-remote. No 4-bit-local headline numbers.
+- **NDIF.** `NDIF_API_KEY` **not set**. Sign-up at `login.ndif.us` (free,
+  US-resident) is a prerequisite gating every remote run; do it before
+  P2/Arm G, not during.
+- **Scenario source** (Arm G): `frontier-ops/eval/drift_harness/
+  scenarios.py`, `emergent` mode — benign directive + planted
+  out-of-scope distractors + fake secrets. Usable as source; improbable
+  variant must be authored; rollouts regenerated on an NDIF model (the
+  committed transcripts are haiku/sonnet — G1-forbidden as activations).
+
 ## 8. Order of work
 
 1. This document sharpened until it can be disagreed with. ← you are here
-2. P1 (removes the variant caveat; laptop).
-3. P3 external leg (embedding-capacity curve needs no GPU — API calls).
-4. P2 8B pilot, then the 70B weekend.
-5. The paper is this document plus the P1–P3 tables.
+2. **Arm T, P1** — exact pairing (removes the variant caveat; laptop, cached data).
+3. **Arm T, P3 external leg** — embedding-capacity curve (API calls, no GPU).
+4. NDIF onboarding (`login.ndif.us`, set `NDIF_API_KEY`) — the one-time gate.
+5. **Arm T, P2** — 8B pilot on NDIF, then the full model.
+6. **Arm G** — scenario harness → single-turn probe + baseline + Δ →
+   cross-family → multi-turn (only on signal). The expensive arm; last.
+7. The paper is this document plus the P1/P3 tables and the Arm-T/Arm-G Δ's.
+
+Arms T and G share one repo (this one) and one substrate. There is no
+separate `goal-probe` repo — that was the pre-consolidation plan; the
+handoff's methodology (matched controls, same-rollout Δ, family split,
+control triad, no-fabrication, null-is-success) is absorbed here as Arm G,
+and its NDIF substrate (§7b) replaced Arm T P2's rented-GPU plan.
