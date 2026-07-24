@@ -1,0 +1,45 @@
+{
+  "protocol": "ARM_G_ALLPOS_V1",
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "source_seeds": [
+    101,
+    102
+  ],
+  "eval_seed": 108,
+  "direction_layer": 16,
+  "secondary_layer": 17,
+  "direction": "rank-1 seed-102 mean paired conflict difference",
+  "removal": "directional ablation x <- x - (x . r) r in the residual stream",
+  "scopes": [
+    "layer16_final_position",
+    "layer16_all_positions",
+    "all_layers_final_position",
+    "all_layers_all_positions"
+  ],
+  "prior_evidence": {
+    "seed107_layer16_rank1_attenuation": 0.869140625,
+    "seed107_layer16_rank4_attenuation": 1.0703125,
+    "seed106_decision_flips_out_of_128": 0,
+    "seed106_full_cascade_auroc_after": 0.9974365234375,
+    "source": "results/arm_g_layer16_seed107_v1"
+  },
+  "primary_question": "does removing the conflict direction from every layer and every token position flip decisions, when single-layer final-position removal flipped none",
+  "discriminant_question": "is the conflict direction distinguishable from a standard difference-of-means refusal direction, geometrically and causally",
+  "coherence_guard": "action probability mass, top-token-is-action rate, next-token entropy and KL from baseline are recorded for every condition; a flip accompanied by collapse is not evidence about the variable",
+  "bootstrap": 2000,
+  "random_directions": 8,
+  "pairs_per_family": 16,
+  "read_position": "pre_action",
+  "source_evidence": {
+    "101": {
+      "decision": "SUPPORTED_PATTERN",
+      "selected_layer": 27,
+      "result_b64_sha256": "eb586377a842d374acdbf280c5183bd7cbbd559569227cc402c24c6be48a6a01"
+    },
+    "102": {
+      "decision": "SUPPORTED_PATTERN",
+      "selected_layer": 27,
+      "result_b64_sha256": "7e790f590586934df8575cc9e8e3e1971c3dfe3fd6d576619c680ca9294cda51"
+    }
+  }
+}
