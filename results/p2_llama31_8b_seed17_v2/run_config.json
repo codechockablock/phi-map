@@ -1,0 +1,21 @@
+{
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "apollo_commit": "f8ec4010e74927394709dffa22b97bdf8cd5a62f",
+  "tasks": [
+    "ai_liar",
+    "sandbagging"
+  ],
+  "cap_per_task": 60,
+  "max_new_tokens": 1024,
+  "max_context_tokens": 4096,
+  "generation": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "per_rollout_stable_seed": true
+  },
+  "seed": 17,
+  "dtype": "bfloat16",
+  "quantization": null,
+  "primary_external_representation": "response_stepmean"
+}

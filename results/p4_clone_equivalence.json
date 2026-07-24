@@ -1,0 +1,57 @@
+{
+  "status": "CLONE_EQUIVALENCE_METHODOLOGICAL_CONTROL_NOT_TASK_RESULT",
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "checkpoint_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "device": "mps",
+  "dtype": "torch.float32",
+  "torch_version": "2.9.1",
+  "transformers_version": "5.0.0",
+  "runtime_wrapper_sha256": "b99158f4e977420531b04a6cbd8b977bee738881758e81b8c5a4cac0ab09a841",
+  "local_files_only": true,
+  "source_and_clone_loaded_separately": true,
+  "serializer": {
+    "method": "binary_sign",
+    "input_dim": 896,
+    "projection_dim": 64,
+    "seed": 23,
+    "quantization_levels": 15,
+    "calibration_quantile": 0.995,
+    "version": "rpq-v1"
+  },
+  "n_trials": 3,
+  "trials": [
+    {
+      "prompt_hash": "35171408b8ec8237918175aeec8a97fcb473f753977384cee78d8eb09921d88f",
+      "channel_hash": "45405e47899d8db72cce7f344d23b05c88d18fef601de473db69fb3de84f4c6b",
+      "prefix_tokens": 18,
+      "channel_tokens": 160,
+      "max_abs_logit_delta": 5.936622619628906e-05,
+      "jensen_shannon_divergence": 1.277174322646352e-11,
+      "top1_equal": true
+    },
+    {
+      "prompt_hash": "c8e01b6ea21ec23507101ab5bd0ae8a3c2b522cc0a605a2e47443d1f2902a0f8",
+      "channel_hash": "a1b8e55220dd5cb9c202b2c299356f45478661ee0e327cab83849811f63b1ecf",
+      "prefix_tokens": 10,
+      "channel_tokens": 160,
+      "max_abs_logit_delta": 8.919835090637207e-05,
+      "jensen_shannon_divergence": 1.8544979462216047e-11,
+      "top1_equal": true
+    },
+    {
+      "prompt_hash": "c0b7cd72667d063ec8e552dd4b758b62777f319da4d45a4f7b74fbe89a412a1a",
+      "channel_hash": "579ecf6e7dd40357ed6152de0eacfa44dd57b7b3aa52295eaa615e4abf9dc01a",
+      "prefix_tokens": 15,
+      "channel_tokens": 160,
+      "max_abs_logit_delta": 8.606910705566406e-05,
+      "jensen_shannon_divergence": 2.123142503802423e-11,
+      "top1_equal": true
+    }
+  ],
+  "summary": {
+    "max_abs_logit_delta": 8.919835090637207e-05,
+    "max_jensen_shannon_divergence": 2.123142503802423e-11,
+    "all_top1_equal": true
+  },
+  "interpretation": "CACHE_AND_FRESH_CLONE_EQUIVALENT_WITHIN_NUMERICAL_ERROR"
+}

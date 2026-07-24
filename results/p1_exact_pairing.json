@@ -1,7 +1,10 @@
 {
   "provenance": {
     "apollo": "/Users/joseph/frontier-ops-v3/eval/data/deception-detection",
-    "encoder": "all-MiniLM-L6-v2"
+    "apollo_commit": "f8ec4010e74927394709dffa22b97bdf8cd5a62f",
+    "encoder": "all-MiniLM-L6-v2",
+    "sentence_transformers_version": "5.2.2",
+    "score_join": "DialogueDataset original flat id plus deterministic np.random.seed(42) shuffle"
   },
   "external_n": {
     "roleplaying": {
@@ -109,6 +112,58 @@
       "apollo_dataset_key": "sandbagging_v2__wmdp_mmlu"
     }
   },
+  "P1d_exact_first_generation_paired": {
+    "ai_liar": {
+      "n": 53,
+      "honest": 35,
+      "deceptive": 18,
+      "internal_auroc": 0.9365079365079365,
+      "external_auroc": 0.5587301587301587,
+      "internal_minus_external": {
+        "delta_auroc": 0.37777777777777777,
+        "ci_95": [
+          0.1873015873015873,
+          0.5619047619047619
+        ],
+        "bootstrap": 10000,
+        "seed": 17
+      },
+      "mapping_audit": {
+        "flattened_generations": 270,
+        "first_generation_rows": 54,
+        "binary_rows": 53,
+        "binary_label_mismatches": 0,
+        "shuffle_seed": 42,
+        "joined_rows": 53,
+        "external_rows_not_joined": 0
+      }
+    },
+    "sandbagging": {
+      "n": 931,
+      "honest": 511,
+      "deceptive": 420,
+      "internal_auroc": 0.9108936725375082,
+      "external_auroc": 0.5558801602832913,
+      "internal_minus_external": {
+        "delta_auroc": 0.35501351225421685,
+        "ci_95": [
+          0.31354859752120023,
+          0.3966872845028423
+        ],
+        "bootstrap": 10000,
+        "seed": 17
+      },
+      "mapping_audit": {
+        "flattened_generations": 1000,
+        "first_generation_rows": 1000,
+        "binary_rows": 931,
+        "binary_label_mismatches": 0,
+        "shuffle_seed": 42,
+        "joined_rows": 931,
+        "external_rows_not_joined": 1
+      }
+    }
+  },
   "P1c_E4_pair_dataset_level": {
     "ai_liar": {
       "internal": 0.9251,
@@ -127,7 +182,7 @@
     }
   },
   "caveats": {
-    "per_sample_join": "NOT established (record/gen/expected flattenings ~0.54 vs Apollo labels); dataset-level AUROC comparison only, no paired delta.",
+    "per_sample_join": "Established for ai_liar and sandbagging by reconstructing Apollo's deterministic seed-42 DialogueDataset shuffle and preserved flat IDs.",
     "insider_variant": "internal=upscale (only variant Apollo scored), external=onpolicy (upscale rollout text is a 157-byte stub on disk). NOT matched.",
     "aggregation": "internal per-token scores mean-aggregated per sample."
   }

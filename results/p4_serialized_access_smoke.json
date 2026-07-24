@@ -1,0 +1,120 @@
+{
+  "status": "SYNTHETIC_PIPELINE_VALIDATION_NOT_RESEARCH_RESULT",
+  "seed": 17,
+  "n_train": 800,
+  "n_test": 800,
+  "serializers": {
+    "scalar_quantized": {
+      "config": {
+        "method": "scalar_quantized",
+        "input_dim": 128,
+        "projection_dim": 64,
+        "seed": 23,
+        "quantization_levels": 15,
+        "calibration_quantile": 0.995,
+        "version": "rpq-v1"
+      },
+      "channel": {
+        "auroc": 0.9095165075887968,
+        "nll": 0.3984926132646524,
+        "accuracy": 0.8275
+      },
+      "input_only": {
+        "auroc": 0.5,
+        "nll": 0.6952577101451157,
+        "accuracy": 0.48125
+      },
+      "shuffled_channel": {
+        "auroc": 0.4743983727116257,
+        "nll": 1.7231033359275438,
+        "accuracy": 0.47
+      },
+      "channel_minus_input_only": {
+        "delta_auroc": 0.40951650758879676,
+        "delta_nll": 0.2967650968804633,
+        "discordance_net": 0.34625,
+        "p10_a_correct_b_wrong": 0.41875,
+        "p01_a_wrong_b_correct": 0.0725
+      },
+      "source_minus_exact_clone": {
+        "delta_auroc": 0.0,
+        "delta_nll": 0.0,
+        "discordance_net": 0.0,
+        "p10_a_correct_b_wrong": 0.0,
+        "p01_a_wrong_b_correct": 0.0
+      },
+      "source_minus_exact_clone_ci": {
+        "delta_auroc": {
+          "low_95": 0.0,
+          "high_95": 0.0
+        },
+        "delta_nll": {
+          "low_95": 0.0,
+          "high_95": 0.0
+        },
+        "discordance_net": {
+          "low_95": 0.0,
+          "high_95": 0.0
+        }
+      },
+      "unique_payload_hashes": 800,
+      "interpretation": "CHANNEL_UTILITY_ONLY"
+    },
+    "binary_sign": {
+      "config": {
+        "method": "binary_sign",
+        "input_dim": 128,
+        "projection_dim": 64,
+        "seed": 23,
+        "quantization_levels": 15,
+        "calibration_quantile": 0.995,
+        "version": "rpq-v1"
+      },
+      "channel": {
+        "auroc": 0.8160600844938194,
+        "nll": 0.5303181503108227,
+        "accuracy": 0.7375
+      },
+      "input_only": {
+        "auroc": 0.5,
+        "nll": 0.6952577101451157,
+        "accuracy": 0.48125
+      },
+      "shuffled_channel": {
+        "auroc": 0.4760632138945392,
+        "nll": 1.0350130435304081,
+        "accuracy": 0.48
+      },
+      "channel_minus_input_only": {
+        "delta_auroc": 0.3160600844938194,
+        "delta_nll": 0.16493955983429298,
+        "discordance_net": 0.25625000000000003,
+        "p10_a_correct_b_wrong": 0.37125,
+        "p01_a_wrong_b_correct": 0.115
+      },
+      "source_minus_exact_clone": {
+        "delta_auroc": 0.0,
+        "delta_nll": 0.0,
+        "discordance_net": 0.0,
+        "p10_a_correct_b_wrong": 0.0,
+        "p01_a_wrong_b_correct": 0.0
+      },
+      "source_minus_exact_clone_ci": {
+        "delta_auroc": {
+          "low_95": 0.0,
+          "high_95": 0.0
+        },
+        "delta_nll": {
+          "low_95": 0.0,
+          "high_95": 0.0
+        },
+        "discordance_net": {
+          "low_95": 0.0,
+          "high_95": 0.0
+        }
+      },
+      "unique_payload_hashes": 800,
+      "interpretation": "CHANNEL_UTILITY_ONLY"
+    }
+  }
+}

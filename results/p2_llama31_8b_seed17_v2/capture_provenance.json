@@ -1,0 +1,19 @@
+{
+  "hardware": {
+    "name": "NVIDIA A100-SXM4-40GB",
+    "total_memory_gib": 39.4935302734375,
+    "bf16_supported": true,
+    "cuda_version": "12.8",
+    "torch_version": "2.11.0+cu128",
+    "load_bearing_hardware": true
+  },
+  "model": {
+    "acting_model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model_commit": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "tokenizer_commit": null,
+    "dtype": "bfloat16",
+    "quantization": null,
+    "activation_replay": "exact prompt + generated token IDs",
+    "activation_scope": "generated tokens only"
+  }
+}

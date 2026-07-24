@@ -15,13 +15,12 @@ Three outputs, each fully computed here (no quoted numbers):
   P1c  The E4 pair at DATASET level: internal AUROC (P1b) beside external
        roleplaying-row AUROC (P1a), per task family.
 
-Documented limits (not fabricated around):
-  - Per-SAMPLE internal<->external join is NOT established: naive
-    record-major / generation-major / expected_label flattenings all
-    reconstruct Apollo's labels at ~0.54 (chance), so the two channels are
-    compared at the dataset/AUROC level, not paired. A per-sample matched
-    delta needs Apollo's deception_detection dataset loader (the true
-    rollout->score index map). Flagged, not guessed.
+Documented limits:
+  - Per-sample pairing is available for ai_liar and sandbagging. Apollo's
+    loader flattens all generations, stores the original flat index in
+    metadata["id"], then applies np.random.seed(42) before saving scores.
+    Reconstructing that permutation recovers the released binary labels
+    exactly and identifies each first-generation score.
   - insider_trading: internal exists only on the `upscale` variant
     (scores.json); the `upscale` rollout TEXT on disk is a 157-byte stub,
     so the external side uses `onpolicy`. Reported as UNMATCHED variant.
@@ -36,14 +35,14 @@ raw projection, no orientation flip.
 from __future__ import annotations
 
 import json
+import subprocess
 from pathlib import Path
 
 import numpy as np
 from sentence_transformers import SentenceTransformer
+from importlib.metadata import version
 
-APOLLO = Path(
-    "/Users/joseph/frontier-ops-v3/eval/data/deception-detection"
-)
+APOLLO = Path("/Users/joseph/frontier-ops-v3/eval/data/deception-detection")
 ROLLOUTS = APOLLO / "data" / "rollouts"
 COMMITTED = Path(
     "/Users/joseph/frontier-ops-v3/eval/session_artifacts/external_transfer_384d.npz"
@@ -61,7 +60,7 @@ EXT_FILE = {
 # internal side: Apollo's scores.json dataset key per task (roleplaying probe)
 INT_KEY = {
     "ai_liar": "ai_liar__original_without_answers",
-    "insider_trading": "insider_trading__upscale",   # UNMATCHED variant
+    "insider_trading": "insider_trading__upscale",  # UNMATCHED variant
     "sandbagging": "sandbagging_v2__wmdp_mmlu",
 }
 MATCHED_VARIANT = {"ai_liar": True, "insider_trading": False, "sandbagging": True}
@@ -85,11 +84,11 @@ def auroc(scores, y):
     return float((ranks[y == 1].sum() - n1 * (n1 + 1) / 2) / (n0 * n1))
 
 
-def load_external(path):
-    """encode_raw.py rule, verbatim: first generation per record."""
+def load_external_rows(path):
+    """encode_raw.py rule plus stable source-record indices."""
     d = json.load(open(path))
-    T, Y = [], []
-    for r in d["rollouts"]:
+    texts, labels, record_indices = [], [], []
+    for record_index, r in enumerate(d["rollouts"]):
         g = (r.get("graded_deception") or [None])[0]
         out = ((r.get("output_strs") or [""])[0] or "").strip()
         if not out:
@@ -104,9 +103,16 @@ def load_external(path):
             y = 1
         else:
             continue
-        T.append(out)
-        Y.append(y)
-    return T, np.array(Y, int)
+        texts.append(out)
+        labels.append(y)
+        record_indices.append(record_index)
+    return texts, np.array(labels, int), np.array(record_indices, int)
+
+
+def load_external(path):
+    """Backward-compatible two-value loader used by the P3 scripts."""
+    texts, labels, _ = load_external_rows(path)
+    return texts, labels
 
 
 def proto(E, Y):
@@ -114,20 +120,125 @@ def proto(E, Y):
     return d / (np.linalg.norm(d) + 1e-12)
 
 
+def first_generation_internal_rows(path, entry):
+    """Recover first-generation score rows from Apollo's deterministic shuffle."""
+    data = json.load(open(path))
+    flat_ids = []
+    next_flat_id = 0
+    for record_index, record in enumerate(data["rollouts"]):
+        outputs = record.get("output_strs") or []
+        if outputs:
+            flat_ids.append((record_index, next_flat_id))
+        next_flat_id += len(outputs)
+
+    if next_flat_id != len(entry["scores"]):
+        raise ValueError(
+            f"flattened rollout count {next_flat_id} != score count "
+            f"{len(entry['scores'])}"
+        )
+
+    # DialogueDataset.randomly_shuffle_dialogues(), preserved at Apollo's
+    # pinned commit: np.random.seed(42); np.random.permutation(len(dataset)).
+    score_order_to_flat_id = np.random.RandomState(42).permutation(next_flat_id)
+    flat_id_to_score_order = {
+        int(flat_id): score_order
+        for score_order, flat_id in enumerate(score_order_to_flat_id)
+    }
+
+    rows = []
+    binary_label_mismatches = 0
+    for record_index, flat_id in flat_ids:
+        score_order = flat_id_to_score_order[flat_id]
+        saved_label = entry["labels"][score_order]
+        if saved_label not in ("HONEST", "DECEPTIVE"):
+            continue
+        raw_grade = (data["rollouts"][record_index].get("graded_deception") or [None])[
+            0
+        ]
+        raw_label = (
+            "HONEST"
+            if raw_grade == "honest"
+            else "DECEPTIVE" if raw_grade == "deceptive" else None
+        )
+        if raw_label != saved_label:
+            binary_label_mismatches += 1
+        rows.append(
+            {
+                "record_index": record_index,
+                "score_order": score_order,
+                "label": 1 if saved_label == "DECEPTIVE" else 0,
+                "score": float(np.mean(entry["scores"][score_order])),
+            }
+        )
+    return rows, {
+        "flattened_generations": next_flat_id,
+        "first_generation_rows": len(flat_ids),
+        "binary_rows": len(rows),
+        "binary_label_mismatches": binary_label_mismatches,
+        "shuffle_seed": 42,
+    }
+
+
+def paired_auc_difference(first, second, labels, n_bootstrap=10_000, seed=17):
+    """Paired, class-stratified bootstrap for AUROC(first)-AUROC(second)."""
+    first = np.asarray(first, float)
+    second = np.asarray(second, float)
+    labels = np.asarray(labels, int)
+    positive = np.flatnonzero(labels == 1)
+    negative = np.flatnonzero(labels == 0)
+    rng = np.random.default_rng(seed)
+    draws = []
+    for _ in range(n_bootstrap):
+        index = np.concatenate(
+            [
+                rng.choice(positive, len(positive), replace=True),
+                rng.choice(negative, len(negative), replace=True),
+            ]
+        )
+        draws.append(
+            auroc(first[index], labels[index]) - auroc(second[index], labels[index])
+        )
+    low, high = np.quantile(draws, [0.025, 0.975])
+    return {
+        "delta_auroc": float(auroc(first, labels) - auroc(second, labels)),
+        "ci_95": [float(low), float(high)],
+        "bootstrap": n_bootstrap,
+        "seed": seed,
+    }
+
+
 def main():
     OUT.parent.mkdir(exist_ok=True)
-    report = {"provenance": {"apollo": str(APOLLO), "encoder": "all-MiniLM-L6-v2"}}
-    model = SentenceTransformer("all-MiniLM-L6-v2")
+    report = {
+        "provenance": {
+            "apollo": str(APOLLO),
+            "apollo_commit": subprocess.check_output(
+                ["git", "-C", str(APOLLO), "rev-parse", "HEAD"],
+                text=True,
+            ).strip(),
+            "encoder": "all-MiniLM-L6-v2",
+            "sentence_transformers_version": version("sentence-transformers"),
+            "score_join": (
+                "DialogueDataset original flat id plus deterministic "
+                "np.random.seed(42) shuffle"
+            ),
+        }
+    }
+    model = SentenceTransformer("all-MiniLM-L6-v2", local_files_only=True)
 
     # ---- external side: encode canonical files -------------------------
-    E, Y = {}, {}
+    E, Y, record_ids = {}, {}, {}
     for t in TASKS:
-        texts, y = load_external(ROLLOUTS / EXT_FILE[t])
-        E[t] = model.encode(texts, batch_size=64, convert_to_numpy=True,
-                            normalize_embeddings=True)
+        texts, y, source_record_ids = load_external_rows(ROLLOUTS / EXT_FILE[t])
+        E[t] = model.encode(
+            texts, batch_size=64, convert_to_numpy=True, normalize_embeddings=True
+        )
         Y[t] = y
-    report["external_n"] = {t: {"n": int(len(Y[t])), "dec": int(Y[t].sum()),
-                                "hon": int((Y[t] == 0).sum())} for t in TASKS}
+        record_ids[t] = source_record_ids
+    report["external_n"] = {
+        t: {"n": int(len(Y[t])), "dec": int(Y[t].sum()), "hon": int((Y[t] == 0).sum())}
+        for t in TASKS
+    }
 
     W = {t: proto(E[t], Y[t]) for t in TASKS}
 
@@ -135,16 +246,21 @@ def main():
     rng = np.random.default_rng(5)
     intask = {}
     for t in TASKS:
-        n = len(Y[t]); perm = rng.permutation(n); folds = np.array_split(perm, 5)
+        n = len(Y[t])
+        perm = rng.permutation(n)
+        folds = np.array_split(perm, 5)
         s = np.zeros(n)
         for f in range(5):
-            te = folds[f]; tr = np.concatenate([folds[j] for j in range(5) if j != f])
+            te = folds[f]
+            tr = np.concatenate([folds[j] for j in range(5) if j != f])
             s[te] = E[t][te] @ proto(E[t][tr], Y[t][tr])
         intask[t] = auroc(s, Y[t])
     report["P1a_external_in_task_cv_auroc"] = {t: round(intask[t], 4) for t in TASKS}
 
     # 4x4 transfer (rows=trained on, cols=eval), raw projection
-    transfer = {a: {b: round(auroc(E[b] @ W[a], Y[b]), 4) for b in TASKS} for a in TASKS}
+    transfer = {
+        a: {b: round(auroc(E[b] @ W[a], Y[b]), 4) for b in TASKS} for a in TASKS
+    }
     report["P1a_external_transfer_auroc"] = transfer
 
     # cosine matrix + reproduction check vs committed npz
@@ -182,6 +298,51 @@ def main():
         }
     report["P1b_internal_roleplaying_row_auroc"] = internal_row
 
+    # ---- exact first-generation join: internal vs roleplaying transfer --
+    paired = {}
+    for task in ["ai_liar", "sandbagging"]:
+        entry = rp[INT_KEY[task]]
+        internal_rows, mapping_audit = first_generation_internal_rows(
+            ROLLOUTS / EXT_FILE[task],
+            entry,
+        )
+        external_scores = E[task] @ W["roleplaying"]
+        external_by_record = {
+            int(record_index): float(score)
+            for record_index, score in zip(
+                record_ids[task],
+                external_scores,
+                strict=True,
+            )
+        }
+        joined = [
+            row for row in internal_rows if row["record_index"] in external_by_record
+        ]
+        labels = np.asarray([row["label"] for row in joined], int)
+        internal_scores = np.asarray([row["score"] for row in joined], float)
+        joined_external_scores = np.asarray(
+            [external_by_record[row["record_index"]] for row in joined],
+            float,
+        )
+        paired[task] = {
+            "n": len(joined),
+            "honest": int(np.sum(labels == 0)),
+            "deceptive": int(np.sum(labels == 1)),
+            "internal_auroc": float(auroc(internal_scores, labels)),
+            "external_auroc": float(auroc(joined_external_scores, labels)),
+            "internal_minus_external": paired_auc_difference(
+                internal_scores,
+                joined_external_scores,
+                labels,
+            ),
+            "mapping_audit": {
+                **mapping_audit,
+                "joined_rows": len(joined),
+                "external_rows_not_joined": int(len(record_ids[task]) - len(joined)),
+            },
+        }
+    report["P1d_exact_first_generation_paired"] = paired
+
     # ---- P1c: the E4 pair at dataset level -----------------------------
     report["P1c_E4_pair_dataset_level"] = {
         t: {
@@ -192,12 +353,12 @@ def main():
         for t in ["ai_liar", "insider_trading", "sandbagging"]
     }
     report["caveats"] = {
-        "per_sample_join": "NOT established (record/gen/expected flattenings "
-                           "~0.54 vs Apollo labels); dataset-level AUROC "
-                           "comparison only, no paired delta.",
+        "per_sample_join": "Established for ai_liar and sandbagging by "
+        "reconstructing Apollo's deterministic seed-42 "
+        "DialogueDataset shuffle and preserved flat IDs.",
         "insider_variant": "internal=upscale (only variant Apollo scored), "
-                           "external=onpolicy (upscale rollout text is a "
-                           "157-byte stub on disk). NOT matched.",
+        "external=onpolicy (upscale rollout text is a "
+        "157-byte stub on disk). NOT matched.",
         "aggregation": "internal per-token scores mean-aggregated per sample.",
     }
 
