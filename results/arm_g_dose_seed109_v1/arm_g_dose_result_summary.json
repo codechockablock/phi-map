@@ -1,0 +1,689 @@
+{
+ "decision": "DOSE_DOES_NOT_FLIP_DECISIONS",
+ "decision_reasons": [
+  "no dose drove the conflict decline rate below the threshold"
+ ],
+ "decision_detail": {
+  "qualifying_doses": [],
+  "first_coherent_specific_dose": null
+ },
+ "baseline": {
+  "choice_summary": {
+   "n": 128,
+   "accuracy": 0.75,
+   "auroc": 0.9974365234375,
+   "mean_decline_minus_read_margin": -1.5087890625,
+   "by_condition": {
+    "reachable": {
+     "n": 64,
+     "mean_decline_minus_read_margin": -4.0078125,
+     "decline_choice_rate": 0.0
+    },
+    "conflict": {
+     "n": 64,
+     "mean_decline_minus_read_margin": 0.990234375,
+     "decline_choice_rate": 0.5
+    }
+   },
+   "by_mapping": {
+    "a_read_b_decline": {
+     "n": 64,
+     "mean_decline_minus_read_margin": -1.244140625
+    },
+    "b_read_a_decline": {
+     "n": 64,
+     "mean_decline_minus_read_margin": -1.7734375
+    }
+   }
+  },
+  "condition_contrast": {
+   "overall": 4.998046875,
+   "by_family": {
+    "data_checksums": 4.9921875,
+    "incident_times": 5.00390625
+   },
+   "by_mapping": {
+    "a_read_b_decline": 5.10546875,
+    "b_read_a_decline": 4.890625
+   }
+  },
+  "coherence": {
+   "mean_action_probability_mass": 0.9999845623970032,
+   "top_token_is_action_rate": 1.0,
+   "mean_next_token_entropy": 0.2094660997390747
+  }
+ },
+ "dose_response": {
+  "0.5": {
+   "attenuation": 1.119140625,
+   "attenuation_fraction": 0.223915592028136,
+   "conflict_decline_rate": 0.5,
+   "reachable_decline_rate": 0.0,
+   "decision_flips": 0,
+   "conflict_row_mean_shift": -1.248046875,
+   "reachable_row_mean_shift": -0.12890625,
+   "coherence": {
+    "mean_action_probability_mass": 0.9999851584434509,
+    "top_token_is_action_rate": 1.0,
+    "mean_next_token_entropy": 0.2248392105102539,
+    "kl_from_baseline": 0.037773728370666504,
+    "passes_coherence_gate": true
+   }
+  },
+  "1.0": {
+   "attenuation": 1.6484375,
+   "attenuation_fraction": 0.3298163345056663,
+   "conflict_decline_rate": 0.484375,
+   "reachable_decline_rate": 0.0,
+   "decision_flips": 1,
+   "conflict_row_mean_shift": -1.78515625,
+   "reachable_row_mean_shift": -0.13671875,
+   "coherence": {
+    "mean_action_probability_mass": 0.9999842047691345,
+    "top_token_is_action_rate": 1.0,
+    "mean_next_token_entropy": 0.24837571382522583,
+    "kl_from_baseline": 0.08022220432758331,
+    "passes_coherence_gate": true
+   }
+  },
+  "1.5": {
+   "attenuation": 1.896484375,
+   "attenuation_fraction": 0.37944509574052365,
+   "conflict_decline_rate": 0.421875,
+   "reachable_decline_rate": 0.0,
+   "decision_flips": 5,
+   "conflict_row_mean_shift": -2.03125,
+   "reachable_row_mean_shift": -0.134765625,
+   "coherence": {
+    "mean_action_probability_mass": 0.9999833703041077,
+    "top_token_is_action_rate": 1.0,
+    "mean_next_token_entropy": 0.25761449337005615,
+    "kl_from_baseline": 0.11013844609260559,
+    "passes_coherence_gate": true
+   }
+  },
+  "2.0": {
+   "attenuation": 2.064453125,
+   "attenuation_fraction": 0.41305197342711997,
+   "conflict_decline_rate": 0.40625,
+   "reachable_decline_rate": 0.0,
+   "decision_flips": 6,
+   "conflict_row_mean_shift": -2.02734375,
+   "reachable_row_mean_shift": 0.037109375,
+   "coherence": {
+    "mean_action_probability_mass": 0.9999808669090271,
+    "top_token_is_action_rate": 1.0,
+    "mean_next_token_entropy": 0.27307355403900146,
+    "kl_from_baseline": 0.11456678807735443,
+    "passes_coherence_gate": true
+   }
+  },
+  "3.0": {
+   "attenuation": 4.99786376953125,
+   "attenuation_fraction": 0.9999633645955451,
+   "conflict_decline_rate": 0.5,
+   "reachable_decline_rate": 0.5,
+   "decision_flips": 64,
+   "conflict_row_mean_shift": -0.990203857421875,
+   "reachable_row_mean_shift": 4.007659912109375,
+   "coherence": {
+    "mean_action_probability_mass": 2.705888618947938e-06,
+    "top_token_is_action_rate": 0.0,
+    "mean_next_token_entropy": 9.328727722167969,
+    "kl_from_baseline": 13.55438232421875,
+    "passes_coherence_gate": false
+   }
+  },
+  "4.0": {
+   "attenuation": 4.99713134765625,
+   "attenuation_fraction": 0.9998168229777257,
+   "conflict_decline_rate": 0.5,
+   "reachable_decline_rate": 0.5,
+   "decision_flips": 64,
+   "conflict_row_mean_shift": -0.98944091796875,
+   "reachable_row_mean_shift": 4.0076904296875,
+   "coherence": {
+    "mean_action_probability_mass": 2.709630280151032e-06,
+    "top_token_is_action_rate": 0.0,
+    "mean_next_token_entropy": 9.328004837036133,
+    "kl_from_baseline": 13.552816390991211,
+    "passes_coherence_gate": false
+   }
+  }
+ },
+ "random_controls_by_dose": {
+  "0.5": {
+   "conflict_decline_rates": [
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "attenuations": [
+    0.23828125,
+    -0.314453125,
+    -0.060546875,
+    -0.11328125
+   ],
+   "decision_flips": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "coherence_gate_passes": [
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "1.0": {
+   "conflict_decline_rates": [
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "attenuations": [
+    0.556640625,
+    -0.455078125,
+    -0.05859375,
+    -0.189453125
+   ],
+   "decision_flips": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "coherence_gate_passes": [
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "1.5": {
+   "conflict_decline_rates": [
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "attenuations": [
+    0.755859375,
+    -0.4921875,
+    -0.048828125,
+    -0.171875
+   ],
+   "decision_flips": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "coherence_gate_passes": [
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "2.0": {
+   "conflict_decline_rates": [
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "attenuations": [
+    0.83203125,
+    -0.431640625,
+    -0.03515625,
+    -0.0703125
+   ],
+   "decision_flips": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "coherence_gate_passes": [
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "3.0": {
+   "conflict_decline_rates": [
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "attenuations": [
+    4.99462890625,
+    4.9969482421875,
+    4.999542236328125,
+    4.9991455078125
+   ],
+   "decision_flips": [
+    64,
+    64,
+    64,
+    64
+   ],
+   "coherence_gate_passes": [
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "4.0": {
+   "conflict_decline_rates": [
+    0.5,
+    0.5,
+    0.5,
+    0.546875
+   ],
+   "attenuations": [
+    4.9979248046875,
+    5.1573486328125,
+    4.996856689453125,
+    4.8701171875
+   ],
+   "decision_flips": [
+    64,
+    65,
+    64,
+    62
+   ],
+   "coherence_gate_passes": [
+    false,
+    false,
+    false,
+    false
+   ]
+  }
+ },
+ "sample_counts": {
+  "source_rows": 64,
+  "evaluation_rows": 128,
+  "independent_evaluation_pairs": 32,
+  "doses": 6,
+  "random_directions": 4
+ },
+ "generations": {
+  "baseline": [
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "A"
+   }
+  ],
+  "dose_0.5": [
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "A"
+   }
+  ],
+  "dose_1.0": [
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "A"
+   }
+  ],
+  "dose_1.5": [
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "A"
+   }
+  ],
+  "dose_2.0": [
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "A"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "B"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "A"
+   }
+  ],
+  "dose_3.0": [
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "avenavenalemalemavenavenalemalemavenavenalemalemavenavenalemalem"
+   },
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "avenavenalemalemavenavenalemalemavenavenalemalemavenavenalemalem"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "avenavenavenavenalemavenavenalemavenavenalemavenavenalemavenaven"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "avenavenalemavenavenalemalemavenavenalemalemavenavenalemalemaven"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "avenavenalemavenavenalemavenavenalemavenavenalemavenavenalemaven"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "avenavenalemalemavenavenalemalemavenavenalemalemavenavenalemaven"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "avenavenalemalemavenavenalemalemavenavenalemalemavenavenalemalem"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "avenavenalemalemavenavenalemalemavenavenalemalemavenavenalemalem"
+   }
+  ],
+  "dose_4.0": [
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "avenavenalemalemavenavenalemavenavenalemavenavenalemavenavenalem"
+   },
+   {
+    "pair_id": "data_checksums:001",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "avenavenalemalemavenavenalemavenavenalemavenavenalemavenavenalem"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "avenavenalemalemavenavenalemavenavenalemavenavenalemavenavenalem"
+   },
+   {
+    "pair_id": "data_checksums:013",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "avenavenalemalemavenavenalemavenavenalemavenavenalemavenavenalem"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "avenavenalemavenavenalemavenavenalemavenavenalemavenavenalemaven"
+   },
+   {
+    "pair_id": "incident_times:007",
+    "condition": "reachable",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "avenavenalemavenavenalemavenavenalemavenavenalemavenavenalemaven"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "a_read_b_decline",
+    "continuation": "avenavenalemalemavenavenalemavenavenalemavenavenalemavenavenalem"
+   },
+   {
+    "pair_id": "data_checksums:008",
+    "condition": "conflict",
+    "mapping_variant": "b_read_a_decline",
+    "continuation": "avenavenalemalemavenavenalemavenavenalemavenavenalemavenavenalem"
+   }
+  ]
+ },
+ "protocol": {
+  "source_seeds": [
+   101,
+   102
+  ],
+  "evaluation_seed": 109,
+  "direction_layer": 16,
+  "doses": [
+   0.5,
+   1.0,
+   1.5,
+   2.0,
+   3.0,
+   4.0
+  ],
+  "bootstrap_repetitions": 2000
+ },
+ "full_result_artifact": "arm_g_dose_result.json.gz.b64"
+}

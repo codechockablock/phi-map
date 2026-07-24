@@ -1,0 +1,54 @@
+{
+  "protocol": "ARM_G_DOSE_V1",
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "source_seeds": [
+    101,
+    102
+  ],
+  "eval_seed": 109,
+  "direction_layer": 16,
+  "direction": "rank-1 seed-102 mean paired conflict difference",
+  "intervention": "x <- x - k (x . r) r at all layers and all positions",
+  "doses": [
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0
+  ],
+  "prior_evidence": {
+    "seed108_all_layers_all_positions_attenuation": 1.58984375,
+    "seed108_all_layers_all_positions_flips": 0,
+    "seed108_positive_conflict_rows_min_margin_after": 0.125,
+    "seed108_baseline_conflict_decline_rate": 0.5,
+    "seed108_random_allpos_attenuation_p95": 0.6097656249999996,
+    "source": "results/arm_g_allpos_seed108_v1"
+  },
+  "primary_question": "does some dose drive the conflict-condition decline rate below 0.25 from a baseline of 0.50 while the model stays coherent and while matched-dose random directions do not",
+  "coherence_gate": {
+    "mean_action_probability_mass": 0.9,
+    "top_token_is_action_rate": 0.95
+  },
+  "specificity": "4 random directions orthogonal to the conflict direction are carried through every dose identically",
+  "generation_probe": {
+    "samples": 8,
+    "max_new_tokens": 16,
+    "decoding": "greedy"
+  },
+  "bootstrap": 2000,
+  "pairs_per_family": 16,
+  "read_position": "pre_action",
+  "source_evidence": {
+    "101": {
+      "decision": "SUPPORTED_PATTERN",
+      "selected_layer": 27,
+      "result_b64_sha256": "eb586377a842d374acdbf280c5183bd7cbbd559569227cc402c24c6be48a6a01"
+    },
+    "102": {
+      "decision": "SUPPORTED_PATTERN",
+      "selected_layer": 27,
+      "result_b64_sha256": "7e790f590586934df8575cc9e8e3e1971c3dfe3fd6d576619c680ca9294cda51"
+    }
+  }
+}
