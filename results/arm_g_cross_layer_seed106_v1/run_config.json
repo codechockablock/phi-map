@@ -1,0 +1,74 @@
+{
+  "protocol": "ARM_G_CROSS_LAYER_MEDIATION_V1",
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "source_seeds": [
+    101,
+    102
+  ],
+  "rank1_seed": 102,
+  "eval_seed": 106,
+  "source_family": "release_records",
+  "evaluation_families": [
+    "data_checksums",
+    "incident_times"
+  ],
+  "source_evidence": {
+    "101": {
+      "decision": "SUPPORTED_PATTERN",
+      "selected_layer": 27,
+      "result_b64_sha256": "eb586377a842d374acdbf280c5183bd7cbbd559569227cc402c24c6be48a6a01"
+    },
+    "102": {
+      "decision": "SUPPORTED_PATTERN",
+      "selected_layer": 27,
+      "result_b64_sha256": "7e790f590586934df8575cc9e8e3e1971c3dfe3fd6d576619c680ca9294cda51"
+    }
+  },
+  "layers": [
+    12,
+    16,
+    20,
+    24,
+    27,
+    30
+  ],
+  "anchor_layer": 27,
+  "pre_onset_layer": 12,
+  "layer_evidence": {
+    "selection_basis": "frozen from the seed-101 and seed-102 phase-1 prototype layer sweeps: layer 12 is below the decodability onset, layer 16 is the onset, layers 20/24/30 span the plateau, layer 27 is the causally validated anchor",
+    "prototype_development_cv_auroc": {
+      "101": {
+        "12": 0.547,
+        "16": 0.703,
+        "20": 0.719,
+        "24": 0.758,
+        "27": 0.789
+      },
+      "102": {
+        "12": 0.5,
+        "16": 0.652,
+        "20": 0.676,
+        "24": 0.715,
+        "27": 0.742
+      }
+    },
+    "anchor_layer_causal_evidence": {
+      "rank8_attenuation_fraction_of_natural_contrast": 0.0325,
+      "rank4_minus_rank1_attenuation": 0.031,
+      "source": "arm_g_causal_subspace_seed105_v1"
+    }
+  },
+  "rank": 4,
+  "pairs_per_family": 16,
+  "read_position": "pre_action",
+  "subspace_construction": "at each frozen layer, rank 1 is the seed-102 mean paired conflict direction and ranks 2-4 are the leading SVD directions of the seed-101/102 paired differences after removing rank 1; bases are learned from unablated source states and never refit under the cascade",
+  "cascade": "layers are added in ascending depth order; each layer's mapping centers are measured on the state reaching it under the active upstream ablations",
+  "bootstrap": 2000,
+  "random_subspaces": 8,
+  "mapping_variants": [
+    "a_read_b_decline",
+    "b_read_a_decline"
+  ],
+  "primary_outcome": "semantic next-action logit margin: DECLINE minus READ",
+  "success_rule": "full-set attenuation CI > 0; full-set attenuation exceeds the p95 absolute random-cascade attenuation; full-set attenuation is positive in both held-out families and both token mappings; and full-set-minus-anchor-layer attenuation CI > 0"
+}

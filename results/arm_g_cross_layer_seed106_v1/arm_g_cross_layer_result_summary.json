@@ -1,0 +1,283 @@
+{
+ "decision": "SUPPORTED_DISTRIBUTED_DEPTH_MEDIATION",
+ "decision_reasons": [],
+ "baseline_condition_contrast": 4.853515625,
+ "single_layer": {
+  "12": {
+   "attenuation": -0.005859375,
+   "attenuation_fraction": -0.0012072434607645875,
+   "ci_95": [
+    -0.029296875,
+    0.01953125
+   ],
+   "random_absolute_p95": 0.02968749999999999,
+   "exceeds_random_control": false,
+   "decodability": {
+    "prototype_transfer_auroc": 0.502685546875,
+    "rank4_logistic_transfer_auroc": 0.59130859375
+   }
+  },
+  "16": {
+   "attenuation": 1.12890625,
+   "attenuation_fraction": 0.23259557344064385,
+   "ci_95": [
+    0.943310546875,
+    1.2988769531249997
+   ],
+   "random_absolute_p95": 0.0234375,
+   "exceeds_random_control": true,
+   "decodability": {
+    "prototype_transfer_auroc": 0.911376953125,
+    "rank4_logistic_transfer_auroc": 0.900146484375
+   }
+  },
+  "20": {
+   "attenuation": 0.2578125,
+   "attenuation_fraction": 0.05311871227364185,
+   "ci_95": [
+    0.21875,
+    0.298828125
+   ],
+   "random_absolute_p95": 0.02734375,
+   "exceeds_random_control": true,
+   "decodability": {
+    "prototype_transfer_auroc": 0.972900390625,
+    "rank4_logistic_transfer_auroc": 0.9140625
+   }
+  },
+  "24": {
+   "attenuation": 0.234375,
+   "attenuation_fraction": 0.0482897384305835,
+   "ci_95": [
+    0.1953125,
+    0.275390625
+   ],
+   "random_absolute_p95": 0.028613281249999997,
+   "exceeds_random_control": true,
+   "decodability": {
+    "prototype_transfer_auroc": 0.9580078125,
+    "rank4_logistic_transfer_auroc": 0.83251953125
+   }
+  },
+  "27": {
+   "attenuation": 0.099609375,
+   "attenuation_fraction": 0.020523138832997986,
+   "ci_95": [
+    0.072265625,
+    0.126953125
+   ],
+   "random_absolute_p95": 0.01943359375,
+   "exceeds_random_control": true,
+   "decodability": {
+    "prototype_transfer_auroc": 0.95361328125,
+    "rank4_logistic_transfer_auroc": 0.81884765625
+   }
+  },
+  "30": {
+   "attenuation": 0.05859375,
+   "attenuation_fraction": 0.012072434607645875,
+   "ci_95": [
+    0.025390625,
+    0.08984375
+   ],
+   "random_absolute_p95": 0.021289062499999994,
+   "exceeds_random_control": true,
+   "decodability": {
+    "prototype_transfer_auroc": 0.940185546875,
+    "rank4_logistic_transfer_auroc": 0.738037109375
+   }
+  }
+ },
+ "cumulative": {
+  "12": {
+   "layers_ablated": [
+    12
+   ],
+   "attenuation": -0.005859375,
+   "attenuation_fraction": -0.0012072434607645875,
+   "ci_95": [
+    -0.03125,
+    0.01953125
+   ]
+  },
+  "16": {
+   "layers_ablated": [
+    12,
+    16
+   ],
+   "attenuation": 1.115234375,
+   "attenuation_fraction": 0.22977867203219315,
+   "ci_95": [
+    0.931591796875,
+    1.302734375
+   ]
+  },
+  "20": {
+   "layers_ablated": [
+    12,
+    16,
+    20
+   ],
+   "attenuation": 1.27734375,
+   "attenuation_fraction": 0.2631790744466801,
+   "ci_95": [
+    1.072216796875,
+    1.4785644531249997
+   ]
+  },
+  "24": {
+   "layers_ablated": [
+    12,
+    16,
+    20,
+    24
+   ],
+   "attenuation": 1.306640625,
+   "attenuation_fraction": 0.269215291750503,
+   "ci_95": [
+    1.109375,
+    1.5000488281249997
+   ]
+  },
+  "27": {
+   "layers_ablated": [
+    12,
+    16,
+    20,
+    24,
+    27
+   ],
+   "attenuation": 1.30859375,
+   "attenuation_fraction": 0.26961770623742454,
+   "ci_95": [
+    1.111279296875,
+    1.5098144531249997
+   ]
+  },
+  "30": {
+   "layers_ablated": [
+    12,
+    16,
+    20,
+    24,
+    27,
+    30
+   ],
+   "attenuation": 1.333984375,
+   "attenuation_fraction": 0.2748490945674044,
+   "ci_95": [
+    1.130859375,
+    1.53125
+   ]
+  }
+ },
+ "depth_increment": {
+  "full_minus_anchor_layer": {
+   "anchor_layer": 27,
+   "mean": 1.234375,
+   "paired_bootstrap": {
+    "repetitions": 2000,
+    "seed": 406,
+    "stratified_by_family": true,
+    "independent_unit": "pair_id",
+    "ci_95": [
+     1.03125,
+     1.4336425781249997
+    ],
+    "mean": 1.2286875
+   }
+  },
+  "full_minus_best_single_layer": {
+   "best_single_layer": 16,
+   "selection": "post hoc; descriptive only",
+   "mean": 0.205078125,
+   "paired_bootstrap": {
+    "repetitions": 2000,
+    "seed": 506,
+    "stratified_by_family": true,
+    "independent_unit": "pair_id",
+    "ci_95": [
+     0.162109375,
+     0.24609375
+    ],
+    "mean": 0.2052236328125
+   }
+  }
+ },
+ "specificity": {
+  "random_subspace_rank": 4,
+  "random_cascade_attenuations": [
+   0.017578125,
+   -0.00390625,
+   0.01171875,
+   0.013671875,
+   0.00390625,
+   0.0078125,
+   -0.015625,
+   0.001953125
+  ],
+  "random_cascade_absolute_p95": 0.016894531249999997,
+  "full_attenuation": 1.333984375,
+  "full_exceeds_frozen_threshold": true,
+  "pre_onset_layer": {
+   "layer": 12,
+   "attenuation": -0.005859375,
+   "random_absolute_p95": 0.02968749999999999,
+   "exceeds_random_control": false
+  }
+ },
+ "sample_counts": {
+  "source_rows": 64,
+  "evaluation_rows": 128,
+  "independent_evaluation_pairs": 32,
+  "conditions_per_pair": 2,
+  "token_mappings_per_condition": 2,
+  "layers": 6,
+  "dimensions_removed_in_full_cascade": 24
+ },
+ "protocol": {
+  "source_seeds": [
+   101,
+   102
+  ],
+  "evaluation_seed": 106,
+  "layers": [
+   12,
+   16,
+   20,
+   24,
+   27,
+   30
+  ],
+  "rank": 4,
+  "random_subspaces": 8,
+  "bootstrap_repetitions": 2000
+ },
+ "decodability_profile": {
+  "12": {
+   "prototype_transfer_auroc": 0.502685546875,
+   "rank4_logistic_transfer_auroc": 0.59130859375
+  },
+  "16": {
+   "prototype_transfer_auroc": 0.911376953125,
+   "rank4_logistic_transfer_auroc": 0.900146484375
+  },
+  "20": {
+   "prototype_transfer_auroc": 0.972900390625,
+   "rank4_logistic_transfer_auroc": 0.9140625
+  },
+  "24": {
+   "prototype_transfer_auroc": 0.9580078125,
+   "rank4_logistic_transfer_auroc": 0.83251953125
+  },
+  "27": {
+   "prototype_transfer_auroc": 0.95361328125,
+   "rank4_logistic_transfer_auroc": 0.81884765625
+  },
+  "30": {
+   "prototype_transfer_auroc": 0.940185546875,
+   "rank4_logistic_transfer_auroc": 0.738037109375
+  }
+ },
+ "full_result_artifact": "arm_g_cross_layer_result.json.gz.b64"
+}
