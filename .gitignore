@@ -1,3 +1,13 @@
 __pycache__/
 *.pyc
 .venv/
+.ruff_cache/
+.DS_Store
+
+# Vendored third-party data: Apollo repo clone, carries its own .git (473M).
+# Refetched by the pinned fetcher in frontier-ops.
+results/*/apollo/
+
+# Raw captured activation tensors (108M). Regenerable from the run manifest
+# and model commit; the analysis artifacts and audits are committed instead.
+results/*/activations/
