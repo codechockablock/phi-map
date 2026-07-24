@@ -1,5 +1,30 @@
 # Deception is one thing inside and many things outside
 
+> ## ⚠️ Status: superseded pre-registration — preserved unedited
+>
+> **This document records what was predicted before the evidence, and is kept
+> unchanged for that reason.** Editing predictions after seeing results would
+> destroy the only thing a pre-registration is good for. Nothing below has been
+> revised to match outcomes.
+>
+> **Its headline claim is not established.** The internal-over-external
+> deception gap held in the released Apollo comparison and failed in the best
+> matched acting-model pilot on realized behaviour: internal 0.594 versus
+> behavioural 0.661, delta -0.067, 95% CI [-0.326, 0.284] — the
+> pre-registered *refuted* pattern.
+>
+> Several specific numbers below are also known to be wrong. The ~0.75
+> behavioural figure conflated feature spaces and label sources; the
+> six-dimensional encoder's independently-labelled score is 0.509. Arm S §6c
+> rests on an identification error corrected later: in frozen decoder-only
+> inference a fresh exact clone reconstructs the KV cache, so cache reuse
+> cannot create producer privilege.
+>
+> The programme's centre of gravity moved to **Arm G**, which is where the
+> defensible results are.
+>
+> **Current state: [RESEARCH_ARC.md](RESEARCH_ARC.md).**
+
 **Measuring what the internal→external map (Φ) destroys — working draft / pre-registration**
 
 Status: v0 evidence measured 2026-07; this document is the spec for the
@@ -110,15 +135,18 @@ raw encodings regenerate in minutes)
 - Trained on roleplaying → ai_liar / insider / sandbagging:
   **0.559 / 0.566 / 0.555**.
 
-### E3 — Internal directions transfer (published, not yet re-derived)
+### E3 — Internal directions transfer (re-derived from released scores)
 
 Apollo's activation probes, trained on one deception dataset, transfer
-across the others (the headline of their paper). Their reported row,
+across the others (the headline of their paper). The released
+roleplaying-probe scores reproduce the row,
 trained on roleplaying → ai_liar / insider / sandbagging:
 **0.925 / 0.998 / 0.911**.
 
-⚠ Same task *families*, not identical rows: their eval variants differ
-from the rollout files used in E1/E2 (see §4). P1 removes this.
+Exact first-generation episode joins are available for ai_liar and
+sandbagging. Insider remains unmatched because the released internal
+scores use `upscale`, whose rollout-text file is only a stub; E1/E2 use
+the available `onpolicy` text.
 
 ### E4 — The number pair (the first measured coordinate of Φ)
 
@@ -129,6 +157,17 @@ from the rollout files used in E1/E2 (see §4). P1 removes this.
 
 Roughly **0.4 AUROC of cross-task structure exists in activation space and
 evaporates at the behavioral surface.**
+
+P1's exact first-generation join upgrades the two matched comparisons to
+paired results:
+
+| task | paired n | internal | external | paired Δ [95% CI] |
+|---|---:|---:|---:|---:|
+| ai_liar | 53 | 0.937 | 0.559 | **+0.378 [0.187, 0.562]** |
+| sandbagging | 931 | 0.911 | 0.556 | **+0.355 [0.314, 0.397]** |
+
+Both joins have zero binary-label mismatches. The intervals use 10,000
+class-stratified paired bootstrap replicates.
 
 ### E5 — The ceiling is on *fixed-feature* monitors
 
@@ -160,25 +199,34 @@ the prize. The map is.
 1. **Representation-relative.** "The behavioral surface" here = one
    384-D sentence embedding. The claim is about *fixed-feature* external
    spaces; P3 measures how the gap depends on the feature space.
-2. **Variant mismatch.** E3's internal numbers come from Apollo's eval
-   variants; E1/E2 used `plain`/`onpolicy` rollout files. Same families,
-   not identical episodes. (P1.)
+2. **Variant mismatch.** P1 resolves this for ai_liar and sandbagging with
+   exact first-generation joins. Insider remains unmatched: internal uses
+   `upscale`, while its released rollout-text artifact is a stub and the
+   external bank uses `onpolicy`.
 3. **Method mismatch.** Internal = trained linear probes; external =
    prototype directions. Probe-vs-prototype is a confound. (P2 matches
    estimator class on both sides.)
 4. **Population.** All llama-70B rollouts, graded by Apollo's pipeline.
    No frontier-model on-policy deception exists in this evidence.
 5. **n = 4 task families**, single model, single seed on the internal side.
+6. **Label provenance.** The retired 0.753 in-house encoder result used the
+   governance system's own verdicts as labels. The separate
+   identity-metric > asserted-G comparison does not: it uses Apollo
+   `graded_deception` labels on roleplaying responses under common
+   five-fold splits (original 0.588 vs 0.578 AUROC). That avoids
+   governance-label circularity but still inherits Apollo-grader error.
 
 ## 5. Pre-registered replication program
 
 ### P1 — Exact pairing (laptop, hours)
 
-Recompute *both* sides on the identical rollout files, identical label
-rule (`graded_deception ≤ 2 honest / ≥ 6 deceptive`, strings mapped
-directly), identical episode sets: internal numbers from Apollo's released
-probes/pipeline outputs on those files; external via `external_half.py`.
-Output: E4's table with the variant caveat removed.
+**Completed 2026-07-23 for every released matched variant.** Apollo's
+loader preserves the original flattened completion ID and applies a
+deterministic seed-42 shuffle. Inverting it gives exact first-generation
+pairs for ai_liar and sandbagging, with zero binary-label mismatches.
+Paired internal−external AUROC deltas are +0.378 [0.187, 0.562] and
++0.355 [0.314, 0.397], respectively. Insider cannot be paired from the
+released artifacts because its `upscale` rollout text is a stub.
 
 ### P2 — The decisive experiment (matched methodology, both banks)
 
@@ -272,9 +320,13 @@ direction stays elevated as the agent works around a boundary).
 **Decision rules (stated now, mirroring P2):** supported if the
 same-rollout Δ ≥ 0.2 with the internal probe clearing the behavioral
 ceiling and cross-family holding; refuted if internal tops out at the
-behavioral ceiling (~0.75 on the recon-vs-benign task) — which cleanly
-retires a class of proposed internal monitors and is a success to report,
-not a failure to hide.
+strongest same-rollout behavioral comparator. The earlier attribution of a
+"~0.75 behavioral ceiling" to the 6-D encoder is retired: that encoder
+scored 0.509 macro AUROC on independent Apollo labels. A stronger,
+properly matched raw step-mean prototype does reach 0.746 [0.696, 0.794]
+on the same 1,443 responses, but only in-task; its cross-task transfer is
+0.467. Thus ~0.75 is a descriptive in-domain comparator, not a universal
+encoder ceiling. A null remains a success to report, not a failure to hide.
 
 **Scenario source:** frontier-ops `eval/drift_harness/scenarios.py` — the
 `emergent` benign directives with planted out-of-scope distractors and
@@ -293,6 +345,33 @@ activations, G1-forbidden as activation input).
 | refuted | behavior preserves more than v0 suggested; black-box monitoring is more viable than our own results implied; the frontier-ops line of work regains standing |
 | flat P3 curve | the ceiling isn't capacity — points at readout/objective mismatch, a different (and novel) account |
 
+## 6c. Arm S — serialized activation access
+
+The deep-research follow-up is incorporated as
+[`SERIALIZED_ACCESS.md`](SERIALIZED_ACCESS.md). It asks whether a reader can
+use a low-leakage serialization of the acting model's internal geometry.
+It does **not** widen the current claim to broad introspection.
+
+One identification correction is binding: for an eval-mode decoder-only
+Transformer, a KV cache is a deterministic function of the visible prefix
+and frozen weights. A fresh exact clone can reconstruct it. Therefore an
+ordinary same-run-cache source should equal a fresh exact clone up to
+numerical error. Source-over-clone is only meaningful after naming and
+ablating additional state that is not reconstructible from the transcript
+and weights. Until then, clone equivalence is a negative control.
+
+Arm S therefore proceeds in three gates:
+
+1. S0 local cache-vs-fresh-clone equivalence;
+2. S1 channel utility and model-family familiarity using P2's same
+   activation artifacts, low-leakage random-projection quantizers, and
+   input-only/shuffled/cross-subject/relabeled controls;
+3. S2 producer-specific coupling only if a concrete private state variable
+   can be defined and causally ablated.
+
+No adaptive activation queries, activation writes, adapters, checkpoints,
+optimizer state, or cross-run persistence are in scope.
+
 ## 7. Assets
 
 - Evidence chain committed & public: `frontier-ops/eval/session_artifacts/`
@@ -308,20 +387,30 @@ activations, G1-forbidden as activation input).
 
 Arm G's discovery phase, answered where the answer is already on disk:
 
-- **Behavioral encoder for the Arm G baseline (G4).** The 6-D encoder
-  whose dims are `filesystem_scope, info_sensitivity, reversibility,
-  network_exposure, execution_privilege, code_gen_ratio` is the
-  **unified-stack fork's**, at `unified-stack/frontier_ops/sensing/
-  encoder.py` — **not** upstream frontier-ops v0.6, whose 6 dims are
-  `user_aligned_task_execution, scope_exploration, credential_adjacent,
-  safety_constraint_awareness, self_modification_reasoning,
-  goal_displacement`. Decide which encoder is the baseline before wiring
-  §G4; the two same-named packages must not be conflated (this is the
-  live `frontier-ops` PyPI name collision). Recommendation: use the
-  upstream v0.6 concept extractor (public, tagged, tested) unless Arm G's
-  scenarios are specifically about filesystem/network/privilege surface,
-  in which case the fork's dims are the better fit — but then vendor the
-  ~200 lines rather than depend on the unpublished fork.
+- **Behavioral encoder external-validity check (completed 2026-07-23).**
+  The 6-D action-surface encoder (`filesystem_scope`,
+  `information_sensitivity`, `action_reversibility`, `network_exposure`,
+  `execution_privilege`, `code_generation_ratio`) is from the
+  **unified-stack fork**, not upstream frontier-ops v0.6. The historical
+  implementation was vendored and checked exactly against commit
+  `3143a52`. On 1,443 response-only Apollo examples it scored **0.509
+  macro Mahalanobis AUROC [0.457, 0.561]**; a supervised 6-D readout
+  reached only 0.562. Sandbagging reached 0.747 under supervision, but a
+  length-only baseline reached 0.893, and mean cross-task transfer was
+  0.463. This is not a general deception encoder. Keep it as a frozen
+  surface negative control for G4, add a stronger same-rollout raw
+  step-mean comparator, and do not assume a 0.75 **six-dimensional**
+  behavioral ceiling.
+  Full audit: `results/p3_behavioral_6d.md`.
+- **Strong same-sample behavioral comparator (completed 2026-07-23).**
+  Raw 384-D MiniLM embeddings averaged over sentence steps, with an
+  out-of-fold in-task prototype, reach **0.746 macro AUROC [0.696, 0.794]**
+  on the exact same 1,443 Apollo responses. Whole-response encoding reaches
+  0.694; the paired step-mean gain is +0.052 [0.022, 0.082]. Form-only
+  features reach 0.689 and frozen cross-task transfer remains 0.467.
+  Therefore G4 should use raw step-mean as its strong matched comparator
+  and the 6-D surface as its negative control. Full report:
+  `results/p3_strong_behavioral_baseline.md`.
 - **Activation tooling.** No `nnsight` / `gemma-scope` / `sae-lens` /
   `resid_post` / `TransformerLens` in either repo — confirmed absent, as
   expected. Arm G/P2 introduce nnsight fresh, pinned.
@@ -353,11 +442,13 @@ Arm G's discovery phase, answered where the answer is already on disk:
 ## 8. Order of work
 
 1. This document sharpened until it can be disagreed with. ✅
-2. **Arm T, P1** — exact pairing. **Laptop legs done 2026-07-22**
+2. **Arm T, P1** — exact pairing. **Complete 2026-07-23**
    (`results/RESULTS.md`): external reproduces bit-identically (Δcos 0.0),
-   internal row re-derived from released scores (0.925/0.998/0.911), E4 gap
-   ~0.36 on matched variants. *Remaining:* the per-sample Apollo join for a
-   paired delta + CI (needs their `deception_detection` loader).
+   internal row re-derived from released scores (0.925/0.998/0.911), and
+   Apollo's seed-42 loader permutation inverted for exact first-generation
+   pairs. Internal−external Δ is +0.378 [0.187, 0.562] on ai_liar and
+   +0.355 [0.314, 0.397] on sandbagging, with zero label mismatches.
+   Insider is excluded because its matched rollout-text artifact is a stub.
 3. **Arm T, P3 external leg** — **done 2026-07-22** (`results/RESULTS.md`).
    Local capacity legs: flat, cross-task transfer at chance across
    384→768→1024 while in-task rises. LLM-judge leg (via Claude Code OAuth,
@@ -366,16 +457,43 @@ Arm G's discovery phase, answered where the answer is already on disk:
    judge 0.76 < internal 0.91–0.99. E5 confirmed (a mind escapes the
    fixed-feature ceiling) and sharpened (it does not reach the internal
    one). *Remaining:* full-N judge run + CIs; frontier embedding-API leg.
-4. **Pilot rung up** — Colab Pro+ (confirm A100 availability) or a rented
-   A100-80GB; stand up the nnsight activation-capture pipeline on
-   Llama-3.1-8B bf16 with the positive/null/random controls green.
+   **6-D addendum (2026-07-23):** the frozen historical action-surface
+   encoder scored 0.509 macro AUROC [0.457, 0.561] on Apollo responses,
+   not ~0.75. Its 0.747 supervised sandbagging score was dominated by a
+   0.893 length-only baseline. Treat it as a negative control, not a
+   ceiling.
+   **Strong-baseline addendum (2026-07-23):** raw MiniLM step means on the
+   exact same 1,443 responses reach 0.746 macro [0.696, 0.794], with a
+   +0.052 [0.022, 0.082] gain over whole-response encoding. This restores
+   ~0.75 only as an in-task fixed-feature comparator; cross-task transfer
+   remains 0.467.
+4. **Pilot rung up** — **completion-gated A100 screen complete 2026-07-23**
+   (`p2_acting_model_pilot.py`, `p2_colab.ipynb`). It regenerates responses
+   with Llama-3.1-8B-Instruct, replays the exact generated token IDs through
+   the same model, excludes prompt tokens from activation summaries,
+   checkpoints each response to Drive, and reports positive/null/random and
+   prompt-only leakage controls. The 1,024-token condition-label rerun gave
+   internal cross-task 0.844 versus behavioral 0.502 (Δ +0.341, paired 95%
+   CI [0.101, 0.501]) with clean controls, clearing the pre-registered
+   screening pattern. Two outputs still hit the cap and 53/60 sandbagging
+   outputs contained final-answer tags, narrowly missing the frozen
+   completion gate.
 5. **Arm T, P2 (8B pilot)** — matched-methodology transfer Δ. **Harness
    built + control-validated on-machine 2026-07-22** (`p2_harness.py`;
-   positive 0.97 / null 0.46 / random 0.51). Analysis machinery reusable;
-   real numbers gated on two human calls: the acting-model choice
-   (llama-3.3-70B via NDIF, matching Apollo — OR regenerate on 8B and probe
-   its own activations; `--model 8B` over existing 70B text is §2.1-invalid)
-   and GPU/NDIF access.
+   positive 0.97 / null 0.46 / random 0.51). The acting-model choice for
+   the pilot is now fixed: regenerate on Llama-3.1-8B-Instruct and probe its
+   own activations; `--model 8B` over existing 70B text remains
+   §2.1-invalid. The available balanced Apollo conditions make this a
+   two-task screen. Condition labels cannot support a realized-deception
+   claim. `p2_outcome_grading.py` freezes a no-LLM deterministic/human
+   rubric. A fresh blinded test–retest pass after rubric clarification retained
+   96 binary rows and changed the primary result to internal 0.594 versus
+   behavioral 0.661 (Δ −0.067, paired 95% CI [-0.326, 0.284]): the
+   pre-registered refuted pattern. A calibration-excluded sensitivity of the
+   first pass also returned the refuted pattern. The completion gate still
+   failed, rater reliability remains single-person test–retest rather than
+   independent inter-rater evidence, and four task families remain necessary
+   for the formal P2 decision.
 6. **Arm G** — scenario harness → single-turn probe + same-rollout Δ →
    cross-family → multi-turn (only on signal). The expensive arm; last.
 7. **Scale rung (optional, on signal)** — NDIF onboarding
@@ -383,6 +501,10 @@ Arm G's discovery phase, answered where the answer is already on disk:
    DeepSeek-R1 for scale evidence.
 8. The paper is this document plus the P1/P3 tables and the Arm-T/Arm-G Δ's;
    the scale rung strengthens it but the 8B result stands on its own.
+9. **Arm S** — S0 clone-equivalence gate locally; then reuse the valid P2
+   activation artifacts for S1 channel-utility/model-familiarity tests.
+   Producer privilege is not tested until a non-reconstructible state
+   variable and causal ablation exist.
 
 Arms T and G share one repo (this one) and one substrate ladder. There is
 no separate `goal-probe` repo — that was the pre-consolidation plan; the
