@@ -1,0 +1,320 @@
+{
+ "artifact": "results/arm_g_cross_layer_seed106_v1/arm_g_cross_layer_result.json.gz.b64",
+ "audited_decision": "SUPPORTED_DISTRIBUTED_DEPTH_MEDIATION",
+ "bootstrap_repetitions": 20000,
+ "section_1_balance_and_estimator_identity": {
+  "cells": 8,
+  "rows_per_cell": [
+   16
+  ],
+  "design_balanced": true,
+  "estimator_identity_max_abs_gap": 0.0,
+  "estimator_identity_holds": true,
+  "note": "under exact balance the grand-mean contrast and the family-stratified mean of per-pair contrasts are algebraically the same statistic, so the reported point estimate and the bootstrapped quantity share an estimand"
+ },
+ "section_2_independent_recomputation": {
+  "baseline_contrast_recomputed": 4.853515625,
+  "baseline_gap": 0.0,
+  "independent_pairs": 32,
+  "statistics_checked": 37,
+  "max_abs_disagreement": 0.0,
+  "all_reported_statistics_reproduce": true
+ },
+ "section_3_interval_robustness": {
+  "full_cascade_attenuation": {
+   "point_estimate": 1.333984375,
+   "bootstrap_mean": 1.33219443359375,
+   "bootstrap_se": 0.10257541728364108,
+   "percentile_ci": [
+    1.130859375,
+    1.529296875
+   ],
+   "basic_ci": [
+    1.138671875,
+    1.537109375
+   ],
+   "normal_ci": [
+    1.1329365571240635,
+    1.5350321928759365
+   ],
+   "paired_t_ci": [
+    1.1121932123338825,
+    1.5557755376661175
+   ],
+   "pairs_positive": "32/32",
+   "sign_test_p": 4.656612873077393e-10,
+   "wilcoxon_p": 7.856644080564048e-07,
+   "sign_flip_permutation_p": 0.0,
+   "all_intervals_exclude_zero": true,
+   "reported_percentile_ci": [
+    1.130859375,
+    1.53125
+   ]
+  },
+  "attenuation_fraction_ratio_bootstrap": {
+   "point_estimate": 0.2748490945674044,
+   "percentile_ci": [
+    0.2602216600648497,
+    0.2928944754056752
+   ],
+   "note": "the reported 27.48% share carries no interval in the run artifact; this resamples numerator and denominator jointly on the same pairs"
+  },
+  "full_minus_anchor_increment": {
+   "point_estimate": 1.234375,
+   "bootstrap_mean": 1.2338083984375,
+   "bootstrap_se": 0.10323343441100295,
+   "percentile_ci": [
+    1.025390625,
+    1.43359375
+   ],
+   "basic_ci": [
+    1.03515625,
+    1.443359375
+   ],
+   "normal_ci": [
+    1.0320374685544342,
+    1.4367125314455658
+   ],
+   "paired_t_ci": [
+    1.0147068333305853,
+    1.4540431666694147
+   ],
+   "pairs_positive": "31/32",
+   "sign_test_p": 1.5366822481155396e-08,
+   "wilcoxon_p": 1.1659171949551853e-06,
+   "sign_flip_permutation_p": 0.0,
+   "all_intervals_exclude_zero": true,
+   "reported_percentile_ci": [
+    1.03125,
+    1.4336425781249997
+   ]
+  },
+  "per_family_conditional": {
+   "data_checksums": {
+    "point_estimate": 1.51171875,
+    "percentile_ci": [
+     1.19140625,
+     1.82421875
+    ],
+    "pairs_positive": "16/16",
+    "sign_flip_permutation_p": 0.0
+   },
+   "incident_times": {
+    "point_estimate": 1.15625,
+    "percentile_ci": [
+     0.8984375,
+     1.39453125
+    ],
+    "pairs_positive": "16/16",
+    "sign_flip_permutation_p": 5e-05
+   }
+  },
+  "family_generalization_caveat": "the stratified bootstrap resamples pairs within each family and therefore treats the two family effects as fixed. With two families the between-family component cannot be bootstrapped at all, so every interval here is conditional on these two held-out families. Generalization to unseen families rests on both families showing the effect independently, not on the width of these intervals."
+ },
+ "section_4_selection_adjusted": {
+  "bootstrap_argmax_distribution": {
+   "16": 1.0
+  },
+  "peak_layer_stability": 1.0,
+  "pairwise_contrasts_against_peak": {
+   "layer16_minus_layer12": {
+    "point_estimate": 1.134765625,
+    "percentile_ci": [
+     0.9609375,
+     1.3046875
+    ],
+    "bonferroni_ci_99.0": [
+     0.90234375,
+     1.35546875
+    ],
+    "sign_flip_permutation_p": 0.0,
+    "pairs_positive": "32/32"
+   },
+   "layer16_minus_layer20": {
+    "point_estimate": 0.87109375,
+    "percentile_ci": [
+     0.70703125,
+     1.033203125
+    ],
+    "bonferroni_ci_99.0": [
+     0.66015625,
+     1.083984375
+    ],
+    "sign_flip_permutation_p": 0.0,
+    "pairs_positive": "32/32"
+   },
+   "layer16_minus_layer24": {
+    "point_estimate": 0.89453125,
+    "percentile_ci": [
+     0.734375,
+     1.052734375
+    ],
+    "bonferroni_ci_99.0": [
+     0.6875,
+     1.099609375
+    ],
+    "sign_flip_permutation_p": 0.0,
+    "pairs_positive": "32/32"
+   },
+   "layer16_minus_layer27": {
+    "point_estimate": 1.029296875,
+    "percentile_ci": [
+     0.849609375,
+     1.20703125
+    ],
+    "bonferroni_ci_99.0": [
+     0.791015625,
+     1.26171875
+    ],
+    "sign_flip_permutation_p": 0.0,
+    "pairs_positive": "31/32"
+   },
+   "layer16_minus_layer30": {
+    "point_estimate": 1.0703125,
+    "percentile_ci": [
+     0.896484375,
+     1.240234375
+    ],
+    "bonferroni_ci_99.0": [
+     0.837890625,
+     1.2890625
+    ],
+    "sign_flip_permutation_p": 0.0,
+    "pairs_positive": "32/32"
+   }
+  },
+  "bonferroni_note": "five pairwise comparisons against the selected peak; the 99.0% intervals are the Bonferroni-adjusted analogues of 95%"
+ },
+ "section_5_perturbation_magnitude": {
+  "per_layer": {
+   "12": {
+    "mean_displacement_norm": 0.04840008393778815,
+    "rms_displacement_norm": 0.05077520189445355,
+    "attenuation": -0.005859375,
+    "attenuation_per_unit_displacement": -0.12106125699144334,
+    "displacement_energy_by_coordinate": [
+     0.3543011415828613,
+     0.32865150168062235,
+     0.19548290682747332,
+     0.12156444990904296
+    ],
+    "rank1_share_of_displacement_energy": 0.3543011415828613
+   },
+   "16": {
+    "mean_displacement_norm": 0.549285185864935,
+    "rms_displacement_norm": 0.6311530131631472,
+    "attenuation": 1.12890625,
+    "attenuation_per_unit_displacement": 2.0552279199417356,
+    "displacement_energy_by_coordinate": [
+     0.7758081155263845,
+     0.03338136123827018,
+     0.07774400006879709,
+     0.1130665231665481
+    ],
+    "rank1_share_of_displacement_energy": 0.7758081155263845
+   },
+   "20": {
+    "mean_displacement_norm": 0.81405688602263,
+    "rms_displacement_norm": 0.9372901967800271,
+    "attenuation": 0.2578125,
+    "attenuation_per_unit_displacement": 0.31670084047766783,
+    "displacement_energy_by_coordinate": [
+     0.7884789552894419,
+     0.08971236717938934,
+     0.11450920032771539,
+     0.007299477203453315
+    ],
+    "rank1_share_of_displacement_energy": 0.7884789552894419
+   },
+   "24": {
+    "mean_displacement_norm": 0.7880244798618332,
+    "rms_displacement_norm": 0.8922691501331058,
+    "attenuation": 0.234375,
+    "attenuation_per_unit_displacement": 0.2974209634212045,
+    "displacement_energy_by_coordinate": [
+     0.7026951834050449,
+     0.07708805151560186,
+     0.19071421296319663,
+     0.02950255211615652
+    ],
+    "rank1_share_of_displacement_energy": 0.7026951834050449
+   },
+   "27": {
+    "mean_displacement_norm": 0.9305378328465548,
+    "rms_displacement_norm": 1.0700079591464418,
+    "attenuation": 0.099609375,
+    "attenuation_per_unit_displacement": 0.10704494915084826,
+    "displacement_energy_by_coordinate": [
+     0.7864452913414073,
+     0.05909013483250273,
+     0.14095653502728805,
+     0.013508038798802035
+    ],
+    "rank1_share_of_displacement_energy": 0.7864452913414073
+   },
+   "30": {
+    "mean_displacement_norm": 1.105890549910968,
+    "rms_displacement_norm": 1.2805658344239494,
+    "attenuation": 0.05859375,
+    "attenuation_per_unit_displacement": 0.05298331738589973,
+    "displacement_energy_by_coordinate": [
+     0.8062939774029312,
+     0.08534578240458444,
+     0.0894563704794376,
+     0.018903869713046813
+    ],
+    "rank1_share_of_displacement_energy": 0.8062939774029312
+   }
+  },
+  "effect_ordering": [
+   16,
+   20,
+   24,
+   27,
+   30,
+   12
+  ],
+  "perturbation_size_ordering": [
+   30,
+   27,
+   20,
+   24,
+   16,
+   12
+  ],
+  "orderings_agree": false,
+  "spearman_effect_vs_size": -0.08571428571428573,
+  "note": "if the causal ordering simply tracked how large the removed component was, the two orderings would coincide and the normalized column would be flat"
+ },
+ "section_6_decision_invariance": {
+  "single_16": {
+   "auroc_baseline": 0.998046875,
+   "auroc_ablated": 0.998046875,
+   "spearman_vs_baseline": 0.9882550178933428,
+   "sign_flips": 0,
+   "rows": 128,
+   "mean_shift_reachable": 0.79296875,
+   "mean_shift_conflict": -0.3359375
+  },
+  "cumulative_30": {
+   "auroc_baseline": 0.998046875,
+   "auroc_ablated": 0.9974365234375,
+   "spearman_vs_baseline": 0.9834886593102331,
+   "sign_flips": 0,
+   "rows": 128,
+   "mean_shift_reachable": 0.955078125,
+   "mean_shift_conflict": -0.37890625
+  }
+ },
+ "section_7_operator_algebra": {
+  "projector_idempotent_max_err": 5.551115123125783e-17,
+  "projector_symmetric_max_err": 0.0,
+  "subspace_coordinate_pinned_to_group_mean": 5.037636974236648e-15,
+  "displacement_lies_in_subspace": 1.7763568394002505e-15,
+  "group_means_preserved_max_err": 1.3322676295501878e-15,
+  "operator_idempotent_max_err": 1.6375789613221059e-15,
+  "operator_idempotent_recentered_max_err": 1.9984014443252818e-15,
+  "cascade_downstream_residual": 5.773159728050814e-15,
+  "all_properties_hold": true
+ }
+}
