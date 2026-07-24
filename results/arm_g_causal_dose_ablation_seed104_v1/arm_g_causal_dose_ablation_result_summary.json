@@ -1,0 +1,84 @@
+{
+  "decision": "SUPPORTED_DOSE_RESPONSE_AND_ABLATION",
+  "decision_reasons": {
+    "dose_response": [],
+    "ablation": []
+  },
+  "protocol": {
+    "source_seed": 102,
+    "evaluation_seed": 104,
+    "layer": 27,
+    "pairs_per_family": 16,
+    "families": [
+      "data_checksums",
+      "incident_times"
+    ],
+    "conditions_per_pair": 2,
+    "token_mappings_per_condition": 2,
+    "doses_sd": [
+      0.5,
+      1.0,
+      2.0,
+      4.0
+    ],
+    "random_control_directions": 16,
+    "bootstrap_repetitions": 2000
+  },
+  "sample_counts": {
+    "evaluation_rows": 128,
+    "independent_evaluation_pairs": 32,
+    "conditions_per_pair": 2,
+    "token_mappings_per_condition": 2
+  },
+  "dose_response": {
+    "supported": true,
+    "projection_sd": 0.7781209579212689,
+    "overall_mean_effect_by_dose": {
+      "0.5": 0.0654296875,
+      "1.0": 0.1494140625,
+      "2.0": 0.2861328125,
+      "4.0": 0.564453125
+    },
+    "pair_level_slope_per_sd": {
+      "mean": 0.1417891659007353,
+      "ci_95": [
+        0.1256433823529412,
+        0.15811121323529412
+      ]
+    },
+    "specificity_at_2sd": {
+      "conflict_effect": 0.2861328125,
+      "control_tag_effect": 0.041015625,
+      "random_absolute_effect_p95": 0.04638671875,
+      "conflict_exceeds_frozen_threshold": true
+    }
+  },
+  "projection_ablation": {
+    "supported": true,
+    "center_method": "unlabeled evaluation-wide mean projection within each token mapping",
+    "baseline": {
+      "accuracy": 0.75,
+      "auroc": 0.9925537109375
+    },
+    "ablated": {
+      "accuracy": 0.75,
+      "auroc": 0.9930419921875
+    },
+    "condition_contrast": {
+      "baseline_mean": 4.9140625,
+      "ablated_mean": 4.798828125,
+      "baseline_minus_ablated": 0.115234375,
+      "fraction_attenuated": 0.02344992050874404,
+      "paired_bootstrap_mean": 0.1158076171875,
+      "ci_95": [
+        0.07421875,
+        0.16015625
+      ]
+    }
+  },
+  "interpretation": "The layer-27 direction has a monotonic, specific causal steering effect. Removing its projection produces a statistically nonzero but modest reduction in the natural condition contrast, so the direction is a causal contributor rather than a sufficient explanation of the representation.",
+  "exact_result_encoding": {
+    "file": "arm_g_causal_dose_ablation_result.json.gz.b64",
+    "encoding": "base64(gzip(utf8-json))"
+  }
+}

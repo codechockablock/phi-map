@@ -1,0 +1,113 @@
+{
+  "decision": "SUPPORTED_MULTIDIRECTIONAL_SUBSPACE",
+  "decision_reasons": [],
+  "protocol": {
+    "source_seeds": [
+      101,
+      102
+    ],
+    "rank1_seed": 102,
+    "evaluation_seed": 105,
+    "source_family": "release_records",
+    "evaluation_families": [
+      "data_checksums",
+      "incident_times"
+    ],
+    "layer": 27,
+    "subspace_ranks": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "random_subspaces": 16,
+    "random_subspace_rank": 8,
+    "bootstrap_repetitions": 2000
+  },
+  "sample_counts": {
+    "source_rows": 64,
+    "source_pair_differences": 32,
+    "evaluation_rows": 128,
+    "independent_evaluation_pairs": 32,
+    "conditions_per_pair": 2,
+    "token_mappings_per_condition": 2
+  },
+  "baseline": {
+    "condition_contrast": 4.865234375,
+    "accuracy": 0.75,
+    "auroc": 0.993896484375
+  },
+  "subspace_ablation": {
+    "attenuation_by_rank": {
+      "1": {
+        "mean": 0.125,
+        "fraction_of_baseline": 0.025692492974708953,
+        "ci_95": [
+          0.087890625,
+          0.166015625
+        ]
+      },
+      "2": {
+        "mean": 0.12890625,
+        "fraction_of_baseline": 0.026495383380168606,
+        "ci_95": [
+          0.09375,
+          0.1640625
+        ]
+      },
+      "4": {
+        "mean": 0.15625,
+        "fraction_of_baseline": 0.03211561621838619,
+        "ci_95": [
+          0.119140625,
+          0.1953125
+        ]
+      },
+      "8": {
+        "mean": 0.158203125,
+        "fraction_of_baseline": 0.03251706142111602,
+        "ci_95": [
+          0.115234375,
+          0.201171875
+        ],
+        "by_family": {
+          "data_checksums": 0.2109375,
+          "incident_times": 0.10546875
+        },
+        "by_mapping": {
+          "a_read_b_decline": 0.1171875,
+          "b_read_a_decline": 0.19921875
+        }
+      }
+    },
+    "rank8_minus_rank1": {
+      "mean": 0.033203125,
+      "relative_gain_over_rank1": 0.265625,
+      "paired_bootstrap_mean": 0.03290625,
+      "ci_95": [
+        0.005859375,
+        0.0625
+      ]
+    },
+    "specificity": {
+      "rank8_attenuation": 0.158203125,
+      "random_absolute_attenuation_p95": 0.0341796875,
+      "rank8_exceeds_frozen_threshold": true
+    }
+  },
+  "source_subspace_diagnostics": {
+    "seed101_seed102_mean_direction_cosine": 0.9685019544093721,
+    "paired_difference_energy_captured_by_rank": {
+      "1": 0.7039121607300529,
+      "2": 0.8202332104333853,
+      "4": 0.8577900970717535,
+      "8": 0.9044982008386219
+    },
+    "max_abs_orthonormality_error": 1.9663159989136147e-12
+  },
+  "interpretation": "The additional source-derived directions add a statistically nonzero causal effect beyond the original rank-1 direction, and rank-8 attenuation is well above equal-rank random controls. The eight-dimensional subspace still accounts for only 3.25% of the natural condition contrast, so the model's condition-sensitive computation remains largely distributed or redundant beyond this layer-local linear subspace.",
+  "exact_result_encoding": {
+    "file": "arm_g_causal_subspace_result.json.gz.b64",
+    "encoding": "base64(gzip(utf8-json))"
+  }
+}

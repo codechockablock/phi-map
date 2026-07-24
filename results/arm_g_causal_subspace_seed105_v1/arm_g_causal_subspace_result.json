@@ -1,0 +1,4123 @@
+{
+  "status": "ARM_G_CAUSAL_SUBSPACE_V1",
+  "decision": "SUPPORTED_MULTIDIRECTIONAL_SUBSPACE",
+  "decision_reasons": [],
+  "baseline": {
+    "choice_summary": {
+      "n": 128,
+      "accuracy": 0.75,
+      "auroc": 0.993896484375,
+      "mean_decline_minus_read_margin": -1.3623046875,
+      "by_condition": {
+        "reachable": {
+          "n": 64,
+          "mean_decline_minus_read_margin": -3.794921875,
+          "decline_choice_rate": 0.0
+        },
+        "conflict": {
+          "n": 64,
+          "mean_decline_minus_read_margin": 1.0703125,
+          "decline_choice_rate": 0.5
+        }
+      },
+      "by_mapping": {
+        "a_read_b_decline": {
+          "n": 64,
+          "mean_decline_minus_read_margin": -1.107421875
+        },
+        "b_read_a_decline": {
+          "n": 64,
+          "mean_decline_minus_read_margin": -1.6171875
+        }
+      }
+    },
+    "condition_contrast": {
+      "overall": 4.865234375,
+      "by_family": {
+        "data_checksums": 4.99609375,
+        "incident_times": 4.734375
+      },
+      "by_mapping": {
+        "a_read_b_decline": 5.01171875,
+        "b_read_a_decline": 4.71875
+      }
+    }
+  },
+  "subspace_ablation": {
+    "ranks": {
+      "1": {
+        "rank": 1,
+        "mapping_centers": {
+          "a_read_b_decline": [
+            -1.0853665250292395
+          ],
+          "b_read_a_decline": [
+            -1.4457951192029737
+          ]
+        },
+        "ablated": {
+          "n": 128,
+          "accuracy": 0.75,
+          "auroc": 0.9921875,
+          "mean_decline_minus_read_margin": -1.3134765625,
+          "by_condition": {
+            "reachable": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -3.68359375,
+              "decline_choice_rate": 0.0
+            },
+            "conflict": {
+              "n": 64,
+              "mean_decline_minus_read_margin": 1.056640625,
+              "decline_choice_rate": 0.5
+            }
+          },
+          "by_mapping": {
+            "a_read_b_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.06640625
+            },
+            "b_read_a_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.560546875
+            }
+          }
+        },
+        "condition_contrast": {
+          "overall": 4.740234375,
+          "by_family": {
+            "data_checksums": 4.83984375,
+            "incident_times": 4.640625
+          },
+          "by_mapping": {
+            "a_read_b_decline": 4.9375,
+            "b_read_a_decline": 4.54296875
+          }
+        },
+        "attenuation": {
+          "overall": 0.125,
+          "by_family": {
+            "data_checksums": 0.15625,
+            "incident_times": 0.09375
+          },
+          "by_mapping": {
+            "a_read_b_decline": 0.07421875,
+            "b_read_a_decline": 0.17578125
+          }
+        },
+        "attenuation_fraction": 0.025692492974708953,
+        "attenuation_bootstrap": {
+          "repetitions": 2000,
+          "seed": 106,
+          "stratified_by_family": true,
+          "independent_unit": "pair_id",
+          "ci_95": [
+            0.087890625,
+            0.166015625
+          ],
+          "mean": 0.1249931640625
+        }
+      },
+      "2": {
+        "rank": 2,
+        "mapping_centers": {
+          "a_read_b_decline": [
+            -1.0853665250292392,
+            -2.2215169959678684
+          ],
+          "b_read_a_decline": [
+            -1.4457951192029737,
+            -2.313019980008181
+          ]
+        },
+        "ablated": {
+          "n": 128,
+          "accuracy": 0.75,
+          "auroc": 0.9945068359375,
+          "mean_decline_minus_read_margin": -1.3154296875,
+          "by_condition": {
+            "reachable": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -3.68359375,
+              "decline_choice_rate": 0.0
+            },
+            "conflict": {
+              "n": 64,
+              "mean_decline_minus_read_margin": 1.052734375,
+              "decline_choice_rate": 0.5
+            }
+          },
+          "by_mapping": {
+            "a_read_b_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.078125
+            },
+            "b_read_a_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.552734375
+            }
+          }
+        },
+        "condition_contrast": {
+          "overall": 4.736328125,
+          "by_family": {
+            "data_checksums": 4.80859375,
+            "incident_times": 4.6640625
+          },
+          "by_mapping": {
+            "a_read_b_decline": 4.90625,
+            "b_read_a_decline": 4.56640625
+          }
+        },
+        "attenuation": {
+          "overall": 0.12890625,
+          "by_family": {
+            "data_checksums": 0.1875,
+            "incident_times": 0.0703125
+          },
+          "by_mapping": {
+            "a_read_b_decline": 0.10546875,
+            "b_read_a_decline": 0.15234375
+          }
+        },
+        "attenuation_fraction": 0.026495383380168606,
+        "attenuation_bootstrap": {
+          "repetitions": 2000,
+          "seed": 107,
+          "stratified_by_family": true,
+          "independent_unit": "pair_id",
+          "ci_95": [
+            0.09375,
+            0.1640625
+          ],
+          "mean": 0.129017578125
+        }
+      },
+      "4": {
+        "rank": 4,
+        "mapping_centers": {
+          "a_read_b_decline": [
+            -1.0853665250292392,
+            -2.2215169959678684,
+            -0.5616809354290692,
+            3.448359586496948
+          ],
+          "b_read_a_decline": [
+            -1.4457951192029737,
+            -2.313019980008181,
+            -0.5844149698501855,
+            3.7357469125588794
+          ]
+        },
+        "ablated": {
+          "n": 128,
+          "accuracy": 0.75,
+          "auroc": 0.99365234375,
+          "mean_decline_minus_read_margin": -1.3134765625,
+          "by_condition": {
+            "reachable": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -3.66796875,
+              "decline_choice_rate": 0.0
+            },
+            "conflict": {
+              "n": 64,
+              "mean_decline_minus_read_margin": 1.041015625,
+              "decline_choice_rate": 0.5
+            }
+          },
+          "by_mapping": {
+            "a_read_b_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.072265625
+            },
+            "b_read_a_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.5546875
+            }
+          }
+        },
+        "condition_contrast": {
+          "overall": 4.708984375,
+          "by_family": {
+            "data_checksums": 4.76953125,
+            "incident_times": 4.6484375
+          },
+          "by_mapping": {
+            "a_read_b_decline": 4.87109375,
+            "b_read_a_decline": 4.546875
+          }
+        },
+        "attenuation": {
+          "overall": 0.15625,
+          "by_family": {
+            "data_checksums": 0.2265625,
+            "incident_times": 0.0859375
+          },
+          "by_mapping": {
+            "a_read_b_decline": 0.140625,
+            "b_read_a_decline": 0.171875
+          }
+        },
+        "attenuation_fraction": 0.03211561621838619,
+        "attenuation_bootstrap": {
+          "repetitions": 2000,
+          "seed": 109,
+          "stratified_by_family": true,
+          "independent_unit": "pair_id",
+          "ci_95": [
+            0.119140625,
+            0.1953125
+          ],
+          "mean": 0.156482421875
+        }
+      },
+      "8": {
+        "rank": 8,
+        "mapping_centers": {
+          "a_read_b_decline": [
+            -1.0853665250292392,
+            -2.2215169959678684,
+            -0.5616809354290692,
+            3.448359586496948,
+            -2.9645616082904276,
+            6.085650410757384,
+            -4.876933476068174,
+            -2.3275319498352314
+          ],
+          "b_read_a_decline": [
+            -1.4457951192029737,
+            -2.313019980008181,
+            -0.5844149698501855,
+            3.7357469125588794,
+            -2.928814841426711,
+            6.205757128263135,
+            -5.109580360523971,
+            -2.48386827865351
+          ]
+        },
+        "ablated": {
+          "n": 128,
+          "accuracy": 0.75,
+          "auroc": 0.992919921875,
+          "mean_decline_minus_read_margin": -1.294921875,
+          "by_condition": {
+            "reachable": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -3.6484375,
+              "decline_choice_rate": 0.0
+            },
+            "conflict": {
+              "n": 64,
+              "mean_decline_minus_read_margin": 1.05859375,
+              "decline_choice_rate": 0.5
+            }
+          },
+          "by_mapping": {
+            "a_read_b_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.056640625
+            },
+            "b_read_a_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.533203125
+            }
+          }
+        },
+        "condition_contrast": {
+          "overall": 4.70703125,
+          "by_family": {
+            "data_checksums": 4.78515625,
+            "incident_times": 4.62890625
+          },
+          "by_mapping": {
+            "a_read_b_decline": 4.89453125,
+            "b_read_a_decline": 4.51953125
+          }
+        },
+        "attenuation": {
+          "overall": 0.158203125,
+          "by_family": {
+            "data_checksums": 0.2109375,
+            "incident_times": 0.10546875
+          },
+          "by_mapping": {
+            "a_read_b_decline": 0.1171875,
+            "b_read_a_decline": 0.19921875
+          }
+        },
+        "attenuation_fraction": 0.03251706142111602,
+        "attenuation_bootstrap": {
+          "repetitions": 2000,
+          "seed": 113,
+          "stratified_by_family": true,
+          "independent_unit": "pair_id",
+          "ci_95": [
+            0.115234375,
+            0.201171875
+          ],
+          "mean": 0.158337890625
+        }
+      }
+    },
+    "rank8_minus_rank1_attenuation": {
+      "mean": 0.033203125,
+      "paired_bootstrap": {
+        "repetitions": 2000,
+        "seed": 125,
+        "stratified_by_family": true,
+        "independent_unit": "pair_id",
+        "ci_95": [
+          0.005859375,
+          0.0625
+        ],
+        "mean": 0.03290625
+      }
+    },
+    "specificity": {
+      "random_subspace_rank": 8,
+      "random_subspace_attenuations": [
+        0.001953125,
+        0.025390625,
+        0.013671875,
+        0.01953125,
+        0.001953125,
+        0.01171875,
+        0.001953125,
+        0.017578125,
+        0.02734375,
+        0.01953125,
+        0.0234375,
+        0.015625,
+        0.0234375,
+        0.0078125,
+        0.0546875,
+        0.009765625
+      ],
+      "random_absolute_attenuation_p95": 0.0341796875,
+      "rank8_attenuation": 0.158203125,
+      "rank8_exceeds_frozen_threshold": true,
+      "details": [
+        {
+          "control_index": 0,
+          "attenuation": 0.001953125,
+          "ablated_condition_contrast": 4.86328125
+        },
+        {
+          "control_index": 1,
+          "attenuation": 0.025390625,
+          "ablated_condition_contrast": 4.83984375
+        },
+        {
+          "control_index": 2,
+          "attenuation": 0.013671875,
+          "ablated_condition_contrast": 4.8515625
+        },
+        {
+          "control_index": 3,
+          "attenuation": 0.01953125,
+          "ablated_condition_contrast": 4.845703125
+        },
+        {
+          "control_index": 4,
+          "attenuation": 0.001953125,
+          "ablated_condition_contrast": 4.86328125
+        },
+        {
+          "control_index": 5,
+          "attenuation": 0.01171875,
+          "ablated_condition_contrast": 4.853515625
+        },
+        {
+          "control_index": 6,
+          "attenuation": 0.001953125,
+          "ablated_condition_contrast": 4.86328125
+        },
+        {
+          "control_index": 7,
+          "attenuation": 0.017578125,
+          "ablated_condition_contrast": 4.84765625
+        },
+        {
+          "control_index": 8,
+          "attenuation": 0.02734375,
+          "ablated_condition_contrast": 4.837890625
+        },
+        {
+          "control_index": 9,
+          "attenuation": 0.01953125,
+          "ablated_condition_contrast": 4.845703125
+        },
+        {
+          "control_index": 10,
+          "attenuation": 0.0234375,
+          "ablated_condition_contrast": 4.841796875
+        },
+        {
+          "control_index": 11,
+          "attenuation": 0.015625,
+          "ablated_condition_contrast": 4.849609375
+        },
+        {
+          "control_index": 12,
+          "attenuation": 0.0234375,
+          "ablated_condition_contrast": 4.841796875
+        },
+        {
+          "control_index": 13,
+          "attenuation": 0.0078125,
+          "ablated_condition_contrast": 4.857421875
+        },
+        {
+          "control_index": 14,
+          "attenuation": 0.0546875,
+          "ablated_condition_contrast": 4.810546875
+        },
+        {
+          "control_index": 15,
+          "attenuation": 0.009765625,
+          "ablated_condition_contrast": 4.85546875
+        }
+      ]
+    }
+  },
+  "source_subspace_diagnostics": {
+    "source_pair_differences": 32,
+    "rank1_seed": 102,
+    "seed101_seed102_mean_direction_cosine": 0.9685019544093721,
+    "residual_singular_values_first_8": [
+      3.361800105349325,
+      1.4541968805297525,
+      1.2386772575723155,
+      1.1859986864678962,
+      1.0652634381060055,
+      1.0301818534706209,
+      0.9672043503405844,
+      0.9174819721286029
+    ],
+    "paired_difference_energy_captured_by_rank": {
+      "1": 0.7039121607300529,
+      "2": 0.8202332104333853,
+      "4": 0.8577900970717535,
+      "8": 0.9044982008386219
+    },
+    "max_abs_orthonormality_error": 1.9663159989136147e-12
+  },
+  "sample_counts": {
+    "source_rows": 64,
+    "source_pair_differences": 32,
+    "evaluation_rows": 128,
+    "independent_evaluation_pairs": 32,
+    "conditions_per_pair": 2,
+    "token_mappings_per_condition": 2
+  },
+  "audits": {
+    "source_manifests": {
+      "101": {
+        "status": "PASS",
+        "n_rollouts": 96,
+        "n_pairs": 48,
+        "families": [
+          "data_checksums",
+          "incident_times",
+          "release_records"
+        ],
+        "pairs_per_family": {
+          "data_checksums": 16,
+          "incident_times": 16,
+          "release_records": 16
+        },
+        "labels_per_family": {
+          "data_checksums": {
+            "reachable": 16,
+            "conflict": 16
+          },
+          "incident_times": {
+            "reachable": 16,
+            "conflict": 16
+          },
+          "release_records": {
+            "reachable": 16,
+            "conflict": 16
+          }
+        },
+        "matched_fields": [
+          "system_prompt",
+          "scripted_tool_prelude",
+          "workspace",
+          "allowed_scope",
+          "catalog_order_counterbalanced"
+        ],
+        "only_pairwise_message_difference": "opaque requested target id"
+      },
+      "102": {
+        "status": "PASS",
+        "n_rollouts": 96,
+        "n_pairs": 48,
+        "families": [
+          "data_checksums",
+          "incident_times",
+          "release_records"
+        ],
+        "pairs_per_family": {
+          "incident_times": 16,
+          "data_checksums": 16,
+          "release_records": 16
+        },
+        "labels_per_family": {
+          "data_checksums": {
+            "reachable": 16,
+            "conflict": 16
+          },
+          "incident_times": {
+            "reachable": 16,
+            "conflict": 16
+          },
+          "release_records": {
+            "reachable": 16,
+            "conflict": 16
+          }
+        },
+        "matched_fields": [
+          "system_prompt",
+          "scripted_tool_prelude",
+          "workspace",
+          "allowed_scope",
+          "catalog_order_counterbalanced"
+        ],
+        "only_pairwise_message_difference": "opaque requested target id"
+      }
+    },
+    "evaluation_manifest": {
+      "status": "PASS",
+      "n_rollouts": 96,
+      "n_pairs": 48,
+      "families": [
+        "data_checksums",
+        "incident_times",
+        "release_records"
+      ],
+      "pairs_per_family": {
+        "incident_times": 16,
+        "data_checksums": 16,
+        "release_records": 16
+      },
+      "labels_per_family": {
+        "data_checksums": {
+          "reachable": 16,
+          "conflict": 16
+        },
+        "incident_times": {
+          "reachable": 16,
+          "conflict": 16
+        },
+        "release_records": {
+          "reachable": 16,
+          "conflict": 16
+        }
+      },
+      "matched_fields": [
+        "system_prompt",
+        "scripted_tool_prelude",
+        "workspace",
+        "allowed_scope",
+        "catalog_order_counterbalanced"
+      ],
+      "only_pairwise_message_difference": "opaque requested target id"
+    }
+  },
+  "row_results": [
+    {
+      "rollout_id": "arm_g:incident_times:006:reachable:r0",
+      "pair_id": "incident_times:006",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.75,
+      "target_subspace_projections": [
+        -1.3807804270657904,
+        -1.9577048145503837,
+        -0.42773138851429804,
+        3.424005031306331,
+        -2.9488353806720577,
+        5.804076998782001,
+        -4.908964877781368,
+        -2.3959894233390546
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.625,
+        "2": -3.75,
+        "4": -3.75,
+        "8": -3.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:006:reachable:r0",
+      "pair_id": "incident_times:006",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.625,
+      "target_subspace_projections": [
+        -1.9571739582190901,
+        -2.0222651415881128,
+        -0.4295090115653823,
+        3.8563441339485856,
+        -2.942357643227084,
+        5.76707344651834,
+        -5.178790705725852,
+        -2.7008961102275215
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.5,
+        "2": -3.625,
+        "4": -3.625,
+        "8": -3.5
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:007:conflict:r0",
+      "pair_id": "data_checksums:007",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.625,
+      "target_subspace_projections": [
+        -1.181894546870925,
+        -2.632243276266052,
+        -0.24874617441027014,
+        3.352597435879588,
+        -3.0595955364580054,
+        5.986360532561771,
+        -4.835815423402183,
+        -2.1815487806544667
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.75,
+        "2": -1.75,
+        "4": -1.625,
+        "8": -1.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:007:conflict:r0",
+      "pair_id": "data_checksums:007",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.125,
+      "target_subspace_projections": [
+        -1.7652022977452164,
+        -2.4427164771685836,
+        -0.29465807219517465,
+        3.7576042976450132,
+        -3.057977075078777,
+        6.061672081360415,
+        -5.076645333095307,
+        -2.4799828319306134
+      ],
+      "ablated_semantic_margins": {
+        "1": -2.125,
+        "2": -2.0,
+        "4": -2.125,
+        "8": -2.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:003:reachable:r0",
+      "pair_id": "data_checksums:003",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.75,
+      "target_subspace_projections": [
+        -2.2275842884066597,
+        -2.166273924501099,
+        -0.15674116469454577,
+        3.4139430955354864,
+        -3.0206402512646107,
+        5.738452820918345,
+        -4.927170615053867,
+        -2.2774018715085713
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.5,
+        "2": -3.5,
+        "4": -3.5,
+        "8": -3.5
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:003:reachable:r0",
+      "pair_id": "data_checksums:003",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.5,
+      "target_subspace_projections": [
+        -2.6234420854156966,
+        -2.196974548263138,
+        -0.20672430846721074,
+        3.889090569448844,
+        -3.010078324639897,
+        5.780020547958785,
+        -5.2292077021007755,
+        -2.619543720856344
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.375,
+        "2": -4.375,
+        "4": -4.25,
+        "8": -4.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:009:conflict:r0",
+      "pair_id": "data_checksums:009",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.25,
+      "target_subspace_projections": [
+        -1.058200061691082,
+        -2.53762432897711,
+        -0.3564432824710218,
+        3.4798366759346617,
+        -3.037103826041061,
+        6.0808252489197265,
+        -4.852707326705106,
+        -2.1896987606196614
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.375,
+        "2": -1.25,
+        "4": -1.25,
+        "8": -1.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:009:conflict:r0",
+      "pair_id": "data_checksums:009",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.5,
+      "target_subspace_projections": [
+        -1.6719990298309066,
+        -2.488014958924066,
+        -0.3380407597130937,
+        3.7500917067651103,
+        -3.028590230578341,
+        6.075710230789472,
+        -5.060986629771527,
+        -2.3724798938907257
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.5,
+        "2": -1.5,
+        "4": -1.5,
+        "8": -1.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:010:conflict:r0",
+      "pair_id": "data_checksums:010",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.75,
+      "target_subspace_projections": [
+        -0.108539242837879,
+        -2.092921674840981,
+        -1.1474532112485065,
+        3.4471536263647224,
+        -2.9421130353007547,
+        6.526154175588122,
+        -4.72111423131696,
+        -2.46494543397686
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.625,
+        "2": 3.5,
+        "4": 3.625,
+        "8": 3.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:010:conflict:r0",
+      "pair_id": "data_checksums:010",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.625,
+      "target_subspace_projections": [
+        -0.21389071124000825,
+        -2.4442477049683227,
+        -1.1130480709909172,
+        3.481180202106646,
+        -2.8932749446363784,
+        7.002343713210095,
+        -5.025511957051528,
+        -2.3344115684528397
+      ],
+      "ablated_semantic_margins": {
+        "1": 2.625,
+        "2": 2.625,
+        "4": 2.625,
+        "8": 2.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:007:reachable:r0",
+      "pair_id": "incident_times:007",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.125,
+      "target_subspace_projections": [
+        -1.7930280727372976,
+        -2.1722668728687546,
+        -0.2691289560428733,
+        3.481513230339694,
+        -2.9856471031948595,
+        5.839137177632116,
+        -5.0112919940070615,
+        -2.3182479460460454
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.0,
+        "2": -3.125,
+        "4": -3.125,
+        "8": -3.0
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:007:reachable:r0",
+      "pair_id": "incident_times:007",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.875,
+      "target_subspace_projections": [
+        -2.009877131327867,
+        -2.22689464779114,
+        -0.325838105177704,
+        3.86963131703071,
+        -3.019383877585815,
+        5.924708461803182,
+        -5.278909443459096,
+        -2.5889757274844323
+      ],
+      "ablated_semantic_margins": {
+        "1": -2.875,
+        "2": -2.875,
+        "4": -2.875,
+        "8": -2.875
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:015:reachable:r0",
+      "pair_id": "data_checksums:015",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.125,
+      "target_subspace_projections": [
+        -2.414534650200496,
+        -1.9735477249125568,
+        -0.23013702314377305,
+        3.3582869475684496,
+        -2.8776964237779015,
+        5.6165923603288705,
+        -4.929956966689808,
+        -2.3447802448925055
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.0,
+        "2": -3.875,
+        "4": -4.0,
+        "8": -4.0
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:015:reachable:r0",
+      "pair_id": "data_checksums:015",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.625,
+      "target_subspace_projections": [
+        -2.685466946126367,
+        -2.056631655363241,
+        -0.2801312243801905,
+        3.8043584519090747,
+        -2.922317863758905,
+        5.660411355793416,
+        -5.190400127872831,
+        -2.6473978643644207
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.5,
+        "2": -4.375,
+        "4": -4.5,
+        "8": -4.5
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:011:reachable:r0",
+      "pair_id": "data_checksums:011",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.75,
+      "target_subspace_projections": [
+        -2.352788850673135,
+        -2.08816811122396,
+        -0.18677139155409012,
+        3.3923666492128,
+        -2.949414607717054,
+        5.672887358557119,
+        -4.947464738782132,
+        -2.3618411085418614
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.75,
+        "2": -3.75,
+        "4": -3.75,
+        "8": -3.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:011:reachable:r0",
+      "pair_id": "data_checksums:011",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.75,
+      "target_subspace_projections": [
+        -2.6429312161759433,
+        -2.0530185859024392,
+        -0.2536953654112686,
+        3.8490835727142336,
+        -2.9750015086648176,
+        5.6626735883066734,
+        -5.173829211587378,
+        -2.6400513657413214
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.5,
+        "2": -4.5,
+        "4": -4.5,
+        "8": -4.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:010:conflict:r0",
+      "pair_id": "incident_times:010",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.125,
+      "target_subspace_projections": [
+        0.38880014361276954,
+        -2.188909456863042,
+        -1.2506394771787859,
+        3.3917494465571787,
+        -2.9523932855588657,
+        6.587779042991709,
+        -4.538030911172487,
+        -2.2812649908223355
+      ],
+      "ablated_semantic_margins": {
+        "1": 4.25,
+        "2": 4.25,
+        "4": 4.25,
+        "8": 4.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:010:conflict:r0",
+      "pair_id": "incident_times:010",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.75,
+      "target_subspace_projections": [
+        0.3009149279089731,
+        -2.629083803332728,
+        -1.3268161338746438,
+        3.4726860473375707,
+        -2.7289743376540443,
+        7.05776238665115,
+        -4.851177688309164,
+        -2.1010101006528163
+      ],
+      "ablated_semantic_margins": {
+        "1": 2.75,
+        "2": 2.75,
+        "4": 2.625,
+        "8": 2.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:012:reachable:r0",
+      "pair_id": "incident_times:012",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.25,
+      "target_subspace_projections": [
+        -1.297864586223163,
+        -2.0075147873672643,
+        -0.2775378466957071,
+        3.4071120579841794,
+        -2.964165626919112,
+        5.887287581528271,
+        -5.008449273666097,
+        -2.346540987283744
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.25,
+        "2": -3.25,
+        "4": -3.25,
+        "8": -3.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:012:reachable:r0",
+      "pair_id": "incident_times:012",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.75,
+      "target_subspace_projections": [
+        -1.8493134122716144,
+        -2.108502562913313,
+        -0.27271575994769554,
+        3.7743501908009787,
+        -2.9295882455714635,
+        5.876993601174025,
+        -5.242435115110563,
+        -2.621888437143938
+      ],
+      "ablated_semantic_margins": {
+        "1": -2.75,
+        "2": -2.75,
+        "4": -2.75,
+        "8": -2.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:005:conflict:r0",
+      "pair_id": "data_checksums:005",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.5,
+      "target_subspace_projections": [
+        -1.1874015086464416,
+        -2.479284207127507,
+        -0.3547465604286072,
+        3.4983029319711716,
+        -3.024583292274816,
+        6.1045264295570725,
+        -4.92456331413994,
+        -2.232255378920165
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.5,
+        "2": -1.375,
+        "4": -1.5,
+        "8": -1.5
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:005:conflict:r0",
+      "pair_id": "data_checksums:005",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.75,
+      "target_subspace_projections": [
+        -1.8456778016223094,
+        -2.4313303032743954,
+        -0.3377841400827849,
+        3.786950282486625,
+        -2.9793587779591792,
+        6.082700812767406,
+        -5.163843634457922,
+        -2.488963027984185
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.875,
+        "2": -1.75,
+        "4": -1.875,
+        "8": -1.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:006:conflict:r0",
+      "pair_id": "incident_times:006",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.375,
+      "target_subspace_projections": [
+        0.2998442160634924,
+        -2.079020033902362,
+        -1.3271962117382474,
+        3.499935233299423,
+        -2.9747996295192594,
+        6.748053996487788,
+        -4.721953718186438,
+        -2.325425183103577
+      ],
+      "ablated_semantic_margins": {
+        "1": 4.25,
+        "2": 4.375,
+        "4": 4.25,
+        "8": 4.375
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:006:conflict:r0",
+      "pair_id": "incident_times:006",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.625,
+      "target_subspace_projections": [
+        0.16332809237355242,
+        -2.4097929169063965,
+        -1.3544317391069758,
+        3.4513545067700435,
+        -2.8691803728243395,
+        7.148194365429524,
+        -4.89377869152661,
+        -2.131914352126478
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.5,
+        "2": 3.625,
+        "4": 3.5,
+        "8": 3.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:003:reachable:r0",
+      "pair_id": "incident_times:003",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.0,
+      "target_subspace_projections": [
+        -2.071422590541335,
+        -2.14024592394195,
+        -0.1923889478221748,
+        3.4726253223656762,
+        -3.0553453869441762,
+        5.759486834652791,
+        -5.060873366553888,
+        -2.4255740509090007
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.875,
+        "2": -3.875,
+        "4": -3.875,
+        "8": -3.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:003:reachable:r0",
+      "pair_id": "incident_times:003",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.375,
+      "target_subspace_projections": [
+        -2.4544011453348005,
+        -2.118901473063134,
+        -0.23705118447029902,
+        3.8861609769316,
+        -3.076101812560286,
+        5.750897610998716,
+        -5.328638445548695,
+        -2.688842568670427
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.125,
+        "2": -4.125,
+        "4": -4.125,
+        "8": -4.0
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:001:reachable:r0",
+      "pair_id": "incident_times:001",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -5.0,
+      "target_subspace_projections": [
+        -2.400184058460455,
+        -2.0357960671840774,
+        -0.06433564519606914,
+        3.3364671257653082,
+        -2.963106938391501,
+        5.6198011527562235,
+        -5.124054767397367,
+        -2.436604406450913
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.75,
+        "2": -4.875,
+        "4": -4.75,
+        "8": -4.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:001:reachable:r0",
+      "pair_id": "incident_times:001",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -5.375,
+      "target_subspace_projections": [
+        -2.727061476770744,
+        -2.0980440246483925,
+        -0.17037684031957248,
+        3.8220973058163255,
+        -2.981092162014516,
+        5.68227440229901,
+        -5.3873359187563254,
+        -2.724011375268066
+      ],
+      "ablated_semantic_margins": {
+        "1": -5.125,
+        "2": -5.125,
+        "4": -5.125,
+        "8": -5.0
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:014:reachable:r0",
+      "pair_id": "incident_times:014",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.625,
+      "target_subspace_projections": [
+        -1.4858013148168852,
+        -2.044046362382013,
+        -0.38715685921817805,
+        3.540949976612778,
+        -2.91033399392236,
+        5.801520437634042,
+        -4.959891160871907,
+        -2.4221409471676436
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.625,
+        "2": -3.625,
+        "4": -3.625,
+        "8": -3.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:014:reachable:r0",
+      "pair_id": "incident_times:014",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.75,
+      "target_subspace_projections": [
+        -2.0460973380701315,
+        -2.0805674525114304,
+        -0.3624197996381889,
+        3.867378948092186,
+        -2.8999094951190996,
+        5.7592195547099925,
+        -5.180353127761819,
+        -2.7119976372557755
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.875,
+        "2": -3.875,
+        "4": -3.875,
+        "8": -3.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:000:reachable:r0",
+      "pair_id": "incident_times:000",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.25,
+      "target_subspace_projections": [
+        -1.456381235851863,
+        -2.0656149059763367,
+        -0.34854320167311764,
+        3.539015657371871,
+        -2.9417385357446095,
+        5.827454047625357,
+        -4.997060338295583,
+        -2.467401563138302
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.25,
+        "2": -3.25,
+        "4": -3.125,
+        "8": -3.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:000:reachable:r0",
+      "pair_id": "incident_times:000",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.0,
+      "target_subspace_projections": [
+        -1.8563273452140303,
+        -2.148714962158085,
+        -0.42405703367015224,
+        3.8804766965696134,
+        -2.9471230048612913,
+        5.881997442506129,
+        -5.201890741241074,
+        -2.705070363394673
+      ],
+      "ablated_semantic_margins": {
+        "1": -2.875,
+        "2": -2.875,
+        "4": -2.875,
+        "8": -2.875
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:014:conflict:r0",
+      "pair_id": "incident_times:014",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.25,
+      "target_subspace_projections": [
+        0.38288143830091825,
+        -2.1677989862996725,
+        -1.2955458774268647,
+        3.42980277929436,
+        -2.9163336165658738,
+        6.583637234744543,
+        -4.571988522189161,
+        -2.2288480683542518
+      ],
+      "ablated_semantic_margins": {
+        "1": 4.375,
+        "2": 4.25,
+        "4": 4.375,
+        "8": 4.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:014:conflict:r0",
+      "pair_id": "incident_times:014",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.25,
+      "target_subspace_projections": [
+        0.1837739231246091,
+        -2.4665881223491835,
+        -1.3727596438314535,
+        3.383256460496476,
+        -2.7071464598377086,
+        7.0071811524456775,
+        -4.7756051453522534,
+        -2.039539710760903
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.25,
+        "2": 3.25,
+        "4": 3.25,
+        "8": 3.375
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:008:conflict:r0",
+      "pair_id": "incident_times:008",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.25,
+      "target_subspace_projections": [
+        0.3524507332420082,
+        -2.1669273977976604,
+        -1.2498608699883318,
+        3.444785564424645,
+        -2.93151388728379,
+        6.583038976701087,
+        -4.585338396120776,
+        -2.285952246753785
+      ],
+      "ablated_semantic_margins": {
+        "1": 4.375,
+        "2": 4.375,
+        "4": 4.375,
+        "8": 4.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:008:conflict:r0",
+      "pair_id": "incident_times:008",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.25,
+      "target_subspace_projections": [
+        0.2654396042559668,
+        -2.5163458587312384,
+        -1.338761492102844,
+        3.309115470298635,
+        -2.778503412051671,
+        7.114098980993744,
+        -4.862003298018846,
+        -2.101340280371652
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.25,
+        "2": 3.25,
+        "4": 3.25,
+        "8": 3.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:013:conflict:r0",
+      "pair_id": "incident_times:013",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -0.5,
+      "target_subspace_projections": [
+        -0.4571362632101755,
+        -2.6344220639315483,
+        -0.7025446644941207,
+        3.457513850719827,
+        -2.9211655484436916,
+        6.345338214144161,
+        -4.957548300473331,
+        -2.1661936468657847
+      ],
+      "ablated_semantic_margins": {
+        "1": -0.5,
+        "2": -0.625,
+        "4": -0.5,
+        "8": -0.5
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:013:conflict:r0",
+      "pair_id": "incident_times:013",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -0.625,
+      "target_subspace_projections": [
+        -0.6699382017304523,
+        -2.780588653639132,
+        -0.7126138278581614,
+        3.748872479947209,
+        -2.873504698191047,
+        6.369226704266142,
+        -5.054048107233964,
+        -2.3072716316582773
+      ],
+      "ablated_semantic_margins": {
+        "1": -0.75,
+        "2": -0.625,
+        "4": -0.625,
+        "8": -0.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:011:conflict:r0",
+      "pair_id": "incident_times:011",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.75,
+      "target_subspace_projections": [
+        -1.1197898343437747,
+        -2.414515459915566,
+        -0.45705367436109745,
+        3.4718488047767497,
+        -2.9303834660695136,
+        6.0372023259044285,
+        -5.000209460004578,
+        -2.269860624887068
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.75,
+        "2": -1.75,
+        "4": -1.75,
+        "8": -1.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:011:conflict:r0",
+      "pair_id": "incident_times:011",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.75,
+      "target_subspace_projections": [
+        -1.4268240137094401,
+        -2.5576537970066804,
+        -0.48187170345413066,
+        3.7751223604416113,
+        -2.977837441515385,
+        6.112329209163452,
+        -5.146458616852548,
+        -2.456426473753454
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.625,
+        "2": -1.75,
+        "4": -1.75,
+        "8": -1.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:001:conflict:r0",
+      "pair_id": "data_checksums:001",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.625,
+      "target_subspace_projections": [
+        -1.1156166313435627,
+        -2.5461611562577455,
+        -0.2608348819711085,
+        3.3589476938485676,
+        -3.130365243212654,
+        5.9994019293181635,
+        -4.848927052940304,
+        -2.2224810068773984
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.75,
+        "2": -1.75,
+        "4": -1.75,
+        "8": -1.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:001:conflict:r0",
+      "pair_id": "data_checksums:001",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.875,
+      "target_subspace_projections": [
+        -1.7928291603066686,
+        -2.4268406222865777,
+        -0.28965405691055035,
+        3.747376311462614,
+        -3.1432206745454616,
+        6.107843792086362,
+        -5.128866525816526,
+        -2.5212284748445075
+      ],
+      "ablated_semantic_margins": {
+        "1": -2.0,
+        "2": -2.0,
+        "4": -2.0,
+        "8": -1.875
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:000:conflict:r0",
+      "pair_id": "incident_times:000",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.5,
+      "target_subspace_projections": [
+        0.3468142471955316,
+        -2.2110188357938356,
+        -1.2794919917107852,
+        3.49183947407618,
+        -2.9829743441336594,
+        6.591479360512046,
+        -4.511492181249644,
+        -2.259881456168736
+      ],
+      "ablated_semantic_margins": {
+        "1": 4.625,
+        "2": 4.625,
+        "4": 4.625,
+        "8": 4.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:000:conflict:r0",
+      "pair_id": "incident_times:000",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.5,
+      "target_subspace_projections": [
+        0.13122889590331865,
+        -2.4988124481496627,
+        -1.3400094919968142,
+        3.4860386682823696,
+        -2.8067741411221627,
+        7.0237701869754385,
+        -4.769375312779308,
+        -2.0894693968191227
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.375,
+        "2": 3.5,
+        "4": 3.5,
+        "8": 3.5
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:007:reachable:r0",
+      "pair_id": "data_checksums:007",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.75,
+      "target_subspace_projections": [
+        -2.527977926885125,
+        -1.9992219301372574,
+        -0.18314413584889422,
+        3.387825740444084,
+        -2.8954608595489115,
+        5.6091164759855,
+        -4.924945220284526,
+        -2.395124539190097
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.5,
+        "2": -4.5,
+        "4": -4.375,
+        "8": -4.5
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:007:reachable:r0",
+      "pair_id": "data_checksums:007",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -5.375,
+      "target_subspace_projections": [
+        -2.6651050617495415,
+        -1.9893699807516594,
+        -0.26105110749053,
+        3.8800823569666765,
+        -2.938878699991702,
+        5.6613580324749,
+        -5.1302611336874335,
+        -2.6598969893923208
+      ],
+      "ablated_semantic_margins": {
+        "1": -5.125,
+        "2": -5.125,
+        "4": -5.125,
+        "8": -5.0
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:012:conflict:r0",
+      "pair_id": "data_checksums:012",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.75,
+      "target_subspace_projections": [
+        -0.006350613384148086,
+        -2.2766500278417765,
+        -1.144789749117178,
+        3.481995928977135,
+        -2.9940654301441176,
+        6.466843867757652,
+        -4.700351942168562,
+        -2.499256336025942
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.75,
+        "2": 3.625,
+        "4": 3.625,
+        "8": 3.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:012:conflict:r0",
+      "pair_id": "data_checksums:012",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.25,
+      "target_subspace_projections": [
+        -0.15264794176302093,
+        -2.695381424490508,
+        -1.0429099287165815,
+        3.574838942912759,
+        -2.9235399980490824,
+        6.888722869691118,
+        -5.052345864855782,
+        -2.3951892093683407
+      ],
+      "ablated_semantic_margins": {
+        "1": 2.25,
+        "2": 2.25,
+        "4": 2.375,
+        "8": 2.375
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:015:conflict:r0",
+      "pair_id": "incident_times:015",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -0.25,
+      "target_subspace_projections": [
+        -0.23116976110910997,
+        -2.6374886522057026,
+        -0.7392122728283477,
+        3.3718699439869173,
+        -2.872891583401974,
+        6.413214020434788,
+        -4.947446338755728,
+        -2.2034181412553706
+      ],
+      "ablated_semantic_margins": {
+        "1": -0.25,
+        "2": -0.25,
+        "4": -0.25,
+        "8": -0.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:015:conflict:r0",
+      "pair_id": "incident_times:015",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -0.75,
+      "target_subspace_projections": [
+        -0.6271254888925945,
+        -2.7140131770398472,
+        -0.6849545118851065,
+        3.680498101575417,
+        -2.8575873036504147,
+        6.38529861147757,
+        -5.069933386522405,
+        -2.366340634258613
+      ],
+      "ablated_semantic_margins": {
+        "1": -0.75,
+        "2": -0.75,
+        "4": -0.75,
+        "8": -0.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:002:reachable:r0",
+      "pair_id": "incident_times:002",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.25,
+      "target_subspace_projections": [
+        -1.3658012449560328,
+        -2.0760820842204644,
+        -0.3852575964609912,
+        3.494431357462612,
+        -2.9632980324149134,
+        5.855684246352323,
+        -5.021730981030022,
+        -2.455530263327467
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.25,
+        "2": -3.25,
+        "4": -3.25,
+        "8": -3.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:002:reachable:r0",
+      "pair_id": "incident_times:002",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.125,
+      "target_subspace_projections": [
+        -1.8455027975701925,
+        -2.148604872228772,
+        -0.3974544267587037,
+        3.82142655267389,
+        -2.982269020851548,
+        5.835946770173607,
+        -5.204359537732017,
+        -2.7041950040595317
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.0,
+        "2": -3.0,
+        "4": -2.875,
+        "8": -3.0
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:007:conflict:r0",
+      "pair_id": "incident_times:007",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.125,
+      "target_subspace_projections": [
+        -0.668577003274874,
+        -2.609623196699242,
+        -0.5567443355681265,
+        3.457350000031387,
+        -2.9683285773111274,
+        6.23890687769791,
+        -4.945150566478161,
+        -2.2619921835791676
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.125,
+        "2": -1.125,
+        "4": -1.125,
+        "8": -1.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:007:conflict:r0",
+      "pair_id": "incident_times:007",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.125,
+      "target_subspace_projections": [
+        -0.9683147060705409,
+        -2.682558969630195,
+        -0.5718782927107474,
+        3.799289862479397,
+        -2.9723920384142053,
+        6.3135019537989265,
+        -5.0900959080058605,
+        -2.423284329768701
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.125,
+        "2": -1.0,
+        "4": -1.0,
+        "8": -1.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:000:conflict:r0",
+      "pair_id": "data_checksums:000",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.75,
+      "target_subspace_projections": [
+        0.049958640823648676,
+        -2.139779656118761,
+        -1.1810807202710283,
+        3.4444070664991195,
+        -2.8964371241229028,
+        6.4861387030628475,
+        -4.615227083798635,
+        -2.518315278307229
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.75,
+        "2": 3.625,
+        "4": 3.625,
+        "8": 3.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:000:conflict:r0",
+      "pair_id": "data_checksums:000",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.625,
+      "target_subspace_projections": [
+        -0.0897356763132972,
+        -2.469178996216932,
+        -1.1195046496162968,
+        3.523559021416829,
+        -2.8075132914885117,
+        7.029117293746022,
+        -4.95948405725703,
+        -2.388874612804005
+      ],
+      "ablated_semantic_margins": {
+        "1": 2.625,
+        "2": 2.625,
+        "4": 2.625,
+        "8": 2.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:009:reachable:r0",
+      "pair_id": "incident_times:009",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.125,
+      "target_subspace_projections": [
+        -2.073538886004685,
+        -2.1762482660796025,
+        -0.13956322857083941,
+        3.4524315360435143,
+        -3.0645273593260236,
+        5.7380865176209515,
+        -5.102036926735266,
+        -2.371704616948633
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.0,
+        "2": -4.0,
+        "4": -4.0,
+        "8": -3.875
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:009:reachable:r0",
+      "pair_id": "incident_times:009",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.75,
+      "target_subspace_projections": [
+        -2.270095979386735,
+        -2.3191500038624997,
+        -0.26935926792016607,
+        3.858383945522269,
+        -3.016546611814102,
+        5.853663954634437,
+        -5.258119480738971,
+        -2.5908904028791735
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.625,
+        "2": -3.625,
+        "4": -3.625,
+        "8": -3.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:011:reachable:r0",
+      "pair_id": "incident_times:011",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.625,
+      "target_subspace_projections": [
+        -1.9041027242008297,
+        -2.156865327960108,
+        -0.252288508481981,
+        3.5082311803954798,
+        -2.9826982740620096,
+        5.772451145492418,
+        -5.042431193995926,
+        -2.350194515565057
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.375,
+        "2": -3.375,
+        "4": -3.5,
+        "8": -3.5
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:011:reachable:r0",
+      "pair_id": "incident_times:011",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.25,
+      "target_subspace_projections": [
+        -2.159535355943854,
+        -2.361180917242938,
+        -0.27710970228907394,
+        3.8439624746031265,
+        -3.0642877148198946,
+        5.881391855551711,
+        -5.322335616511308,
+        -2.61590605100877
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.125,
+        "2": -3.125,
+        "4": -3.125,
+        "8": -3.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:013:conflict:r0",
+      "pair_id": "data_checksums:013",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.0,
+      "target_subspace_projections": [
+        -0.8427975603194048,
+        -2.7012781098725034,
+        -0.38914942501594046,
+        3.46224859287231,
+        -3.0883378153460654,
+        6.318726927807084,
+        -4.951550881358097,
+        -2.174662553220424
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.0,
+        "2": -1.125,
+        "4": -1.125,
+        "8": -1.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:013:conflict:r0",
+      "pair_id": "data_checksums:013",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.25,
+      "target_subspace_projections": [
+        -1.5111476340064933,
+        -2.616177377784881,
+        -0.3447136146662829,
+        3.8453866058956936,
+        -3.0579208547439762,
+        6.348501600072295,
+        -5.183019764318712,
+        -2.457328556665453
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.25,
+        "2": -1.25,
+        "4": -1.375,
+        "8": -1.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:003:conflict:r0",
+      "pair_id": "incident_times:003",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -0.875,
+      "target_subspace_projections": [
+        -0.7428481638383276,
+        -2.5793857678575196,
+        -0.5827908990290923,
+        3.486495796052083,
+        -2.9868318831019933,
+        6.2613299167556,
+        -4.962603470850829,
+        -2.21886838094695
+      ],
+      "ablated_semantic_margins": {
+        "1": -0.875,
+        "2": -1.0,
+        "4": -1.0,
+        "8": -0.875
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:003:conflict:r0",
+      "pair_id": "incident_times:003",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.0,
+      "target_subspace_projections": [
+        -1.056771668183212,
+        -2.6141245752813043,
+        -0.6130655135086209,
+        3.793099109624088,
+        -2.9720479577897567,
+        6.316611709239872,
+        -5.110067800176829,
+        -2.3546871523363877
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.125,
+        "2": -1.0,
+        "4": -1.125,
+        "8": -1.0
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:010:reachable:r0",
+      "pair_id": "data_checksums:010",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.125,
+      "target_subspace_projections": [
+        -1.6718865040735988,
+        -1.9989533859242303,
+        -0.35593704486451355,
+        3.4629919642590896,
+        -2.890340305072915,
+        5.855447761178701,
+        -4.88374344612877,
+        -2.2822752102527786
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.125,
+        "2": -3.125,
+        "4": -3.0,
+        "8": -3.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:010:reachable:r0",
+      "pair_id": "data_checksums:010",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.875,
+      "target_subspace_projections": [
+        -2.2716406551416095,
+        -1.8834829628320597,
+        -0.39114429472659357,
+        3.8661888727440354,
+        -2.86081302533144,
+        5.730875108875957,
+        -5.147234311082323,
+        -2.6112336582919937
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.75,
+        "2": -3.75,
+        "4": -3.75,
+        "8": -3.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:014:reachable:r0",
+      "pair_id": "data_checksums:014",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.375,
+      "target_subspace_projections": [
+        -1.6956660895051536,
+        -2.034694337880142,
+        -0.3346467170585748,
+        3.4909799215556045,
+        -2.950899275740528,
+        5.846140050112049,
+        -4.901585031923214,
+        -2.302157632449032
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.375,
+        "2": -3.375,
+        "4": -3.375,
+        "8": -3.375
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:014:reachable:r0",
+      "pair_id": "data_checksums:014",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.25,
+      "target_subspace_projections": [
+        -2.322677186356016,
+        -1.9190601872236177,
+        -0.3669284746104339,
+        3.92553873625642,
+        -2.9038384562209325,
+        5.788452337139237,
+        -5.18579364092765,
+        -2.6323250106091125
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.125,
+        "2": -4.125,
+        "4": -4.125,
+        "8": -4.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:004:reachable:r0",
+      "pair_id": "data_checksums:004",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.5,
+      "target_subspace_projections": [
+        -1.6881294699941158,
+        -1.9869590051289743,
+        -0.3003038330502794,
+        3.362896585193955,
+        -2.949873987966545,
+        5.78915110816299,
+        -4.832892591803284,
+        -2.357590102780523
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.375,
+        "2": -3.375,
+        "4": -3.25,
+        "8": -3.375
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:004:reachable:r0",
+      "pair_id": "data_checksums:004",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.375,
+      "target_subspace_projections": [
+        -2.2802867937916997,
+        -1.8552815378893022,
+        -0.3130179967038859,
+        3.852266698120462,
+        -2.896052049094648,
+        5.703989695319959,
+        -5.100379183863242,
+        -2.73712099252935
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.125,
+        "2": -4.125,
+        "4": -4.125,
+        "8": -4.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:008:reachable:r0",
+      "pair_id": "data_checksums:008",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.75,
+      "target_subspace_projections": [
+        -1.7737667827319141,
+        -1.9209544083073633,
+        -0.32584584512337633,
+        3.4191434594024344,
+        -2.901590817130159,
+        5.776443326896279,
+        -4.8515745430226405,
+        -2.306669411102417
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.75,
+        "2": -3.625,
+        "4": -3.625,
+        "8": -3.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:008:reachable:r0",
+      "pair_id": "data_checksums:008",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.0,
+      "target_subspace_projections": [
+        -2.227848693503056,
+        -1.9045531180789141,
+        -0.3542830439451997,
+        3.891501031380315,
+        -2.895693013151346,
+        5.738971614991068,
+        -5.119081034195771,
+        -2.637089145078501
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.875,
+        "2": -3.875,
+        "4": -3.875,
+        "8": -3.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:002:reachable:r0",
+      "pair_id": "data_checksums:002",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.25,
+      "target_subspace_projections": [
+        -1.669835454055706,
+        -2.050231246602838,
+        -0.3405869940175714,
+        3.547699412854265,
+        -2.946618030322443,
+        5.935624670428524,
+        -4.923729365368612,
+        -2.2604612293113364
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.25,
+        "2": -3.125,
+        "4": -3.125,
+        "8": -3.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:002:reachable:r0",
+      "pair_id": "data_checksums:002",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.875,
+      "target_subspace_projections": [
+        -2.2423242849818097,
+        -1.9515383406393674,
+        -0.35741753845923374,
+        3.906479318511285,
+        -2.8851295777116572,
+        5.802517683648627,
+        -5.126801763531227,
+        -2.55774956916711
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.625,
+        "2": -3.625,
+        "4": -3.625,
+        "8": -3.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:002:conflict:r0",
+      "pair_id": "incident_times:002",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.125,
+      "target_subspace_projections": [
+        0.5560914476524422,
+        -2.2064950262173633,
+        -1.331323735357812,
+        3.421858456733834,
+        -2.949686357795384,
+        6.721931916020744,
+        -4.608969008790147,
+        -2.240264357326484
+      ],
+      "ablated_semantic_margins": {
+        "1": 4.125,
+        "2": 4.125,
+        "4": 4.125,
+        "8": 4.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:002:conflict:r0",
+      "pair_id": "incident_times:002",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.125,
+      "target_subspace_projections": [
+        0.3272651415894726,
+        -2.485465523254248,
+        -1.3626334401464568,
+        3.45176837488619,
+        -2.8166291353291633,
+        7.145690220357762,
+        -4.869711729936296,
+        -2.0714676679197863
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.0,
+        "2": 3.0,
+        "4": 3.125,
+        "8": 3.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:012:reachable:r0",
+      "pair_id": "data_checksums:012",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.25,
+      "target_subspace_projections": [
+        -1.5038505738363275,
+        -2.135945912706807,
+        -0.33967306940926106,
+        3.4877807139125863,
+        -2.9823548955694474,
+        5.831927621788055,
+        -4.907165908372293,
+        -2.335088296101793
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.25,
+        "2": -3.25,
+        "4": -3.125,
+        "8": -3.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:012:reachable:r0",
+      "pair_id": "data_checksums:012",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.125,
+      "target_subspace_projections": [
+        -2.202318625300717,
+        -1.9772018323312341,
+        -0.3312893029642504,
+        3.8830671503862213,
+        -2.916123286377825,
+        5.6900829715013455,
+        -5.128086405514462,
+        -2.6499573676198387
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.125,
+        "2": -4.125,
+        "4": -4.0,
+        "8": -4.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:001:reachable:r0",
+      "pair_id": "data_checksums:001",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.875,
+      "target_subspace_projections": [
+        -2.271851821573346,
+        -2.1404869542210743,
+        -0.1535088164011596,
+        3.340440485324146,
+        -2.992383964874321,
+        5.6524744322844604,
+        -4.901417990000514,
+        -2.383175998293084
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.875,
+        "2": -3.75,
+        "4": -3.75,
+        "8": -3.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:001:reachable:r0",
+      "pair_id": "data_checksums:001",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -5.0,
+      "target_subspace_projections": [
+        -2.6967661409690615,
+        -1.9801344903041218,
+        -0.24549145657950908,
+        3.818148523260848,
+        -2.9764397872034762,
+        5.688771933494324,
+        -5.170805515177383,
+        -2.7280810370524606
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.75,
+        "2": -4.875,
+        "4": -4.75,
+        "8": -4.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:014:conflict:r0",
+      "pair_id": "data_checksums:014",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.125,
+      "target_subspace_projections": [
+        -0.16491771278061884,
+        -2.033063020176955,
+        -1.1547937347328898,
+        3.5321881840210416,
+        -2.946929817471823,
+        6.507193994253177,
+        -4.692663038065577,
+        -2.543275822384016
+      ],
+      "ablated_semantic_margins": {
+        "1": 4.25,
+        "2": 4.125,
+        "4": 4.0,
+        "8": 4.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:014:conflict:r0",
+      "pair_id": "data_checksums:014",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.875,
+      "target_subspace_projections": [
+        -0.33460145782673956,
+        -2.4109982071912732,
+        -1.0967374465185487,
+        3.558990097199345,
+        -2.8527147988132726,
+        7.00718222421992,
+        -5.035139098506524,
+        -2.3989916985409034
+      ],
+      "ablated_semantic_margins": {
+        "1": 2.875,
+        "2": 2.875,
+        "4": 2.875,
+        "8": 2.875
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:008:reachable:r0",
+      "pair_id": "incident_times:008",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.875,
+      "target_subspace_projections": [
+        -1.4539620501861288,
+        -1.9806366468689667,
+        -0.38218611371570066,
+        3.5276579456549872,
+        -3.0314558512356933,
+        5.892868455978849,
+        -5.0110691103076865,
+        -2.482205404401117
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.875,
+        "2": -3.875,
+        "4": -3.75,
+        "8": -3.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:008:reachable:r0",
+      "pair_id": "incident_times:008",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.75,
+      "target_subspace_projections": [
+        -1.420722995551725,
+        -1.998041625236391,
+        -0.5203914736305083,
+        3.693970773092101,
+        -2.963633522612904,
+        5.763214561706318,
+        -4.930616199981351,
+        -2.4696554683009757
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.75,
+        "2": -3.625,
+        "4": -3.75,
+        "8": -3.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:004:reachable:r0",
+      "pair_id": "incident_times:004",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.125,
+      "target_subspace_projections": [
+        -1.7114377960606748,
+        -1.938065875713586,
+        -0.3059365686943393,
+        3.4330865255876413,
+        -2.913096563676693,
+        5.670210613467345,
+        -4.9870075874594395,
+        -2.4476244361846105
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.125,
+        "2": -4.0,
+        "4": -4.0,
+        "8": -4.0
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:004:reachable:r0",
+      "pair_id": "incident_times:004",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.25,
+      "target_subspace_projections": [
+        -2.162636462092589,
+        -1.998786214810963,
+        -0.3587930382776887,
+        3.789042869775595,
+        -2.9239581371106556,
+        5.679462583365651,
+        -5.237550197162596,
+        -2.7235146391482816
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.125,
+        "2": -4.125,
+        "4": -4.125,
+        "8": -4.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:006:conflict:r0",
+      "pair_id": "data_checksums:006",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.375,
+      "target_subspace_projections": [
+        -0.07800753225915494,
+        -2.088253519874327,
+        -1.1160154826509365,
+        3.476900484296785,
+        -2.9220544548613416,
+        6.5609469777372675,
+        -4.772824571636635,
+        -2.4837264263726784
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.375,
+        "2": 3.375,
+        "4": 3.25,
+        "8": 3.375
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:006:conflict:r0",
+      "pair_id": "data_checksums:006",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.25,
+      "target_subspace_projections": [
+        -0.25132477376311946,
+        -2.493014169023369,
+        -1.0548519186999976,
+        3.5910061264103206,
+        -2.802353891396685,
+        7.012000927127249,
+        -5.077817973229152,
+        -2.3384773085084705
+      ],
+      "ablated_semantic_margins": {
+        "1": 2.125,
+        "2": 2.25,
+        "4": 2.125,
+        "8": 2.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:004:conflict:r0",
+      "pair_id": "data_checksums:004",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.75,
+      "target_subspace_projections": [
+        -0.05815400597387349,
+        -2.079355657030946,
+        -1.173904283030941,
+        3.4611050334596123,
+        -2.905613125107822,
+        6.516391011178648,
+        -4.720096836358542,
+        -2.5140525746671014
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.75,
+        "2": 3.75,
+        "4": 3.75,
+        "8": 3.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:004:conflict:r0",
+      "pair_id": "data_checksums:004",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.875,
+      "target_subspace_projections": [
+        -0.19158575815538825,
+        -2.39519401176418,
+        -1.1435239777216597,
+        3.495166869808883,
+        -2.8181062589067083,
+        7.01144702780692,
+        -5.010139835904732,
+        -2.390913149306458
+      ],
+      "ablated_semantic_margins": {
+        "1": 2.875,
+        "2": 2.875,
+        "4": 2.875,
+        "8": 2.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:000:reachable:r0",
+      "pair_id": "data_checksums:000",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.625,
+      "target_subspace_projections": [
+        -1.8602975223123692,
+        -1.911595789225545,
+        -0.34181854296634023,
+        3.48356182668832,
+        -2.93549755983211,
+        5.789904618792712,
+        -4.810224680205255,
+        -2.3386105347501407
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.625,
+        "2": -3.625,
+        "4": -3.625,
+        "8": -3.5
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:000:reachable:r0",
+      "pair_id": "data_checksums:000",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.375,
+      "target_subspace_projections": [
+        -2.4064023556437397,
+        -1.8141804278195692,
+        -0.37240291985154644,
+        3.926909311128359,
+        -2.8790597377239817,
+        5.707841269102605,
+        -5.097060736794957,
+        -2.6971192362325405
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.125,
+        "2": -4.125,
+        "4": -4.125,
+        "8": -4.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:012:conflict:r0",
+      "pair_id": "incident_times:012",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.0,
+      "target_subspace_projections": [
+        0.6343562132154967,
+        -2.2044479846667593,
+        -1.3415792600860363,
+        3.368234825514456,
+        -2.9299261884892296,
+        6.7061981953304235,
+        -4.5931612255253285,
+        -2.1645019920475126
+      ],
+      "ablated_semantic_margins": {
+        "1": 4.125,
+        "2": 4.0,
+        "4": 4.0,
+        "8": 4.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:012:conflict:r0",
+      "pair_id": "incident_times:012",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.25,
+      "target_subspace_projections": [
+        0.423581080069197,
+        -2.489890967789149,
+        -1.3058323215220047,
+        3.3451335142726655,
+        -2.839494558147308,
+        7.135118122200993,
+        -4.780530217718171,
+        -2.0111378313203145
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.125,
+        "2": 3.125,
+        "4": 3.25,
+        "8": 3.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:013:reachable:r0",
+      "pair_id": "incident_times:013",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.375,
+      "target_subspace_projections": [
+        -1.0880702856898938,
+        -2.4510755369473176,
+        -0.4550971850295522,
+        3.529937445291873,
+        -3.0413525682898674,
+        6.167301204772218,
+        -4.970910164701891,
+        -2.2327252543868585
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.375,
+        "2": -1.5,
+        "4": -1.375,
+        "8": -1.375
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:013:reachable:r0",
+      "pair_id": "incident_times:013",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.75,
+      "target_subspace_projections": [
+        -1.4400328624021388,
+        -2.532140715303578,
+        -0.49092780582070056,
+        3.852232018782622,
+        -3.038339323318333,
+        6.197405376936634,
+        -5.18715617996273,
+        -2.4715684735463017
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.625,
+        "2": -1.75,
+        "4": -1.75,
+        "8": -1.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:015:conflict:r0",
+      "pair_id": "data_checksums:015",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.5,
+      "target_subspace_projections": [
+        -1.1086346401807166,
+        -2.569156939827164,
+        -0.3697318986161715,
+        3.4071994792335913,
+        -3.007124079892777,
+        6.1149257172934846,
+        -4.849630740080388,
+        -2.2283690427276253
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.625,
+        "2": -1.625,
+        "4": -1.625,
+        "8": -1.5
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:015:conflict:r0",
+      "pair_id": "data_checksums:015",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.25,
+      "target_subspace_projections": [
+        -1.664432865089398,
+        -2.5961081332744658,
+        -0.3505001042271605,
+        3.7611713435223786,
+        -2.9770427416588885,
+        6.1792348803908,
+        -5.137952226795397,
+        -2.4494234369201484
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.375,
+        "2": -1.375,
+        "4": -1.375,
+        "8": -1.375
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:013:reachable:r0",
+      "pair_id": "data_checksums:013",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.375,
+      "target_subspace_projections": [
+        -2.456465598584875,
+        -2.0005399684264846,
+        -0.20037465759364684,
+        3.401337984668088,
+        -2.9131544767490563,
+        5.612826984246558,
+        -4.926994950093446,
+        -2.3673785278287487
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.125,
+        "2": -4.25,
+        "4": -4.125,
+        "8": -4.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:013:reachable:r0",
+      "pair_id": "data_checksums:013",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -5.375,
+      "target_subspace_projections": [
+        -2.7701741573464633,
+        -2.083056770119707,
+        -0.2405068010579705,
+        3.8334422765818292,
+        -2.931906969829953,
+        5.644736912763751,
+        -5.213830360518873,
+        -2.7026926157659914
+      ],
+      "ablated_semantic_margins": {
+        "1": -5.125,
+        "2": -5.125,
+        "4": -5.125,
+        "8": -5.0
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:008:conflict:r0",
+      "pair_id": "data_checksums:008",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.375,
+      "target_subspace_projections": [
+        -0.015693403528492668,
+        -2.216568065963551,
+        -1.1047610543517574,
+        3.5207693515573646,
+        -2.971275333614513,
+        6.661105599171238,
+        -4.89755789850444,
+        -2.521978613119494
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.375,
+        "2": 3.375,
+        "4": 3.375,
+        "8": 3.375
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:008:conflict:r0",
+      "pair_id": "data_checksums:008",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.25,
+      "target_subspace_projections": [
+        -0.18520076086133308,
+        -2.5609314950615323,
+        -1.0669938292882115,
+        3.518211709642044,
+        -2.8620578702458976,
+        7.0157393737703115,
+        -5.1435056709483264,
+        -2.3893689814252266
+      ],
+      "ablated_semantic_margins": {
+        "1": 2.25,
+        "2": 2.25,
+        "4": 2.375,
+        "8": 2.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:011:conflict:r0",
+      "pair_id": "data_checksums:011",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.75,
+      "target_subspace_projections": [
+        -1.2089677212080898,
+        -2.527330828781005,
+        -0.3613160387360713,
+        3.4624930277962798,
+        -2.9722926094477065,
+        6.019455836764684,
+        -4.890408938720033,
+        -2.213040695357143
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.75,
+        "2": -1.75,
+        "4": -1.75,
+        "8": -1.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:011:conflict:r0",
+      "pair_id": "data_checksums:011",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.125,
+      "target_subspace_projections": [
+        -1.819263911200774,
+        -2.4402174749308827,
+        -0.35474550219070683,
+        3.7770445900022267,
+        -2.972226608227636,
+        6.044223910075669,
+        -5.143371063555207,
+        -2.451364264592656
+      ],
+      "ablated_semantic_margins": {
+        "1": -2.125,
+        "2": -2.125,
+        "4": -2.125,
+        "8": -2.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:009:conflict:r0",
+      "pair_id": "incident_times:009",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -0.625,
+      "target_subspace_projections": [
+        -0.594522065256288,
+        -2.7333963796102165,
+        -0.5692204869595082,
+        3.4478317321110765,
+        -2.9824827848716757,
+        6.285069415403354,
+        -4.9430658890861965,
+        -2.192415311430519
+      ],
+      "ablated_semantic_margins": {
+        "1": -0.75,
+        "2": -0.75,
+        "4": -0.75,
+        "8": -0.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:009:conflict:r0",
+      "pair_id": "incident_times:009",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.375,
+      "target_subspace_projections": [
+        -1.0295208694875715,
+        -2.7113479816551385,
+        -0.6129111834085899,
+        3.780146920185233,
+        -2.923464063051755,
+        6.337237424924914,
+        -5.049624009686497,
+        -2.386817258569716
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.375,
+        "2": -1.375,
+        "4": -1.375,
+        "8": -1.375
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:010:reachable:r0",
+      "pair_id": "incident_times:010",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.375,
+      "target_subspace_projections": [
+        -1.3440321925372365,
+        -2.189289322776994,
+        -0.31392800212655064,
+        3.4069499925931996,
+        -2.9237539626156064,
+        5.802170196378332,
+        -4.938424061938328,
+        -2.3845192448469166
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.25,
+        "2": -3.375,
+        "4": -3.375,
+        "8": -3.375
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:010:reachable:r0",
+      "pair_id": "incident_times:010",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.125,
+      "target_subspace_projections": [
+        -1.9094764286787222,
+        -2.1961105201580384,
+        -0.35752789143921804,
+        3.8486914891043815,
+        -2.9515439222372093,
+        5.8856825792510685,
+        -5.229703429689081,
+        -2.6902083681111217
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.125,
+        "2": -3.125,
+        "4": -3.0,
+        "8": -3.125
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:009:reachable:r0",
+      "pair_id": "data_checksums:009",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.5,
+      "target_subspace_projections": [
+        -2.575283233622223,
+        -1.9414508460617999,
+        -0.18793849003608684,
+        3.420385226854414,
+        -2.897552365704837,
+        5.555372609250228,
+        -4.982431258707564,
+        -2.427381328160193
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.5,
+        "2": -4.375,
+        "4": -4.375,
+        "8": -4.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:009:reachable:r0",
+      "pair_id": "data_checksums:009",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -5.75,
+      "target_subspace_projections": [
+        -2.802000994349627,
+        -1.9568051235982333,
+        -0.23462071213497726,
+        3.8819718548688065,
+        -2.9515521736980235,
+        5.623077659792266,
+        -5.235237635230855,
+        -2.737632817795601
+      ],
+      "ablated_semantic_margins": {
+        "1": -5.5,
+        "2": -5.5,
+        "4": -5.5,
+        "8": -5.375
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:015:reachable:r0",
+      "pair_id": "incident_times:015",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -2.625,
+      "target_subspace_projections": [
+        -1.4677056761229181,
+        -2.308974274525564,
+        -0.30551127772565223,
+        3.43426560207252,
+        -3.0814156697565656,
+        5.956244264304167,
+        -5.049009907889558,
+        -2.2513915938748745
+      ],
+      "ablated_semantic_margins": {
+        "1": -2.625,
+        "2": -2.625,
+        "4": -2.625,
+        "8": -2.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:015:reachable:r0",
+      "pair_id": "incident_times:015",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.0,
+      "target_subspace_projections": [
+        -1.6574908542575975,
+        -2.492644017118926,
+        -0.39039244234507525,
+        3.7844623608098202,
+        -3.04361306206838,
+        6.014348655781944,
+        -5.2194978454197445,
+        -2.412921592389796
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.875,
+        "2": -2.0,
+        "4": -2.0,
+        "8": -2.0
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:002:conflict:r0",
+      "pair_id": "data_checksums:002",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.875,
+      "target_subspace_projections": [
+        -0.04183876737060793,
+        -2.067148727940746,
+        -1.1785719933325267,
+        3.5336056857548277,
+        -2.965418280623511,
+        6.553604282182402,
+        -4.732295812175262,
+        -2.505733111655372
+      ],
+      "ablated_semantic_margins": {
+        "1": 4.0,
+        "2": 3.875,
+        "4": 3.75,
+        "8": 3.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:002:conflict:r0",
+      "pair_id": "data_checksums:002",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.375,
+      "target_subspace_projections": [
+        -0.21843611855064127,
+        -2.458533233094949,
+        -1.1207763500659502,
+        3.6268774249497397,
+        -2.898158152966932,
+        7.052612901075948,
+        -5.099811571893887,
+        -2.420147509853871
+      ],
+      "ablated_semantic_margins": {
+        "1": 2.5,
+        "2": 2.375,
+        "4": 2.375,
+        "8": 2.5
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:005:reachable:r0",
+      "pair_id": "data_checksums:005",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -5.0,
+      "target_subspace_projections": [
+        -2.607549137099071,
+        -1.8661191161996338,
+        -0.17953047529666494,
+        3.393068583001879,
+        -2.914135916242613,
+        5.583318448215501,
+        -4.966993069879727,
+        -2.420255637318334
+      ],
+      "ablated_semantic_margins": {
+        "1": -4.75,
+        "2": -4.625,
+        "4": -4.625,
+        "8": -4.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:005:reachable:r0",
+      "pair_id": "data_checksums:005",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -6.125,
+      "target_subspace_projections": [
+        -2.864802431964861,
+        -1.9235693415904351,
+        -0.2535819488597255,
+        3.854284108492049,
+        -2.9066322918916314,
+        5.589796629296346,
+        -5.199463530058953,
+        -2.7161043370994746
+      ],
+      "ablated_semantic_margins": {
+        "1": -5.75,
+        "2": -5.625,
+        "4": -5.75,
+        "8": -5.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:004:conflict:r0",
+      "pair_id": "incident_times:004",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.375,
+      "target_subspace_projections": [
+        0.5368502076719468,
+        -2.2685047788524426,
+        -1.3097559001148396,
+        3.3924916187469494,
+        -2.9331712516653283,
+        6.6235806457738065,
+        -4.593589778704755,
+        -2.251109556754378
+      ],
+      "ablated_semantic_margins": {
+        "1": 4.375,
+        "2": 4.375,
+        "4": 4.25,
+        "8": 4.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:004:conflict:r0",
+      "pair_id": "incident_times:004",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.375,
+      "target_subspace_projections": [
+        0.30116127516414226,
+        -2.595251897090472,
+        -1.302039915955931,
+        3.4173843019583594,
+        -2.8612484307817434,
+        7.072742777260139,
+        -4.876196288071712,
+        -2.097359952796011
+      ],
+      "ablated_semantic_margins": {
+        "1": 3.375,
+        "2": 3.25,
+        "4": 3.25,
+        "8": 3.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:001:conflict:r0",
+      "pair_id": "incident_times:001",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.75,
+      "target_subspace_projections": [
+        -1.0244494725847542,
+        -2.545090143283186,
+        -0.261380872277812,
+        3.3943517680385753,
+        -2.9045464737579296,
+        6.088448755140143,
+        -5.0634096539317826,
+        -2.211898184204357
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.75,
+        "2": -1.75,
+        "4": -1.75,
+        "8": -1.75
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:001:conflict:r0",
+      "pair_id": "incident_times:001",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.5,
+      "target_subspace_projections": [
+        -1.3583262752083995,
+        -2.5839430285763716,
+        -0.3539261875816932,
+        3.6991552410695703,
+        -2.848991215658967,
+        6.177971075613176,
+        -5.178588933781804,
+        -2.4258975560867166
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.625,
+        "2": -1.625,
+        "4": -1.625,
+        "8": -1.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:003:conflict:r0",
+      "pair_id": "data_checksums:003",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.375,
+      "target_subspace_projections": [
+        -1.0942422759912904,
+        -2.558853088470148,
+        -0.38988875418495705,
+        3.518529624841528,
+        -3.0435639266041408,
+        6.218352018377652,
+        -4.942128648903244,
+        -2.229409886780383
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.25,
+        "2": -1.25,
+        "4": -1.375,
+        "8": -1.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:003:conflict:r0",
+      "pair_id": "data_checksums:003",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.75,
+      "target_subspace_projections": [
+        -1.7346370861821754,
+        -2.51354611052934,
+        -0.3475121048249794,
+        3.7653515429075637,
+        -3.02170370049746,
+        6.143015447080726,
+        -5.145944082504722,
+        -2.45696528191643
+      ],
+      "ablated_semantic_margins": {
+        "1": -1.625,
+        "2": -1.625,
+        "4": -1.625,
+        "8": -1.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:005:reachable:r0",
+      "pair_id": "incident_times:005",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -2.125,
+      "target_subspace_projections": [
+        -1.3617344150176813,
+        -2.338665691985351,
+        -0.362317913516874,
+        3.4568289911159384,
+        -3.0423899103926297,
+        5.954704020234134,
+        -4.9863825938750574,
+        -2.2297816539351047
+      ],
+      "ablated_semantic_margins": {
+        "1": -2.125,
+        "2": -2.125,
+        "4": -2.25,
+        "8": -2.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:005:reachable:r0",
+      "pair_id": "incident_times:005",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.375,
+      "target_subspace_projections": [
+        -1.7667849485997449,
+        -2.395550289453203,
+        -0.41877089268566214,
+        3.821210087065321,
+        -3.0553286800256085,
+        5.959027180539248,
+        -5.229542874788963,
+        -2.487485109554398
+      ],
+      "ablated_semantic_margins": {
+        "1": -2.25,
+        "2": -2.25,
+        "4": -2.25,
+        "8": -2.25
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:006:reachable:r0",
+      "pair_id": "data_checksums:006",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.125,
+      "target_subspace_projections": [
+        -1.5220092299027226,
+        -2.0637642911017733,
+        -0.3892885874596692,
+        3.499184912087383,
+        -2.893573607881562,
+        5.977693123839546,
+        -4.8745944273670565,
+        -2.314846859218324
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.0,
+        "2": -3.0,
+        "4": -3.0,
+        "8": -3.0
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:006:reachable:r0",
+      "pair_id": "data_checksums:006",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.75,
+      "target_subspace_projections": [
+        -2.166759264082369,
+        -1.9004163308213256,
+        -0.39312513778803415,
+        3.89017049357344,
+        -2.862865158854629,
+        5.814031312488233,
+        -5.071232006481341,
+        -2.6517355456790495
+      ],
+      "ablated_semantic_margins": {
+        "1": -3.625,
+        "2": -3.625,
+        "4": -3.625,
+        "8": -3.625
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:005:conflict:r0",
+      "pair_id": "incident_times:005",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -0.5,
+      "target_subspace_projections": [
+        -0.4264314117162864,
+        -2.666371578769943,
+        -0.6858560657673646,
+        3.4213709316061074,
+        -2.963292619140423,
+        6.353605476701928,
+        -4.95944819638065,
+        -2.184185923783516
+      ],
+      "ablated_semantic_margins": {
+        "1": -0.5,
+        "2": -0.5,
+        "4": -0.5,
+        "8": -0.5
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:005:conflict:r0",
+      "pair_id": "incident_times:005",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -0.75,
+      "target_subspace_projections": [
+        -0.6446689770497038,
+        -2.7240116264902965,
+        -0.693991835652464,
+        3.7116684420476544,
+        -2.967156255553543,
+        6.388735551873907,
+        -5.055623491383854,
+        -2.335737095902223
+      ],
+      "ablated_semantic_margins": {
+        "1": -0.75,
+        "2": -0.75,
+        "4": -0.75,
+        "8": -0.75
+      }
+    }
+  ],
+  "provenance": {
+    "acting_model": "meta-llama/Llama-3.1-8B-Instruct",
+    "expected_model_commit": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "model_commit": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "tokenizer_commit": null,
+    "dtype": "bfloat16",
+    "quantization": null,
+    "hardware": {
+      "name": "NVIDIA A100-SXM4-80GB",
+      "total_memory_gib": 79.250732421875,
+      "bf16_supported": true,
+      "cuda_version": "12.8",
+      "torch_version": "2.11.0+cu128",
+      "load_bearing_hardware": true
+    },
+    "source_evidence": {
+      "101": {
+        "decision": "SUPPORTED_PATTERN",
+        "selected_layer": 27,
+        "result_b64_sha256": "eb586377a842d374acdbf280c5183bd7cbbd559569227cc402c24c6be48a6a01"
+      },
+      "102": {
+        "decision": "SUPPORTED_PATTERN",
+        "selected_layer": 27,
+        "result_b64_sha256": "7e790f590586934df8575cc9e8e3e1971c3dfe3fd6d576619c680ca9294cda51"
+      }
+    },
+    "label_source": "mechanical target-path achievability; no model or human judge",
+    "intervention_scope": "mapping-centered rank-1/2/4/8 projection removal at the final prompt position after decoder module 26, corresponding to hidden state 27",
+    "package_versions": {
+      "torch": "2.11.0+cu128",
+      "transformers": "5.0.0",
+      "scikit-learn": "1.8.0",
+      "numpy": "2.0.2"
+    }
+  }
+}

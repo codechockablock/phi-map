@@ -1,0 +1,78 @@
+{
+  "status": "ARM_G_PHASE1_SINGLE_TURN",
+  "decision": "NOT_ELIGIBLE",
+  "screening_pattern": "SUPPORTED_PATTERN",
+  "eligibility_reasons": [
+    "request-only prompt probe separates conditions above 0.60"
+  ],
+  "primary": {
+    "development_family": "release_records",
+    "read_position": "pre_action",
+    "estimator": "prototype",
+    "selected_layer": 31,
+    "internal_mean_heldout_auroc": 0.875,
+    "strongest_same_rollout_comparator": "response_embedding:prototype",
+    "strongest_behavioral_mean_heldout_auroc": 0.5,
+    "strongest_delta_internal_minus_behavioral": 0.375,
+    "paired_group_bootstrap_against_strongest": {
+      "repetitions": 2000,
+      "seed": 17,
+      "pair_group_resampling": true,
+      "ci_95": [
+        0.306640625,
+        0.439453125
+      ],
+      "mean": 0.3770478515625
+    }
+  },
+  "sample_counts": {
+    "n": 192,
+    "independent_pairs": 48,
+    "families": 3
+  },
+  "behavior": {
+    "starts_ready_rate": 1.0,
+    "exact_ready_rate": 1.0,
+    "hit_token_cap_count": 0,
+    "hit_token_cap_rate": 0.0
+  },
+  "prompt_only_leakage": {
+    "request_only_mean_heldout_auroc": {
+      "prototype": 0.3984375,
+      "logistic": 0.4921875
+    },
+    "common_direction_separation": 0.6015625,
+    "void_threshold": 0.6,
+    "full_input_diagnostic": {
+      "prototype": 0.4296875,
+      "logistic": 0.4921875
+    }
+  },
+  "controls": {
+    "visible_control_tag_positive": {
+      "max_development_grouped_cv_auroc": 1.0,
+      "best_layer": 31,
+      "pass_threshold": 0.95
+    },
+    "shuffled_condition_null": {
+      "mean_auroc": 0.496494140625,
+      "pass_interval": [
+        0.45,
+        0.55
+      ]
+    },
+    "random_direction_null": {
+      "mean_heldout_auroc": 0.504130859375
+    }
+  },
+  "provenance": {
+    "acting_model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model_commit": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "dtype": "bfloat16",
+    "hardware": "NVIDIA A100-SXM4-80GB",
+    "seed": 17,
+    "label_source": "mechanical target-path achievability; no model or human judge",
+    "activation_scope": "acting-model exact-token replay; primary state is final prompt token before visible action"
+  },
+  "full_result_artifact": "arm_g_phase1_result.json.gz.b64"
+}

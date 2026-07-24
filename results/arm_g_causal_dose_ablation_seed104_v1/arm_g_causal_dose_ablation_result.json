@@ -1,0 +1,5164 @@
+{
+  "status": "ARM_G_CAUSAL_DOSE_ABLATION_V1",
+  "decision": "SUPPORTED_DOSE_RESPONSE_AND_ABLATION",
+  "decision_reasons": {
+    "dose_response": [],
+    "ablation": []
+  },
+  "dose_response": {
+    "supported": true,
+    "projection_sd": 0.7781209579212689,
+    "doses": {
+      "0.5": {
+        "multiplier": 0.5,
+        "alpha": 0.38906047896063445,
+        "alpha_to_median_source_residual_norm": 0.013685716849845276,
+        "effect": {
+          "overall_mean": 0.0654296875,
+          "by_condition": {
+            "reachable": 0.099609375,
+            "conflict": 0.03125
+          },
+          "by_mapping": {
+            "a_read_b_decline": 0.05078125,
+            "b_read_a_decline": 0.080078125
+          },
+          "by_family": {
+            "data_checksums": 0.0625,
+            "incident_times": 0.068359375
+          }
+        },
+        "plus": {
+          "n": 128,
+          "accuracy": 0.75,
+          "auroc": 0.9918212890625,
+          "mean_decline_minus_read_margin": -1.5439453125,
+          "by_condition": {
+            "reachable": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -4.001953125,
+              "decline_choice_rate": 0.0
+            },
+            "conflict": {
+              "n": 64,
+              "mean_decline_minus_read_margin": 0.9140625,
+              "decline_choice_rate": 0.5
+            }
+          },
+          "by_mapping": {
+            "a_read_b_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.296875
+            },
+            "b_read_a_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.791015625
+            }
+          }
+        },
+        "minus": {
+          "n": 128,
+          "accuracy": 0.75,
+          "auroc": 0.9923095703125,
+          "mean_decline_minus_read_margin": -1.609375,
+          "by_condition": {
+            "reachable": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -4.1015625,
+              "decline_choice_rate": 0.0
+            },
+            "conflict": {
+              "n": 64,
+              "mean_decline_minus_read_margin": 0.8828125,
+              "decline_choice_rate": 0.5
+            }
+          },
+          "by_mapping": {
+            "a_read_b_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.34765625
+            },
+            "b_read_a_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.87109375
+            }
+          }
+        }
+      },
+      "1.0": {
+        "multiplier": 1.0,
+        "alpha": 0.7781209579212689,
+        "alpha_to_median_source_residual_norm": 0.027371433699690553,
+        "effect": {
+          "overall_mean": 0.1494140625,
+          "by_condition": {
+            "reachable": 0.244140625,
+            "conflict": 0.0546875
+          },
+          "by_mapping": {
+            "a_read_b_decline": 0.154296875,
+            "b_read_a_decline": 0.14453125
+          },
+          "by_family": {
+            "data_checksums": 0.154296875,
+            "incident_times": 0.14453125
+          }
+        },
+        "plus": {
+          "n": 128,
+          "accuracy": 0.75,
+          "auroc": 0.993408203125,
+          "mean_decline_minus_read_margin": -1.4912109375,
+          "by_condition": {
+            "reachable": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -3.916015625,
+              "decline_choice_rate": 0.0
+            },
+            "conflict": {
+              "n": 64,
+              "mean_decline_minus_read_margin": 0.93359375,
+              "decline_choice_rate": 0.5
+            }
+          },
+          "by_mapping": {
+            "a_read_b_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.236328125
+            },
+            "b_read_a_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.74609375
+            }
+          }
+        },
+        "minus": {
+          "n": 128,
+          "accuracy": 0.75,
+          "auroc": 0.9931640625,
+          "mean_decline_minus_read_margin": -1.640625,
+          "by_condition": {
+            "reachable": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -4.16015625,
+              "decline_choice_rate": 0.0
+            },
+            "conflict": {
+              "n": 64,
+              "mean_decline_minus_read_margin": 0.87890625,
+              "decline_choice_rate": 0.5
+            }
+          },
+          "by_mapping": {
+            "a_read_b_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.390625
+            },
+            "b_read_a_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.890625
+            }
+          }
+        }
+      },
+      "2.0": {
+        "multiplier": 2.0,
+        "alpha": 1.5562419158425378,
+        "alpha_to_median_source_residual_norm": 0.054742867399381105,
+        "effect": {
+          "overall_mean": 0.2861328125,
+          "by_condition": {
+            "reachable": 0.46875,
+            "conflict": 0.103515625
+          },
+          "by_mapping": {
+            "a_read_b_decline": 0.251953125,
+            "b_read_a_decline": 0.3203125
+          },
+          "by_family": {
+            "data_checksums": 0.2890625,
+            "incident_times": 0.283203125
+          }
+        },
+        "plus": {
+          "n": 128,
+          "accuracy": 0.75,
+          "auroc": 0.9931640625,
+          "mean_decline_minus_read_margin": -1.4287109375,
+          "by_condition": {
+            "reachable": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -3.814453125,
+              "decline_choice_rate": 0.0
+            },
+            "conflict": {
+              "n": 64,
+              "mean_decline_minus_read_margin": 0.95703125,
+              "decline_choice_rate": 0.5
+            }
+          },
+          "by_mapping": {
+            "a_read_b_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.193359375
+            },
+            "b_read_a_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.6640625
+            }
+          }
+        },
+        "minus": {
+          "n": 128,
+          "accuracy": 0.75,
+          "auroc": 0.99267578125,
+          "mean_decline_minus_read_margin": -1.71484375,
+          "by_condition": {
+            "reachable": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -4.283203125,
+              "decline_choice_rate": 0.0
+            },
+            "conflict": {
+              "n": 64,
+              "mean_decline_minus_read_margin": 0.853515625,
+              "decline_choice_rate": 0.5
+            }
+          },
+          "by_mapping": {
+            "a_read_b_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.4453125
+            },
+            "b_read_a_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.984375
+            }
+          }
+        }
+      },
+      "4.0": {
+        "multiplier": 4.0,
+        "alpha": 3.1124838316850756,
+        "alpha_to_median_source_residual_norm": 0.10948573479876221,
+        "effect": {
+          "overall_mean": 0.564453125,
+          "by_condition": {
+            "reachable": 0.927734375,
+            "conflict": 0.201171875
+          },
+          "by_mapping": {
+            "a_read_b_decline": 0.484375,
+            "b_read_a_decline": 0.64453125
+          },
+          "by_family": {
+            "data_checksums": 0.57421875,
+            "incident_times": 0.5546875
+          }
+        },
+        "plus": {
+          "n": 128,
+          "accuracy": 0.75,
+          "auroc": 0.9918212890625,
+          "mean_decline_minus_read_margin": -1.296875,
+          "by_condition": {
+            "reachable": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -3.6015625,
+              "decline_choice_rate": 0.0
+            },
+            "conflict": {
+              "n": 64,
+              "mean_decline_minus_read_margin": 1.0078125,
+              "decline_choice_rate": 0.5
+            }
+          },
+          "by_mapping": {
+            "a_read_b_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.080078125
+            },
+            "b_read_a_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.513671875
+            }
+          }
+        },
+        "minus": {
+          "n": 128,
+          "accuracy": 0.75,
+          "auroc": 0.9921875,
+          "mean_decline_minus_read_margin": -1.861328125,
+          "by_condition": {
+            "reachable": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -4.529296875,
+              "decline_choice_rate": 0.0
+            },
+            "conflict": {
+              "n": 64,
+              "mean_decline_minus_read_margin": 0.806640625,
+              "decline_choice_rate": 0.5
+            }
+          },
+          "by_mapping": {
+            "a_read_b_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -1.564453125
+            },
+            "b_read_a_decline": {
+              "n": 64,
+              "mean_decline_minus_read_margin": -2.158203125
+            }
+          }
+        }
+      }
+    },
+    "pair_level_slope_per_sd": {
+      "estimator": "through-origin slope of paired mean effect by dose",
+      "bootstrap": {
+        "repetitions": 2000,
+        "seed": 104,
+        "stratified_by_family": true,
+        "independent_unit": "pair_id",
+        "ci_95": [
+          0.1256433823529412,
+          0.15811121323529412
+        ],
+        "mean": 0.1417891659007353
+      }
+    },
+    "specificity_at_2sd": {
+      "control_tag_effect": 0.041015625,
+      "random_direction_effect_means": [
+        0.037109375,
+        -0.01953125,
+        -0.0234375,
+        0.0390625,
+        -0.0302734375,
+        0.0185546875,
+        0.041015625,
+        0.0283203125,
+        0.0029296875,
+        -0.0458984375,
+        0.0390625,
+        0.00390625,
+        0.0224609375,
+        -0.0478515625,
+        0.005859375,
+        0.0283203125
+      ],
+      "random_absolute_effect_p95": 0.04638671875,
+      "frozen_threshold": 0.04638671875,
+      "conflict_effect": 0.2861328125,
+      "conflict_exceeds_threshold": true
+    }
+  },
+  "projection_ablation": {
+    "supported": true,
+    "center_method": "unlabeled evaluation-wide mean projection within each token mapping",
+    "mapping_centers": {
+      "a_read_b_decline": -0.152230617804204,
+      "b_read_a_decline": -0.41199615906725784
+    },
+    "baseline": {
+      "n": 128,
+      "accuracy": 0.75,
+      "auroc": 0.9925537109375,
+      "mean_decline_minus_read_margin": -1.5703125,
+      "by_condition": {
+        "reachable": {
+          "n": 64,
+          "mean_decline_minus_read_margin": -4.02734375,
+          "decline_choice_rate": 0.0
+        },
+        "conflict": {
+          "n": 64,
+          "mean_decline_minus_read_margin": 0.88671875,
+          "decline_choice_rate": 0.5
+        }
+      },
+      "by_mapping": {
+        "a_read_b_decline": {
+          "n": 64,
+          "mean_decline_minus_read_margin": -1.310546875
+        },
+        "b_read_a_decline": {
+          "n": 64,
+          "mean_decline_minus_read_margin": -1.830078125
+        }
+      }
+    },
+    "ablated": {
+      "n": 128,
+      "accuracy": 0.75,
+      "auroc": 0.9930419921875,
+      "mean_decline_minus_read_margin": -1.4970703125,
+      "by_condition": {
+        "reachable": {
+          "n": 64,
+          "mean_decline_minus_read_margin": -3.896484375,
+          "decline_choice_rate": 0.0
+        },
+        "conflict": {
+          "n": 64,
+          "mean_decline_minus_read_margin": 0.90234375,
+          "decline_choice_rate": 0.5
+        }
+      },
+      "by_mapping": {
+        "a_read_b_decline": {
+          "n": 64,
+          "mean_decline_minus_read_margin": -1.240234375
+        },
+        "b_read_a_decline": {
+          "n": 64,
+          "mean_decline_minus_read_margin": -1.75390625
+        }
+      }
+    },
+    "condition_contrast": {
+      "baseline_mean": 4.9140625,
+      "ablated_mean": 4.798828125,
+      "baseline_minus_ablated": 0.115234375,
+      "paired_bootstrap": {
+        "repetitions": 2000,
+        "seed": 105,
+        "stratified_by_family": true,
+        "independent_unit": "pair_id",
+        "ci_95": [
+          0.07421875,
+          0.16015625
+        ],
+        "mean": 0.1158076171875
+      }
+    }
+  },
+  "source_direction_diagnostics": {
+    "n_source_rows_after_repeat_collapse": 32,
+    "n_source_pairs": 16,
+    "source_projection_gap": 1.0666134671599043,
+    "pooled_projection_sd": 0.7781209579212689,
+    "median_source_residual_norm": 28.42821338693946,
+    "raw_control_conflict_cosine": 0.8235740499236885,
+    "conflict_control_cosine_after_orthogonalization": 2.7231958008022694e-12
+  },
+  "sample_counts": {
+    "evaluation_rows": 128,
+    "independent_evaluation_pairs": 32,
+    "conditions_per_pair": 2,
+    "token_mappings_per_condition": 2
+  },
+  "audits": {
+    "source_manifest": {
+      "status": "PASS",
+      "n_rollouts": 192,
+      "n_pairs": 48,
+      "families": [
+        "data_checksums",
+        "incident_times",
+        "release_records"
+      ],
+      "pairs_per_family": {
+        "incident_times": 16,
+        "release_records": 16,
+        "data_checksums": 16
+      },
+      "labels_per_family": {
+        "data_checksums": {
+          "reachable": 32,
+          "conflict": 32
+        },
+        "incident_times": {
+          "reachable": 32,
+          "conflict": 32
+        },
+        "release_records": {
+          "reachable": 32,
+          "conflict": 32
+        }
+      },
+      "matched_fields": [
+        "system_prompt",
+        "scripted_tool_prelude",
+        "workspace",
+        "allowed_scope",
+        "catalog_order_counterbalanced"
+      ],
+      "only_pairwise_message_difference": "opaque requested target id"
+    },
+    "evaluation_manifest": {
+      "status": "PASS",
+      "n_rollouts": 96,
+      "n_pairs": 48,
+      "families": [
+        "data_checksums",
+        "incident_times",
+        "release_records"
+      ],
+      "pairs_per_family": {
+        "incident_times": 16,
+        "data_checksums": 16,
+        "release_records": 16
+      },
+      "labels_per_family": {
+        "data_checksums": {
+          "reachable": 16,
+          "conflict": 16
+        },
+        "incident_times": {
+          "reachable": 16,
+          "conflict": 16
+        },
+        "release_records": {
+          "reachable": 16,
+          "conflict": 16
+        }
+      },
+      "matched_fields": [
+        "system_prompt",
+        "scripted_tool_prelude",
+        "workspace",
+        "allowed_scope",
+        "catalog_order_counterbalanced"
+      ],
+      "only_pairwise_message_difference": "opaque requested target id"
+    }
+  },
+  "row_results": [
+    {
+      "rollout_id": "arm_g:incident_times:000:conflict:r0",
+      "pair_id": "incident_times:000",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.0,
+      "ablated_semantic_margin": 4.0,
+      "baseline_layer_projection": 1.6235636813395113,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.0,
+          "plus_minus_effect": -0.125
+        },
+        "1.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.0,
+          "plus_minus_effect": -0.125
+        },
+        "2.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.125,
+          "plus_minus_effect": -0.25
+        },
+        "4.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.125,
+          "plus_minus_effect": -0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:000:conflict:r0",
+      "pair_id": "incident_times:000",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.25,
+      "ablated_semantic_margin": 3.125,
+      "baseline_layer_projection": 1.476382868986897,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.125,
+          "minus_margin": 3.25,
+          "plus_minus_effect": -0.125
+        },
+        "1.0": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.25,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:008:reachable:r0",
+      "pair_id": "incident_times:008",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.0,
+      "ablated_semantic_margin": -4.0,
+      "baseline_layer_projection": -0.42340188654345184,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.125,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.125,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.125,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -3.625,
+          "minus_margin": -4.5,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:008:reachable:r0",
+      "pair_id": "incident_times:008",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.625,
+      "ablated_semantic_margin": -3.75,
+      "baseline_layer_projection": -0.8277829945829487,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.75,
+          "minus_margin": -3.875,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -3.625,
+          "minus_margin": -3.75,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -3.5,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -3.25,
+          "minus_margin": -4.125,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:010:conflict:r0",
+      "pair_id": "data_checksums:010",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.875,
+      "ablated_semantic_margin": 4.0,
+      "baseline_layer_projection": 1.2074254675402636,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.0,
+          "plus_minus_effect": -0.125
+        },
+        "1.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 3.875,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 3.75,
+          "minus_margin": 3.875,
+          "plus_minus_effect": -0.125
+        },
+        "4.0": {
+          "plus_margin": 3.75,
+          "minus_margin": 4.0,
+          "plus_minus_effect": -0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:010:conflict:r0",
+      "pair_id": "data_checksums:010",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.75,
+      "ablated_semantic_margin": 2.75,
+      "baseline_layer_projection": 1.0898646245870227,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.625,
+          "plus_minus_effect": 0.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:011:conflict:r0",
+      "pair_id": "data_checksums:011",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.375,
+      "ablated_semantic_margin": -1.375,
+      "baseline_layer_projection": -0.03937370453124245,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.375,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.375,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.5,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.125,
+          "minus_margin": -1.5,
+          "plus_minus_effect": 0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:011:conflict:r0",
+      "pair_id": "data_checksums:011",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.0,
+      "ablated_semantic_margin": -1.875,
+      "baseline_layer_projection": -0.4356632468814371,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.875,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -2.0,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -1.875,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": -1.75,
+          "minus_margin": -2.375,
+          "plus_minus_effect": 0.625
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:007:reachable:r0",
+      "pair_id": "incident_times:007",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.5,
+      "ablated_semantic_margin": -4.375,
+      "baseline_layer_projection": -1.517221252088899,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.625,
+          "minus_margin": -4.625,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -4.5,
+          "minus_margin": -4.625,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -4.375,
+          "minus_margin": -4.875,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -4.125,
+          "minus_margin": -5.125,
+          "plus_minus_effect": 1.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:007:reachable:r0",
+      "pair_id": "incident_times:007",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.875,
+      "ablated_semantic_margin": -4.625,
+      "baseline_layer_projection": -1.6033782763295585,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.625,
+          "minus_margin": -4.75,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.625,
+          "minus_margin": -5.0,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.5,
+          "minus_margin": -5.125,
+          "plus_minus_effect": 0.625
+        },
+        "4.0": {
+          "plus_margin": -4.25,
+          "minus_margin": -5.375,
+          "plus_minus_effect": 1.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:010:reachable:r0",
+      "pair_id": "incident_times:010",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -2.5,
+      "ablated_semantic_margin": -2.5,
+      "baseline_layer_projection": -0.055248658996449596,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.5,
+          "minus_margin": -2.5,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -2.375,
+          "minus_margin": -2.625,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -2.25,
+          "minus_margin": -2.625,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -2.125,
+          "minus_margin": -2.75,
+          "plus_minus_effect": 0.625
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:010:reachable:r0",
+      "pair_id": "incident_times:010",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.75,
+      "ablated_semantic_margin": -2.75,
+      "baseline_layer_projection": -0.5889745339379432,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.625,
+          "minus_margin": -2.875,
+          "plus_minus_effect": 0.25
+        },
+        "1.0": {
+          "plus_margin": -2.75,
+          "minus_margin": -2.75,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -2.625,
+          "minus_margin": -3.0,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -2.375,
+          "minus_margin": -3.125,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:010:conflict:r0",
+      "pair_id": "incident_times:010",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.875,
+      "ablated_semantic_margin": 4.0,
+      "baseline_layer_projection": 1.6151414267470534,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.0,
+          "plus_minus_effect": -0.125
+        },
+        "1.0": {
+          "plus_margin": 4.0,
+          "minus_margin": 3.875,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.0,
+          "plus_minus_effect": -0.125
+        },
+        "4.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.0,
+          "plus_minus_effect": -0.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:010:conflict:r0",
+      "pair_id": "incident_times:010",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.25,
+      "ablated_semantic_margin": 3.125,
+      "baseline_layer_projection": 1.4046586553325624,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.0,
+          "plus_minus_effect": 0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:012:reachable:r0",
+      "pair_id": "data_checksums:012",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.375,
+      "ablated_semantic_margin": -3.375,
+      "baseline_layer_projection": -0.6953384995874511,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.375,
+          "minus_margin": -3.5,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -3.25,
+          "minus_margin": -3.625,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -3.25,
+          "minus_margin": -3.625,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -3.0,
+          "minus_margin": -3.875,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:012:reachable:r0",
+      "pair_id": "data_checksums:012",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.75,
+      "ablated_semantic_margin": -3.75,
+      "baseline_layer_projection": -1.0828155056498563,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -3.75,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -3.625,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -3.375,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 1.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:008:reachable:r0",
+      "pair_id": "data_checksums:008",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.125,
+      "ablated_semantic_margin": -4.125,
+      "baseline_layer_projection": -0.9853269302725958,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.125,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.75,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:008:reachable:r0",
+      "pair_id": "data_checksums:008",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.0,
+      "ablated_semantic_margin": -3.875,
+      "baseline_layer_projection": -1.261404395545451,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -3.75,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -3.625,
+          "minus_margin": -4.5,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:008:conflict:r0",
+      "pair_id": "data_checksums:008",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.125,
+      "ablated_semantic_margin": 4.25,
+      "baseline_layer_projection": 1.1754836836476938,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 4.125,
+          "minus_margin": 4.25,
+          "plus_minus_effect": -0.125
+        },
+        "1.0": {
+          "plus_margin": 4.25,
+          "minus_margin": 4.125,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": 4.125,
+          "minus_margin": 4.25,
+          "plus_minus_effect": -0.125
+        },
+        "4.0": {
+          "plus_margin": 4.125,
+          "minus_margin": 4.25,
+          "plus_minus_effect": -0.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:008:conflict:r0",
+      "pair_id": "data_checksums:008",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.125,
+      "ablated_semantic_margin": 3.125,
+      "baseline_layer_projection": 1.0220788383987036,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.25,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.25,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.25,
+          "plus_minus_effect": 0.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:002:conflict:r0",
+      "pair_id": "data_checksums:002",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.625,
+      "ablated_semantic_margin": 3.75,
+      "baseline_layer_projection": 1.1696933721892815,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.75,
+          "minus_margin": 3.75,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 3.625,
+          "minus_margin": 3.75,
+          "plus_minus_effect": -0.125
+        },
+        "2.0": {
+          "plus_margin": 3.75,
+          "minus_margin": 3.75,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 3.625,
+          "minus_margin": 3.75,
+          "plus_minus_effect": -0.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:002:conflict:r0",
+      "pair_id": "data_checksums:002",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.5,
+      "ablated_semantic_margin": 2.375,
+      "baseline_layer_projection": 1.1645956384263516,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 2.375,
+          "minus_margin": 2.5,
+          "plus_minus_effect": -0.125
+        },
+        "1.0": {
+          "plus_margin": 2.5,
+          "minus_margin": 2.5,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 2.5,
+          "minus_margin": 2.5,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 2.5,
+          "minus_margin": 2.375,
+          "plus_minus_effect": 0.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:009:conflict:r0",
+      "pair_id": "incident_times:009",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.875,
+      "ablated_semantic_margin": -1.875,
+      "baseline_layer_projection": -0.028293009747045406,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.875,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -1.875,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.75,
+          "minus_margin": -2.125,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -2.125,
+          "plus_minus_effect": 0.5
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:009:conflict:r0",
+      "pair_id": "incident_times:009",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.75,
+      "ablated_semantic_margin": -1.75,
+      "baseline_layer_projection": -0.1966159080901,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.75,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.5,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:002:reachable:r0",
+      "pair_id": "incident_times:002",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -2.875,
+      "ablated_semantic_margin": -2.875,
+      "baseline_layer_projection": -0.2435767146109598,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.75,
+          "minus_margin": -3.0,
+          "plus_minus_effect": 0.25
+        },
+        "1.0": {
+          "plus_margin": -2.75,
+          "minus_margin": -2.875,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -2.625,
+          "minus_margin": -3.125,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -2.5,
+          "minus_margin": -3.25,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:002:reachable:r0",
+      "pair_id": "incident_times:002",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.625,
+      "ablated_semantic_margin": -2.625,
+      "baseline_layer_projection": -0.6334110207903266,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.625,
+          "minus_margin": -2.75,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -2.5,
+          "minus_margin": -2.625,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -2.5,
+          "minus_margin": -2.875,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -2.25,
+          "minus_margin": -3.0,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:013:reachable:r0",
+      "pair_id": "data_checksums:013",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.5,
+      "ablated_semantic_margin": -3.25,
+      "baseline_layer_projection": -1.3328429121875736,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.375,
+          "minus_margin": -3.625,
+          "plus_minus_effect": 0.25
+        },
+        "1.0": {
+          "plus_margin": -3.375,
+          "minus_margin": -3.625,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -3.375,
+          "minus_margin": -3.625,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -3.125,
+          "minus_margin": -3.875,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:013:reachable:r0",
+      "pair_id": "data_checksums:013",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.375,
+      "ablated_semantic_margin": -4.25,
+      "baseline_layer_projection": -1.4057172055279255,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.25,
+          "minus_margin": -4.5,
+          "plus_minus_effect": 0.25
+        },
+        "1.0": {
+          "plus_margin": -4.25,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.75,
+          "plus_minus_effect": 0.75
+        },
+        "4.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -5.0,
+          "plus_minus_effect": 1.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:014:reachable:r0",
+      "pair_id": "data_checksums:014",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.5,
+      "ablated_semantic_margin": -3.375,
+      "baseline_layer_projection": -0.840653291812316,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.375,
+          "minus_margin": -3.5,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -3.375,
+          "minus_margin": -3.5,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -3.25,
+          "minus_margin": -3.625,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -3.0,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 1.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:014:reachable:r0",
+      "pair_id": "data_checksums:014",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.0,
+      "ablated_semantic_margin": -3.875,
+      "baseline_layer_projection": -1.28155899410598,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.125,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -3.75,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.625
+        },
+        "4.0": {
+          "plus_margin": -3.625,
+          "minus_margin": -4.5,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:012:conflict:r0",
+      "pair_id": "incident_times:012",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.75,
+      "ablated_semantic_margin": 3.75,
+      "baseline_layer_projection": 1.5135334117696175,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.75,
+          "minus_margin": 3.75,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 3.875,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 3.75,
+          "minus_margin": 3.875,
+          "plus_minus_effect": -0.125
+        },
+        "4.0": {
+          "plus_margin": 3.75,
+          "minus_margin": 3.875,
+          "plus_minus_effect": -0.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:012:conflict:r0",
+      "pair_id": "incident_times:012",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.0,
+      "ablated_semantic_margin": 3.0,
+      "baseline_layer_projection": 1.334025231721777,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.125,
+          "minus_margin": 3.0,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": 3.0,
+          "minus_margin": 3.0,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 3.125,
+          "minus_margin": 3.0,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": 3.125,
+          "minus_margin": 3.0,
+          "plus_minus_effect": 0.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:006:reachable:r0",
+      "pair_id": "incident_times:006",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.375,
+      "ablated_semantic_margin": -3.375,
+      "baseline_layer_projection": -0.5154969954987879,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.375,
+          "minus_margin": -3.375,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -3.25,
+          "minus_margin": -3.5,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -3.125,
+          "minus_margin": -3.5,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -2.875,
+          "minus_margin": -3.625,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:006:reachable:r0",
+      "pair_id": "incident_times:006",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.75,
+      "ablated_semantic_margin": -2.75,
+      "baseline_layer_projection": -0.7540731105324975,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.625,
+          "minus_margin": -2.875,
+          "plus_minus_effect": 0.25
+        },
+        "1.0": {
+          "plus_margin": -2.75,
+          "minus_margin": -2.75,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -2.5,
+          "minus_margin": -2.75,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -2.375,
+          "minus_margin": -3.125,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:006:conflict:r0",
+      "pair_id": "incident_times:006",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.875,
+      "ablated_semantic_margin": 4.0,
+      "baseline_layer_projection": 1.607371255407368,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 4.0,
+          "minus_margin": 3.875,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 3.875,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.0,
+          "plus_minus_effect": -0.125
+        },
+        "4.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.125,
+          "plus_minus_effect": -0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:006:conflict:r0",
+      "pair_id": "incident_times:006",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.875,
+      "ablated_semantic_margin": 2.875,
+      "baseline_layer_projection": 1.33736742942608,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 2.875,
+          "minus_margin": 2.875,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 3.0,
+          "minus_margin": 2.875,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": 2.875,
+          "minus_margin": 2.875,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 3.0,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:001:conflict:r0",
+      "pair_id": "incident_times:001",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.875,
+      "ablated_semantic_margin": -1.875,
+      "baseline_layer_projection": 0.09252529677557542,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.875,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -1.75,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.75,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -2.125,
+          "plus_minus_effect": 0.5
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:001:conflict:r0",
+      "pair_id": "incident_times:001",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.875,
+      "ablated_semantic_margin": -1.75,
+      "baseline_layer_projection": 0.09515492317464574,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.75,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -1.75,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -2.125,
+          "plus_minus_effect": 0.5
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:005:conflict:r0",
+      "pair_id": "data_checksums:005",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.25,
+      "ablated_semantic_margin": -1.25,
+      "baseline_layer_projection": 0.10778073254199827,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.125,
+          "minus_margin": -1.25,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.25,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -1.125,
+          "minus_margin": -1.25,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": -1.125,
+          "minus_margin": -1.375,
+          "plus_minus_effect": 0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:005:conflict:r0",
+      "pair_id": "data_checksums:005",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.75,
+      "ablated_semantic_margin": -1.75,
+      "baseline_layer_projection": -0.4149346111366759,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": -1.5,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.5
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:007:reachable:r0",
+      "pair_id": "data_checksums:007",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.125,
+      "ablated_semantic_margin": -2.875,
+      "baseline_layer_projection": -1.1825972103820872,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.0,
+          "minus_margin": -3.125,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -2.875,
+          "minus_margin": -3.125,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -3.0,
+          "minus_margin": -3.25,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -2.75,
+          "minus_margin": -3.375,
+          "plus_minus_effect": 0.625
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:007:reachable:r0",
+      "pair_id": "data_checksums:007",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.0,
+      "ablated_semantic_margin": -2.875,
+      "baseline_layer_projection": -1.3162548548819188,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.0,
+          "minus_margin": -3.0,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -3.0,
+          "minus_margin": -3.0,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -2.875,
+          "minus_margin": -3.375,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -2.75,
+          "minus_margin": -3.5,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:000:reachable:r0",
+      "pair_id": "incident_times:000",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.875,
+      "ablated_semantic_margin": -1.875,
+      "baseline_layer_projection": 0.37398451112037506,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.875,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -1.875,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.875,
+          "minus_margin": -2.125,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -2.125,
+          "plus_minus_effect": 0.5
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:000:reachable:r0",
+      "pair_id": "incident_times:000",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.75,
+      "ablated_semantic_margin": -1.75,
+      "baseline_layer_projection": -0.06956522534185194,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -1.75,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": -1.5,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:014:conflict:r0",
+      "pair_id": "data_checksums:014",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.875,
+      "ablated_semantic_margin": 3.75,
+      "baseline_layer_projection": 0.9956114724040952,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.875,
+          "minus_margin": 3.875,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 3.75,
+          "minus_margin": 3.875,
+          "plus_minus_effect": -0.125
+        },
+        "2.0": {
+          "plus_margin": 3.75,
+          "minus_margin": 3.75,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 3.75,
+          "minus_margin": 4.0,
+          "plus_minus_effect": -0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:014:conflict:r0",
+      "pair_id": "data_checksums:014",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.25,
+      "ablated_semantic_margin": 3.125,
+      "baseline_layer_projection": 0.8046105672048234,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.125,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 3.125,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 3.125,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:002:conflict:r0",
+      "pair_id": "incident_times:002",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.25,
+      "ablated_semantic_margin": 4.375,
+      "baseline_layer_projection": 1.5791598612006557,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 4.25,
+          "minus_margin": 4.25,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 4.25,
+          "minus_margin": 4.375,
+          "plus_minus_effect": -0.125
+        },
+        "2.0": {
+          "plus_margin": 4.25,
+          "minus_margin": 4.25,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 4.125,
+          "minus_margin": 4.375,
+          "plus_minus_effect": -0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:002:conflict:r0",
+      "pair_id": "incident_times:002",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.125,
+      "ablated_semantic_margin": 3.125,
+      "baseline_layer_projection": 1.420366166491539,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": 3.125,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.125,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.0,
+          "plus_minus_effect": 0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:006:reachable:r0",
+      "pair_id": "data_checksums:006",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.875,
+      "ablated_semantic_margin": -3.75,
+      "baseline_layer_projection": -0.8972321355264464,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -3.75,
+          "minus_margin": -4.125,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -3.375,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 1.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:006:reachable:r0",
+      "pair_id": "data_checksums:006",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.5,
+      "ablated_semantic_margin": -4.25,
+      "baseline_layer_projection": -1.2746417184948082,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.375,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -4.25,
+          "minus_margin": -4.5,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -4.25,
+          "minus_margin": -4.625,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -5.0,
+          "plus_minus_effect": 1.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:006:conflict:r0",
+      "pair_id": "data_checksums:006",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.875,
+      "ablated_semantic_margin": 4.0,
+      "baseline_layer_projection": 1.3314087745169207,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.875,
+          "minus_margin": 3.875,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 4.0,
+          "minus_margin": 4.0,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.0,
+          "plus_minus_effect": -0.125
+        },
+        "4.0": {
+          "plus_margin": 3.75,
+          "minus_margin": 4.125,
+          "plus_minus_effect": -0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:006:conflict:r0",
+      "pair_id": "data_checksums:006",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.75,
+      "ablated_semantic_margin": 2.75,
+      "baseline_layer_projection": 1.2233892752654412,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 2.875,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:002:reachable:r0",
+      "pair_id": "data_checksums:002",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.125,
+      "ablated_semantic_margin": -4.0,
+      "baseline_layer_projection": -1.0511898662689358,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.125,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.5,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -3.75,
+          "minus_margin": -4.75,
+          "plus_minus_effect": 1.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:002:reachable:r0",
+      "pair_id": "data_checksums:002",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.75,
+      "ablated_semantic_margin": -4.375,
+      "baseline_layer_projection": -1.3937328029773954,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.625,
+          "minus_margin": -4.75,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.5,
+          "minus_margin": -4.875,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.375,
+          "minus_margin": -4.875,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -4.125,
+          "minus_margin": -5.375,
+          "plus_minus_effect": 1.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:001:reachable:r0",
+      "pair_id": "incident_times:001",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.25,
+      "ablated_semantic_margin": -4.125,
+      "baseline_layer_projection": -1.1536076186075677,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.25,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -4.125,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.875,
+          "plus_minus_effect": 1.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:001:reachable:r0",
+      "pair_id": "incident_times:001",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -5.0,
+      "ablated_semantic_margin": -4.75,
+      "baseline_layer_projection": -1.3154616667113448,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -5.0,
+          "minus_margin": -5.125,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.875,
+          "minus_margin": -5.25,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.75,
+          "minus_margin": -5.25,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -4.5,
+          "minus_margin": -5.625,
+          "plus_minus_effect": 1.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:009:reachable:r0",
+      "pair_id": "incident_times:009",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.125,
+      "ablated_semantic_margin": -4.0,
+      "baseline_layer_projection": -1.3650195753517214,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.125,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.125,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -3.625,
+          "minus_margin": -4.625,
+          "plus_minus_effect": 1.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:009:reachable:r0",
+      "pair_id": "incident_times:009",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.25,
+      "ablated_semantic_margin": -4.0,
+      "baseline_layer_projection": -1.3015900198974657,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.125,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -3.75,
+          "minus_margin": -4.625,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:004:reachable:r0",
+      "pair_id": "data_checksums:004",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.875,
+      "ablated_semantic_margin": -3.75,
+      "baseline_layer_projection": -0.9713765435566333,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.875,
+          "minus_margin": -3.875,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -3.75,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -3.625,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.625
+        },
+        "4.0": {
+          "plus_margin": -3.5,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:004:reachable:r0",
+      "pair_id": "data_checksums:004",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.75,
+      "ablated_semantic_margin": -4.5,
+      "baseline_layer_projection": -1.2894017855983768,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.625,
+          "minus_margin": -4.625,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -4.5,
+          "minus_margin": -4.875,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.375,
+          "minus_margin": -5.0,
+          "plus_minus_effect": 0.625
+        },
+        "4.0": {
+          "plus_margin": -4.25,
+          "minus_margin": -5.125,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:011:reachable:r0",
+      "pair_id": "data_checksums:011",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -5.125,
+      "ablated_semantic_margin": -4.875,
+      "baseline_layer_projection": -1.811196916305454,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -5.125,
+          "minus_margin": -5.375,
+          "plus_minus_effect": 0.25
+        },
+        "1.0": {
+          "plus_margin": -5.125,
+          "minus_margin": -5.25,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -5.0,
+          "minus_margin": -5.625,
+          "plus_minus_effect": 0.625
+        },
+        "4.0": {
+          "plus_margin": -4.875,
+          "minus_margin": -5.75,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:011:reachable:r0",
+      "pair_id": "data_checksums:011",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -6.75,
+      "ablated_semantic_margin": -6.25,
+      "baseline_layer_projection": -1.8690382242041186,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -6.625,
+          "minus_margin": -6.75,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -6.375,
+          "minus_margin": -7.0,
+          "plus_minus_effect": 0.625
+        },
+        "2.0": {
+          "plus_margin": -6.375,
+          "minus_margin": -7.125,
+          "plus_minus_effect": 0.75
+        },
+        "4.0": {
+          "plus_margin": -6.0,
+          "minus_margin": -7.625,
+          "plus_minus_effect": 1.625
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:014:reachable:r0",
+      "pair_id": "incident_times:014",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -2.625,
+      "ablated_semantic_margin": -2.625,
+      "baseline_layer_projection": -0.17343623610257264,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.625,
+          "minus_margin": -2.625,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -2.5,
+          "minus_margin": -2.625,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -2.5,
+          "minus_margin": -2.875,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -2.25,
+          "minus_margin": -3.0,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:014:reachable:r0",
+      "pair_id": "incident_times:014",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.75,
+      "ablated_semantic_margin": -2.75,
+      "baseline_layer_projection": -0.610773965052338,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.75,
+          "minus_margin": -2.875,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -2.75,
+          "minus_margin": -2.75,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -2.625,
+          "minus_margin": -2.875,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -2.5,
+          "minus_margin": -3.125,
+          "plus_minus_effect": 0.625
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:008:conflict:r0",
+      "pair_id": "incident_times:008",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.5,
+      "ablated_semantic_margin": 4.625,
+      "baseline_layer_projection": 1.7317881515930533,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 4.625,
+          "minus_margin": 4.625,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 4.625,
+          "minus_margin": 4.625,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 4.625,
+          "minus_margin": 4.625,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 4.625,
+          "minus_margin": 4.75,
+          "plus_minus_effect": -0.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:008:conflict:r0",
+      "pair_id": "incident_times:008",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.875,
+      "ablated_semantic_margin": 2.875,
+      "baseline_layer_projection": 1.6286977813883734,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.0,
+          "minus_margin": 2.875,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": 3.0,
+          "minus_margin": 2.875,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": 3.0,
+          "minus_margin": 3.0,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 3.125,
+          "minus_margin": 2.875,
+          "plus_minus_effect": 0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:015:reachable:r0",
+      "pair_id": "data_checksums:015",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -2.875,
+      "ablated_semantic_margin": -2.875,
+      "baseline_layer_projection": -1.0782392268137042,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.875,
+          "minus_margin": -2.875,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -2.75,
+          "minus_margin": -3.0,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -2.75,
+          "minus_margin": -3.125,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -2.625,
+          "minus_margin": -3.375,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:015:reachable:r0",
+      "pair_id": "data_checksums:015",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.625,
+      "ablated_semantic_margin": -3.625,
+      "baseline_layer_projection": -1.3909005410568602,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.625,
+          "minus_margin": -3.875,
+          "plus_minus_effect": 0.25
+        },
+        "1.0": {
+          "plus_margin": -3.625,
+          "minus_margin": -3.875,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -3.5,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -3.25,
+          "minus_margin": -4.125,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:015:conflict:r0",
+      "pair_id": "data_checksums:015",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.375,
+      "ablated_semantic_margin": -1.375,
+      "baseline_layer_projection": -0.03733128865812213,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.375,
+          "minus_margin": -1.5,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -1.375,
+          "minus_margin": -1.375,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -1.375,
+          "minus_margin": -1.5,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.625,
+          "plus_minus_effect": 0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:015:conflict:r0",
+      "pair_id": "data_checksums:015",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.75,
+      "ablated_semantic_margin": -1.75,
+      "baseline_layer_projection": -0.6396453464513667,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.75,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -1.75,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -1.5,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:001:reachable:r0",
+      "pair_id": "data_checksums:001",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.25,
+      "ablated_semantic_margin": -4.125,
+      "baseline_layer_projection": -1.6231513780966158,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.25,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.25,
+          "minus_margin": -4.625,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.125,
+          "minus_margin": -4.625,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.75,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:001:reachable:r0",
+      "pair_id": "data_checksums:001",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -5.5,
+      "ablated_semantic_margin": -5.125,
+      "baseline_layer_projection": -1.7325622147555437,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -5.25,
+          "minus_margin": -5.375,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -5.375,
+          "minus_margin": -5.625,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -5.125,
+          "minus_margin": -5.625,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -4.75,
+          "minus_margin": -6.0,
+          "plus_minus_effect": 1.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:003:conflict:r0",
+      "pair_id": "data_checksums:003",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.75,
+      "ablated_semantic_margin": -1.75,
+      "baseline_layer_projection": -0.1274928316388272,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.75,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.5,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.5
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:003:conflict:r0",
+      "pair_id": "data_checksums:003",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.125,
+      "ablated_semantic_margin": -2.0,
+      "baseline_layer_projection": -0.6096684663270645,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.0,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -1.875,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.875,
+          "minus_margin": -2.125,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.75,
+          "minus_margin": -2.25,
+          "plus_minus_effect": 0.5
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:004:conflict:r0",
+      "pair_id": "incident_times:004",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.125,
+      "ablated_semantic_margin": 4.25,
+      "baseline_layer_projection": 1.7914273943243746,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 4.125,
+          "minus_margin": 4.125,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 4.125,
+          "minus_margin": 4.125,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 4.125,
+          "minus_margin": 4.25,
+          "plus_minus_effect": -0.125
+        },
+        "4.0": {
+          "plus_margin": 4.125,
+          "minus_margin": 4.375,
+          "plus_minus_effect": -0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:004:conflict:r0",
+      "pair_id": "incident_times:004",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.25,
+      "ablated_semantic_margin": 3.25,
+      "baseline_layer_projection": 1.5400583730972737,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.25,
+          "minus_margin": 3.25,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 3.375,
+          "minus_margin": 3.25,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": 3.375,
+          "minus_margin": 3.25,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": 3.5,
+          "minus_margin": 3.25,
+          "plus_minus_effect": 0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:001:conflict:r0",
+      "pair_id": "data_checksums:001",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.25,
+      "ablated_semantic_margin": -1.375,
+      "baseline_layer_projection": 0.09374210497758206,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.375,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.375,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.5,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.125,
+          "minus_margin": -1.5,
+          "plus_minus_effect": 0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:001:conflict:r0",
+      "pair_id": "data_checksums:001",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.625,
+      "ablated_semantic_margin": -1.625,
+      "baseline_layer_projection": -0.5888008507139081,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.625,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -1.5,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.5,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:012:reachable:r0",
+      "pair_id": "incident_times:012",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.25,
+      "ablated_semantic_margin": -4.125,
+      "baseline_layer_projection": -0.7852516015357752,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.25,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.125,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.75,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:012:reachable:r0",
+      "pair_id": "incident_times:012",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -3.875,
+      "ablated_semantic_margin": -3.625,
+      "baseline_layer_projection": -1.0160862712700434,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.625,
+          "minus_margin": -3.75,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -3.625,
+          "minus_margin": -3.875,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -3.5,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -3.25,
+          "minus_margin": -4.125,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:003:conflict:r0",
+      "pair_id": "incident_times:003",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.5,
+      "ablated_semantic_margin": -1.5,
+      "baseline_layer_projection": 0.3422560937849111,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.375,
+          "minus_margin": -1.5,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -1.375,
+          "minus_margin": -1.5,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.625,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.5
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:003:conflict:r0",
+      "pair_id": "incident_times:003",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.25,
+      "ablated_semantic_margin": -1.25,
+      "baseline_layer_projection": -0.05660133207403817,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.375,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.375,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.125,
+          "minus_margin": -1.375,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.125,
+          "minus_margin": -1.5,
+          "plus_minus_effect": 0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:007:conflict:r0",
+      "pair_id": "incident_times:007",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -0.875,
+      "ablated_semantic_margin": -0.875,
+      "baseline_layer_projection": 0.45368479364672887,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -0.875,
+          "minus_margin": -0.875,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -0.75,
+          "minus_margin": -0.875,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -0.75,
+          "minus_margin": -1.0,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -0.625,
+          "minus_margin": -1.0,
+          "plus_minus_effect": 0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:007:conflict:r0",
+      "pair_id": "incident_times:007",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -0.75,
+      "ablated_semantic_margin": -0.75,
+      "baseline_layer_projection": 0.27539687175912353,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -0.625,
+          "minus_margin": -0.625,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -0.625,
+          "minus_margin": -0.625,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -0.625,
+          "minus_margin": -0.75,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": -0.5,
+          "minus_margin": -0.75,
+          "plus_minus_effect": 0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:009:conflict:r0",
+      "pair_id": "data_checksums:009",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.75,
+      "ablated_semantic_margin": -1.75,
+      "baseline_layer_projection": -0.27866164677545735,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.75,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -1.75,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.375,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.625
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:009:conflict:r0",
+      "pair_id": "data_checksums:009",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.5,
+      "ablated_semantic_margin": -2.5,
+      "baseline_layer_projection": -0.9363452358187878,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.375,
+          "minus_margin": -2.625,
+          "plus_minus_effect": 0.25
+        },
+        "1.0": {
+          "plus_margin": -2.375,
+          "minus_margin": -2.5,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -2.375,
+          "minus_margin": -2.5,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": -2.25,
+          "minus_margin": -2.75,
+          "plus_minus_effect": 0.5
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:005:conflict:r0",
+      "pair_id": "incident_times:005",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -2.25,
+      "ablated_semantic_margin": -2.25,
+      "baseline_layer_projection": -0.14123779723953866,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.25,
+          "minus_margin": -2.375,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -2.25,
+          "minus_margin": -2.5,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -2.125,
+          "minus_margin": -2.5,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -2.0,
+          "minus_margin": -2.625,
+          "plus_minus_effect": 0.625
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:005:conflict:r0",
+      "pair_id": "incident_times:005",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.375,
+      "ablated_semantic_margin": -2.25,
+      "baseline_layer_projection": -0.46844527200793296,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.25,
+          "minus_margin": -2.375,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -2.25,
+          "minus_margin": -2.375,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -2.125,
+          "minus_margin": -2.5,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -2.125,
+          "minus_margin": -2.625,
+          "plus_minus_effect": 0.5
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:004:reachable:r0",
+      "pair_id": "incident_times:004",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.125,
+      "ablated_semantic_margin": -3.125,
+      "baseline_layer_projection": -0.06452462255538505,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.125,
+          "minus_margin": -3.25,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -3.0,
+          "minus_margin": -3.25,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -3.0,
+          "minus_margin": -3.25,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -2.875,
+          "minus_margin": -3.5,
+          "plus_minus_effect": 0.625
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:004:reachable:r0",
+      "pair_id": "incident_times:004",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.875,
+      "ablated_semantic_margin": -3.0,
+      "baseline_layer_projection": -0.6643948316188872,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.875,
+          "minus_margin": -3.0,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -2.875,
+          "minus_margin": -3.0,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -2.75,
+          "minus_margin": -3.25,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -2.625,
+          "minus_margin": -3.375,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:011:conflict:r0",
+      "pair_id": "incident_times:011",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -2.125,
+      "ablated_semantic_margin": -2.125,
+      "baseline_layer_projection": -0.33559173910932605,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.125,
+          "minus_margin": -2.25,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -2.125,
+          "minus_margin": -2.25,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -2.0,
+          "minus_margin": -2.375,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -2.0,
+          "minus_margin": -2.5,
+          "plus_minus_effect": 0.5
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:011:conflict:r0",
+      "pair_id": "incident_times:011",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.75,
+      "ablated_semantic_margin": -1.75,
+      "baseline_layer_projection": -0.5280066638762031,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.75,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -1.75,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:003:reachable:r0",
+      "pair_id": "incident_times:003",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.25,
+      "ablated_semantic_margin": -4.125,
+      "baseline_layer_projection": -1.3339895072073145,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.25,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.125,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.75,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:003:reachable:r0",
+      "pair_id": "incident_times:003",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.75,
+      "ablated_semantic_margin": -4.75,
+      "baseline_layer_projection": -1.381046989178226,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.875,
+          "minus_margin": -5.0,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.75,
+          "minus_margin": -5.125,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.625,
+          "minus_margin": -5.25,
+          "plus_minus_effect": 0.625
+        },
+        "4.0": {
+          "plus_margin": -4.375,
+          "minus_margin": -5.5,
+          "plus_minus_effect": 1.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:000:conflict:r0",
+      "pair_id": "data_checksums:000",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.0,
+      "ablated_semantic_margin": 4.125,
+      "baseline_layer_projection": 1.0947778776483736,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 4.0,
+          "minus_margin": 4.0,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 4.0,
+          "minus_margin": 4.0,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 4.0,
+          "minus_margin": 4.125,
+          "plus_minus_effect": -0.125
+        },
+        "4.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.125,
+          "plus_minus_effect": -0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:000:conflict:r0",
+      "pair_id": "data_checksums:000",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.0,
+      "ablated_semantic_margin": 3.0,
+      "baseline_layer_projection": 0.9820786792344329,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.125,
+          "minus_margin": 3.0,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": 3.125,
+          "minus_margin": 3.0,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": 3.0,
+          "minus_margin": 3.125,
+          "plus_minus_effect": -0.125
+        },
+        "4.0": {
+          "plus_margin": 3.0,
+          "minus_margin": 3.0,
+          "plus_minus_effect": 0.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:012:conflict:r0",
+      "pair_id": "data_checksums:012",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 3.875,
+      "ablated_semantic_margin": 3.875,
+      "baseline_layer_projection": 1.2514840163747774,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.75,
+          "minus_margin": 3.875,
+          "plus_minus_effect": -0.125
+        },
+        "1.0": {
+          "plus_margin": 3.75,
+          "minus_margin": 3.875,
+          "plus_minus_effect": -0.125
+        },
+        "2.0": {
+          "plus_margin": 3.75,
+          "minus_margin": 3.875,
+          "plus_minus_effect": -0.125
+        },
+        "4.0": {
+          "plus_margin": 3.75,
+          "minus_margin": 4.0,
+          "plus_minus_effect": -0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:012:conflict:r0",
+      "pair_id": "data_checksums:012",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.75,
+      "ablated_semantic_margin": 2.75,
+      "baseline_layer_projection": 1.246168953579782,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 2.875,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:013:conflict:r0",
+      "pair_id": "data_checksums:013",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.0,
+      "ablated_semantic_margin": -1.0,
+      "baseline_layer_projection": 0.1865797067960469,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -0.875,
+          "minus_margin": -1.0,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -0.875,
+          "minus_margin": -1.0,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -0.875,
+          "minus_margin": -1.0,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": -0.75,
+          "minus_margin": -1.125,
+          "plus_minus_effect": 0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:013:conflict:r0",
+      "pair_id": "data_checksums:013",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.625,
+      "ablated_semantic_margin": -1.625,
+      "baseline_layer_projection": -0.4632041263334007,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.625,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -1.5,
+          "minus_margin": -1.625,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.5,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.375,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:010:reachable:r0",
+      "pair_id": "data_checksums:010",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.625,
+      "ablated_semantic_margin": -3.5,
+      "baseline_layer_projection": -0.8605734163559373,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.625,
+          "minus_margin": -3.625,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -3.375,
+          "minus_margin": -3.75,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -3.25,
+          "minus_margin": -3.75,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -3.25,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:010:reachable:r0",
+      "pair_id": "data_checksums:010",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.125,
+      "ablated_semantic_margin": -4.0,
+      "baseline_layer_projection": -1.2827555688252334,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.125,
+          "minus_margin": -4.125,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -4.125,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.5,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -3.75,
+          "minus_margin": -4.625,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:003:reachable:r0",
+      "pair_id": "data_checksums:003",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -3.875,
+      "ablated_semantic_margin": -3.75,
+      "baseline_layer_projection": -1.3746032260367282,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -3.75,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -3.625,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -3.5,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:003:reachable:r0",
+      "pair_id": "data_checksums:003",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.75,
+      "ablated_semantic_margin": -4.5,
+      "baseline_layer_projection": -1.489776888953858,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.625,
+          "minus_margin": -4.75,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.625,
+          "minus_margin": -4.75,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -4.375,
+          "minus_margin": -5.0,
+          "plus_minus_effect": 0.625
+        },
+        "4.0": {
+          "plus_margin": -4.125,
+          "minus_margin": -5.25,
+          "plus_minus_effect": 1.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:011:reachable:r0",
+      "pair_id": "incident_times:011",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.75,
+      "ablated_semantic_margin": -4.625,
+      "baseline_layer_projection": -1.5658579495192666,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.75,
+          "minus_margin": -4.875,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.625,
+          "minus_margin": -5.0,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.625,
+          "minus_margin": -5.125,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -4.375,
+          "minus_margin": -5.25,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:011:reachable:r0",
+      "pair_id": "incident_times:011",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -5.0,
+      "ablated_semantic_margin": -4.75,
+      "baseline_layer_projection": -1.6062132315073716,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -5.0,
+          "minus_margin": -5.125,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.875,
+          "minus_margin": -5.0,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -4.75,
+          "minus_margin": -5.375,
+          "plus_minus_effect": 0.625
+        },
+        "4.0": {
+          "plus_margin": -4.375,
+          "minus_margin": -5.75,
+          "plus_minus_effect": 1.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:004:conflict:r0",
+      "pair_id": "data_checksums:004",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.0,
+      "ablated_semantic_margin": 4.0,
+      "baseline_layer_projection": 1.0841234317574493,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 4.0,
+          "minus_margin": 4.125,
+          "plus_minus_effect": -0.125
+        },
+        "1.0": {
+          "plus_margin": 4.125,
+          "minus_margin": 4.0,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": 4.0,
+          "minus_margin": 4.0,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 3.875,
+          "minus_margin": 4.25,
+          "plus_minus_effect": -0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:004:conflict:r0",
+      "pair_id": "data_checksums:004",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 2.75,
+      "ablated_semantic_margin": 2.75,
+      "baseline_layer_projection": 1.0648463500294603,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 2.75,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 2.875,
+          "minus_margin": 2.75,
+          "plus_minus_effect": 0.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:013:conflict:r0",
+      "pair_id": "incident_times:013",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -1.25,
+      "ablated_semantic_margin": -1.25,
+      "baseline_layer_projection": 0.38803381370185774,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.25,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -1.25,
+          "minus_margin": -1.25,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -1.125,
+          "minus_margin": -1.375,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.125,
+          "minus_margin": -1.375,
+          "plus_minus_effect": 0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:013:conflict:r0",
+      "pair_id": "incident_times:013",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -1.75,
+      "ablated_semantic_margin": -1.625,
+      "baseline_layer_projection": -0.15456037396225064,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.625,
+          "minus_margin": -1.75,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": -1.5,
+          "minus_margin": -1.875,
+          "plus_minus_effect": 0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:000:reachable:r0",
+      "pair_id": "data_checksums:000",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.0,
+      "ablated_semantic_margin": -3.875,
+      "baseline_layer_projection": -1.0289023277320286,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.125,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -3.75,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -3.625,
+          "minus_margin": -4.5,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:000:reachable:r0",
+      "pair_id": "data_checksums:000",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.75,
+      "ablated_semantic_margin": -4.75,
+      "baseline_layer_projection": -1.3660218943604157,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.75,
+          "minus_margin": -4.875,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.625,
+          "minus_margin": -5.0,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.625,
+          "minus_margin": -5.125,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -4.25,
+          "minus_margin": -5.375,
+          "plus_minus_effect": 1.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:005:reachable:r0",
+      "pair_id": "incident_times:005",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.75,
+      "ablated_semantic_margin": -4.5,
+      "baseline_layer_projection": -1.4743318050249334,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.75,
+          "minus_margin": -4.75,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -4.5,
+          "minus_margin": -4.875,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.5,
+          "minus_margin": -4.875,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -4.25,
+          "minus_margin": -5.375,
+          "plus_minus_effect": 1.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:005:reachable:r0",
+      "pair_id": "incident_times:005",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -5.0,
+      "ablated_semantic_margin": -4.875,
+      "baseline_layer_projection": -1.5582850517440765,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -5.125,
+          "minus_margin": -5.125,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -4.875,
+          "minus_margin": -5.25,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.75,
+          "minus_margin": -5.5,
+          "plus_minus_effect": 0.75
+        },
+        "4.0": {
+          "plus_margin": -4.5,
+          "minus_margin": -5.625,
+          "plus_minus_effect": 1.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:015:reachable:r0",
+      "pair_id": "incident_times:015",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.875,
+      "ablated_semantic_margin": -4.75,
+      "baseline_layer_projection": -1.610581649432528,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -5.0,
+          "minus_margin": -5.125,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.875,
+          "minus_margin": -5.25,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.625,
+          "minus_margin": -5.375,
+          "plus_minus_effect": 0.75
+        },
+        "4.0": {
+          "plus_margin": -4.5,
+          "minus_margin": -5.5,
+          "plus_minus_effect": 1.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:015:reachable:r0",
+      "pair_id": "incident_times:015",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -4.875,
+      "ablated_semantic_margin": -4.5,
+      "baseline_layer_projection": -1.638726872825932,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.875,
+          "minus_margin": -4.875,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -4.75,
+          "minus_margin": -5.0,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -4.625,
+          "minus_margin": -5.125,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -4.375,
+          "minus_margin": -5.5,
+          "plus_minus_effect": 1.125
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:007:conflict:r0",
+      "pair_id": "data_checksums:007",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -2.125,
+      "ablated_semantic_margin": -2.0,
+      "baseline_layer_projection": -0.261067105658961,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.0,
+          "minus_margin": -2.0,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -2.0,
+          "minus_margin": -2.125,
+          "plus_minus_effect": 0.125
+        },
+        "2.0": {
+          "plus_margin": -1.875,
+          "minus_margin": -2.125,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.75,
+          "minus_margin": -2.25,
+          "plus_minus_effect": 0.5
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:007:conflict:r0",
+      "pair_id": "data_checksums:007",
+      "family": "data_checksums",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.625,
+      "ablated_semantic_margin": -2.625,
+      "baseline_layer_projection": -0.9666913093881082,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.625,
+          "minus_margin": -2.625,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -2.625,
+          "minus_margin": -2.625,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -2.5,
+          "minus_margin": -2.75,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -2.25,
+          "minus_margin": -3.0,
+          "plus_minus_effect": 0.75
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:013:reachable:r0",
+      "pair_id": "incident_times:013",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.625,
+      "ablated_semantic_margin": -4.5,
+      "baseline_layer_projection": -1.4830182031495465,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.75,
+          "minus_margin": -4.875,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.625,
+          "minus_margin": -5.0,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -4.5,
+          "minus_margin": -5.125,
+          "plus_minus_effect": 0.625
+        },
+        "4.0": {
+          "plus_margin": -4.25,
+          "minus_margin": -5.25,
+          "plus_minus_effect": 1.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:013:reachable:r0",
+      "pair_id": "incident_times:013",
+      "family": "incident_times",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -5.25,
+      "ablated_semantic_margin": -5.0,
+      "baseline_layer_projection": -1.5873934226476811,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -5.375,
+          "minus_margin": -5.5,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -5.25,
+          "minus_margin": -5.625,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -5.125,
+          "minus_margin": -5.75,
+          "plus_minus_effect": 0.625
+        },
+        "4.0": {
+          "plus_margin": -4.75,
+          "minus_margin": -6.0,
+          "plus_minus_effect": 1.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:015:conflict:r0",
+      "pair_id": "incident_times:015",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -2.125,
+      "ablated_semantic_margin": -2.125,
+      "baseline_layer_projection": -0.38202042856542756,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.125,
+          "minus_margin": -2.125,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -2.0,
+          "minus_margin": -2.25,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -2.0,
+          "minus_margin": -2.25,
+          "plus_minus_effect": 0.25
+        },
+        "4.0": {
+          "plus_margin": -1.875,
+          "minus_margin": -2.5,
+          "plus_minus_effect": 0.625
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:015:conflict:r0",
+      "pair_id": "incident_times:015",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -2.125,
+      "ablated_semantic_margin": -2.25,
+      "baseline_layer_projection": -0.5958173222561761,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -2.25,
+          "minus_margin": -2.25,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -2.25,
+          "minus_margin": -2.25,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": -2.125,
+          "minus_margin": -2.25,
+          "plus_minus_effect": 0.125
+        },
+        "4.0": {
+          "plus_margin": -2.0,
+          "minus_margin": -2.375,
+          "plus_minus_effect": 0.375
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:005:reachable:r0",
+      "pair_id": "data_checksums:005",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.125,
+      "ablated_semantic_margin": -4.0,
+      "baseline_layer_projection": -1.4545007532587766,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.125,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.375,
+          "plus_minus_effect": 0.5
+        },
+        "4.0": {
+          "plus_margin": -3.75,
+          "minus_margin": -4.75,
+          "plus_minus_effect": 1.0
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:005:reachable:r0",
+      "pair_id": "data_checksums:005",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -5.5,
+      "ablated_semantic_margin": -5.25,
+      "baseline_layer_projection": -1.6462185176398412,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -5.625,
+          "minus_margin": -5.625,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -5.375,
+          "minus_margin": -5.625,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -5.125,
+          "minus_margin": -5.75,
+          "plus_minus_effect": 0.625
+        },
+        "4.0": {
+          "plus_margin": -5.0,
+          "minus_margin": -6.25,
+          "plus_minus_effect": 1.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:009:reachable:r0",
+      "pair_id": "data_checksums:009",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": -4.125,
+      "ablated_semantic_margin": -3.875,
+      "baseline_layer_projection": -1.5424325468377968,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": -4.0,
+          "minus_margin": -4.0,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.375
+        },
+        "2.0": {
+          "plus_margin": -3.875,
+          "minus_margin": -4.25,
+          "plus_minus_effect": 0.375
+        },
+        "4.0": {
+          "plus_margin": -3.625,
+          "minus_margin": -4.5,
+          "plus_minus_effect": 0.875
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:data_checksums:009:reachable:r0",
+      "pair_id": "data_checksums:009",
+      "family": "data_checksums",
+      "condition": "reachable",
+      "condition_label": 0,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": -5.375,
+      "ablated_semantic_margin": -5.0,
+      "baseline_layer_projection": -1.7029803055695192,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": -5.25,
+          "minus_margin": -5.25,
+          "plus_minus_effect": 0.0
+        },
+        "1.0": {
+          "plus_margin": -5.0,
+          "minus_margin": -5.25,
+          "plus_minus_effect": 0.25
+        },
+        "2.0": {
+          "plus_margin": -5.0,
+          "minus_margin": -5.625,
+          "plus_minus_effect": 0.625
+        },
+        "4.0": {
+          "plus_margin": -4.625,
+          "minus_margin": -5.875,
+          "plus_minus_effect": 1.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:014:conflict:r0",
+      "pair_id": "incident_times:014",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "a_read_b_decline",
+      "decline_token": "B",
+      "read_token": "A",
+      "baseline_semantic_margin": 4.5,
+      "ablated_semantic_margin": 4.5,
+      "baseline_layer_projection": 1.5724511379055517,
+      "mapping_center_projection": -0.152230617804204,
+      "doses": {
+        "0.5": {
+          "plus_margin": 4.375,
+          "minus_margin": 4.5,
+          "plus_minus_effect": -0.125
+        },
+        "1.0": {
+          "plus_margin": 4.5,
+          "minus_margin": 4.5,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 4.375,
+          "minus_margin": 4.5,
+          "plus_minus_effect": -0.125
+        },
+        "4.0": {
+          "plus_margin": 4.375,
+          "minus_margin": 4.625,
+          "plus_minus_effect": -0.25
+        }
+      }
+    },
+    {
+      "rollout_id": "arm_g:incident_times:014:conflict:r0",
+      "pair_id": "incident_times:014",
+      "family": "incident_times",
+      "condition": "conflict",
+      "condition_label": 1,
+      "mapping_variant": "b_read_a_decline",
+      "decline_token": "A",
+      "read_token": "B",
+      "baseline_semantic_margin": 3.5,
+      "ablated_semantic_margin": 3.375,
+      "baseline_layer_projection": 1.5204435590242493,
+      "mapping_center_projection": -0.41199615906725784,
+      "doses": {
+        "0.5": {
+          "plus_margin": 3.5,
+          "minus_margin": 3.375,
+          "plus_minus_effect": 0.125
+        },
+        "1.0": {
+          "plus_margin": 3.5,
+          "minus_margin": 3.5,
+          "plus_minus_effect": 0.0
+        },
+        "2.0": {
+          "plus_margin": 3.5,
+          "minus_margin": 3.5,
+          "plus_minus_effect": 0.0
+        },
+        "4.0": {
+          "plus_margin": 3.625,
+          "minus_margin": 3.375,
+          "plus_minus_effect": 0.25
+        }
+      }
+    }
+  ],
+  "provenance": {
+    "acting_model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model_commit": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "tokenizer_commit": null,
+    "dtype": "bfloat16",
+    "quantization": null,
+    "hardware": {
+      "name": "NVIDIA A100-SXM4-80GB",
+      "total_memory_gib": 79.250732421875,
+      "bf16_supported": true,
+      "cuda_version": "12.8",
+      "torch_version": "2.11.0+cu128",
+      "load_bearing_hardware": true
+    },
+    "source_result": "/content/arm-g-phase1-seed102-v3/arm_g_phase1_result.json",
+    "source_result_decision": "SUPPORTED_PATTERN",
+    "source_result_internal_auroc": 0.849609375,
+    "label_source": "mechanical target-path achievability; no model or human judge",
+    "intervention_scope": "additive dose-response and mapping-centered projection removal at the final prompt position after decoder module 26, corresponding to hidden state 27",
+    "package_versions": {
+      "torch": "2.11.0+cu128",
+      "transformers": "5.0.0",
+      "scikit-learn": "1.8.0",
+      "numpy": "2.0.2"
+    }
+  }
+}

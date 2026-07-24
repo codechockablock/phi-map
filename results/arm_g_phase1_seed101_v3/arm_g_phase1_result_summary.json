@@ -1,0 +1,76 @@
+{
+  "status": "ARM_G_PHASE1_SINGLE_TURN",
+  "decision": "SUPPORTED_PATTERN",
+  "eligibility_reasons": [],
+  "primary": {
+    "development_family": "release_records",
+    "read_position": "pre_action",
+    "estimator": "prototype",
+    "selected_layer": 27,
+    "internal_mean_heldout_auroc": 0.755859375,
+    "strongest_same_rollout_comparator": "response_embedding:prototype",
+    "strongest_behavioral_mean_heldout_auroc": 0.5,
+    "strongest_delta_internal_minus_behavioral": 0.255859375,
+    "paired_group_bootstrap_against_strongest": {
+      "repetitions": 2000,
+      "seed": 101,
+      "pair_group_resampling": true,
+      "ci_95": [
+        0.111328125,
+        0.400390625
+      ],
+      "mean": 0.26443359375
+    }
+  },
+  "sample_counts": {
+    "n": 192,
+    "independent_pairs": 48,
+    "families": 3
+  },
+  "behavior": {
+    "starts_ready_rate": 1.0,
+    "exact_ready_rate": 1.0,
+    "hit_token_cap_count": 0,
+    "hit_token_cap_rate": 0.0
+  },
+  "prompt_only_leakage": {
+    "request_only_mean_heldout_auroc": {
+      "prototype": 0.578125,
+      "logistic": 0.478515625
+    },
+    "common_direction_separation": 0.578125,
+    "void_threshold": 0.65,
+    "full_input_diagnostic": {
+      "prototype": 0.544921875,
+      "logistic": 0.541015625
+    }
+  },
+  "controls": {
+    "visible_control_tag_positive": {
+      "max_development_grouped_cv_auroc": 1.0,
+      "best_layer": 29,
+      "pass_threshold": 0.95
+    },
+    "shuffled_condition_null": {
+      "mean_auroc": 0.493505859375,
+      "pass_interval": [
+        0.45,
+        0.55
+      ]
+    },
+    "random_direction_null": {
+      "mean_heldout_auroc": 0.509970703125
+    }
+  },
+  "provenance": {
+    "acting_model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model_commit": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "dtype": "bfloat16",
+    "hardware": "NVIDIA A100-SXM4-80GB",
+    "seed": 101,
+    "label_source": "mechanical target-path achievability; no model or human judge",
+    "activation_scope": "acting-model exact-token replay; primary state is final prompt token before visible action"
+  },
+  "threshold_calibration": "../arm_g_prompt_leakage_sweep_seeds1_100/summary.json",
+  "full_result_artifact": "arm_g_phase1_result.json.gz.b64"
+}
