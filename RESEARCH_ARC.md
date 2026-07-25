@@ -1,4 +1,4 @@
-# Research arc — state as of 2026-07-24
+# Research arc — state as of 2026-07-25
 
 ## The question we started with
 
@@ -487,7 +487,88 @@ assumed a locally linear pathway that does not exist.
 
 Artifacts in `results/arm_g_dose_seed109_v1/`.
 
+### 13. Catalog-order confound (adversarial review, seeds 106-110) — the behavioural instrument is suspended
+
+Independent recomputation from the stored per-row artifacts, no GPU and no
+model. `review_arm_g.py` reproduces every figure below; the argument is written
+up in `ADVERSARIAL_REVIEW.md`.
+
+`arm_g_scenarios.py` derived catalog order from pair-index parity: even pairs
+listed the in-scope path first, odd pairs the out-of-scope path first. The
+validator checked marginal balance across pairs, which that satisfies, so it
+passed every audit including section 9's. The defect is that **order was nested
+in scenario rather than crossed with it** — every scenario appeared at exactly
+one order — so the order contrast absorbed every other parity-locked property of
+the pair.
+
+In the conflict condition the decision is a perfect function of that parity:
+
+| conflict rows | n | baseline margin | decision |
+|---|---:|---|---|
+| parity 0, offending path on catalog line 2 | 32 | +3.371, range [+1.75, +4.75] | DECLINE 32/32 |
+| parity 1, offending path on catalog line 1 | 32 | −1.500, range [−2.25, −0.75] | READ 0/32 |
+
+Zero exceptions in seed 110, and independently zero in seed 108. Both families,
+both A/B mappings. P under the observed 50% rate is about 1e-19.
+
+**What this explains.** The 0.500 conflict decline rate is not partial
+compliance; it is 100% and 0% on two scenario sub-types. Section 12's finding
+that the rate stays pinned at exactly 0.500 across every removal cell while the
+conflict mean margin moves by −1.76 is the same fact. The "2-logit gap around
+the boundary" named in the continuation list is the 2.500-unit hole between the
+two sub-types, not a property of the task.
+
+**What it does to the direction.** Projection onto the layer-16 rank-1 direction
+separates parity within the conflict condition at AUROC **1.0000**, against
+**0.9431** for the actual label. In seed 107 the components behind the quoted
+held-out AUROCs of 0.756 and 0.850 score 1.0000 and 0.9951 on parity. In seed
+106 the leading component is 1.0000 on parity at every layer from 16 to 30. The
+direction reads the generator artifact better than it reads the variable, at
+every layer measured.
+
+**What it does to the responsiveness result.** 93.3% of per-row slope variance
+and 94.9% of margin variance is between the four (condition x parity) cells. The
+pooled r(slope, margin) of −0.944, R² 0.892, becomes −0.268, R² 0.072 once cells
+are demeaned, and is non-significant within three of the four cells.
+
+**What it does not touch.** The margin-level condition contrast is estimable
+even from the legacy design: the four cells give a saturated orthogonal fit with
+condition at +4.939 already adjusted for the line effect. The scope signal at
+margin level is not what is at risk. The *decision* is, and the decision is what
+sections 11 and 12 are built on.
+
+**Two corrections to earlier sections.** Section 11 describes the removal
+operator as mapping the component to its group mean; the hook passes
+`center=0.0`, so it zeroes the projection. And with `center=0` that hook is
+exactly additive steering at `c_i = −proj_i/sigma`, so removal and addition are
+one operator — and since sigma is by definition the SD of the projection,
+removal's coefficient is pinned near 1. For all 128 rows it falls inside that
+row's own non-crossing interval, so the additive dose-response predicts section
+11's 0/128 flips with zero free parameters. The apparent operator asymmetry is
+one operator at −0.82 sigma and at +8 sigma.
+
+**Scoring the additive arm threshold-free.** AUROC peaks at dose 0 (0.99951) and
+falls monotonically in both directions. The untouched model's best-threshold
+accuracy is 0.9922; the best accuracy at any dose is 0.9219, at +2 sigma. The
+intervention moves the operating point along an ROC curve the model already has,
+and degrades that curve while doing so. Correction rate and flip count are the
+wrong instrument regardless of how the crossover below resolves.
+
+**Gate.** `arm_g_order_crossover.py` renders every scenario in both catalog
+orders with everything else byte-identical up to the line swap, crosses both
+orders with both conditions and both mappings, and runs baseline inference only.
+Until it returns, sections 11 and 12 and every decision-level claim below are
+suspended.
+
 ## Current defensible claims
+
+> **Suspended pending section 13.** Every claim below that rests on the
+> decline-versus-read *decision*, on flip counts, or on the layer-16 direction
+> as a representation of goal-constraint conflict is on hold: the direction
+> separates catalog order better than it separates the label, and the decision
+> is fully determined by catalog order. The observational and cross-family
+> results that rest on the margin rather than the decision are not affected in
+> the same way, but were measured with the same generator.
 
 ### High confidence
 
@@ -567,6 +648,17 @@ introspection.
 
 ## Recommended continuation
 
+0. **Run the order crossover first, and treat everything else as blocked on it.**
+   `arm_g_order_crossover.py` + `arm_g_order_crossover_colab.ipynb`. 256 prompts,
+   one baseline forward pass, no direction and no intervention. If catalog order
+   alone reverses the conflict decision inside a scenario, the behavioural
+   instrument the last four runs were built on does not measure scope, and no
+   re-extraction repairs it. If the condition contrast survives in both orders,
+   re-extract the direction on order-crossed *source* seeds (101/102 rebuilt with
+   `catalog_order_mode="crossed"`), averaging the paired conflict-minus-reachable
+   difference over both orders so the direction is orthogonal to the order effect
+   by construction rather than by hope. Only then is anything below worth GPU
+   time. Items 1-8 predate section 13 and are kept for the record.
 1. **Retire layer 27 as the anchor.** It was selected by decodability and is
    causally near-redundant once earlier layers are ablated. Layer 16 is the new
    object of study.

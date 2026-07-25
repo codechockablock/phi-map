@@ -1,8 +1,44 @@
 # The Coefficient Determines the Conclusion: Dose and Operator Artifacts in Detection–Correction Asymmetry
 
-**Status:** draft, 2026-07-25. Every number is from an audited artifact in
-`results/`. Nothing here is submitted. This draft replaces an earlier version
-whose central claim we refuted ourselves; see §9.
+**Status: WITHDRAWN pending the order crossover, 2026-07-25.** Do not circulate.
+Every number here is still from an audited artifact, and they all still
+reproduce — but an adversarial review of the artifacts found the evaluation set
+confounded and three of this draft's claims do not survive it. See
+`ADVERSARIAL_REVIEW.md`, `RESEARCH_ARC.md` §13, and `review_arm_g.py`. In short:
+
+1. **The operator claim below is wrong, and the artifacts already contain the
+   refutation.** The removal hook passes `center=0.0` (`arm_g_allpos.py:162`), so
+   it zeroes the projection rather than mapping to a group mean as stated. With
+   `center=0` that hook is *exactly* additive steering at `c_i = −proj_i/σ`, so
+   removal and addition are one operator, and since σ is by definition the SD of
+   the projection, removal's coefficient is pinned near 1. For all 128 rows it
+   falls inside that row's own non-crossing interval, so the additive
+   dose-response predicts the 0/128 result with zero free parameters. "Operator
+   flips the conclusion" is one operator at −0.82σ versus +8σ. The scope-matched
+   cell needed to check this already existed (`layer16_all_positions`, seed 108).
+2. **The behavioural outcome is a generator artifact.** The conflict decision is
+   a perfect function of `pair_index` parity — hence of whether the offending
+   path is on catalog line 1 or line 2 — 64/64 rows in seed 110 and independently
+   64/64 in seed 108. The 0.500 decline rate and the "empty band" are two
+   scenario sub-types, not a margin distribution.
+3. **The responsiveness claim is a four-cell comparison.** 93.3% of slope
+   variance is between the four (condition × parity) cells; R² 0.892 becomes
+   0.072 cell-demeaned; F(1,125) uses ~124 degrees of freedom that do not exist.
+4. **The coefficient claim survives but is published.** Angular Steering
+   (arXiv 2510.26243, Oct 2025) already unifies ablation and addition and notes
+   ablation has no free coefficient; arXiv 2606.20852 already separates
+   fixed-threshold gains from operating-point shifts. Five for five against.
+
+What the artifacts do support, and what a rewrite should be built on: scored
+threshold-free, AUROC peaks at dose 0 and falls monotonically both ways, and the
+untouched model's best-threshold accuracy (0.9922) beats the best steered
+accuracy (0.9219). The intervention moves the operating point along an ROC curve
+the model already has and degrades it in the process. Correction rate and flip
+count are the wrong instrument.
+
+This draft replaces an earlier version whose central claim we refuted ourselves;
+see §9. It is now the third claim in this arc to be refuted by its own evidence,
+which is the process working.
 
 ---
 
