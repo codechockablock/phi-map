@@ -139,12 +139,76 @@ each other. Arm G engineered the public channel to carry nothing, so its
 deployment. Arm T let the public channel carry the whole response, and
 behaviour won.
 
+## Prediction 1 is falsified, and it was not novel
+
+The unattributed figures traced to
+[DeceptGuard](https://arxiv.org/abs/2603.13791) (Mukhopadhyay, IIIT Kalyani,
+v1 14 Mar 2026), §8.4 Finding 2, verbatim: white-box advantage is
++0.162 pAUROC under *Honest CoT* (p < 0.001), +0.071 under *Sanitized CoT*
+(p < 0.01), +0.031 under *Deceptive CoT* (p = 0.04). Mean +0.097 confirmed in
+the abstract. That paper also does both analyses this document proposed as
+gaps, and the results are not what was predicted.
+
+**Table 5 is the monitor-capability sweep, and the advantage is flat.** Four
+frontier backbones, Hybrid minus black-box:
+
+| Backbone | BB | Hybrid | Advantage |
+|---|---:|---:|---:|
+| Claude Sonnet 4.5 | 0.837 | 0.934 | +0.097 |
+| Claude Opus 4.5 | 0.851 | 0.941 | +0.090 |
+| Gemini 2.5 Pro | 0.829 | 0.930 | +0.101 |
+| GPT-5.1 | 0.841 | 0.936 | +0.095 |
+
+The advantage does not decay as the monitor gets stronger. It sits in
++0.090 to +0.101 across all four, including the backbone they identify as
+strongest. **Prediction 1, as stated, is not supported.**
+
+The one thing that survives is scope. These four backbones span only ~0.02
+AUROC of black-box performance — all frontier-class. Parrack's haiku→sonnet
+swing of 0.153 spans a small model to a large one. So the defensible residue is
+that baseline sensitivity is real at the *low* end and **saturates among
+frontier monitors**. That is narrower and less interesting than a crossing
+point, and it means the crossing point probably does not exist for any monitor
+anyone would actually deploy.
+
+**Table 4 also undercuts a criticism I was about to make.** I suspected
+DeceptGuard's headline conflated CoT-text access with true activation access.
+Their modality ablation decomposes it:
+
+| Configuration | pAUROC |
+|---|---:|
+| Actions only | 0.793 |
+| Outputs only | 0.701 |
+| Actions + Outputs (black-box) | 0.837 |
+| CoT only | 0.841 |
+| CoT + Actions + Outputs | 0.869 |
+| **+ Hidden state (Hybrid)** | **0.934** |
+
+CoT text adds +0.032 over black-box; the hidden-state probe adds **+0.065 on
+top of that** — the single largest incremental gain, as they note. Roughly two
+thirds of the advantage is activations, not text. The conflation worry was
+wrong.
+
+## The moderator needs a concealment budget
+
+DeceptGuard's Figure 7 shows something the information-differential model does
+not predict: **black-box performance *improves* as CoT manipulation increases.**
+Their explanation is that "agents that invest effort in sanitizing their
+reasoning traces have less capacity to perfectly camouflage their actions,
+leaving stronger behavioral footprints," citing Carlsmith's argument that
+concealment effort must be allocated across channels.
+
+So I(private; label) and I(public; label) are not independent — they are coupled
+by a finite concealment budget. The advantage under Deceptive CoT collapses to
++0.031 not because the public channel is better monitored but because
+concealment effort *moved there*. Any model of this should treat the two
+channels as competing for one budget rather than as separate quantities.
+
 ## Testable predictions
 
-1. **Monotone decay.** Hold the probe fixed, sweep monitor capability, and the
-   advantage shrinks monotonically. The crossing point — where a cheap
-   behavioural monitor matches the probe — is the decision-relevant quantity
-   and is not reported anywhere we have found.
+1. ~~**Monotone decay.**~~ Falsified above for frontier monitors. Retained only
+   in the weak form that baseline sensitivity exists at the low capability end
+   and saturates at the top.
 2. **Moderator.** The advantage is predicted by how much of the label is
    recoverable from public tokens. Measurable directly by training a recovery
    model on public tokens alone.
@@ -183,11 +247,23 @@ This is a synthesis and a reframing. It identifies a confound and a gap; it has
 not measured anything. Prediction 3 is a literature meta-analysis and could be
 done immediately. Predictions 1 and 2 need a study.
 
-Unverified: pAUROC figures of +0.162 / +0.071 / +0.031 across
-Honest/Sanitized/Deceptive CoT conditions appeared in a search summary that
-could not be attributed to a specific paper. Still unattributed after a second
-pass. They are consistent with the moderator above but must not be cited until
-read at source.
+Attribution closed. The +0.162 / +0.071 / +0.031 figures are DeceptGuard §8.4
+Finding 2, read at source and quoted above. Nothing in this document now rests
+on an unattributed number.
+
+Evidence quality on DeceptGuard should be weighted below the other sources when
+citing it. Single author; monitors optimised on 4,800 *synthetic* trajectories
+and tested on 9,200 semi-realistic ones from a benchmark the same paper
+introduces; deceptive behaviour is induced by injected side-tasks rather than
+emerging naturally, unlike Panfilov where frontier models chose dishonesty
+unprompted. The authors concede their environments are "a controlled
+approximation of real deployment contexts." Its value here is not its headline
+but its internal decomposition — Tables 4 and 5 are the analyses nobody else
+ran, and they are what falsified prediction 1.
+
+Incidental corroboration: their probe accuracy peaks at layer 32 of 80 in
+Llama-3.1-70B, about 40% depth. Our Arm G peak was layer 16-17 of 32, about 50%.
+Consistent with each other and with the mid-network literature.
 
 Resolved, and it cut against the framing: the "on par with GPT-5, beats
 GPT-4.1-Nano" claim traced to Panfilov et al., where the substance is stronger
