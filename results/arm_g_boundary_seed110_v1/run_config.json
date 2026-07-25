@@ -1,0 +1,66 @@
+{
+  "protocol": "ARM_G_BOUNDARY_V1",
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "source_seeds": [
+    101,
+    102
+  ],
+  "eval_seed": 110,
+  "direction": "rank-1 seed-102 mean paired conflict difference",
+  "direction_layer": 16,
+  "intervention": "signed additive steering x <- x + c*sigma*r at layer 16, all token positions, where sigma is the SD of the baseline projection onto r",
+  "doses_in_sigma": [
+    -8.0,
+    -6.0,
+    -4.0,
+    -3.0,
+    -2.0,
+    -1.0,
+    -0.5,
+    0.0,
+    0.5,
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    6.0,
+    8.0
+  ],
+  "random_doses_in_sigma": [
+    -8.0,
+    -4.0,
+    -1.0,
+    1.0,
+    4.0,
+    8.0
+  ],
+  "prior_evidence": {
+    "seed108_positive_conflict_rows_baseline_min": 2.125,
+    "seed108_positive_conflict_rows_after_removal_min": 0.125,
+    "seed109_saturation_dose": 1.5,
+    "seed109_flips_at_max_coherent_dose": 6,
+    "source": "results/arm_g_allpos_seed108_v1, results/arm_g_dose_seed109_v1"
+  },
+  "primary_question": "decompose per-row dose-to-flip into baseline distance divided by per-row responsiveness, and test whether responsiveness is homogeneous across conditions",
+  "why_the_naive_test_is_circular": "with a shared slope s, dose-to-flip is exactly -margin(0)/s, so regressing dose-to-flip on baseline margin returns R^2 = 1 as arithmetic; the evidence is in slope homogeneity, not in that fit",
+  "success_rule": "primary is responsiveness homogeneity, estimable from every row regardless of crossings: a condition slope difference whose CI excludes zero supports structural heterogeneity. Boundary geometry additionally requires at least half the rows to cross within the coherent dose range with distance-only R^2 >= 0.90; below that coverage the truncated fit is reported but not load bearing",
+  "coherence_gate": {
+    "mean_action_probability_mass": 0.9,
+    "top_token_is_action_rate": 0.95
+  },
+  "bootstrap": 2000,
+  "pairs_per_family": 16,
+  "read_position": "pre_action",
+  "source_evidence": {
+    "101": {
+      "decision": "SUPPORTED_PATTERN",
+      "selected_layer": 27,
+      "result_b64_sha256": "eb586377a842d374acdbf280c5183bd7cbbd559569227cc402c24c6be48a6a01"
+    },
+    "102": {
+      "decision": "SUPPORTED_PATTERN",
+      "selected_layer": 27,
+      "result_b64_sha256": "7e790f590586934df8575cc9e8e3e1971c3dfe3fd6d576619c680ca9294cda51"
+    }
+  }
+}

@@ -1,5 +1,29 @@
 # Partial Writability: Dose Structure in the Detection–Correction Asymmetry
 
+> **CORRECTION PENDING — the central framing of this draft is wrong.**
+> Seed 110 (`results/arm_g_boundary_seed110_v1/`) shows the layer-16 conflict
+> direction is **fully writable** under signed additive steering: 128 of 128 rows
+> cross the decision boundary, the coherence gate passes at every one of 15 doses
+> out to ±8σ (action-token mass ≥ 0.9998), and matched random directions produce
+> 0–1 flips. The "read-only" reading below is an artifact of the *removal*
+> operator, which saturates once the projection is already zeroed and then goes
+> off-distribution rather than pushing harder. §4's claim that "the causal pathway
+> saturates within the natural range" is an over-reading of an operator
+> limitation and must be withdrawn.
+>
+> What survives, and strengthens: the methodological argument. Same direction,
+> same model, same protocol, a single-dose paper would report **5.5%, 21.1%,
+> 45.3%, 67.2% or 75.0%** correction depending only on the coefficient chosen.
+> That is now a demonstration rather than an inference.
+>
+> Also revised: responsiveness is not uniform, but condition is not the reason.
+> Baseline margin explains it (R² 0.894) and condition adds nothing beyond margin
+> (ΔR² to 0.898, F(1,125) = 3.79, p = 0.054) while margin adds hugely beyond
+> condition (0.618 → 0.898, F = 341, p ≈ 0). **Boundary position sets both the
+> distance to travel and the gain per unit dose** — one law, not two regimes.
+> A purely linear readout would give every row the same slope, so the variation
+> is downstream nonlinearity.
+
 **Status:** draft, 2026-07-25. Every number is from an audited artifact in
 `results/`. Nothing here is submitted.
 
