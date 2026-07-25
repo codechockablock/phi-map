@@ -1,101 +1,86 @@
-# Partial Writability: Dose Structure in the Detection–Correction Asymmetry
-
-> **CORRECTION PENDING — the central framing of this draft is wrong.**
-> Seed 110 (`results/arm_g_boundary_seed110_v1/`) shows the layer-16 conflict
-> direction is **fully writable** under signed additive steering: 128 of 128 rows
-> cross the decision boundary, the coherence gate passes at every one of 15 doses
-> out to ±8σ (action-token mass ≥ 0.9998), and matched random directions produce
-> 0–1 flips. The "read-only" reading below is an artifact of the *removal*
-> operator, which saturates once the projection is already zeroed and then goes
-> off-distribution rather than pushing harder. §4's claim that "the causal pathway
-> saturates within the natural range" is an over-reading of an operator
-> limitation and must be withdrawn.
->
-> What survives, and strengthens: the methodological argument. Same direction,
-> same model, same protocol, a single-dose paper would report **5.5%, 21.1%,
-> 45.3%, 67.2% or 75.0%** correction depending only on the coefficient chosen.
-> That is now a demonstration rather than an inference.
->
-> Also revised: responsiveness is not uniform, but condition is not the reason.
-> Baseline margin explains it (R² 0.894) and condition adds nothing beyond margin
-> (ΔR² to 0.898, F(1,125) = 3.79, p = 0.054) while margin adds hugely beyond
-> condition (0.618 → 0.898, F = 341, p ≈ 0). **Boundary position sets both the
-> distance to travel and the gain per unit dose** — one law, not two regimes.
-> A purely linear readout would give every row the same slope, so the variation
-> is downstream nonlinearity.
+# The Coefficient Determines the Conclusion: Dose and Operator Artifacts in Detection–Correction Asymmetry
 
 **Status:** draft, 2026-07-25. Every number is from an audited artifact in
-`results/`. Nothing here is submitted.
+`results/`. Nothing here is submitted. This draft replaces an earlier version
+whose central claim we refuted ourselves; see §9.
 
 ---
 
 ## Abstract
 
-Linear probe directions in language models are increasingly reported to be
-readable but not writable: the probe detects a behavioural variable while
-steering or ablating along the probe direction fails to change the behaviour.
-This has now been observed independently for hallucination, for deception, and
-here for a third construct. We argue the phenomenon is real and the standard way
-of measuring it is wrong.
+A growing literature reports that linear probe directions in language models are
+readable but not writable — the probe detects a behavioural variable while
+steering along the probe direction fails to change the behaviour. The finding has
+been reported independently for hallucination, deception, and other constructs,
+and is increasingly treated as a property of representations.
 
-We study a mechanically-labelled goal–constraint variable in
-Llama-3.1-8B-Instruct: whether a requested target lies inside a stated
-permission scope. Labels are a property of a file path, not of a judge. The
-direction is validated observationally (held-out AUROC 0.756 and 0.850 on two
-independent seeds against a clamped behavioural comparator at 0.500, source
-directions aligned at cosine 0.969), localised to a sharp layer-16/17 plateau,
-shown to be predominantly rank-1 (81.2% of the rank-4 effect), replicated across
-prompt seeds (1.129 and 1.070), shown selective against structured nulls made
-disjoint from it (0.039 and 0.022 against a random-subspace floor of 0.032), and
-distinguished from a refusal direction by a double dissociation (cosine 0.062,
-opposite causal action pattern).
+We show that on a single direction in a single model, the reported correction
+rate is a **function of the intervention's free parameters**, and spans the whole
+range of possible conclusions. Using a mechanically-labelled goal–constraint
+variable in Llama-3.1-8B-Instruct — whether a requested target lies inside a
+stated permission scope, where the label is a property of a file path and no
+judge appears anywhere in the pipeline — we find:
 
-We then attempt to write to it, and fail — but not in the way a binary
-correction-rate would report. Ablating the direction from every layer at every
-token position removes 33.4% of the condition contrast and flips **0 of 128**
-decisions. Scaling removal past unit strength produces a **monotone dose-response
-that saturates at about 1.5× full removal**: the conflict-row margin shift goes
-−1.248, −1.785, −2.031, −2.027, and the decline rate falls from 0.500 to 0.406,
-moving about 5% of decisions while matched-dose random directions hold at exactly
-0.500. Beyond saturation the model is destroyed before it can be controlled: at
-3× removal the intervention scores as spectacular success — 100% of the contrast
-removed, 64 of 128 decisions flipped — on a model emitting
-`avenavenalemalemavenaven`, with action-token probability mass 2.7e-06 and
-next-token entropy 9.33 against a baseline of 0.209. Matched-dose random
-directions collapse identically there.
+**The choice of operator flips the conclusion.** Mapping the direction's
+component to its group mean at every layer and token position removes 33.4% of
+the condition contrast and flips **0 of 128** decisions; scaling that removal past
+unit strength saturates at about 1.5× and then destroys the model. The identical
+direction under **signed additive steering** moves **128 of 128** rows across the
+decision boundary, with the coherence gate passing at every one of fifteen doses
+out to ±8σ (action-token probability mass never below 0.9998) and four matched
+random directions producing 0–1 flips at any dose. Removal is bounded — once the
+projection is gone there is nothing left to remove — and overshooting leaves the
+distribution rather than pushing harder.
 
-Two conclusions follow. First, "0% correction" and "saturating partial
-writability with a characterised collapse boundary" are different claims, and
-single-dose binary reporting cannot distinguish them. Second, scaled
-interventions manufacture artifacts that look like successes, and separating
-them requires matched-dose random controls plus a coherence gate — neither of
-which is standard.
+**The choice of coefficient flips the conclusion.** A single-dose protocol on
+this direction would report 5.5%, 21.1%, 45.3%, 67.2% or 75.0% correction at 1σ,
+2σ, 3σ, 4σ and 6σ respectively. All five are the same direction in the same model
+under the same protocol.
+
+**Responsiveness is boundary position, not condition.** Per-row gain varies
+threefold and is explained by baseline margin (R² 0.894); experimental condition
+adds nothing beyond margin (ΔR² to 0.898, F(1,125) = 3.79, p = 0.054) while margin
+adds substantially beyond condition (0.618 → 0.898, F = 341.5). Rows far from the
+boundary are roughly twice as responsive as rows near it. Since a linear readout
+would assign every row the same slope, the variation is downstream nonlinearity:
+boundary position sets both the distance to travel and the gain per unit dose.
+
+We do not claim the published nulls are wrong. We claim that a protocol which
+fixes an operator and a coefficient and reports a binary rate cannot distinguish
+"not a control point" from "under-dosed," and that on the one direction where we
+swept both, the difference was entirely dosimetric.
 
 ---
 
-## 1. Position
+## 1. The disagreement is not about models
 
-The detection–correction asymmetry has arrived independently from several
-directions, which is the main reason to take it seriously:
+Three recent results disagree about whether probe directions are control points,
+and the disagreement tracks methodology rather than architecture:
 
 - **Hallucination.** Roy et al. (arXiv 2604.13068) test seven models from 117M to
-  7B across GPT-2, Pythia and Qwen-2.5 and report a 0% correction rate in 7 of 7
-  under steering along the probe direction, naming it the detection–correction
-  asymmetry.
+  7B across GPT-2, Pythia and Qwen-2.5 and report a **0% correction rate in 7 of
+  7** under steering along the probe direction, naming this the
+  detection–correction asymmetry.
 - **Deception.** Rift (Nyoma, arXiv 2606.17229) finds the deception direction
-  linearly readable across families (zero-shot AUC 0.933) but not writable:
-  adding it to an honest pass yields incoherent output (0/8), subtracting it from
-  a deceptive pass does not flip to truth (0/8).
-- **Refusal, as the counterexample.** Arditi et al. (arXiv 2406.11717) *do* flip
+  readable across families (zero-shot AUC 0.933) but **not writable**: adding it
+  to an honest pass yields incoherent output (0/8), subtracting it from a
+  deceptive pass does not flip to truth (0/8).
+- **The same behaviour, opposite verdict.** A multi-behaviour steering study
+  (arXiv 2511.18284) reports hallucination **highly steerable** (+60 trait delta)
+  — in Llama-3.1-8B at layer 15, adjacent to the layer we study.
+- **Refusal as the writable case.** Arditi et al. (arXiv 2406.11717) flip refusal
   behaviour by ablating a single direction across all layers and positions in 13
-  chat models. Some directions are writable.
-- **This work.** A fourth construct, mechanically labelled, with the same
-  outcome, plus the dose structure the others do not measure.
+  chat models.
 
-Independent convergence on three constructs and a dozen models is corroboration.
-What is missing is not more existence proofs; it is a measurement that
-distinguishes *no control point* from *a control point too weak to cross a
-decision boundary*. That distinction is the contribution here.
+The hallucination pair is the sharpest: same construct, opposite conclusion. One
+asks whether steering *corrects* hallucination into factual output; the other
+asks whether steering *induces* more of it, scored by an LLM judge. These are
+different operations with different free parameters, and nothing in either report
+lets a reader convert one into the other.
+
+Our contribution is not a fifth data point. It is a demonstration, on one
+direction where we can sweep the free parameters, that they determine the
+conclusion.
 
 ---
 
@@ -104,25 +89,21 @@ decision boundary*. That distinction is the contribution here.
 Matched scenario pairs. Within a pair, system prompt, tool prelude, workspace,
 catalogue contents and the stated permission scope are identical. Only an opaque
 requested target identifier differs: one target resolves to a path inside the
-allowed scope, the other outside it. **The condition label is therefore a
-mechanical property of the path, with no human or model judge anywhere in the
-pipeline** — a difference from the deception-probe literature, where labels are
-judged, induced by instruction, or both.
+allowed scope, the other outside it. **The condition label is a mechanical
+property of the path** — no human or model judge anywhere in the pipeline, unlike
+the deception-probe literature where labels are judged, instruction-induced, or
+both.
 
-At the measurement point the model must emit exactly `READY`, so the visible
-output is identical across conditions by construction. The outcome variable is
-the next-action logit margin `DECLINE − READ`, with the A/B answer-token mapping
-reversed on every scenario to counterbalance token bias.
+At the measurement point the model must emit exactly `READY`, so visible output
+is identical across conditions by construction. The outcome is the next-action
+logit margin `DECLINE − READ`, with the A/B answer-token mapping reversed on every
+scenario to counterbalance token bias. Development uses one scenario family
+(`release_records`); all evaluation is on two held-out families with a fresh
+prompt seed per run.
 
-Development uses one scenario family (`release_records`); all evaluation is on
-two held-out families (`data_checksums`, `incident_times`) with a fresh prompt
-seed per run.
-
-**The clamp is a two-edged design choice, and it is the paper's main structural
-limitation.** It makes the observational result clean — the behavioural
-comparator is 0.500 because the output carries no information by construction —
-and it caps the behavioural ceiling, because a forced binary choice with a wide
-margin gap around the boundary cannot show a graded variable doing much. See §6.
+The clamp makes the observational comparator uninformative by design (0.500), and
+it also means our behavioural outcome is a forced binary choice. §11 treats that
+as a limitation rather than a feature.
 
 ---
 
@@ -130,30 +111,27 @@ margin gap around the boundary cannot show a graded variable doing much. See §6
 
 | Property | Evidence |
 |---|---|
-| Cross-family decodable | Held-out AUROC 0.756 (seed 101) and 0.850 (seed 102); behavioural comparator 0.500 |
-| Not an arbitrary direction | Source directions across seeds aligned at cosine 0.969 |
+| Cross-family decodable | Held-out AUROC 0.756 (seed 101), 0.850 (seed 102); clamped behavioural comparator 0.500 |
+| Not arbitrary | Source directions across seeds aligned at cosine 0.969 |
 | Not prompt leakage | Request-only probes 0.445 / 0.410 against a threshold frozen at 0.65 after a 100-seed null calibration showed 25% of seeds clearing the original 0.60 |
 | Localised | Sharp onset between layers 15 and 16; layers 13–15 at their random floor; 16 (1.070) and 17 (1.076) indistinguishable |
-| Predominantly one direction | Rank 1 recovers 81.2% of the rank-4 attenuation |
+| Predominantly rank-1 | Rank 1 recovers 81.2% of the rank-4 attenuation |
 | Replicated | Layer-16 rank-4 attenuation 1.129 (seed 106), 1.070 (seed 107) |
-| Selective | Structured nulls (catalogue control tag; family identity) made disjoint from the conflict subspace attenuate 0.039 and 0.022 against a random-subspace p95 of 0.032 |
-| Not refusal | Cosine with a difference-of-means refusal direction 0.062; ablating conflict moves conflict rows −1.758 and reachable rows −0.168, ablating refusal moves conflict +0.494 and reachable +2.803 |
+| Selective | Structured nulls made disjoint from the conflict subspace attenuate 0.039 and 0.022 against a random-subspace p95 of 0.032 |
+| Not refusal | Cosine 0.062 with a difference-of-means refusal direction; ablating conflict moves conflict rows −1.758 and reachable rows −0.168, ablating refusal moves conflict +0.494 and reachable +2.803 |
 
-Layer selection matters and is a trap. Choosing the layer by cross-validated
-probe accuracy selects layer 27, where rank-4 ablation removes 2.05% of the
-contrast. Choosing by causal effect selects 16–17, where the same construction
-removes 21.8%. Decodability peaks at layer 20 and stays 0.94–0.97 through 30
-while causal efficacy peaks at 16 and decays — so probe accuracy actively
-misleads about where to intervene, consistent with Hase et al. (arXiv 2301.04213).
+Layer choice is itself a trap worth recording. Selecting by cross-validated probe
+accuracy picks layer 27, where rank-4 ablation removes 2.05% of the contrast;
+selecting by causal effect picks 16–17, where the same construction removes 21.8%.
+Decodability peaks at layer 20 and holds 0.94–0.97 through layer 30 while causal
+efficacy peaks at 16 and decays. Probe accuracy actively misleads about where to
+intervene, consistent with Hase et al. (arXiv 2301.04213).
 
 ---
 
-## 4. Writing to it fails with structure
+## 4. Under removal, the direction looks read-only
 
-### 4.1 Scope is not the limiting factor
-
-Widening the intervention from one layer at one position to all layers at all
-positions nearly triples the effect and changes nothing about the decision.
+Mapping the component to its group mean, at increasing layer and position scope:
 
 | Scope | Attenuation | Share of contrast | Decision flips |
 |---|---:|---:|---:|
@@ -162,157 +140,248 @@ positions nearly triples the effect and changes nothing about the decision.
 | All layers, final position | 0.922 | 19.3% | 0/128 |
 | All layers, all positions | 1.590 | 33.4% | 0/128 |
 
-Coherence is intact throughout: action-token probability mass 1.000, next-token
-entropy 0.215 → 0.246.
+Coherence intact throughout (action mass 1.000; entropy 0.215 → 0.246). Scaling
+removal past unit strength:
 
-### 4.2 Why nothing flips: boundary geometry, not inertness
+| k | Attenuation | Conflict decline rate | Flips | Conflict-row shift | Action mass | Entropy |
+|---:|---:|---:|---:|---:|---:|---:|
+| 0.5 | 22.4% | 0.500 | 0/128 | −1.248 | 1.000 | 0.225 |
+| 1.0 | 33.0% | 0.484 | 1/128 | −1.785 | 1.000 | 0.248 |
+| 1.5 | 37.9% | 0.422 | 5/128 | −2.031 | 1.000 | 0.258 |
+| 2.0 | 41.3% | 0.406 | 6/128 | −2.027 | 1.000 | 0.273 |
+| 3.0 | 100% | 0.500 | 64/128 | −0.990 | **2.7e-06** | **9.33** |
 
-The baseline margins are bimodal with an empty band around the decision
-boundary. The 32 conflict rows that favour declining start at a mean of +3.492
-with a **minimum of +2.125** — no row begins near zero. Under all-layer
-all-position ablation they fall to a mean of +1.074 and a **minimum of +0.125**,
-with five rows inside 0.5 of the boundary.
+Read on its own this is a textbook detection–correction asymmetry with a
+saturation story: the effect plateaus at k ≈ 1.5, moves about 5% of decisions, and
+the only doses that flip half the rows are doses at which the model emits
+`avenavenalemalemavenaven` and matched random directions produce the same 64
+flips. **We drew exactly that conclusion, and it was wrong.**
 
-The intervention moves the deciding rows roughly 95% of the way to flipping and
-stops. Reporting this as "0% correction" is true and uninformative.
+---
 
-### 4.3 Dose: monotone, then saturating, then destructive
+## 5. Under additive steering, the same direction is fully writable
 
-Scaled removal `x ← x − k(x·r)r`, all layers, all positions:
+Signed additive steering `x ← x + c·σ·r` at layer 16 across all token positions,
+where σ = 0.5506 is the standard deviation of the baseline projection onto r.
+Baseline contrast 4.9395.
 
-| k | Attenuation | Conflict decline rate | Flips | Conflict-row shift | Action mass | Entropy | Coherent |
+| c (σ) | Contrast | Conflict decline | Reachable decline | Flips | Action mass | Entropy | Gate |
 |---:|---:|---:|---:|---:|---:|---:|:--:|
-| 0.5 | 22.4% | 0.500 | 0/128 | −1.248 | 1.000 | 0.225 | yes |
-| 1.0 | 33.0% | 0.484 | 1/128 | −1.785 | 1.000 | 0.248 | yes |
-| 1.5 | 37.9% | 0.422 | 5/128 | −2.031 | 1.000 | 0.258 | yes |
-| 2.0 | 41.3% | 0.406 | 6/128 | −2.027 | 1.000 | 0.273 | yes |
-| 3.0 | 100% | 0.500 | 64/128 | −0.990 | **2.7e-06** | **9.33** | **no** |
-| 4.0 | 100% | 0.500 | 64/128 | −0.989 | **2.7e-06** | **9.33** | **no** |
+| −8 | 5.094 | 0.000 | 0.000 | 32/128 | 1.0000 | 0.040 | pass |
+| −6 | 5.982 | 0.016 | 0.000 | 31/128 | 1.0000 | 0.127 | pass |
+| −4 | 6.375 | 0.344 | 0.000 | 10/128 | 1.0000 | 0.154 | pass |
+| −2 | 6.158 | 0.500 | 0.000 | 0/128 | 1.0000 | 0.110 | pass |
+| 0 | 4.939 | 0.500 | 0.000 | 0/128 | 1.0000 | 0.215 | pass |
+| +2 | 3.445 | 0.859 | 0.016 | 27/128 | 1.0000 | 0.447 | pass |
+| +3 | 2.893 | 1.000 | 0.344 | 58/128 | 1.0000 | 0.478 | pass |
+| +4 | 2.424 | 1.000 | 0.781 | 86/128 | 1.0000 | 0.438 | pass |
+| +6 | 1.682 | 1.000 | 1.000 | 96/128 | 0.9999 | 0.301 | pass |
+| +8 | 1.232 | 1.000 | 1.000 | 96/128 | 0.9998 | 0.226 | pass |
 
-Three things in this table are the paper.
+**Every row crosses.** Crossing coverage is 128/128, with individual crossing
+doses ranging from 0.600σ to 6.111σ. The coherence gate passes at all fifteen
+doses; action-token probability mass never falls below 0.9998 and next-token
+entropy stays below 0.48 against a 0.215 baseline. Four matched random directions
+orthogonal to r produce 0 or 1 flips at every dose tested, with condition
+contrasts staying within 3.96–5.31 against a baseline of 4.94.
 
-**The effect is real and specific.** The decline rate falls monotonically to
-0.406 and flips reach 6 of 128, while four matched-dose random directions
-orthogonal to the conflict direction hold the decline rate at exactly 0.500 with
-0–1 flips at *every* coherent dose. The direction does move decisions. It moves
-about 5% of them.
-
-**The effect saturates well before the model breaks.** The conflict-row shift
-goes −1.248, −1.785, −2.031, −2.027. Removing more than the full component buys
-nothing. Pushing the coordinate outside its natural range does not push the
-decision further, which is a statement about the downstream pathway and not
-about measurement precision.
-
-**Beyond saturation the numbers invert into an artifact.** At k=3 a naive
-readout is *100% of the condition contrast removed, 64 of 128 decisions
-flipped* — a headline result. The model is emitting
-`avenavenalemalemavenaven...` instead of a single `A` or `B`, with action-token
-mass 2.7e-06 and entropy 9.33 against a 0.209 baseline. Matched-dose random
-directions produce the same 64 flips and the same gate failure, so the collapse
-is generic to perturbation magnitude and carries no information about the
-variable.
-
-### 4.4 What this implies for how the asymmetry is measured
-
-A single-dose binary correction rate cannot separate three distinct states:
-
-1. the direction is not a control point;
-2. the direction is a control point whose effect saturates below the decision
-   boundary;
-3. the intervention was strong enough to flip decisions only by destroying the
-   model.
-
-State 2 is what we observe, and it is the interesting one. States 1 and 3 both
-report as clean numbers — 0% and ~50% respectively — under a protocol that does
-not sweep dose, does not include matched-dose random controls, and does not gate
-on coherence. We recommend all three as minimum reporting for any writability
-claim.
+Both directions of control work. Pushing negative drives the conflict decline
+rate to 0.000; pushing positive drives it to 1.000 and then carries the reachable
+condition with it.
 
 ---
 
-## 5. Specificity degrades as intervention scope widens
+## 6. Why removal and addition diverge
 
-Worth stating because it cuts against our own strongest numbers. At single-layer
-scope the conflict subspace beats its random-subspace floor by a factor of 79
-(1.334 against a p95 of 0.017). At all-layer all-position scope the margin falls
-to 12× on the median random draw and only **2.6× on the p95** (1.590 against
-0.610), and that p95 rests on a single random draw at 0.807 out of eight.
+Removal is a **bounded** operator. Mapping the projection to its group mean moves
+each row by at most its own deviation, which has standard deviation σ = 0.5506.
+Once the component is gone there is nothing further to remove, which is exactly
+the plateau at k ≈ 1.5. Scaling beyond that does not push harder in the same
+sense — at k = 2 the deviation is reflected through the mean, and at k = 3 the
+state is driven to a projection no natural input produces. The model breaks
+because the intervention has left the distribution, not because the pathway is
+saturated. Matched random directions collapse identically at k = 3, which
+identifies the collapse as generic to perturbation magnitude.
 
-Widening the intervention buys effect size and loses specificity. We do not lean
-on the all-position condition for any specificity claim, and neither should
-anyone else without more random draws.
+Additive steering is **unbounded and stays on-manifold much longer**: at +8σ the
+model still places 0.9998 of its mass on the action tokens.
 
----
-
-## 6. Limitations
-
-1. **One model, one construct, synthetic scenarios.** Llama-3.1-8B-Instruct only.
-   The task is a synthetic lookup with a permission scope.
-2. **The behavioural clamp caps the behavioural ceiling.** A forced binary A/B
-   margin with an empty ~2-logit band around the boundary structurally cannot
-   show a graded variable controlling much. Our null on decision flips is partly
-   a property of this design, which is why §4.2 reports boundary geometry rather
-   than only the flip count. A task with real action variation is required for a
-   stronger behavioural claim, and we do not have one.
-3. **Not emergent deception or misalignment.** The variable is scope conflict
-   under instruction. It is not evidence about strategic behaviour.
-4. **The scenario generator had a defect, and every reported result used the
-   defective version.** `control_label` was `(pair_index + constant) % 2`, and
-   that parity also fixes in-scope slot assignment and catalogue ordering, so the
-   catalogue control tag was confounded with scope structure — a first principal
-   angle cosine of 0.9999 against the conflict subspace. The generator now
-   supports a `parity_independent` mode with assignment balanced within each
-   parity class, and `validate_manifest` reports
-   `control_label_parity_independent` unconditionally in every run artifact, so
-   the confound cannot recur silently. **This does not retroactively fix
-   anything.** All numbers reported here come from the confounded generator,
-   which is why the §3 selectivity result rests on the family null and both
-   orthogonalised nulls rather than the raw control-tag comparison. The defect
-   was present in all three families at all seeds tested, so it is a property of
-   the generator and not of any particular run.
-5. **Eight random draws is a thin specificity threshold** at all-position scope.
-6. ~~One artifact is not row-level auditable.~~ Closed. The seed-107 protocol
-   was re-run under the legacy generator mode with per-row margin storage added
-   (`results/arm_g_layer16_seed107_v2/`). All fourteen reported attenuations —
-   seven depth layers, three ranks, four nulls — recompute from the stored
-   row-level margins with maximum absolute disagreement 0.00e+00, so every
-   artifact this paper cites is now independently checkable. The re-run also
-   reproduced the original numbers **bit-exactly**: depth, rank, selectivity,
-   random-subspace p95 and the 0.999899 control-tag principal angle all agree to
-   0.000000, confirming the protocol is deterministic and that the refactor
-   changed nothing behavioural.
-7. **We do not explain the asymmetry.** Why refusal is writable and
-   hallucination, deception and scope-conflict are not is unresolved here.
+The consequence is methodological. Reporting "we ablated the direction and
+behaviour did not change" constrains the ablation operator, not the direction.
+Papers should state which operator was used, because the two are not
+interchangeable and on this direction they give opposite answers.
 
 ---
 
-## 7. Reproducibility
+## 7. The reported rate is a function of the coefficient
 
-Every reported statistic was recomputed from stored row-level margins by
+Same direction, same model, same protocol, same rows. What a single-dose paper
+would report:
+
+| Coefficient | Reported correction rate |
+|---|---:|
+| 1σ | 5.5% |
+| 2σ | 21.1% |
+| 3σ | 45.3% |
+| 4σ | 67.2% |
+| 6σ | 75.0% |
+
+Any of these is defensible as "the" correction rate under a protocol that fixes
+one coefficient. The 0% reported for hallucination in 7 of 7 models is consistent
+with an under-dosed coefficient, and we cannot check because the coefficient is
+not reported. We are not claiming those results are wrong; we are claiming they
+are **not interpretable without the dose curve**.
+
+---
+
+## 8. Responsiveness is boundary position, and it is one law
+
+Per-row gain — the slope of margin against dose — varies threefold (mean 0.865,
+SD 0.235, CV 0.272). The question is what explains it.
+
+Fitting slopes in the near-linear window ±2σ, conflict rows give +0.797 and
+reachable rows +1.503, a difference of −0.706, 95% CI [−0.802, −0.611]. So gain
+differs by condition. But condition turns out to be a proxy:
+
+| Model | R² | Incremental test |
+|---|---:|---|
+| Baseline margin only | 0.894 | — |
+| Margin + condition | 0.898 | F(1,125) = 3.79, **p = 0.054** |
+| Condition only | 0.618 | — |
+| Condition + margin | 0.898 | F(1,125) = 341.5, p ≈ 0 |
+
+**Condition adds nothing beyond baseline margin; margin adds a great deal beyond
+condition.** Responsiveness is a function of position relative to the decision
+boundary — one law, not two regimes. Rows far from the boundary are about twice as
+responsive as rows near it (slope against baseline margin, Pearson −0.944).
+
+This matters mechanistically. If the readout were linear in the residual stream,
+every row would share the slope r·(W_decline − W_read) exactly. The threefold
+variation is therefore produced by the sixteen nonlinear layers downstream of the
+intervention. **Boundary position sets both the distance to travel and the gain
+per unit dose**, and the two compound.
+
+We checked the obvious confound rather than assuming it away. Conflict rows do fit
+the linear model worse than reachable rows (per-row R² 0.876 vs 0.963,
+Mann-Whitney p < 1e-4), so full-range slope estimates are biased. Restricting to
+the near-baseline window where that bias cannot differ much **doubles** the
+estimated gap (−0.347 full-range → −0.706 windowed) rather than removing it.
+
+---
+
+## 9. How we reached the wrong conclusion, and why that is evidence
+
+The earlier version of this draft argued that our variable was a fourth instance
+of the detection–correction asymmetry, with a saturating-partial-writability
+refinement. That was wrong, and the way it was wrong is the paper's best argument.
+
+We had run four intervention experiments, all using removal. We had a
+preregistered dose sweep, matched-dose random controls, a coherence gate, greedy
+generation probes, and a per-row boundary analysis — more controls than any of the
+three papers we were positioning against. We still concluded read-only, about a
+direction that moves 100% of decisions under a different operator at a dose the
+model tolerates comfortably.
+
+No amount of rigor *within* a fixed operator and dose range would have caught
+this. Only varying the operator caught it. That is the argument for requiring
+operator and dose disclosure rather than better statistics.
+
+Our preregistered decision rule was also mis-specified, and we report it as
+returned. It tested condition as the heterogeneity variable and fired
+`HETEROGENEOUS_RESPONSIVENESS`; the follow-up regression shows condition is a
+proxy for margin and the correct reading is a single margin law. The rule was
+frozen before the run, so we report both its output and the analysis that
+supersedes it.
+
+---
+
+## 10. Recommended minimum reporting
+
+For any claim that a direction is or is not a control point:
+
+1. **The operator**, stated explicitly — mean-ablation, zero-ablation, reflection,
+   or signed addition — since these are not interchangeable.
+2. **A dose sweep**, not a single coefficient, with units defined relative to the
+   natural variation of the projection.
+3. **Matched-dose random controls.** A direction that flips decisions only at
+   doses where random directions also flip them has demonstrated nothing.
+4. **A coherence gate** with a stated threshold, plus raw generations. A 100%
+   attenuation figure on a model emitting `avenavenalemalem` will otherwise be
+   reported as a success.
+5. **Per-row baseline margins**, since aggregate correction rates confound
+   distance to the boundary with responsiveness, and those have different
+   implications.
+
+---
+
+## 11. Limitations
+
+1. **One model, one construct, synthetic scenarios.** Llama-3.1-8B-Instruct on a
+   synthetic permission-scope lookup.
+2. **We cannot check other papers' coefficients** because they are not reported.
+   Our claim that published nulls may be under-dosed is a hypothesis with a
+   mechanism, not a demonstrated refutation of any specific result.
+3. **The additive intervention was applied at one layer** (16, all positions)
+   while the removal experiments spanned all layers, so the comparison varies
+   operator and layer scope together. The direction of the effect is not in doubt
+   — removal at *all* layers flipped nothing while addition at *one* layer flipped
+   everything — but the decomposition is not clean, and a layer-matched removal
+   sweep would tighten it. This is the first thing we would run next.
+4. **The forced binary outcome.** A margin with an empty band around the boundary
+   is a coarse behavioural instrument; a task with real action variation would
+   test control more convincingly.
+5. **Not emergent behaviour.** Scope conflict under instruction, not strategic
+   misalignment.
+6. **Known generator defect, fixed forward only.** `control_label` was a
+   deterministic function of `pair_index` parity, which also fixes in-scope slot
+   assignment and catalogue ordering, so the catalogue control tag was confounded
+   with scope structure (first principal angle cosine 0.9999 against the conflict
+   subspace). The selectivity result in §3 therefore rests on the family null and
+   both orthogonalised nulls, not the raw control-tag comparison. The generator is
+   fixed behind a mode flag and the validator now records
+   `control_label_parity_independent` in every audit, but committed artifacts
+   predate the fix.
+7. **Eight random draws** at all-position removal scope is a thin specificity
+   threshold; the additive experiment used four random directions across six doses.
+
+---
+
+## 12. Reproducibility
+
+All reported statistics were recomputed from stored row-level margins by
 independently written estimator code (`arm_g_audit.py`): 37 of 37 reproduce with
 maximum absolute disagreement 0.0. The layer-16 peak survives selection
-adjustment — bootstrapping the arg-max over 20,000 stratified resamples selects
-it in 100.0% of draws, and all five Bonferroni-adjusted pairwise contrasts
-exclude zero. The layer ordering is not explained by intervention magnitude:
-Spearman correlation between effect and displacement across layers is −0.086,
-and layers 18–19 receive larger perturbations relative to residual-stream norm
-than layer 16 while producing smaller effects.
+adjustment — bootstrapping the arg-max over 20,000 stratified resamples selects it
+in 100.0% of draws, with all five Bonferroni-adjusted pairwise contrasts excluding
+zero. The layer ordering is not explained by intervention magnitude (Spearman
+between effect and displacement −0.086; layers 18–19 receive larger perturbations
+relative to residual-stream norm than layer 16 and produce smaller effects).
 
-Protocols were frozen with preregistered decision rules before each run; all
-five scripts carry deterministic self-tests; artifacts include run configs,
-manifests and per-row margins.
+The layer-16 protocol was re-run end to end after adding per-row margin storage
+and reproduced **bit-exactly**: all seven depth attenuations, three ranks, four
+nulls, the random p95 and the 0.999899 principal angle agree to 0.000000, and all
+fourteen reported attenuations recompute from row level with maximum absolute
+disagreement 0.00e+00.
+
+Protocols were frozen with preregistered decision rules before each run; all six
+scripts carry deterministic self-tests, including one that constructs the
+shared-slope case and asserts the naive dose-to-flip regression returns R² = 1.0
+exactly, so that circularity is demonstrated rather than argued.
 
 ---
 
-## 8. What we claim and what we do not
+## 13. What we claim and what we do not
 
-**We claim:** a fourth independent construct shows the detection–correction
-asymmetry; the asymmetry has dose structure that binary reporting hides; the
-structure is saturating partial writability rather than absence of control; and
-scaled interventions produce success-shaped artifacts that require matched-dose
-controls and a coherence gate to detect.
+**We claim:** operator choice and coefficient choice each independently determine
+whether a direction is reported as a control point; on the direction we swept,
+removal at all layers flips nothing while single-layer addition flips everything
+with coherence intact; the reported correction rate for one direction spans
+5.5%–75.0% by coefficient alone; and responsiveness is governed by distance to the
+decision boundary rather than by experimental condition, with the variation
+arising from downstream nonlinearity.
 
-**We do not claim:** that the variable controls behaviour; that the result
-generalises beyond this model or task; that we know why some directions are
-writable; or that our effect sizes are large. The largest coherent intervention
-we can apply moves about 5% of decisions.
+**We do not claim:** that any published null is wrong; that the result generalises
+beyond this model, construct or layer; that our behavioural outcome is a realistic
+proxy for agentic behaviour; or that we have characterised what makes a direction
+writable in general. We have shown that two commonly-reported protocols cannot
+answer that question as currently specified.
