@@ -566,8 +566,14 @@ def main() -> None:
     }
 
     score = partial(ablate_and_score, model, tokenizer)
+    condition_margins: dict[str, np.ndarray] = {}
 
-    def run_one(layer: int, basis: np.ndarray, seed: int) -> dict[str, Any]:
+    def run_one(
+        layer: int,
+        basis: np.ndarray,
+        seed: int,
+        name: str | None = None,
+    ) -> dict[str, Any]:
         margins, centers, displacement = score(
             eval_rows,
             layer,
@@ -586,12 +592,17 @@ def main() -> None:
             / np.linalg.norm(evaluation_states[layer], axis=1).mean()
         )
         entry["choice_summary"] = semantic_choice_summary(margins, eval_rows)
+        if name is not None:
+            condition_margins[name] = margins
         return entry
 
     depth = {}
     for layer in DEPTH_LAYERS:
         depth[str(layer)] = run_one(
-            layer, bases["conflict"][layer][:, :PRIMARY_RANK], EVAL_SEED + layer
+            layer,
+            bases["conflict"][layer][:, :PRIMARY_RANK],
+            EVAL_SEED + layer,
+            f"depth_layer{layer}",
         )
 
     depth_random = {}
@@ -615,19 +626,23 @@ def main() -> None:
     ranks = {}
     for rank in RANKS:
         basis = bases["conflict"][FOCUS_LAYER][:, :rank]
-        ranks[str(rank)] = run_one(FOCUS_LAYER, basis, EVAL_SEED + 200 + rank)
+        ranks[str(rank)] = run_one(
+            FOCUS_LAYER, basis, EVAL_SEED + 200 + rank, f"rank{rank}"
+        )
 
     conflict_basis = bases["conflict"][FOCUS_LAYER][:, :PRIMARY_RANK]
     nulls = {}
     nulls_orthogonalized = {}
     for name in NULL_CONTRASTS:
         basis = bases[name][FOCUS_LAYER][:, :PRIMARY_RANK]
-        nulls[name] = run_one(FOCUS_LAYER, basis, EVAL_SEED + 300)
+        nulls[name] = run_one(FOCUS_LAYER, basis, EVAL_SEED + 300, f"null_{name}")
         nulls[name]["principal_angle_cosines_with_conflict"] = principal_angle_cosines(
             basis, conflict_basis
         )
         disjoint = orthogonalized_subspace(basis, conflict_basis)
-        nulls_orthogonalized[name] = run_one(FOCUS_LAYER, disjoint, EVAL_SEED + 350)
+        nulls_orthogonalized[name] = run_one(
+            FOCUS_LAYER, disjoint, EVAL_SEED + 350, f"null_{name}_orthogonalized"
+        )
         nulls_orthogonalized[name]["max_abs_overlap_with_conflict"] = float(
             np.max(np.abs(conflict_basis.T @ disjoint))
         )
@@ -702,6 +717,10 @@ def main() -> None:
                 "residual_norm_by_layer": {
                     str(layer): float(np.linalg.norm(evaluation_states[layer][index]))
                     for layer in DEPTH_LAYERS
+                },
+                "ablated_semantic_margins": {
+                    key: float(values[index])
+                    for key, values in condition_margins.items()
                 },
                 "conflict_projections_at_focus": (
                     evaluation_states[FOCUS_LAYER][index]

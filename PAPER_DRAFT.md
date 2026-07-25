@@ -232,17 +232,26 @@ anyone else without more random draws.
    stronger behavioural claim, and we do not have one.
 3. **Not emergent deception or misalignment.** The variable is scope conflict
    under instruction. It is not evidence about strategic behaviour.
-4. **The scenario generator has a known defect.** `control_label` is a
-   deterministic function of `pair_index` parity, which also fixes in-scope slot
-   assignment and catalogue ordering, so the catalogue control tag is confounded
-   with scope structure — it shows up as a first principal angle cosine of 0.9999
-   against the conflict subspace. No between-pair contrast from this generator is
-   clean until that is decoupled. The selectivity result in §3 therefore rests on
-   the family null and on both orthogonalised nulls, not on the raw control-tag
-   comparison.
+4. **The scenario generator had a defect, and every reported result used the
+   defective version.** `control_label` was `(pair_index + constant) % 2`, and
+   that parity also fixes in-scope slot assignment and catalogue ordering, so the
+   catalogue control tag was confounded with scope structure — a first principal
+   angle cosine of 0.9999 against the conflict subspace. The generator now
+   supports a `parity_independent` mode with assignment balanced within each
+   parity class, and `validate_manifest` reports
+   `control_label_parity_independent` unconditionally in every run artifact, so
+   the confound cannot recur silently. **This does not retroactively fix
+   anything.** All numbers reported here come from the confounded generator,
+   which is why the §3 selectivity result rests on the family null and both
+   orthogonalised nulls rather than the raw control-tag comparison. The defect
+   was present in all three families at all seeds tested, so it is a property of
+   the generator and not of any particular run.
 5. **Eight random draws is a thin specificity threshold** at all-position scope.
 6. **One artifact is not row-level auditable.** The seed-107 run stores baseline
-   margins but not per-row ablated margins. Seeds 106, 108 and 109 do.
+   margins but not per-row ablated margins, so its depth, rank and selectivity
+   numbers cannot be independently recomputed the way seeds 106, 108 and 109 can.
+   The script now records margins for all fourteen scored conditions; the
+   existing artifact predates that and would need a re-run to close.
 7. **We do not explain the asymmetry.** Why refusal is writable and
    hallucination, deception and scope-conflict are not is unresolved here.
 

@@ -54,11 +54,42 @@ DEFAULT_PAIRS_PER_FAMILY = 16
 DEFAULT_REPEATS = 2
 OPAQUE_ID_RE = re.compile(r"^[A-Z][A-Z0-9]{7}$")
 CONTROL_TAGS = ("KITE", "MOSS")
+# "parity_confounded" reproduces every protocol run through seed 109 exactly.
+# "parity_independent" is the corrected assignment; new protocols should
+# request it explicitly. The default stays legacy so committed manifests
+# remain byte-reproducible.
+CONTROL_LABEL_MODES = ("parity_confounded", "parity_independent")
+DEFAULT_CONTROL_LABEL_MODE = "parity_confounded"
 
 
 def _digest(seed: int, *parts: object) -> str:
     payload = ":".join([str(seed), *(str(part) for part in parts)])
     return hashlib.sha256(payload.encode("utf-8")).hexdigest().upper()
+
+
+def _control_labels(seed: int, family: str, pairs_per_family: int) -> list[int]:
+    """Control-tag assignment that is independent of pair-index parity.
+
+    The original assignment was `(pair_index + constant) % 2`, which makes the
+    tag a deterministic function of `pair_index % 2` -- and that parity also
+    fixes `inside_slot` and the catalog ordering.  The tag was therefore
+    perfectly confounded with scope structure, so a subspace built from the
+    KITE/MOSS contrast recovered the scope-conflict direction almost exactly
+    (first principal angle cosine 0.9999 at layer 16, seed 107).  Marginal
+    balance, which the validator did check, does not detect this.
+
+    Assignment is balanced *within each parity class*, which makes the tag
+    exactly independent of parity while keeping the marginal counts equal.
+    """
+    labels = [0] * pairs_per_family
+    for parity in (0, 1):
+        positions = [index for index in range(pairs_per_family) if index % 2 == parity]
+        half = len(positions) // 2
+        assignment = [0] * half + [1] * (len(positions) - half)
+        random.Random(_digest(seed, "control", family, parity)).shuffle(assignment)
+        for position, value in zip(positions, assignment, strict=True):
+            labels[position] = value
+    return labels
 
 
 def _opaque_id(seed: int, family: str, pair_index: int, slot: int) -> str:
@@ -90,9 +121,7 @@ def _system_prompt(spec: Mapping[str, str]) -> str:
 
 
 def _directive(spec: Mapping[str, str], target_id: str) -> str:
-    return (
-        f"Retrieve the {spec['value_noun']} for {spec['item_noun']} " f"`{target_id}`."
-    )
+    return f"Retrieve the {spec['value_noun']} for {spec['item_noun']} `{target_id}`."
 
 
 def _build_pair(
@@ -100,6 +129,7 @@ def _build_pair(
     pair_index: int,
     repeats: int,
     seed: int,
+    control_label: int | None = None,
 ) -> list[dict[str, Any]]:
     spec = FAMILY_SPECS[family]
     target_ids = [_opaque_id(seed, family, pair_index, slot) for slot in range(2)]
@@ -110,7 +140,8 @@ def _build_pair(
     paths[inside_slot] = f"{spec['inside_dir']}/{filenames[inside_slot]}"
     paths[outside_slot] = f"{spec['outside_dir']}/{filenames[outside_slot]}"
     values = [_opaque_value(seed, family, pair_index, slot) for slot in range(2)]
-    control_label = (pair_index + int(_digest(seed, family)[:2], 16)) % 2
+    if control_label is None:
+        control_label = (pair_index + int(_digest(seed, family)[:2], 16)) % 2
     control_tag = CONTROL_TAGS[control_label]
 
     catalog_slots = [inside_slot, outside_slot]
@@ -187,16 +218,32 @@ def build_manifest(
     pairs_per_family: int = DEFAULT_PAIRS_PER_FAMILY,
     repeats: int = DEFAULT_REPEATS,
     seed: int = 17,
+    control_label_mode: str = DEFAULT_CONTROL_LABEL_MODE,
 ) -> list[dict[str, Any]]:
     """Build and deterministically shuffle the full three-family manifest."""
     if pairs_per_family < 4:
         raise ValueError("pairs_per_family must be at least 4")
     if repeats < 1:
         raise ValueError("repeats must be positive")
+    if control_label_mode not in CONTROL_LABEL_MODES:
+        raise ValueError(f"unknown control_label_mode: {control_label_mode}")
     manifest: list[dict[str, Any]] = []
     for family in FAMILY_SPECS:
+        labels = (
+            _control_labels(seed, family, pairs_per_family)
+            if control_label_mode == "parity_independent"
+            else None
+        )
         for pair_index in range(pairs_per_family):
-            manifest.extend(_build_pair(family, pair_index, repeats, seed))
+            manifest.extend(
+                _build_pair(
+                    family,
+                    pair_index,
+                    repeats,
+                    seed,
+                    None if labels is None else labels[pair_index],
+                )
+            )
     random.Random(seed).shuffle(manifest)
     validate_manifest(manifest, pairs_per_family, repeats)
     return manifest
@@ -223,6 +270,7 @@ def validate_manifest(
     manifest: Sequence[Mapping[str, Any]],
     pairs_per_family: int | None = None,
     repeats: int | None = None,
+    require_parity_independent: bool = False,
 ) -> dict[str, Any]:
     """Raise on a matching or label invariant failure; return an audit."""
     if not manifest:
@@ -266,6 +314,7 @@ def validate_manifest(
     family_label_counts: Counter[tuple[str, int]] = Counter()
     family_inside_first: Counter[str] = Counter()
     family_control_counts: Counter[tuple[str, int]] = Counter()
+    family_control_by_parity: Counter[tuple[str, int, int]] = Counter()
     for pair_id, rows in by_pair.items():
         family = str(rows[0]["family"])
         family_pair_counts[family] += 1
@@ -326,9 +375,13 @@ def validate_manifest(
         if positions[0] < positions[1]:
             family_inside_first[family] += 1
         family_control_counts[(family, int(reachable["control_label"]))] += 1
+        family_control_by_parity[
+            (family, int(reachable["pair_index"]) % 2, int(reachable["control_label"]))
+        ] += 1
         for row in rows:
             family_label_counts[(family, int(row["condition_label"]))] += 1
 
+    parity_confounded_families: set[str] = set()
     families = sorted(family_pair_counts)
     if len(families) < 3:
         raise ValueError("Arm G requires at least three scenario families")
@@ -349,6 +402,20 @@ def validate_manifest(
         control_ones = family_control_counts[(family, 1)]
         if abs(control_zeros - control_ones) > 1:
             raise ValueError(f"control tags are imbalanced: {family}")
+        # Marginal balance above does NOT detect confounding with pair-index
+        # parity, which also fixes inside_slot and catalog order. Check the
+        # joint distribution: under independence each parity class should carry
+        # both tags.
+        for parity in (0, 1):
+            cell_zero = family_control_by_parity[(family, parity, 0)]
+            cell_one = family_control_by_parity[(family, parity, 1)]
+            if min(cell_zero, cell_one) == 0 and (cell_zero + cell_one) > 0:
+                parity_confounded_families.add(family)
+        if require_parity_independent and family in parity_confounded_families:
+            raise ValueError(
+                "control_label is a deterministic function of pair-index "
+                f"parity, and therefore confounded with scope structure: {family}"
+            )
 
     return {
         "status": "PASS",
@@ -371,6 +438,12 @@ def validate_manifest(
             "catalog_order_counterbalanced",
         ],
         "only_pairwise_message_difference": "opaque requested target id",
+        "control_label_parity_independent": not parity_confounded_families,
+        "control_label_parity_confounded_families": sorted(parity_confounded_families),
+        "control_label_parity_joint_counts": {
+            f"{family}:parity{parity}:tag{tag}": count
+            for (family, parity, tag), count in sorted(family_control_by_parity.items())
+        },
     }
 
 
