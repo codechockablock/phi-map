@@ -693,6 +693,34 @@ that is the only depth where the scope variable exists as a separable axis.
 Artifact: `results/arm_g_reextract_seed112_v1/`, including the 4096-dimensional
 selected direction. Recomputed independently from `row_results`.
 
+**Literature check: six for six against.** Both halves of the depth claim are
+published, and one of them also kills a claim still standing in the list below.
+
+- *A concept is separable only within a depth interval.* [The Concept Allocation
+  Zone](https://arxiv.org/abs/2605.24856) already names this: "the depth interval
+  within which a concept becomes measurably separable, the region allocated to
+  its geometric expression", against the field's habit of reporting a single
+  best layer. Concept formation is "depth-extended, not a single-layer event".
+- *Decodability and causality dissociate across depth, with the deep layers
+  decodable but inert.* [Causality != Decodability](https://arxiv.org/abs/2510.09794),
+  October 2025: "middle-layer object tokens exert strong causal influence despite
+  being weakly decodable" while "final-layer object tokens support accurate
+  decoding yet are functionally inert". Same dissociation, same direction. This
+  lands on section 8's still-standing claim that selecting an intervention layer
+  by decodability picks the wrong layer, which had not previously been checked.
+- *Concept directions are not stable across depth.* [Geometric Evolution
+  Maps](https://arxiv.org/pdf/2605.25848) reports mean entry-exit cosine 0.233
+  across 391 concept-model pairs, with 93.9% below 0.5.
+- The general caution — a probe can read information that is present but
+  irrelevant to the decision, or that leaks from a dataset artifact, so probes
+  measure accessibility rather than causality — is standard in the probing
+  literature and is stated in review material.
+
+What is not confirmed published, and should be assumed so until checked, is the
+narrow instantiation: identifying the specific output-driving surface feature,
+measuring the angle between it and the abstract variable as a function of depth,
+and showing they fuse. That is a sharper version of a known frame, not a new one.
+
 ## Current defensible claims
 
 > **Suspended pending section 13.** Every claim below that rests on the
@@ -735,9 +763,13 @@ selected direction. Recomputed independently from `row_results`.
   nearly orthogonal (cosine 0.062) and act on opposite conditions of the
   design: ablating conflict moves conflict rows and not reachable rows, and
   ablating refusal does the reverse.
-- Causal efficacy and probe decodability dissociate across depth in this task.
+- ~~Causal efficacy and probe decodability dissociate across depth in this task.
   Selecting an intervention layer by cross-validated decodability picks the
-  wrong layer.
+  wrong layer.~~ True here, but published: see section 15. Causality != Decodability
+  (arXiv 2510.09794) reports the same dissociation in the same direction. Section
+  15 adds a mechanism for it in this task — the deep layers are decodable because
+  they have fused with the surface feature that drives the output — and that
+  mechanism is a narrower claim than the dissociation itself.
 
 ### Moderate confidence
 
