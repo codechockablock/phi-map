@@ -95,7 +95,7 @@ def analyse(name: str, rows: list, metric: str) -> dict:
     # constant, then advantage ~ c - black and correlating advantage against
     # black is guaranteed to give r ~ -1 for reasons that have nothing to do
     # with regimes. The logit and headroom controls do NOT address this.
-    print(f"\n  variance asymmetry (the correlation's real driver, if any):")
+    print("\n  variance asymmetry (the correlation's real driver, if any):")
     print(
         f"    black-box  sd = {base.std(ddof=1):.4f}   range {base.max() - base.min():.3f}"
     )
@@ -131,7 +131,7 @@ def analyse(name: str, rows: list, metric: str) -> dict:
 def main() -> None:
     print(__doc__)
     analyse("Parrack et al. 2026 -- 5 datasets", PARRACK, "AUROC")
-    dg = analyse(
+    analyse(
         "DeceptGuard 2026 -- 12 deception categories", DECEPTGUARD, "pAUROC@FPR<=0.20"
     )
 
@@ -163,7 +163,7 @@ def main() -> None:
 
     print(f"\n{'=' * 74}\nBottom line\n{'=' * 74}")
     print(
-        f"  Parrack   mean {dg and ''}{np.mean([r[1] - r[2] for r in PARRACK]):+.4f}, "
+        f"  Parrack   mean {np.mean([r[1] - r[2] for r in PARRACK]):+.4f}, "
         f"but spans {min(r[1] - r[2] for r in PARRACK):+.3f} to {max(r[1] - r[2] for r in PARRACK):+.3f}"
     )
     print(
