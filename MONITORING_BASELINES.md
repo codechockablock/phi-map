@@ -212,17 +212,79 @@ channels as competing for one budget rather than as separate quantities.
 2. **Moderator.** The advantage is predicted by how much of the label is
    recoverable from public tokens. Measurable directly by training a recovery
    model on public tokens alone.
-3. **Retrospective, conditioned on regime.** Within regime 1, reported
-   advantages should correlate with the weakness of the baseline each paper
-   chose. Regime 2 results should show no such correlation, because monitor
-   capability is not the binding constraint there. **Testable from published
-   numbers with no compute**, and the cheapest real contribution available —
-   but the regime classification has to be done first and honestly, or the
-   correlation is trivially manufacturable by dataset selection.
+3. ~~**Retrospective correlation.**~~ Tested in `regime_analysis.py` on the
+   per-dataset numbers from both papers. **The continuous form does not
+   survive**, for two different reasons:
+   - DeceptGuard gives r = -0.985 (p < 0.001), which looks decisive and is
+     mostly an artifact. The white-box arm is nearly constant across the 12
+     categories (sd 0.0145, range 0.901-0.947) while the black-box arm varies
+     four times as much (sd 0.0597, range 0.718-0.947). With
+     `advantage = white - black` and `white` near-constant, `advantage ~ c -
+     black` and the correlation is mechanically forced. It survives logit and
+     headroom controls because those address ceiling compression, not variance
+     asymmetry.
+   - Parrack has comparable variance in both arms (ratio 1.10x, so not forced)
+     but only five datasets: raw r = -0.699 is not significant (p = 0.189) and
+     **flips to +0.113 under logit transform**, driven by Insider Trading at
+     0.999 where logit explodes. Underpowered and sign-unstable.
+
+   Neither dataset supports the continuous claim. Reporting r = -0.985 without
+   the variance check would have been the most embarrassing available error.
 4. **Regime is diagnosable.** Whether a deployment sits in regime 1 or 2 is
    measurable by asking whether a strong monitor recovers the label from outputs
-   alone. If that is right, it is more useful than any single advantage number,
-   because it tells a practitioner which kind of monitoring can work at all.
+   alone. Note this is close to circular as a *definition* — regime 2 just is
+   "output monitors fail" — so its only real content is practical: it is a
+   cheap decision procedure that tells you whether to build a probe pipeline at
+   all, not a discovery. Stated honestly, that is modest.
+
+## What the variance asymmetry actually shows
+
+The failed correlation left behind something better. The two arms behave
+qualitatively differently across deception types:
+
+| | black-box | white-box |
+|---|---:|---:|
+| DeceptGuard, sd across 12 categories | 0.0597 | **0.0145** |
+| DeceptGuard, range | 0.718–0.947 | **0.901–0.947** |
+
+**The probe is nearly invariant to deception type; the behavioural monitor is
+not.** That is the two-regime claim stated as a property of the monitors rather
+than as a correlation, and the variance asymmetry is direct evidence for it
+instead of a tautological consequence of it. The advantage moves because the
+*baseline* moves, and the baseline moves because some deception types are
+legible in output and others are not.
+
+Parrack's per-dataset numbers order exactly as that predicts, using their own
+stated reason for the Backdoors result:
+
+| Label recoverable from public tokens? | Mean advantage | Datasets |
+|---|---:|---|
+| no | **+0.138** | AI Liar +0.144, Dilution +0.132 |
+| partial | +0.043 | Insider Trading +0.065, Sandbagging +0.022 |
+| yes | **−0.055** | Backdoors −0.055 |
+
+Monotone, and n = 5, so indicative only. But the direction is the regime
+prediction and it comes from the higher-quality source.
+
+## The defensible contribution
+
+Not a correlation and not a crossing point. This:
+
+> **A single mean white-box advantage is not a comparable quantity across
+> papers, because it is dominated by the baseline-difficulty mix of whichever
+> datasets were chosen.**
+
+Quantified in both sources:
+
+- Parrack: mean **+0.062**, spanning **−0.055 to +0.144**. The spread is 3.2x
+  the mean and includes a sign change.
+- DeceptGuard: mean **+0.104**, spanning **+0.042 to +0.183** — a 4.4x ratio
+  between the smallest and largest category.
+
+Both papers lead with the mean. Neither mean tells a reader whether a probe
+would help in their setting, because the answer depends on which regime they
+are in, and the mean averages across regimes. That criticism is cheap to make,
+quantified, and does not depend on any of our own results being interesting.
 
 ## Why this is the right direction for this repo
 
