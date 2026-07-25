@@ -1,0 +1,43 @@
+{
+  "protocol": "ARM_G_REEXTRACT_V1",
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "source_seeds": [
+    101,
+    102
+  ],
+  "eval_seed": 112,
+  "sweep_layers": [
+    12,
+    14,
+    16,
+    17,
+    18,
+    20,
+    24,
+    27,
+    30
+  ],
+  "intervention": "none; baseline capture only",
+  "recipes": [
+    "order_averaged",
+    "legacy_recipe",
+    "order_main",
+    "order_difference",
+    "orthogonalized"
+  ],
+  "aggregation": "h(C,O) = mu + a*C + b*O + d*C*O. The within-scenario paired difference gives 2a + 2d*o, so averaging over both orders cancels d exactly and leaves the pure condition main effect. One order per pair, which a parity-locked generator forces, folds the requested-line effect into the direction",
+  "success_rule": "the orthogonalized direction must read the label at AUROC >= 0.9 while its order AUROC within each condition stays within 0.2 of chance, about 2.6 null SDs where the contaminated case sits at the 0.5 ceiling. The other four recipes are built from the same states as controls",
+  "pairs_per_family": 16,
+  "source_pairs_per_family": 48,
+  "bootstrap_repetitions": 400,
+  "read_position": "pre_action",
+  "prior_evidence": {
+    "source": "results/arm_g_order_crossover_seed111_v1, RESEARCH_ARC.md section 14",
+    "legacy_direction_label_auroc": 0.9431,
+    "legacy_direction_order_auroc_within_conflict": 1.0,
+    "crossover_condition_main_effect": 4.814,
+    "crossover_order_main_effect": -3.08,
+    "crossover_condition_x_order": -3.793,
+    "prediction": "order_averaged and legacy_recipe should be near-identical, since the parity assignment is balanced and neither estimate is biased, and both should be contaminated on order at the projection level in proportion to cos(a, d). Only `orthogonalized` should read the label while sitting near 0.5 on order within a condition"
+  }
+}

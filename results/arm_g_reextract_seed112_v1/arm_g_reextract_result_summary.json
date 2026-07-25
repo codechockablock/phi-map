@@ -1,0 +1,1783 @@
+{
+ "decision": "CLEAN_DIRECTION",
+ "decision_reasons": [
+  "before orthogonalization the condition direction reads catalog order within conflict at AUROC 1.0000, and the legacy aggregation at 1.0000 -- both unbiased estimates of the same axis, which is why the defect was never the estimator",
+  "orthogonalizing against the order main effect and the interaction is what makes the projections clean, and crossed source data is what makes those two estimable"
+ ],
+ "selected_layer": 16,
+ "layer_profile": {
+  "12": {
+   "order_averaged": {
+    "label_auroc": 0.60296630859375,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.6669921875,
+      "requested_line_auroc": 0.6669921875
+     },
+     "reachable": {
+      "order_auroc": 0.448974609375,
+      "requested_line_auroc": 0.551025390625
+     }
+    },
+    "order_contamination": 0.1669921875,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.5287353515625,
+       0.78179931640625
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.2609375,
+       0.60377197265625
+      ],
+      "covers_chance": true
+     }
+    },
+    "clean": false
+   },
+   "legacy_recipe": {
+    "label_auroc": 0.58673095703125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.630859375,
+      "requested_line_auroc": 0.630859375
+     },
+     "reachable": {
+      "order_auroc": 0.462158203125,
+      "requested_line_auroc": 0.537841796875
+     }
+    },
+    "order_contamination": 0.130859375,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.341778564453125,
+       0.8490417480468748
+      ],
+      "covers_chance": true
+     },
+     "reachable": {
+      "ci_95": [
+       0.146661376953125,
+       0.8072265624999999
+      ],
+      "covers_chance": true
+     }
+    },
+    "clean": false
+   },
+   "order_main": {
+    "label_auroc": 0.46661376953125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.451416015625,
+      "requested_line_auroc": 0.451416015625
+     },
+     "reachable": {
+      "order_auroc": 0.377197265625,
+      "requested_line_auroc": 0.622802734375
+     }
+    },
+    "order_contamination": 0.122802734375,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.410882568359375,
+       0.48243408203125
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.322711181640625,
+       0.41432495117187496
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_difference": {
+    "label_auroc": 0.5206298828125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.24853515625,
+      "requested_line_auroc": 0.24853515625
+     },
+     "reachable": {
+      "order_auroc": 0.822509765625,
+      "requested_line_auroc": 0.177490234375
+     }
+    },
+    "order_contamination": 0.322509765625,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.20040283203125,
+       0.26611328125
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.780755615234375,
+       0.883062744140625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "orthogonalized": {
+    "label_auroc": 0.6173095703125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.7060546875,
+      "requested_line_auroc": 0.7060546875
+     },
+     "reachable": {
+      "order_auroc": 0.452880859375,
+      "requested_line_auroc": 0.547119140625
+     }
+    },
+    "order_contamination": 0.2060546875,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.542645263671875,
+       0.8010986328124999
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.251849365234375,
+       0.5941406249999999
+      ],
+      "covers_chance": true
+     }
+    },
+    "clean": false
+   }
+  },
+  "14": {
+   "order_averaged": {
+    "label_auroc": 0.8814697265625,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.912353515625,
+      "requested_line_auroc": 0.912353515625
+     },
+     "reachable": {
+      "order_auroc": 0.72119140625,
+      "requested_line_auroc": 0.27880859375
+     }
+    },
+    "order_contamination": 0.412353515625,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.704095458984375,
+       0.99951171875
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.459954833984375,
+       0.8167175292968749
+      ],
+      "covers_chance": true
+     }
+    },
+    "clean": false
+   },
+   "legacy_recipe": {
+    "label_auroc": 0.879150390625,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.900390625,
+      "requested_line_auroc": 0.900390625
+     },
+     "reachable": {
+      "order_auroc": 0.719970703125,
+      "requested_line_auroc": 0.280029296875
+     }
+    },
+    "order_contamination": 0.400390625,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.659661865234375,
+       0.988043212890625
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.3524658203125,
+       0.95
+      ],
+      "covers_chance": true
+     }
+    },
+    "clean": false
+   },
+   "order_main": {
+    "label_auroc": 0.3353271484375,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.119873046875,
+      "requested_line_auroc": 0.119873046875
+     },
+     "reachable": {
+      "order_auroc": 0.30615234375,
+      "requested_line_auroc": 0.69384765625
+     }
+    },
+    "order_contamination": 0.380126953125,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.053887939453125006,
+       0.20411376953125
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.26143798828125,
+       0.38857421874999987
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_difference": {
+    "label_auroc": 0.430908203125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.264404296875,
+      "requested_line_auroc": 0.264404296875
+     },
+     "reachable": {
+      "order_auroc": 0.7255859375,
+      "requested_line_auroc": 0.2744140625
+     }
+    },
+    "order_contamination": 0.235595703125,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.235308837890625,
+       0.29420166015625
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.6957763671875,
+       0.749267578125
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "orthogonalized": {
+    "label_auroc": 0.901123046875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.869140625,
+      "requested_line_auroc": 0.869140625
+     },
+     "reachable": {
+      "order_auroc": 0.80126953125,
+      "requested_line_auroc": 0.19873046875
+     }
+    },
+    "order_contamination": 0.369140625,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.666217041015625,
+       0.99317626953125
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.472869873046875,
+       0.879205322265625
+      ],
+      "covers_chance": true
+     }
+    },
+    "clean": false
+   }
+  },
+  "16": {
+   "order_averaged": {
+    "label_auroc": 0.93310546875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 1.0,
+      "requested_line_auroc": 1.0
+     },
+     "reachable": {
+      "order_auroc": 0.952392578125,
+      "requested_line_auroc": 0.047607421875
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       1.0,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.923321533203125,
+       0.98170166015625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "legacy_recipe": {
+    "label_auroc": 0.9324951171875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 1.0,
+      "requested_line_auroc": 1.0
+     },
+     "reachable": {
+      "order_auroc": 0.9541015625,
+      "requested_line_auroc": 0.0458984375
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       1.0,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.91767578125,
+       0.987060546875
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_main": {
+    "label_auroc": 0.0943603515625,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0,
+      "requested_line_auroc": 0.0
+     },
+     "reachable": {
+      "order_auroc": 0.01953125,
+      "requested_line_auroc": 0.98046875
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.0021911621093750003,
+       0.03960571289062495
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_difference": {
+    "label_auroc": 0.07940673828125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0,
+      "requested_line_auroc": 0.0
+     },
+     "reachable": {
+      "order_auroc": 0.236328125,
+      "requested_line_auroc": 0.763671875
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.17403564453125,
+       0.29791259765624994
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "orthogonalized": {
+    "label_auroc": 0.9969482421875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.6337890625,
+      "requested_line_auroc": 0.6337890625
+     },
+     "reachable": {
+      "order_auroc": 0.33203125,
+      "requested_line_auroc": 0.66796875
+     }
+    },
+    "order_contamination": 0.16796875,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.35418701171875,
+       0.8843444824218749
+      ],
+      "covers_chance": true
+     },
+     "reachable": {
+      "ci_95": [
+       0.20250244140625,
+       0.49962768554687487
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": true
+   }
+  },
+  "17": {
+   "order_averaged": {
+    "label_auroc": 0.9537353515625,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 1.0,
+      "requested_line_auroc": 1.0
+     },
+     "reachable": {
+      "order_auroc": 0.9384765625,
+      "requested_line_auroc": 0.0615234375
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       1.0,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.9054931640625,
+       0.96802978515625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "legacy_recipe": {
+    "label_auroc": 0.95245361328125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 1.0,
+      "requested_line_auroc": 1.0
+     },
+     "reachable": {
+      "order_auroc": 0.94140625,
+      "requested_line_auroc": 0.05859375
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       1.0,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.89886474609375,
+       0.97315673828125
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_main": {
+    "label_auroc": 0.06524658203125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0,
+      "requested_line_auroc": 0.0
+     },
+     "reachable": {
+      "order_auroc": 0.035400390625,
+      "requested_line_auroc": 0.964599609375
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.01097412109375,
+       0.061773681640624994
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_difference": {
+    "label_auroc": 0.0538330078125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0,
+      "requested_line_auroc": 0.0
+     },
+     "reachable": {
+      "order_auroc": 0.2021484375,
+      "requested_line_auroc": 0.7978515625
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.14619140625,
+       0.2508422851562499
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "orthogonalized": {
+    "label_auroc": 0.9930419921875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.66650390625,
+      "requested_line_auroc": 0.66650390625
+     },
+     "reachable": {
+      "order_auroc": 0.380859375,
+      "requested_line_auroc": 0.619140625
+     }
+    },
+    "order_contamination": 0.16650390625,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.275848388671875,
+       0.911187744140625
+      ],
+      "covers_chance": true
+     },
+     "reachable": {
+      "ci_95": [
+       0.255810546875,
+       0.49366455078125
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": true
+   }
+  },
+  "18": {
+   "order_averaged": {
+    "label_auroc": 0.96441650390625,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 1.0,
+      "requested_line_auroc": 1.0
+     },
+     "reachable": {
+      "order_auroc": 0.853515625,
+      "requested_line_auroc": 0.146484375
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       1.0,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.81541748046875,
+       0.89918212890625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "legacy_recipe": {
+    "label_auroc": 0.9632568359375,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 1.0,
+      "requested_line_auroc": 1.0
+     },
+     "reachable": {
+      "order_auroc": 0.8544921875,
+      "requested_line_auroc": 0.1455078125
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       1.0,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.8136962890625,
+       0.908221435546875
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_main": {
+    "label_auroc": 0.03985595703125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0,
+      "requested_line_auroc": 0.0
+     },
+     "reachable": {
+      "order_auroc": 0.112060546875,
+      "requested_line_auroc": 0.887939453125
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.073480224609375,
+       0.150146484375
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_difference": {
+    "label_auroc": 0.033935546875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0,
+      "requested_line_auroc": 0.0
+     },
+     "reachable": {
+      "order_auroc": 0.23095703125,
+      "requested_line_auroc": 0.76904296875
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.174066162109375,
+       0.2790771484375
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "orthogonalized": {
+    "label_auroc": 0.6180419921875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.1181640625,
+      "requested_line_auroc": 0.1181640625
+     },
+     "reachable": {
+      "order_auroc": 0.34228515625,
+      "requested_line_auroc": 0.65771484375
+     }
+    },
+    "order_contamination": 0.3818359375,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.6368896484374998
+      ],
+      "covers_chance": true
+     },
+     "reachable": {
+      "ci_95": [
+       0.249713134765625,
+       0.413336181640625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   }
+  },
+  "20": {
+   "order_averaged": {
+    "label_auroc": 0.97894287109375,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 1.0,
+      "requested_line_auroc": 1.0
+     },
+     "reachable": {
+      "order_auroc": 0.889404296875,
+      "requested_line_auroc": 0.110595703125
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       1.0,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.845703125,
+       0.9337280273437498
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "legacy_recipe": {
+    "label_auroc": 0.97869873046875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 1.0,
+      "requested_line_auroc": 1.0
+     },
+     "reachable": {
+      "order_auroc": 0.89794921875,
+      "requested_line_auroc": 0.10205078125
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       1.0,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.849993896484375,
+       0.9460693359375
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_main": {
+    "label_auroc": 0.02313232421875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0,
+      "requested_line_auroc": 0.0
+     },
+     "reachable": {
+      "order_auroc": 0.069580078125,
+      "requested_line_auroc": 0.930419921875
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.034631347656250006,
+       0.10403442382812497
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_difference": {
+    "label_auroc": 0.01287841796875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0068359375,
+      "requested_line_auroc": 0.0068359375
+     },
+     "reachable": {
+      "order_auroc": 0.2109375,
+      "requested_line_auroc": 0.7890625
+     }
+    },
+    "order_contamination": 0.4931640625,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.017095947265624994
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.145220947265625,
+       0.27595214843749993
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "orthogonalized": {
+    "label_auroc": 0.3828125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0224609375,
+      "requested_line_auroc": 0.0224609375
+     },
+     "reachable": {
+      "order_auroc": 0.234619140625,
+      "requested_line_auroc": 0.765380859375
+     }
+    },
+    "order_contamination": 0.4775390625,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.44199218749999947
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.13179931640625,
+       0.298101806640625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   }
+  },
+  "24": {
+   "order_averaged": {
+    "label_auroc": 0.968994140625,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 1.0,
+      "requested_line_auroc": 1.0
+     },
+     "reachable": {
+      "order_auroc": 0.88427734375,
+      "requested_line_auroc": 0.11572265625
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       1.0,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.840264892578125,
+       0.9284912109375
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "legacy_recipe": {
+    "label_auroc": 0.9678955078125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 1.0,
+      "requested_line_auroc": 1.0
+     },
+     "reachable": {
+      "order_auroc": 0.887939453125,
+      "requested_line_auroc": 0.112060546875
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.99951171875,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.844952392578125,
+       0.9294677734375
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_main": {
+    "label_auroc": 0.02685546875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0,
+      "requested_line_auroc": 0.0
+     },
+     "reachable": {
+      "order_auroc": 0.076171875,
+      "requested_line_auroc": 0.923828125
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.041241455078125,
+       0.118658447265625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_difference": {
+    "label_auroc": 0.01031494140625,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.014892578125,
+      "requested_line_auroc": 0.014892578125
+     },
+     "reachable": {
+      "order_auroc": 0.146484375,
+      "requested_line_auroc": 0.853515625
+     }
+    },
+    "order_contamination": 0.485107421875,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.001953125,
+       0.034429931640624994
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.091796875,
+       0.210211181640625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "orthogonalized": {
+    "label_auroc": 0.2991943359375,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.193115234375,
+      "requested_line_auroc": 0.193115234375
+     },
+     "reachable": {
+      "order_auroc": 0.29150390625,
+      "requested_line_auroc": 0.70849609375
+     }
+    },
+    "order_contamination": 0.306884765625,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.02938232421875001,
+       0.32277221679687496
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.2614501953125,
+       0.359136962890625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   }
+  },
+  "27": {
+   "order_averaged": {
+    "label_auroc": 0.9652099609375,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.999755859375,
+      "requested_line_auroc": 0.999755859375
+     },
+     "reachable": {
+      "order_auroc": 0.950927734375,
+      "requested_line_auroc": 0.049072265625
+     }
+    },
+    "order_contamination": 0.499755859375,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.99853515625,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.9196533203125,
+       0.979254150390625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "legacy_recipe": {
+    "label_auroc": 0.9630126953125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.999755859375,
+      "requested_line_auroc": 0.999755859375
+     },
+     "reachable": {
+      "order_auroc": 0.951171875,
+      "requested_line_auroc": 0.048828125
+     }
+    },
+    "order_contamination": 0.499755859375,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.99853515625,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.919171142578125,
+       0.979986572265625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_main": {
+    "label_auroc": 0.02740478515625,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0,
+      "requested_line_auroc": 0.0
+     },
+     "reachable": {
+      "order_auroc": 0.022705078125,
+      "requested_line_auroc": 0.977294921875
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.006079101562500001,
+       0.046636962890624994
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_difference": {
+    "label_auroc": 0.01605224609375,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.00244140625,
+      "requested_line_auroc": 0.00244140625
+     },
+     "reachable": {
+      "order_auroc": 0.09765625,
+      "requested_line_auroc": 0.90234375
+     }
+    },
+    "order_contamination": 0.49755859375,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.008056640625
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.056103515625,
+       0.14455566406249998
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "orthogonalized": {
+    "label_auroc": 0.134765625,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.09765625,
+      "requested_line_auroc": 0.09765625
+     },
+     "reachable": {
+      "order_auroc": 0.29052734375,
+      "requested_line_auroc": 0.70947265625
+     }
+    },
+    "order_contamination": 0.40234375,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.24318847656249998
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.2509521484375,
+       0.34791259765625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   }
+  },
+  "30": {
+   "order_averaged": {
+    "label_auroc": 0.95684814453125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.999755859375,
+      "requested_line_auroc": 0.999755859375
+     },
+     "reachable": {
+      "order_auroc": 0.963134765625,
+      "requested_line_auroc": 0.036865234375
+     }
+    },
+    "order_contamination": 0.499755859375,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.99853515625,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.932122802734375,
+       0.985107421875
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "legacy_recipe": {
+    "label_auroc": 0.95361328125,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.999755859375,
+      "requested_line_auroc": 0.999755859375
+     },
+     "reachable": {
+      "order_auroc": 0.96240234375,
+      "requested_line_auroc": 0.03759765625
+     }
+    },
+    "order_contamination": 0.499755859375,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.99852294921875,
+       1.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.9326171875,
+       0.985595703125
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_main": {
+    "label_auroc": 0.03240966796875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0,
+      "requested_line_auroc": 0.0
+     },
+     "reachable": {
+      "order_auroc": 0.01123046875,
+      "requested_line_auroc": 0.98876953125
+     }
+    },
+    "order_contamination": 0.5,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.0
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.0024353027343750003,
+       0.026373291015624994
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "order_difference": {
+    "label_auroc": 0.022216796875,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.0009765625,
+      "requested_line_auroc": 0.0009765625
+     },
+     "reachable": {
+      "order_auroc": 0.078857421875,
+      "requested_line_auroc": 0.921142578125
+     }
+    },
+    "order_contamination": 0.4990234375,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.0,
+       0.00439453125
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.043695068359375,
+       0.12698974609374997
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   },
+   "orthogonalized": {
+    "label_auroc": 0.1859130859375,
+    "within_condition": {
+     "conflict": {
+      "order_auroc": 0.203857421875,
+      "requested_line_auroc": 0.203857421875
+     },
+     "reachable": {
+      "order_auroc": 0.29443359375,
+      "requested_line_auroc": 0.70556640625
+     }
+    },
+    "order_contamination": 0.296142578125,
+    "order_ci": {
+     "conflict": {
+      "ci_95": [
+       0.068829345703125,
+       0.24830322265625
+      ],
+      "covers_chance": false
+     },
+     "reachable": {
+      "ci_95": [
+       0.260491943359375,
+       0.34058837890625
+      ],
+      "covers_chance": false
+     }
+    },
+    "clean": false
+   }
+  }
+ },
+ "direction_cosines": {
+  "12": {
+   "order_averaged_vs_legacy_recipe": 0.927798850152002,
+   "order_averaged_vs_order_main": 0.0935639662527655,
+   "order_averaged_vs_order_difference": -0.011680686729504418,
+   "order_averaged_vs_orthogonalized": 0.995956971701496,
+   "legacy_recipe_vs_order_main": 0.09867555863547806,
+   "legacy_recipe_vs_order_difference": -0.036669366002570786,
+   "legacy_recipe_vs_orthogonalized": 0.9233726480620597,
+   "order_main_vs_order_difference": -0.3061857796653574,
+   "order_main_vs_orthogonalized": 0.005218784535694444,
+   "order_difference_vs_orthogonalized": 5.170681591226689e-13
+  },
+  "14": {
+   "order_averaged_vs_legacy_recipe": 0.9618056606473889,
+   "order_averaged_vs_order_main": -0.15146369496325857,
+   "order_averaged_vs_order_difference": -0.1355709230375959,
+   "order_averaged_vs_orthogonalized": 0.9802284999524342,
+   "legacy_recipe_vs_order_main": -0.16003158220768782,
+   "legacy_recipe_vs_order_difference": -0.1174066645994008,
+   "legacy_recipe_vs_orthogonalized": 0.9429756861032585,
+   "order_main_vs_order_difference": -0.3022386881265102,
+   "order_main_vs_orthogonalized": -0.056407922106854594,
+   "order_difference_vs_orthogonalized": -3.966556250123432e-12
+  },
+  "16": {
+   "order_averaged_vs_legacy_recipe": 0.9991307846855124,
+   "order_averaged_vs_order_main": -0.9281705150128345,
+   "order_averaged_vs_order_difference": -0.7545862602377256,
+   "order_averaged_vs_orthogonalized": 0.21151822820101587,
+   "legacy_recipe_vs_order_main": -0.92768878910841,
+   "legacy_recipe_vs_order_difference": -0.7495824453394354,
+   "legacy_recipe_vs_orthogonalized": 0.21148267376030516,
+   "order_main_vs_order_difference": 0.7248797649330515,
+   "order_main_vs_orthogonalized": 0.163269183517826,
+   "order_difference_vs_orthogonalized": -8.230065934311526e-13
+  },
+  "17": {
+   "order_averaged_vs_legacy_recipe": 0.998997324249264,
+   "order_averaged_vs_order_main": -0.9269884360752061,
+   "order_averaged_vs_order_difference": -0.7696932823281306,
+   "order_averaged_vs_orthogonalized": 0.2008646973288103,
+   "legacy_recipe_vs_order_main": -0.9279509690429993,
+   "legacy_recipe_vs_order_difference": -0.7634600407356991,
+   "legacy_recipe_vs_orthogonalized": 0.19716638635207573,
+   "order_main_vs_order_difference": 0.7358036987386871,
+   "order_main_vs_orthogonalized": 0.17675488758130664,
+   "order_difference_vs_orthogonalized": -8.290573089153597e-13
+  },
+  "18": {
+   "order_averaged_vs_legacy_recipe": 0.9992219537406897,
+   "order_averaged_vs_order_main": -0.949295426612407,
+   "order_averaged_vs_order_difference": -0.8325046821937184,
+   "order_averaged_vs_orthogonalized": 0.09980931269999366,
+   "legacy_recipe_vs_order_main": -0.9499659127589357,
+   "legacy_recipe_vs_order_difference": -0.8281928856663652,
+   "legacy_recipe_vs_orthogonalized": 0.096317432922189,
+   "order_main_vs_order_difference": 0.7902246130613355,
+   "order_main_vs_orthogonalized": 0.21447446925888491,
+   "order_difference_vs_orthogonalized": -7.904493032340199e-13
+  },
+  "20": {
+   "order_averaged_vs_legacy_recipe": 0.9992347089500332,
+   "order_averaged_vs_order_main": -0.9586513156774603,
+   "order_averaged_vs_order_difference": -0.8582245882631693,
+   "order_averaged_vs_orthogonalized": 0.0691696877248778,
+   "legacy_recipe_vs_order_main": -0.9592909430590273,
+   "legacy_recipe_vs_order_difference": -0.8537032061432623,
+   "legacy_recipe_vs_orthogonalized": 0.06534766557256247,
+   "order_main_vs_order_difference": 0.8199481942483371,
+   "order_main_vs_orthogonalized": 0.21499763730749888,
+   "order_difference_vs_orthogonalized": -7.270911303591809e-13
+  },
+  "24": {
+   "order_averaged_vs_legacy_recipe": 0.9991624147753505,
+   "order_averaged_vs_order_main": -0.9649370335809635,
+   "order_averaged_vs_order_difference": -0.8726691640579044,
+   "order_averaged_vs_orthogonalized": 0.061655425070777106,
+   "legacy_recipe_vs_order_main": -0.9651543373699716,
+   "legacy_recipe_vs_order_difference": -0.8682496399697762,
+   "legacy_recipe_vs_orthogonalized": 0.058607936787689247,
+   "order_main_vs_order_difference": 0.8412553763387292,
+   "order_main_vs_orthogonalized": 0.20069793031437694,
+   "order_difference_vs_orthogonalized": -5.289796378704636e-13
+  },
+  "27": {
+   "order_averaged_vs_legacy_recipe": 0.9990395479886731,
+   "order_averaged_vs_order_main": -0.9605168679892455,
+   "order_averaged_vs_order_difference": -0.8759507178057414,
+   "order_averaged_vs_orthogonalized": 0.11407155663400839,
+   "legacy_recipe_vs_order_main": -0.9595996687392017,
+   "legacy_recipe_vs_order_difference": -0.8722393990597345,
+   "legacy_recipe_vs_orthogonalized": 0.1144979511311292,
+   "order_main_vs_order_difference": 0.856991269667623,
+   "order_main_vs_orthogonalized": 0.16563467591351883,
+   "order_difference_vs_orthogonalized": -3.5253570895843467e-13
+  },
+  "30": {
+   "order_averaged_vs_legacy_recipe": 0.9989959504508448,
+   "order_averaged_vs_order_main": -0.9527681476030703,
+   "order_averaged_vs_order_difference": -0.8876413345300305,
+   "order_averaged_vs_orthogonalized": 0.15775661366268653,
+   "legacy_recipe_vs_order_main": -0.9520836430131455,
+   "legacy_recipe_vs_order_difference": -0.8847165233083171,
+   "legacy_recipe_vs_orthogonalized": 0.15707661764597652,
+   "order_main_vs_order_difference": 0.87844186026893,
+   "order_main_vs_orthogonalized": 0.1487054791622656,
+   "order_difference_vs_orthogonalized": -2.1436671882035796e-13
+  }
+ },
+ "prior_evidence": {
+  "source": "results/arm_g_order_crossover_seed111_v1, RESEARCH_ARC.md section 14",
+  "legacy_direction_label_auroc": 0.9431,
+  "legacy_direction_order_auroc_within_conflict": 1.0,
+  "crossover_condition_main_effect": 4.814,
+  "crossover_order_main_effect": -3.08,
+  "crossover_condition_x_order": -3.793,
+  "prediction": "order_averaged and legacy_recipe should be near-identical, since the parity assignment is balanced and neither estimate is biased, and both should be contaminated on order at the projection level in proportion to cos(a, d). Only `orthogonalized` should read the label while sitting near 0.5 on order within a condition"
+ },
+ "sample_counts": {
+  "source_rows": 384,
+  "source_scenarios": 96,
+  "evaluation_rows": 256,
+  "layers": [
+   12,
+   14,
+   16,
+   17,
+   18,
+   20,
+   24,
+   27,
+   30
+  ]
+ },
+ "audits": {
+  "source_manifests": {
+   "101": {
+    "status": "PASS",
+    "n_rollouts": 576,
+    "n_pairs": 288,
+    "families": [
+     "data_checksums",
+     "incident_times",
+     "release_records"
+    ],
+    "pairs_per_family": {
+     "incident_times": 96,
+     "release_records": 96,
+     "data_checksums": 96
+    },
+    "labels_per_family": {
+     "data_checksums": {
+      "reachable": 96,
+      "conflict": 96
+     },
+     "incident_times": {
+      "reachable": 96,
+      "conflict": 96
+     },
+     "release_records": {
+      "reachable": 96,
+      "conflict": 96
+     }
+    },
+    "matched_fields": [
+     "system_prompt",
+     "scripted_tool_prelude",
+     "workspace",
+     "allowed_scope",
+     "catalog_order_counterbalanced"
+    ],
+    "only_pairwise_message_difference": "opaque requested target id",
+    "control_label_parity_independent": true,
+    "control_label_parity_confounded_families": [],
+    "control_label_parity_joint_counts": {
+     "data_checksums:parity0:tag0": 24,
+     "data_checksums:parity0:tag1": 24,
+     "data_checksums:parity1:tag0": 24,
+     "data_checksums:parity1:tag1": 24,
+     "incident_times:parity0:tag0": 24,
+     "incident_times:parity0:tag1": 24,
+     "incident_times:parity1:tag0": 24,
+     "incident_times:parity1:tag1": 24,
+     "release_records:parity0:tag0": 24,
+     "release_records:parity0:tag1": 24,
+     "release_records:parity1:tag0": 24,
+     "release_records:parity1:tag1": 24
+    },
+    "catalog_order_parity_independent": true,
+    "catalog_order_parity_confounded_families": [],
+    "catalog_order_joint_counts": {
+     "data_checksums:parity0:inside_first": 24,
+     "data_checksums:parity0:outside_first": 24,
+     "data_checksums:parity1:inside_first": 24,
+     "data_checksums:parity1:outside_first": 24,
+     "incident_times:parity0:inside_first": 24,
+     "incident_times:parity0:outside_first": 24,
+     "incident_times:parity1:inside_first": 24,
+     "incident_times:parity1:outside_first": 24,
+     "release_records:parity0:inside_first": 24,
+     "release_records:parity0:outside_first": 24,
+     "release_records:parity1:inside_first": 24,
+     "release_records:parity1:outside_first": 24
+    },
+    "catalog_order_crossed_within_scenario": true
+   },
+   "102": {
+    "status": "PASS",
+    "n_rollouts": 576,
+    "n_pairs": 288,
+    "families": [
+     "data_checksums",
+     "incident_times",
+     "release_records"
+    ],
+    "pairs_per_family": {
+     "data_checksums": 96,
+     "incident_times": 96,
+     "release_records": 96
+    },
+    "labels_per_family": {
+     "data_checksums": {
+      "reachable": 96,
+      "conflict": 96
+     },
+     "incident_times": {
+      "reachable": 96,
+      "conflict": 96
+     },
+     "release_records": {
+      "reachable": 96,
+      "conflict": 96
+     }
+    },
+    "matched_fields": [
+     "system_prompt",
+     "scripted_tool_prelude",
+     "workspace",
+     "allowed_scope",
+     "catalog_order_counterbalanced"
+    ],
+    "only_pairwise_message_difference": "opaque requested target id",
+    "control_label_parity_independent": true,
+    "control_label_parity_confounded_families": [],
+    "control_label_parity_joint_counts": {
+     "data_checksums:parity0:tag0": 24,
+     "data_checksums:parity0:tag1": 24,
+     "data_checksums:parity1:tag0": 24,
+     "data_checksums:parity1:tag1": 24,
+     "incident_times:parity0:tag0": 24,
+     "incident_times:parity0:tag1": 24,
+     "incident_times:parity1:tag0": 24,
+     "incident_times:parity1:tag1": 24,
+     "release_records:parity0:tag0": 24,
+     "release_records:parity0:tag1": 24,
+     "release_records:parity1:tag0": 24,
+     "release_records:parity1:tag1": 24
+    },
+    "catalog_order_parity_independent": true,
+    "catalog_order_parity_confounded_families": [],
+    "catalog_order_joint_counts": {
+     "data_checksums:parity0:inside_first": 24,
+     "data_checksums:parity0:outside_first": 24,
+     "data_checksums:parity1:inside_first": 24,
+     "data_checksums:parity1:outside_first": 24,
+     "incident_times:parity0:inside_first": 24,
+     "incident_times:parity0:outside_first": 24,
+     "incident_times:parity1:inside_first": 24,
+     "incident_times:parity1:outside_first": 24,
+     "release_records:parity0:inside_first": 24,
+     "release_records:parity0:outside_first": 24,
+     "release_records:parity1:inside_first": 24,
+     "release_records:parity1:outside_first": 24
+    },
+    "catalog_order_crossed_within_scenario": true
+   }
+  },
+  "evaluation_manifest": {
+   "status": "PASS",
+   "n_rollouts": 192,
+   "n_pairs": 96,
+   "families": [
+    "data_checksums",
+    "incident_times",
+    "release_records"
+   ],
+   "pairs_per_family": {
+    "release_records": 32,
+    "incident_times": 32,
+    "data_checksums": 32
+   },
+   "labels_per_family": {
+    "data_checksums": {
+     "reachable": 32,
+     "conflict": 32
+    },
+    "incident_times": {
+     "reachable": 32,
+     "conflict": 32
+    },
+    "release_records": {
+     "reachable": 32,
+     "conflict": 32
+    }
+   },
+   "matched_fields": [
+    "system_prompt",
+    "scripted_tool_prelude",
+    "workspace",
+    "allowed_scope",
+    "catalog_order_counterbalanced"
+   ],
+   "only_pairwise_message_difference": "opaque requested target id",
+   "control_label_parity_independent": true,
+   "control_label_parity_confounded_families": [],
+   "control_label_parity_joint_counts": {
+    "data_checksums:parity0:tag0": 8,
+    "data_checksums:parity0:tag1": 8,
+    "data_checksums:parity1:tag0": 8,
+    "data_checksums:parity1:tag1": 8,
+    "incident_times:parity0:tag0": 8,
+    "incident_times:parity0:tag1": 8,
+    "incident_times:parity1:tag0": 8,
+    "incident_times:parity1:tag1": 8,
+    "release_records:parity0:tag0": 8,
+    "release_records:parity0:tag1": 8,
+    "release_records:parity1:tag0": 8,
+    "release_records:parity1:tag1": 8
+   },
+   "catalog_order_parity_independent": true,
+   "catalog_order_parity_confounded_families": [],
+   "catalog_order_joint_counts": {
+    "data_checksums:parity0:inside_first": 8,
+    "data_checksums:parity0:outside_first": 8,
+    "data_checksums:parity1:inside_first": 8,
+    "data_checksums:parity1:outside_first": 8,
+    "incident_times:parity0:inside_first": 8,
+    "incident_times:parity0:outside_first": 8,
+    "incident_times:parity1:inside_first": 8,
+    "incident_times:parity1:outside_first": 8,
+    "release_records:parity0:inside_first": 8,
+    "release_records:parity0:outside_first": 8,
+    "release_records:parity1:inside_first": 8,
+    "release_records:parity1:outside_first": 8
+   },
+   "catalog_order_crossed_within_scenario": true
+  }
+ },
+ "protocol": {
+  "source_seeds": [
+   101,
+   102
+  ],
+  "evaluation_seed": 112,
+  "catalog_order_mode": "crossed",
+  "control_label_mode": "parity_independent",
+  "intervention": "none"
+ },
+ "full_result_artifact": "arm_g_reextract_result.json.gz.b64"
+}

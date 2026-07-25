@@ -625,6 +625,74 @@ point demonstrated by a two-line prompt edit rather than by a steering vector.
 Artifact: `results/arm_g_order_crossover_seed111_v1/`. Every figure above
 recomputed from `row_results` by independently written code.
 
+### 15. Re-extraction on order-crossed sources (seed 112) — the direction was 79% catalog position
+
+`arm_g_reextract.py`, A100, baseline capture only. Source seeds 101 and 102 and
+evaluation seed 112 all rebuilt with `catalog_order_mode="crossed"`, 96 source
+scenarios, 256 evaluation rows, nine layers swept.
+
+**A correction to section 14's prescription first.** Section 14 said to fix this
+by averaging the paired difference over both orders. That is wrong, and the
+protocol's own self-test caught it. The parity-locked assignment is *balanced* —
+half the pairs render `inside_first` — so the interaction cancels in the legacy
+mean too and the old estimate of the condition axis was never biased. Confirmed
+on real states: the order-averaged and legacy directions agree at cosine
+**0.99913** at layer 16 and are contaminated identically, both at order AUROC
+**1.0000** within the conflict condition.
+
+The contamination is at the projection level. Projecting onto the condition axis
+picks up catalog position whenever the two are not orthogonal *in the model's
+geometry*, however cleanly the axis was estimated. They are not:
+
+| layer | cos(a, order main) | cos(a, interaction) | cos(a, orthogonalized) |
+|---:|---:|---:|---:|
+| 12 | +0.094 | −0.012 | 0.996 |
+| 14 | −0.152 | −0.136 | 0.980 |
+| **16** | **−0.928** | **−0.755** | **0.212** |
+| 17 | −0.927 | −0.770 | 0.201 |
+| 20 | −0.959 | −0.858 | 0.069 |
+| 30 | −0.953 | −0.888 | 0.158 |
+
+At layer 16 the committed "goal-constraint conflict direction" is 93% aligned
+with the catalog-order axis. Only 21% of it survives orthogonalization. **About
+four fifths of it was catalog position.**
+
+**Orthogonalizing repairs it, and improves the label reading.** At layer 16:
+
+| direction | label AUROC | order AUROC, conflict | order AUROC, reachable |
+|---|---:|---:|---:|
+| order_averaged | 0.9331 | 1.0000 | 0.9524 |
+| legacy_recipe | 0.9325 | 1.0000 | 0.9541 |
+| **orthogonalized** | **0.9969** | 0.6338 | 0.3320 |
+
+Removing the position component makes the direction a *better* scope reader, not
+a worse one. Crossed source data is what makes this possible at all: without both
+renderings of a scenario the order axes are not estimable, so there is nothing to
+project out.
+
+**Honest limit.** The orthogonalized direction is much cleaner, not provably
+clean. Order AUROC within conflict is 0.634 and within reachable 0.332 — about
+1.8 and 2.2 null SDs from chance, where the measured null spread including
+direction-estimation variance is 0.076. It passes the protocol's 0.20 bar, and
+that bar is generous and was set here. Read this as "the position component is
+mostly gone", not "the position component is gone".
+
+**The depth structure is the real finding, and it reframes section 8.**
+Orthogonalization only leaves a usable direction at layers 16-17. From 18 down,
+`cos(a, orthogonalized)` collapses to 0.06-0.16 and the orthogonalized label
+AUROC falls off a cliff — 0.618 at 18, 0.383 at 20, 0.299 at 24, 0.135 at 27.
+The interaction axis at those depths *anti*-predicts the label almost perfectly
+(AUROC 0.013 at layer 20). Scope and catalog position are geometrically fused
+deeper in the network and separable only at 16-17.
+
+That explains the old dissociation rather than restating it. Decodability peaked
+at layer 20 because the direction there was reading catalog position, and catalog
+position is what the decision follows. Causal efficacy peaked at 16-17 because
+that is the only depth where the scope variable exists as a separable axis.
+
+Artifact: `results/arm_g_reextract_seed112_v1/`, including the 4096-dimensional
+selected direction. Recomputed independently from `row_results`.
+
 ## Current defensible claims
 
 > **Suspended pending section 13.** Every claim below that rests on the
