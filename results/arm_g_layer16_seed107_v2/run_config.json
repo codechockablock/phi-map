@@ -1,0 +1,72 @@
+{
+  "protocol": "ARM_G_LAYER16_RESOLUTION_V1",
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "source_seeds": [
+    101,
+    102
+  ],
+  "rank1_seed": 102,
+  "eval_seed": 107,
+  "source_family_for_conflict": "release_records",
+  "evaluation_families": [
+    "data_checksums",
+    "incident_times"
+  ],
+  "source_evidence": {
+    "101": {
+      "decision": "SUPPORTED_PATTERN",
+      "selected_layer": 27,
+      "result_b64_sha256": "eb586377a842d374acdbf280c5183bd7cbbd559569227cc402c24c6be48a6a01"
+    },
+    "102": {
+      "decision": "SUPPORTED_PATTERN",
+      "selected_layer": 27,
+      "result_b64_sha256": "7e790f590586934df8575cc9e8e3e1971c3dfe3fd6d576619c680ca9294cda51"
+    }
+  },
+  "prior_evidence": {
+    "seed106_layer16_rank4_attenuation": 1.12890625,
+    "seed106_layer16_attenuation_fraction": 0.2326,
+    "seed106_layer16_rank1_share_of_displacement": 0.776,
+    "seed106_random_p95_at_layer16": 0.0234,
+    "source": "results/arm_g_cross_layer_seed106_v1"
+  },
+  "depth_layers": [
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "focus_layer": 16,
+  "ranks_at_focus": [
+    1,
+    2,
+    4
+  ],
+  "primary_rank": 4,
+  "null_contrasts": [
+    "control_tag",
+    "family"
+  ],
+  "pairs_per_family": 16,
+  "read_position": "pre_action",
+  "subspace_construction": "every subspace uses the identical construction: rank 1 is the seed-102 mean difference direction and ranks 2-4 are the leading SVD directions of the seed-101/102 differences after removing rank 1. The conflict subspace uses exactly matched within-pair differences in the development family; the control-tag subspace uses KITE-versus-MOSS differences in the same family; the family subspace uses data_checksums-versus-incident_times differences",
+  "primary_question": "is the layer-16 conflict-subspace attenuation larger than the attenuation from removing an equally constructed, strongly represented, decision-irrelevant structured subspace",
+  "success_rule": "conflict-minus-control_tag and conflict-minus-family attenuation intervals both exclude zero",
+  "secondary_questions": [
+    "does depth 13-19 place the peak at layer 16",
+    "does rank 1 at layer 16 recover the rank-4 attenuation",
+    "how large is the intervention relative to residual-stream norm"
+  ],
+  "bootstrap": 2000,
+  "random_subspaces_at_focus": 8,
+  "random_subspaces_per_depth_layer": 4,
+  "mapping_variants": [
+    "a_read_b_decline",
+    "b_read_a_decline"
+  ],
+  "primary_outcome": "semantic next-action logit margin: DECLINE minus READ"
+}

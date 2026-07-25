@@ -247,11 +247,16 @@ anyone else without more random draws.
    was present in all three families at all seeds tested, so it is a property of
    the generator and not of any particular run.
 5. **Eight random draws is a thin specificity threshold** at all-position scope.
-6. **One artifact is not row-level auditable.** The seed-107 run stores baseline
-   margins but not per-row ablated margins, so its depth, rank and selectivity
-   numbers cannot be independently recomputed the way seeds 106, 108 and 109 can.
-   The script now records margins for all fourteen scored conditions; the
-   existing artifact predates that and would need a re-run to close.
+6. ~~One artifact is not row-level auditable.~~ Closed. The seed-107 protocol
+   was re-run under the legacy generator mode with per-row margin storage added
+   (`results/arm_g_layer16_seed107_v2/`). All fourteen reported attenuations —
+   seven depth layers, three ranks, four nulls — recompute from the stored
+   row-level margins with maximum absolute disagreement 0.00e+00, so every
+   artifact this paper cites is now independently checkable. The re-run also
+   reproduced the original numbers **bit-exactly**: depth, rank, selectivity,
+   random-subspace p95 and the 0.999899 control-tag principal angle all agree to
+   0.000000, confirming the protocol is deterministic and that the refactor
+   changed nothing behavioural.
 7. **We do not explain the asymmetry.** Why refusal is writable and
    hallucination, deception and scope-conflict are not is unresolved here.
 
