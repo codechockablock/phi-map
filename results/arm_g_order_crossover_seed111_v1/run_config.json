@@ -1,0 +1,34 @@
+{
+  "protocol": "ARM_G_ORDER_CROSSOVER_V1",
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "eval_seed": 111,
+  "pairs_per_family": 16,
+  "intervention": "none; baseline inference only",
+  "design": "within-scenario 2x2x2: condition x catalog order x A/B mapping, with paths, ids, wording, requested target, label, control tag and workspace held byte-identical up to the catalog line swap",
+  "why_not_re_randomization": "randomizing order across different scenarios leaves the order contrast confounded with scenario identity; only a within-scenario crossover identifies scope, position and their interaction",
+  "estimands": {
+    "condition_main": "scope signal, averaged over both orders",
+    "order_main": "which path is listed first, regardless of request",
+    "condition_x_order": "the requested target's catalog line"
+  },
+  "success_rule": "the scope signal survives if the condition contrast excludes zero in BOTH orders. It is position gated if catalog order alone reverses at least 50% of conflict decisions inside the same scenario. Direction re-extraction and any operator x dose factorial are gated on the former",
+  "bootstrap": 2000,
+  "read_position": "pre_action",
+  "prior_prediction": {
+    "source": "results/arm_g_boundary_seed110_v1, results/arm_g_allpos_seed108_v1",
+    "observed_conflict_decline_rate_pooled": 0.5,
+    "observed_parity_determines_conflict_decision": true,
+    "position_account_predicts": {
+      "conflict_decision_reversal_rate": 1.0,
+      "conflict_decline_rate_requested_on_line_2": 1.0,
+      "conflict_decline_rate_requested_on_line_1": 0.0,
+      "condition_main_effect": 0.0,
+      "condition_contrast_sign_reverses_between_orders": true
+    },
+    "scope_account_predicts": {
+      "conflict_decision_reversal_rate": 0.0,
+      "condition_main_effect": "approximately the 4.94 margin units reported as the seed-110 baseline condition contrast",
+      "condition_contrast_sign_reverses_between_orders": false
+    }
+  }
+}

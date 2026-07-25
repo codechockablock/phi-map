@@ -554,11 +554,76 @@ intervention moves the operating point along an ROC curve the model already has,
 and degrades that curve while doing so. Correction rate and flip count are the
 wrong instrument regardless of how the crossover below resolves.
 
-**Gate.** `arm_g_order_crossover.py` renders every scenario in both catalog
-orders with everything else byte-identical up to the line swap, crosses both
-orders with both conditions and both mappings, and runs baseline inference only.
-Until it returns, sections 11 and 12 and every decision-level claim below are
-suspended.
+### 14. Order crossover (seed 111) — `POSITION_GATED`, and the representation is better than we thought
+
+`arm_g_order_crossover.py`, A100, baseline inference only: no direction, no hook,
+no intervention. 64 scenarios rendered in both catalog orders, byte-identical up
+to the line swap, crossed with both conditions and both A/B mappings, 256 rows.
+Coherence clean (action mass 1.000, top-token-is-action 1.000).
+
+**The decision is entirely position.** Holding the scenario fixed and swapping
+only the two catalog lines reverses **64 of 64** conflict decisions. Zero
+scenarios violate "declines if and only if the requested target is on line 2."
+Reachable rows: 0 of 64.
+
+| cell | n | mean margin | decline rate |
+|---|---:|---:|---:|
+| conflict, requested target on line 2 | 64 | +3.400 | **1.000** |
+| conflict, requested target on line 1 | 64 | −1.576 | **0.000** |
+| reachable, requested target on line 1 | 64 | −3.311 | 0.000 |
+| reachable, requested target on line 2 | 64 | −4.494 | 0.000 |
+
+The 0.500 conflict decline rate reported since section 5 is the average of 1.000
+and 0.000. It was never a rate.
+
+**The scope signal is real and larger than the legacy estimate.** Bootstrap over
+scenario, stratified by family:
+
+| contrast | estimate | 95% CI |
+|---|---:|---|
+| condition main | +4.814 | [+4.659, +4.969] |
+| order main | −3.080 | [−3.227, −2.925] |
+| condition x order (= requested line) | −3.793 | [−4.004, −3.560] |
+| condition contrast at `inside_first` | +6.711 | [+6.541, +6.883] |
+| condition contrast at `outside_first` | +2.918 | [+2.709, +3.107] |
+
+All five exclude zero. The condition contrast is positive in **both** orders, so
+the `SCOPE_SURVIVES` criterion is met on the margin — the decision gate fired
+first only because reversal is total. Both prior predictions recorded before the
+run were half right: the position account called the 100% reversal and missed the
+condition main effect; the scope account called the condition main effect and
+missed the reversal.
+
+**The sharpest number in the run.** Within each order, threshold-free:
+
+| order | AUROC | accuracy at threshold 0 |
+|---|---:|---:|
+| `inside_first` | **1.00000** | **1.0000** |
+| `outside_first` | **1.00000** | **0.5000** |
+
+Perfect separation in both, and the accuracy difference is entirely where the
+threshold sits. The model knows which requests are out of scope — flawlessly, in
+both renderings — and whether it acts on that knowledge is decided by which line
+the path is printed on. This is section 13's operating-point-versus-discrimination
+point demonstrated by a two-line prompt edit rather than by a steering vector.
+
+**Consequences.**
+
+1. Sections 11 and 12 do not measure scope. Every decision-level result from
+   seeds 107-110 — flip counts, correction rates, `DOSE_DOES_NOT_FLIP_DECISIONS` —
+   is void as a statement about goal-constraint conflict.
+2. The observational arm survives and improves. There is a real, perfectly
+   decodable scope variable to study.
+3. The layer-16 direction still needs re-extracting: it was fit where order was
+   locked, and the order main effect is −3.080, so a difference-of-means fit had
+   ample position signal to absorb. Rebuild seeds 101/102 with
+   `catalog_order_mode="crossed"` and average the paired conflict-minus-reachable
+   difference over both orders.
+4. Do not restore flip counts or correction rates. The decision in this task is a
+   position readout with a threshold in the wrong place.
+
+Artifact: `results/arm_g_order_crossover_seed111_v1/`. Every figure above
+recomputed from `row_results` by independently written code.
 
 ## Current defensible claims
 

@@ -327,7 +327,38 @@ that hides it.
 
 ---
 
-## 7. The crossover, built
+## 7. The crossover, run — `POSITION_GATED`
+
+Seed 111, A100, baseline inference only. Result in
+`results/arm_g_order_crossover_seed111_v1/`, recomputed independently from
+`row_results`.
+
+Swapping only the two catalog lines, with the scenario otherwise byte-identical,
+reverses **64 of 64** conflict decisions. Zero exceptions. Reachable: 0 of 64.
+
+| cell | mean margin | decline rate |
+|---|---:|---:|
+| conflict, requested target on line 2 | +3.400 | **1.000** |
+| conflict, requested target on line 1 | −1.576 | **0.000** |
+
+And the prediction in §1.1 held: the scope signal is real. Condition main effect
++4.814, CI [+4.659, +4.969], positive in both orders (+6.711 and +2.918). Order
+main −3.080. Interaction −3.793. All exclude zero.
+
+The best single number is the within-order discrimination: AUROC **1.00000** at
+`inside_first` and **1.00000** at `outside_first`, with accuracy at threshold 0 of
+**1.0000** and **0.5000** respectively. Identical, perfect ranking; the entire
+accuracy difference is where the threshold sits. §3 argued that steering along
+this direction moves the operating point rather than adding information — the
+crossover shows a two-line prompt edit doing the same thing, more cleanly, with
+no intervention at all.
+
+So the arm splits: the decision-level results are void as scope measurements, and
+the representation is real and better than the earlier estimate. §5's Q6 answer
+was right about which experiment to run and wrong to expect one verdict — both
+accounts were half right.
+
+## 8. The crossover, as built
 
 `arm_g_order_crossover.py` + `arm_g_order_crossover_colab.ipynb`. Baseline
 inference only: no direction, no hook, no intervention.
