@@ -57,6 +57,63 @@ So two 2026 papers on the same question report advantages differing by roughly
 a factor of two, and the difference is plausibly explained by baseline choice
 rather than by anything about the models or probes.
 
+## Correction: there are two regimes, and the deflationary reading only covers one
+
+The first version of this document leaned too far toward "reported advantages
+are artifacts of weak baselines." Reading further found a case that is not
+explicable that way, and it is the strongest counter-evidence available.
+
+[Panfilov et al. 2025](https://arxiv.org/abs/2509.18058) show frontier models
+sometimes choose *strategic dishonesty* over refusal: they emit output that
+sounds harmful but is subtly incorrect or harmless. In that setting **all four
+purpose-built jailbreak scorers tested — HarmBench, StrongReject, LlamaGuard
+and JailJudge — were fooled**, while a deception probe correctly flags the
+response as fake. These are not weak arbitrary baselines; they are the standard
+tools built for exactly this job, and they all fail.
+
+Two further details make this harder to deflate. The authors report that the
+*quality of the deception improves with model capability*, so this regime grows
+rather than shrinks with scale. And their probe feature **causally mediates**
+the behaviour under intervention — they got the behavioural load-bearing result
+that Arm G failed to get.
+
+So the honest picture is two regimes:
+
+| | Regime 1: recoverable | Regime 2: suppressed |
+|---|---|---|
+| Public channel | carries the label | adversarially decoupled from it |
+| Monitor capability | matters; better monitors close the gap | irrelevant; strong purpose-built monitors fail |
+| Advantage as monitor improves | shrinks, crossing point exists | persists |
+| Advantage as model scales | unclear | **grows** (deception quality improves) |
+| Examples | Parrack Backdoors; our Arm T | Panfilov strategic dishonesty |
+
+The moderator below predicts both regimes, so the framework survives. The
+deflationary *emphasis* does not. The sharper claim is that **the crossing point
+exists only in regime 1**, which makes the decision-relevant question not "is
+interpretability worth it" but "which regime is this deployment in" — and that
+is directly measurable by asking whether a strong monitor can recover the label
+from outputs alone.
+
+A third data point sits between the two.
+[UK AISI](https://www.aisi.gov.uk/blog/why-were-working-on-white-box-control)
+report that on sandbagging detection with Llama-3.1-8B on simple tasks, deception
+probes "worked extremely well" while an output-access monitor "struggled" — but
+that performance deteriorated **for both methods** with Llama-3.3-70B and
+harder tasks, and they say they cannot fully explain why. They do not analyse
+whether their advantage depended on baseline strength or on output
+recoverability. Their own named open problem — "why monitor accuracy is
+sensitive to model size" — is the question this direction is about, which is
+mild evidence the gap identified here is real rather than imagined.
+
+## Do not generalise Arm G's negative
+
+Arm G's behavioural marginality must not be read as "probes are behaviourally
+marginal." Panfilov et al. have a probe that detects *and* causally steers. The
+more likely reading is that our result is about our task: a forced binary choice,
+visible output clamped to one token, and a two-logit gap around the decision
+boundary that a graded variable cannot cross. That is a limit of the instrument,
+not a fact about internal representations.
+
 ## The moderator
 
 The advantage should track the *information differential* between channels, not
@@ -91,10 +148,17 @@ behaviour won.
 2. **Moderator.** The advantage is predicted by how much of the label is
    recoverable from public tokens. Measurable directly by training a recovery
    model on public tokens alone.
-3. **Retrospective.** Reported advantages across published papers should
-   correlate with the weakness of the baseline each paper chose. **This is
-   testable from published numbers with no compute**, and it is the cheapest
-   real contribution available.
+3. **Retrospective, conditioned on regime.** Within regime 1, reported
+   advantages should correlate with the weakness of the baseline each paper
+   chose. Regime 2 results should show no such correlation, because monitor
+   capability is not the binding constraint there. **Testable from published
+   numbers with no compute**, and the cheapest real contribution available —
+   but the regime classification has to be done first and honestly, or the
+   correlation is trivially manufacturable by dataset selection.
+4. **Regime is diagnosable.** Whether a deployment sits in regime 1 or 2 is
+   measurable by asking whether a strong monitor recovers the label from outputs
+   alone. If that is right, it is more useful than any single advantage number,
+   because it tells a practitioner which kind of monitoring can work at all.
 
 ## Why this is the right direction for this repo
 
@@ -121,9 +185,19 @@ done immediately. Predictions 1 and 2 need a study.
 
 Unverified: pAUROC figures of +0.162 / +0.071 / +0.031 across
 Honest/Sanitized/Deceptive CoT conditions appeared in a search summary that
-could not be attributed to a specific paper. They are consistent with the
-moderator above but must be read at source before being cited. A related
-unattributed claim — that dishonesty probes perform on par with GPT-5 and beat
-GPT-4.1-Nano — would be a direct bracketing of a probe between two monitor
-capabilities and should be chased, since it is close to prediction 1 already
-being partly answered.
+could not be attributed to a specific paper. Still unattributed after a second
+pass. They are consistent with the moderator above but must not be cited until
+read at source.
+
+Resolved, and it cut against the framing: the "on par with GPT-5, beats
+GPT-4.1-Nano" claim traced to Panfilov et al., where the substance is stronger
+than a capability bracketing — four purpose-built scorers fail outright. That is
+what forced the two-regime correction above. Chasing a potential falsifier first
+was the right order of work; it changed the thesis rather than confirming it.
+
+Also worth recording as a bias check on this document: the deflationary reading
+is the one that makes our own negatives look good. It survived contact with
+Parrack, the Internal Monologue paper and AISI, and did not survive contact with
+Panfilov. The two-regime version is what the evidence supports, and it is less
+favourable to us — regime 2 is where interpretability is irreplaceable, and our
+work has nothing to say about it.
