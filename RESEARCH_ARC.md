@@ -809,6 +809,53 @@ carries a pre-action representation of permission violation, never ablates to
 measure what fraction of decisions such a representation mediates, and reports no
 ceiling. That question is open.
 
+### 17. Ceiling validation: the gate fired, and no class comparison is licensed
+
+`arm_g_ceiling.py`, A100, forward-only on 32 generic prompts. Twelve doses in
+budget units, five directions, two layers. Decision at both layers:
+**`PROTOCOL_NOT_REPRODUCED`**. That is the designed refusal, not a result.
+
+| direction | layer 16 | layer 20 |
+|---|---:|---:|
+| ffn_column (control) | 2.435 | 2.220 |
+| ffn_column_1 (control) | 1.562 | 2.206 |
+| probe_scope | 1.958 | 1.790 |
+| random_0 | 2.335 | 1.742 |
+| random_1 | 2.426 | 1.825 |
+
+The positive control had to land inside their reported 1.37-1.65 band or no
+comparison across intervention classes is allowed. It landed at 2.44 and 2.22.
+
+**The dose parameterization is provably right, so the fault is the detector.**
+Their ceiling is `cos θ = m*/sqrt(1+m*²) = 0.825`. For a unit write approximately
+orthogonal to the residual, `h + t‖h‖u` gives `cos θ = t/sqrt(1+t²)`, which
+reaches 0.825 at exactly **t = 1.460**. The dose axis matches theirs to four
+figures. The offset is in how collapse is *detected*: half-max on a single
+next-token entropy curve fires about 1.34-1.47x later than their rollout-horizon
+degeneration. Their criterion is validated against generated text; a knee in a
+one-token entropy curve is a different and later event.
+
+**The cliff itself is real.** Entropy runs 0.34 at baseline to 9.0-9.6 by dose 3,
+against roughly 11.7 for uniform over the vocabulary — that is scramble, and the
+transition is sharp, with most of the rise inside one or two dose steps.
+
+**Two things worth keeping.** The probe direction sits *inside* the range spanned
+by the FFN columns and the random directions at both layers, so nothing here
+suggests a difference-of-means direction behaves as a distinct intervention class.
+But two FFN columns of the same class differ by 1.56x at layer 16 — more than the
+classes differ from each other — so at n=2 per class the comparison would not be
+resolvable even with a corrected detector. Any redo needs many more directions per
+class, not just a better criterion.
+
+**Cost of doing it properly.** Rollout-based degeneration rather than a
+single-token knee, signed doses rather than positive only (their control window is
+signed), and enough directions per class to beat the within-class spread. That is
+a reimplementation of someone else's protocol, in the subfield section 15's
+literature check and the decision to shelve geometry moved us out of. Logged and
+stopped rather than iterated.
+
+Artifact: `results/arm_g_ceiling_v1/`.
+
 ## Current defensible claims
 
 > **Suspended pending section 13.** Every claim below that rests on the

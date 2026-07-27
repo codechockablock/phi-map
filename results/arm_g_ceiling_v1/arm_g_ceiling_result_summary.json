@@ -1,0 +1,66 @@
+{
+ "config": {
+  "protocol": "ARM_G_CEILING_V1",
+  "model": "meta-llama/Llama-3.1-8B-Instruct",
+  "question": "does the single-neuron collapse ceiling of arXiv 2606.19831 transfer to residual-stream difference-of-means probe directions",
+  "predicted_m_star": 1.46,
+  "reported_band": [
+   1.37,
+   1.65
+  ],
+  "doses_in_budget_units": [
+   0.0,
+   0.25,
+   0.5,
+   0.75,
+   1.0,
+   1.25,
+   1.5,
+   1.75,
+   2.0,
+   2.5,
+   3.0,
+   4.0
+  ],
+  "layers": [
+   16,
+   20
+  ],
+  "budget_definition": "B = ||r_L|| / ||v||; with every direction normalized to unit length the budget-normalized dose t equals the write-to-residual ratio ||dh|| / ||r_L||, so it is comparable across intervention classes",
+  "collapse_criterion": "half-max on mean next-token entropy between baseline and saturation, which needs no absolute threshold",
+  "positive_control": "a normalized FFN down-projection column, their setting. If it does not collapse inside the reported band this harness has not reproduced their protocol and no class comparison is licensed",
+  "why_no_scope_task": "collapse is a property of the intervention and the model. Arm G's dependent variable is catalog-position determined (section 14) and its dose ladder never exceeded a third of the single-layer budget (section 16); neither touches this measurement",
+  "prior_art_check": "the companion paper named in 2606.19831 extends to model-scale screening across neurons, still K=1, and is not out. The angle-norm decomposition (2606.06735) treats norm as a stability lever and defines no collapse edge. Recorded as not found, not as not there"
+ },
+ "by_layer": {
+  "16": {
+   "residual_norm": 9.166283965110779,
+   "collapse_dose": {
+    "ffn_column": 2.434982235274346,
+    "ffn_column_1": 1.5624907397141765,
+    "probe_scope": 1.957785044658851,
+    "random_0": 2.3350387329075484,
+    "random_1": 2.426355833635057
+   },
+   "decision": "PROTOCOL_NOT_REPRODUCED",
+   "decision_reasons": [
+    "the FFN-column control collapses at 2.43, outside the reported 1.37-1.65 band, so the discrepancy is in the protocol and not in the intervention class"
+   ]
+  },
+  "20": {
+   "residual_norm": 13.52451577782631,
+   "collapse_dose": {
+    "ffn_column": 2.220386532101732,
+    "ffn_column_1": 2.20598772061632,
+    "probe_scope": 1.7902032704882986,
+    "random_0": 1.741921770790629,
+    "random_1": 1.8249026932707075
+   },
+   "decision": "PROTOCOL_NOT_REPRODUCED",
+   "decision_reasons": [
+    "the FFN-column control collapses at 2.22, outside the reported 1.37-1.65 band, so the discrepancy is in the protocol and not in the intervention class"
+   ]
+  }
+ },
+ "full_result_artifact": "arm_g_ceiling_result.json.gz.b64"
+}
