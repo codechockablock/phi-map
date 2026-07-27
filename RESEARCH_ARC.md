@@ -721,6 +721,94 @@ narrow instantiation: identifying the specific output-driving surface feature,
 measuring the angle between it and the abstract variable as a function of depth,
 and showing they fuse. That is a sharper version of a known frame, not a new one.
 
+### 16. Budget-normalizing the dose ladder: the ceiling was a protocol artifact
+
+Prompted by *Leverage Is Not Reach* (arXiv 2606.19831), which defines a
+budget-normalized control window for single-neuron interventions and reports a
+collapse coefficient of **1.46** for Llama-3.1-8B, in a 1.37-1.65 band across the
+Qwen and Llama families, set by the participation ratio of the residual. Arm G's
+reported ceiling is "roughly 1.5x full removal", on the same model. The numerals
+match, so the conversion had to be done.
+
+**Their budget.** `B = ‖r_L‖/‖v‖`, the dose at which the write's magnitude
+reaches the residual's, with `v` the FFN down-projection column and `‖r_L‖`
+measured on generic text at generation positions. Collapse is `t* = m*B`, so the
+criterion is `‖Δh‖/‖h‖ ≈ m*`.
+
+**Arm G converted**, using `‖h‖ = 8.991` at layer 16 from seed 107's
+`residual_norm_by_layer`, mean `|x·r| = 0.4979`, `sigma = 0.5506`:
+
+| intervention | ‖Δh‖/‖h‖ | fraction of m* | coherent |
+|---|---:|---:|---|
+| removal k=0.5, 32 layers | 0.028 | 0.02x | yes |
+| removal k=1.5, 32 layers | 0.083 | 0.06x | yes |
+| removal k=2.0, 32 layers | 0.111 | 0.08x | yes |
+| **removal k=3.0, 32 layers** | **0.166** | **0.11x** | **no** |
+| addition c=2 sigma, 1 layer | 0.123 | 0.08x | yes |
+| addition c=8 sigma, 1 layer | 0.490 | 0.34x | yes |
+
+**The numerical agreement was a coincidence between unit systems.** Arm G's `k`
+multiplies each row's own projection onto a unit direction; their `t` is a
+coefficient on a weight column of norm `‖v‖`. At k=1.5 Arm G is 18x below the
+threshold it appeared to match.
+
+**And the collapse needs a different explanation than a ceiling.** The model died
+at 0.166, nine times below the single-layer threshold. The only difference is 32
+layers against one. So section 12's "the model is destroyed before a larger
+intervention can be tried" is the layer-scope confound of the investigation
+brief's 6.1, quantified: it is compounding, not budget. Neither a fact about
+scope conflict nor about Llama's residual geometry. Not scooped, and not
+publishable either.
+
+**Three scope mismatches with that framework**, all of which have to be cleared
+before Arm G can enter it:
+
+1. Their intervention is a single FFN neuron writing along a weight-derived
+   direction. Arm G's is a difference-of-means probe direction in the residual
+   stream. The paper states the framework is for K=1 and does not validate
+   extension to steering vectors.
+2. Their `m*` is single-layer. Multi-layer is named as unvalidated.
+3. Their triggers are **measured at rollout** — near 0.3 for mode switches, 0.45
+   for refusal, 0.6 for task framing. Arm G clamps output to a single `READY`
+   token, and that clamp is what makes the observational result clean. A
+   rollout-resolved trigger cannot be measured on a clamped single-token margin.
+   So scope, budget and window cannot be "a new behavior class with an unmeasured
+   trigger" in their sense until the task produces rollout behaviour.
+
+**Budget normalization does not rescue the 5%.** That number is 6 of 128 decision
+flips on the task section 14 showed to be 100% catalog-position determined,
+64/64, with a 2.5-unit empty band censoring flip counts at any dose. Calibrating
+the dose on a broken dependent variable yields a well-calibrated dose-response
+curve for how hard one must push to change which catalog line the model is
+reacting to.
+
+**What does transfer is the headroom.** Arm G never exceeded a third of the
+single-layer budget; c=8 sigma sat at 0.49 and stayed coherent at action mass
+0.9998, as a third-of-ceiling dose should. Predicted collapse at **c ≈ 24 sigma**.
+That makes the cheap experiment their own named future work rather than anything
+about scope: *does a residual-stream difference-of-means direction at a single
+layer collapse at `‖Δh‖/‖h‖ ≈ 1.46`, as a single FFN neuron does?* It needs no
+scope task, no rollout and no behavioural outcome — collapse is read from entropy
+and action-token mass, both already instrumented. One forward sweep over a dose
+ladder in their units either confirms `m*` generalizes across intervention
+classes or shows it does not.
+
+**Caveats.** `‖h‖` here is measured on Arm G prompts at the read position, theirs
+on generic text at generation positions; the ratios shift somewhat under their
+normalization, not by the order of magnitude the verdict rests on, but convert
+properly before publishing. And the `m*` comparison assumes the collapse criterion
+is the write-to-residual ratio; that follows from `t* = m*B` with `B = ‖r_L‖/‖v‖`,
+but it is worth confirming against their Table 3 protocol directly.
+
+**Permit (arXiv 2605.09480) does not take the authority construct.** Read in
+full: it is a control-method paper — a trainable projection defining a
+permission-sensitive subspace plus permission-conditioned transformations,
+ReFT-style, backbone frozen. The separability and low-rank observations are
+exploratory motivation for the method. It never asks whether a frozen model
+carries a pre-action representation of permission violation, never ablates to
+measure what fraction of decisions such a representation mediates, and reports no
+ceiling. That question is open.
+
 ## Current defensible claims
 
 > **Suspended pending section 13.** Every claim below that rests on the
@@ -746,8 +834,13 @@ and showing they fuse. That is a sharper version of a known frame, not a new one
   decline-versus-read decision margin, and shifts a small fraction of the
   decisions themselves: about 5% at the strongest dose the model survives,
   against 0-1 of 128 for matched-dose random directions.
-- That causal effect saturates at roughly 1.5x full removal. Pushing the
-  coordinate beyond its natural range does not push the decision further.
+- ~~That causal effect saturates at roughly 1.5x full removal. Pushing the
+  coordinate beyond its natural range does not push the decision further.~~
+  The saturation is real in the data and the *explanation* was wrong: see
+  section 16. Converted into intervention-budget units the whole ladder sits in
+  the bottom tenth of the single-layer coherence budget, and the k=3 collapse is
+  32-layer compounding rather than a ceiling. "The model is destroyed before a
+  larger intervention can be tried" is a fact about applying at every layer.
 - The causal contribution is concentrated in a sharp plateau at layers 16-17,
   at the decodability onset, not at the most decodable layers. Rank-4 removal
   there attenuates the condition contrast about 11 times more than the same
