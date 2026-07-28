@@ -693,7 +693,7 @@ that is the only depth where the scope variable exists as a separable axis.
 Artifact: `results/arm_g_reextract_seed112_v1/`, including the 4096-dimensional
 selected direction. Recomputed independently from `row_results`.
 
-**Literature check: six for six against.** Both halves of the depth claim are
+**Literature check: six for six against, re-verified against source.** Both halves of the depth claim are
 published, and one of them also kills a claim still standing in the list below.
 
 - *A concept is separable only within a depth interval.* [The Concept Allocation
@@ -705,12 +705,21 @@ published, and one of them also kills a claim still standing in the list below.
   decodable but inert.* [Causality != Decodability](https://arxiv.org/abs/2510.09794),
   October 2025: "middle-layer object tokens exert strong causal influence despite
   being weakly decodable" while "final-layer object tokens support accurate
-  decoding yet are functionally inert". Same dissociation, same direction. This
-  lands on section 8's still-standing claim that selecting an intervention layer
-  by decodability picks the wrong layer, which had not previously been checked.
+  decoding yet are functionally inert". Verified against the abstract. Two caveats
+  added on re-verification: it is a ViT counting task rather than a language model,
+  and the paper does **not** warn against selecting a layer by probe accuracy —
+  that framing came from a search summary and should not have been attributed to
+  them. Section 8's corollary is weakly novel rather than scooped.
 - *Concept directions are not stable across depth.* [Geometric Evolution
   Maps](https://arxiv.org/pdf/2605.25848) reports mean entry-exit cosine 0.233
   across 391 concept-model pairs, with 93.9% below 0.5.
+- *Re-verification pass.* Every verdict in this section and section 15 was
+  originally taken from search summaries. All eight were later checked against
+  abstracts or full text after one summarizer was caught confabulating a paper's
+  claims from its title. Result: six confirmed verbatim, two partial, none
+  refuted. The two partials are recorded inline above — the layer-selection
+  warning is not in arXiv 2510.09794, and the tool-ordering figure is unsourced.
+  The strategic conclusion is unchanged; the attributions are now accurate.
 - The general caution — a probe can read information that is present but
   irrelevant to the decision, or that leaks from a dataset artifact, so probes
   measure accessibility rather than causality — is standard in the probing
@@ -903,13 +912,16 @@ Artifact: `results/arm_g_ceiling_v1/`.
   nearly orthogonal (cosine 0.062) and act on opposite conditions of the
   design: ablating conflict moves conflict rows and not reachable rows, and
   ablating refusal does the reverse.
-- ~~Causal efficacy and probe decodability dissociate across depth in this task.
-  Selecting an intervention layer by cross-validated decodability picks the
-  wrong layer.~~ True here, but published: see section 15. Causality != Decodability
-  (arXiv 2510.09794) reports the same dissociation in the same direction. Section
-  15 adds a mechanism for it in this task — the deep layers are decodable because
-  they have fused with the surface feature that drives the output — and that
-  mechanism is a narrower claim than the dissociation itself.
+- Causal efficacy and probe decodability dissociate across depth in this task.
+  Selecting an intervention layer by cross-validated decodability picks the wrong
+  layer. **Partially published — section 15 over-struck this on first pass.** The
+  dissociation itself is theirs verbatim (arXiv 2510.09794, verified against the
+  abstract), in a ViT counting task. The layer-selection warning is not in that
+  paper; it came from a search summary and was mistakenly attributed. So the
+  phenomenon is published and the practical corollary is a one-line inference
+  nobody appears to have written down. Weak novelty, not zero. Section 15 adds the
+  mechanism in this task — deep layers are decodable because they have fused with
+  the surface feature that drives the output — which is narrower still.
 
 ### Moderate confidence
 
