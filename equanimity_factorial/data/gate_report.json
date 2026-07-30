@@ -1,0 +1,328 @@
+{
+  "n_rows": 2716,
+  "checks": {
+    "crossing": {
+      "content": {
+        "n_units": 679,
+        "levels": [
+          "equanimity",
+          "neutral"
+        ],
+        "nested": false,
+        "verdict": "crossed",
+        "pass": true
+      },
+      "verbosity": {
+        "n_units": 679,
+        "levels": [
+          "terse",
+          "verbose"
+        ],
+        "nested": false,
+        "verdict": "crossed",
+        "pass": true
+      }
+    },
+    "separation": {
+      "tok_reasoning": {
+        "field": "tok_reasoning",
+        "per_stance": {
+          "equanimity": {
+            "n": 679,
+            "mean_terse": 46.986745213549334,
+            "mean_verbose": 285.4860088365243,
+            "d": 8.428367600077065,
+            "auroc_len_predicts_verbosity": 0.9985489359948464
+          },
+          "neutral": {
+            "n": 679,
+            "mean_terse": 46.79528718703976,
+            "mean_verbose": 288.7452135493373,
+            "d": 8.413185221493954,
+            "auroc_len_predicts_verbosity": 1.0
+          }
+        },
+        "min_abs_d": 8.413185221493954,
+        "threshold": 0.8,
+        "pass": true
+      },
+      "tok_total": {
+        "field": "tok_total",
+        "per_stance": {
+          "equanimity": {
+            "n": 679,
+            "mean_terse": 160.1281296023564,
+            "mean_verbose": 386.3357879234168,
+            "d": 5.743495523973721,
+            "auroc_len_predicts_verbosity": 0.999993492986524
+          },
+          "neutral": {
+            "n": 679,
+            "mean_terse": 161.06332842415316,
+            "mean_verbose": 388.90132547864505,
+            "d": 5.514242728530152,
+            "auroc_len_predicts_verbosity": 0.999997830995508
+          }
+        },
+        "min_abs_d": 5.514242728530152,
+        "threshold": 0.8,
+        "pass": true
+      }
+    },
+    "independence": {
+      "tok_reasoning": {
+        "field": "tok_reasoning",
+        "per_verbosity": {
+          "terse": {
+            "n": 679,
+            "mean_raw_diff": 0.19145802650957292,
+            "d": 0.026560354883214652,
+            "ci90_low": -0.05456601958221989,
+            "ci90_high": 0.10768672934864919,
+            "bound": 0.2,
+            "equivalent": true,
+            "auroc_len_predicts_content": 0.5283651562442386,
+            "mean_equanimity": 46.986745213549334,
+            "mean_neutral": 46.79528718703976
+          },
+          "verbose": {
+            "n": 679,
+            "mean_raw_diff": -3.25920471281296,
+            "d": -0.08210293437158737,
+            "ci90_low": -0.12480786278535025,
+            "ci90_high": -0.03939800595782449,
+            "bound": 0.2,
+            "equivalent": true,
+            "auroc_len_predicts_content": 0.47919273990816436,
+            "mean_equanimity": 285.4860088365243,
+            "mean_neutral": 288.7452135493373
+          }
+        },
+        "pass": true
+      },
+      "tok_answer": {
+        "field": "tok_answer",
+        "per_verbosity": {
+          "terse": {
+            "n": 679,
+            "mean_raw_diff": -1.1266568483063328,
+            "d": -0.03974463048775729,
+            "ci90_low": -0.07054505057004593,
+            "ci90_high": -0.008944210405468656,
+            "bound": 0.2,
+            "equivalent": true,
+            "auroc_len_predicts_content": 0.4897829043403949,
+            "mean_equanimity": 113.14138438880707,
+            "mean_neutral": 114.26804123711341
+          },
+          "verbose": {
+            "n": 679,
+            "mean_raw_diff": 0.6936671575846833,
+            "d": 0.02285129092350397,
+            "ci90_low": -0.0205226477400383,
+            "ci90_high": 0.06622522958704624,
+            "bound": 0.2,
+            "equivalent": true,
+            "auroc_len_predicts_content": 0.5003741532748714,
+            "mean_equanimity": 100.84977908689248,
+            "mean_neutral": 100.15611192930781
+          }
+        },
+        "pass": true
+      },
+      "tok_total": {
+        "field": "tok_total",
+        "per_verbosity": {
+          "terse": {
+            "n": 679,
+            "mean_raw_diff": -0.93519882179676,
+            "d": -0.03216951357694042,
+            "ci90_low": -0.06623082176945572,
+            "ci90_high": 0.0018917946155748641,
+            "bound": 0.2,
+            "equivalent": true,
+            "auroc_len_predicts_content": 0.4947173895597138,
+            "mean_equanimity": 160.1281296023564,
+            "mean_neutral": 161.06332842415316
+          },
+          "verbose": {
+            "n": 679,
+            "mean_raw_diff": -2.565537555228277,
+            "d": -0.05222492530710587,
+            "ci90_low": -0.08510722983924675,
+            "ci90_high": -0.019342620774964986,
+            "bound": 0.2,
+            "equivalent": true,
+            "auroc_len_predicts_content": 0.48538850123958605,
+            "mean_equanimity": 386.3357879234168,
+            "mean_neutral": 388.90132547864505
+          }
+        },
+        "pass": true
+      }
+    },
+    "independence_by_category": {
+      "field": "tok_total",
+      "by_category": {
+        "dysphoric": {
+          "terse": {
+            "d": 0.05627977259152335,
+            "n": 136,
+            "mean_diff": 1.2279411764705883,
+            "p": 0.2250393410271608,
+            "p_holm": 1.0,
+            "flagged": false
+          },
+          "verbose": {
+            "d": -0.07857502009381293,
+            "n": 136,
+            "mean_diff": -3.448529411764706,
+            "p": 0.05634793202448235,
+            "p_holm": 0.39443552417137645,
+            "flagged": false
+          }
+        },
+        "hostile": {
+          "terse": {
+            "d": 0.005997043009314905,
+            "n": 135,
+            "mean_diff": 0.14074074074074075,
+            "p": 0.9218258794087146,
+            "p_holm": 0.9218258794087146,
+            "flagged": false
+          },
+          "verbose": {
+            "d": -0.013945059490262927,
+            "n": 135,
+            "mean_diff": -0.5777777777777777,
+            "p": 0.8023402304581986,
+            "p_holm": 1.0,
+            "flagged": false
+          }
+        },
+        "judgment": {
+          "terse": {
+            "d": -0.05217152218477175,
+            "n": 137,
+            "mean_diff": -1.2846715328467153,
+            "p": 0.3171658128227024,
+            "p_holm": 1.0,
+            "flagged": false
+          },
+          "verbose": {
+            "d": -0.09429914112635286,
+            "n": 137,
+            "mean_diff": -4.313868613138686,
+            "p": 0.044921390702504414,
+            "p_holm": 0.3593711256200353,
+            "flagged": false
+          }
+        },
+        "technical_hard": {
+          "terse": {
+            "d": -0.17909156671976376,
+            "n": 137,
+            "mean_diff": -5.343065693430657,
+            "p": 0.0016775015733682037,
+            "p_holm": 0.016775015733682036,
+            "flagged": true
+          },
+          "verbose": {
+            "d": -0.11085289381033334,
+            "n": 137,
+            "mean_diff": -5.897810218978102,
+            "p": 0.02130000999416391,
+            "p_holm": 0.19170008994747517,
+            "flagged": false
+          }
+        },
+        "underspecified": {
+          "terse": {
+            "d": 0.0261012021950904,
+            "n": 134,
+            "mean_diff": 0.6492537313432836,
+            "p": 0.5815484659629758,
+            "p_holm": 1.0,
+            "flagged": false
+          },
+          "verbose": {
+            "d": 0.03621449477326443,
+            "n": 134,
+            "mean_diff": 1.5223880597014925,
+            "p": 0.4708334167316498,
+            "p_holm": 1.0,
+            "flagged": false
+          }
+        }
+      },
+      "n_comparisons": 10,
+      "worst_abs_d": 0.17909156671976376,
+      "min_p_holm": 0.016775015733682036,
+      "pass": false
+    },
+    "content_separation": {
+      "auroc": 0.9459771473686722,
+      "shuffled_null_auroc": 0.47742608574942363,
+      "within_verbosity": {
+        "terse": 0.9315874293175661,
+        "verbose": 0.9585871972340855
+      },
+      "contamination": {
+        "label_auroc": 0.9459771473686722,
+        "nuisance_auroc_within_label": {
+          "0": 0.43274893122303654,
+          "1": 0.5657978357673179
+        },
+        "worst_nuisance_deviation": 0.06725106877696346,
+        "reads_nuisance_better_than_label": false
+      },
+      "threshold": 0.75,
+      "pass": true
+    },
+    "leakage": {
+      "tok_reasoning": {
+        "field": "tok_reasoning",
+        "b_manipulation_tokens": 240.22459499263624,
+        "per_verbosity": {
+          "terse": {
+            "content_shift_tokens": 0.19145802650957222,
+            "leakage_pct_of_B": 0.07969959383860803
+          },
+          "verbose": {
+            "content_shift_tokens": -3.2592047128129593,
+            "leakage_pct_of_B": 1.3567323166526166
+          }
+        },
+        "worst_leakage_pct": 1.3567323166526166
+      },
+      "tok_total": {
+        "field": "tok_total",
+        "b_manipulation_tokens": 227.02282768777613,
+        "per_verbosity": {
+          "terse": {
+            "content_shift_tokens": -0.935198821796746,
+            "leakage_pct_of_B": 0.4119404340619536
+          },
+          "verbose": {
+            "content_shift_tokens": -2.565537555228275,
+            "leakage_pct_of_B": 1.130079112025092
+          }
+        },
+        "worst_leakage_pct": 1.130079112025092
+      }
+    },
+    "required_pool_n": {
+      "tok_reasoning": {
+        "terse": 533,
+        "verbose": 149
+      },
+      "tok_total": {
+        "terse": 95,
+        "verbose": 89
+      }
+    }
+  },
+  "preregistered_pass": true,
+  "screen_clean": false,
+  "pass": true
+}

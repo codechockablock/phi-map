@@ -1,0 +1,31 @@
+band_version=v4  prompts=288  todo=1152
+  40/1152 fail=0 0.39/s eta=47min
+  80/1152 fail=0 0.36/s eta=50min
+  120/1152 fail=0 0.36/s eta=47min
+  160/1152 fail=0 0.36/s eta=46min
+  200/1152 fail=0 0.36/s eta=44min
+  240/1152 fail=0 0.36/s eta=42min
+  280/1152 fail=0 0.36/s eta=40min
+  320/1152 fail=0 0.36/s eta=39min
+  360/1152 fail=0 0.36/s eta=37min
+  400/1152 fail=0 0.36/s eta=35min
+  440/1152 fail=0 0.37/s eta=32min
+  480/1152 fail=0 0.37/s eta=30min
+  520/1152 fail=0 0.37/s eta=28min
+  560/1152 fail=0 0.38/s eta=26min
+  600/1152 fail=0 0.38/s eta=24min
+  640/1152 fail=0 0.38/s eta=22min
+  680/1152 fail=0 0.38/s eta=21min
+  720/1152 fail=0 0.38/s eta=19min
+  760/1152 fail=0 0.38/s eta=17min
+  800/1152 fail=0 0.39/s eta=15min
+  840/1152 fail=0 0.39/s eta=14min
+  880/1152 fail=0 0.39/s eta=12min
+  920/1152 fail=0 0.39/s eta=10min
+  960/1152 fail=0 0.39/s eta=8min
+  1000/1152 fail=0 0.39/s eta=7min
+  1040/1152 fail=0 0.38/s eta=5min
+  1080/1152 fail=0 0.38/s eta=3min
+  1120/1152 fail=0 0.38/s eta=1min
+  1152/1152 fail=0 0.38/s eta=0min
+done in 3039s fails=0

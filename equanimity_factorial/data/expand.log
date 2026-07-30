@@ -1,0 +1,16 @@
+generator: claude-sonnet-5
+current pool: 100   target: 680
+  round 1: 25 batches
+    pool now 677
+  round 2: 2 batches
+    pool now 682
+  dropping 3 near-duplicates
+
+wrote /Users/joseph/phi-map/equanimity_factorial/data/prompt_pool.json: 679 prompts
+{
+  "dysphoric": 136,
+  "hostile": 135,
+  "technical_hard": 137,
+  "judgment": 137,
+  "underspecified": 134
+}

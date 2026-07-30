@@ -1,0 +1,26 @@
+generator      : claude-sonnet-5
+prompts        : 100   cells: 4
+already done   : 12
+to generate    : 388
+  20/388  fail=0  0.75/s
+  40/388  fail=0  0.79/s
+  60/388  fail=0  0.81/s
+  80/388  fail=0  0.83/s
+  100/388  fail=0  0.87/s
+  120/388  fail=0  0.87/s
+  140/388  fail=0  0.89/s
+  160/388  fail=0  0.89/s
+  180/388  fail=0  0.87/s
+  200/388  fail=0  0.86/s
+  220/388  fail=0  0.82/s
+  240/388  fail=0  0.81/s
+  260/388  fail=0  0.81/s
+  280/388  fail=0  0.82/s
+  300/388  fail=0  0.82/s
+  320/388  fail=0  0.82/s
+  340/388  fail=0  0.83/s
+  360/388  fail=0  0.84/s
+  380/388  fail=0  0.85/s
+  388/388  fail=0  0.84/s
+done in 461s, failures=0
+wrote /Users/joseph/phi-map/equanimity_factorial/data/factorial_raw.jsonl
