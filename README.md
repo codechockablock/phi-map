@@ -1,12 +1,22 @@
 # phi-map
 
+**Status: frozen, 2026-07-30.** No further work is planned. The repository is kept
+for the record and for the one result worth writing up.
+
 Research repo that began as one question — *is deception one thing inside a
 model and many things outside it?* — and ended up somewhere narrower and better
 supported.
 
-**[RESEARCH_ARC.md](RESEARCH_ARC.md) is the current state.** Read it first. It
-carries the full evidence ledger, the claims at their defensible scope, what is
-not established, and what to run next. Everything below is orientation.
+**[docs/FINAL-STATUS-2026-07-30.md](docs/FINAL-STATUS-2026-07-30.md) is the closing
+summary.** Read it first: what survived, what died and why, what was considered and
+closed, and where every artifact lives.
+
+**[RESEARCH_ARC.md](RESEARCH_ARC.md) is the evidence ledger**, current as of the
+freeze. It carries the claims at their defensible scope and what is not established.
+Note its **VOID block** — several claims that stood earlier were retracted by §13–§15
+and must not be cited.
+
+Everything below is orientation and predates the freeze.
 
 ## What survived
 
@@ -85,3 +95,24 @@ python3 arm_g_dose.py --self-test
 Relationship to [frontier-ops](https://github.com/codechockablock/frontier-ops):
 imports it as a library (encoders, prototype/calibration machinery, pinned
 Apollo data fetcher). Owes it nothing else; frontier-ops is frozen.
+
+## What is frozen, and what that means
+
+Frozen means no new experiments, no new compute, and no forward agenda. It does not
+mean the results are withdrawn — see the closing summary for what is confirmatory,
+what is exploratory, and what died.
+
+Retired by decision at the freeze:
+
+- **The Arm G forward agenda** — multi-turn decay, Arm S1, the ceiling
+  reimplementation. All were attempts to extract more from a variable that saturates;
+  §14 is what ended that agenda rather than part of it (`RESEARCH_ARC.md` §19.1).
+- **The model/agent-welfare framing.** The methodological findings stand on their own
+  as measurement-validity and agent-safety results; the welfare interpretive layer is
+  dropped (`RESEARCH_ARC.md` §19.2).
+- **A general research harness**, scoped and declined — the machinery this repo already
+  had did not prevent the failures it was built to prevent
+  (`docs/research-harness-scope-2026-07-30.md`).
+
+The strongest surviving result needs **no new compute** to write up: every figure is in
+`results/arm_g_order_crossover_seed111_v1/` and `results/arm_g_reextract_seed112_v1/`.
