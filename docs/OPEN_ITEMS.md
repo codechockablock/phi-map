@@ -24,6 +24,10 @@ Results §9.5. The audit is closed: `docs/audit-closeout-2026-07-30.md`.
 | 7 | **The notebook's markdown says JailbreakBench; the code and all seven artifacts say `advbench`.** | Documentation/code divergence in a reproducibility claim. One-line fix, no result depends on it. |
 | 8 | **`equanimity_factorial/train_eval.py` line references in the audit doc have shifted** by the three-site patch. | Cosmetic. The audit cites the file as it stood when read, and says so in its header. |
 
+| 9 | **Marker-anchoring repair is untested, not disproven.** Step 5 returned S4 VOID: 4/8 adapters carry the `ANSWER:` marker on under 90% of rating turns, so `R_m` is undefined on this adapter set. `R_m` and the D-β offset control were never computed. | Needs a new pre-registration with an anchor that exists in every generation, or an adapter set with higher coverage, or a protocol that forces the scaffold. Not S3 — nothing is known about repairability. |
+| 10 | **Format acquisition appears to lapse on short-form turns.** Where the rating-turn marker is absent, the model answers with the bare digit at character 0, skipping the `REASONING:`/`ANSWER:` scaffold entirely. | A hypothesis about *when* the Finding I mechanism applies. Deliberately not acted on — using it as an anchor would be the post-hoc substitution Step 5's branch forbids. Any test states its anchor and criteria first. |
+| 11 | **Pre-registrations should evaluate their own preconditions against data already in hand.** D-α could have been checked when the S5 prereg was written; the coverage figures were already in Step 4 §3. | Process item. Cheap to adopt: before finalising a prereg, run every void/disqualifying condition that existing artifacts can answer. |
+
 ## Deliberately not opened
 
 Per the 2026-07-30 depth stop: no tests of the lint's fixtures, no layer above the
