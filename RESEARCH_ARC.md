@@ -886,13 +886,26 @@ post-hoc. Power at the achieved design is **MDE 9.34 pp [6.34, 22.82]** against
 motivating effects of 1.25–3 pp, so the founding question is unanswerable at achievable
 n. Position-sensitivity was promoted to being the study.
 
-**Finding I — format tuning destroys position-fixed readouts.** Four confirmed
-instances across four readout classes: token log-ratio (first-token opener mass
-96.6% → 4.7%/16.3%), text window (a 400-char judge window against answer offsets of
-0 / ~209 / ~1161), renormalised tail (`digit_mass` to 0.031 on one adapter), and
-hidden-state projection (`valence_axis`, confirmed by refit at cos = 0.99989 to the
-contaminated axis). Base-vs-tuned is robust; every differential-by-condition claim is
-exploratory.
+**Finding I — format tuning destroys position-fixed readouts.** **Four confirmed
+instances across THREE readout classes** (revised 2026-07-30, see below):
+
+| class | instances | licensing section |
+|---|---|---|
+| format-token displacement | `refusal_openers` (opener mass 96.6% → 4.7%/16.3%); `rating_digits` | §18 |
+| text window | the judge's 400-char window vs answer offsets 0 / ~209 / ~1161 | §18 |
+| hidden-state projection | `valence_axis`, refit-confirmed at cos = 0.99989 | §18 |
+
+Base-vs-tuned is robust; every differential-by-condition claim is exploratory.
+
+**Revision, pre-registered before it was computed** (`docs/digitmass-scaffold-*`):
+`digit_mass` was originally read as *support collapse*. It is instead **strongly
+tracking scaffold-skip propensity** — r = **−0.899** (p = 0.0024, n = 8) against
+rating-turn marker coverage, replicating within cells (−0.860 eq-terse, −0.988
+neu-terse). It is **not** the skip rate itself: mean |dm − (1−cov)| = 0.257 and
+`digit_mass` exceeds (1−cov) in 8/8 rows. So `rating_digits` remains a Finding I
+instance but moves into the class `refusal_openers` already occupies, and the
+renormalised-tail class is lost. The instance half of the claim survives; the class
+half did not.
 
 **Finding II — orthogonality certified on one distribution does not transfer.** Length
 orthogonality certified at |d| < 0.2 across 6,456 generations on the training pool;

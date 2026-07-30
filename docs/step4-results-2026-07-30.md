@@ -212,6 +212,13 @@ absolute measure (support collapse in a hidden-state readout — the first non-t
 instance), with the threshold-sensitivity caveat attached. The vindication condition
 ("S within 2× of base") did not remotely obtain.
 
+**Instance count: four confirmed, across THREE readout classes (revised 2026-07-30).**
+See `docs/digitmass-scaffold-results-2026-07-30.md`: `digit_mass` tracks scaffold-skip
+propensity at r = −0.899, so `rating_digits` moves into `refusal_openers`'s class and
+the renormalised-tail class is lost. The instance count is unchanged; the class count
+is not. A5b's "only instance caught by a built-in guard" is weakened accordingly — the
+guard fired, but on scaffold adherence rather than on support collapse.
+
 **Instance count: RESOLVED in R5 (§9.5). Four confirmed.** R4 demoted this instance
 to "under test" while the axis contamination was open. The refit ran and returned
 **V-1 SURVIVES**, so `valence_axis` is restored to the confirmatory family and Finding
