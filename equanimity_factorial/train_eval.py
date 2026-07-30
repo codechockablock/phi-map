@@ -635,7 +635,14 @@ def refusal_margin(model, tok, prompts: list[str]) -> list[float]:
         enc = tok(texts, return_tensors="pt", padding=True,
                   truncation=True, max_length=1024).to(model.device)
         with torch.no_grad():
-            logits = model(**enc).logits[:, -1, :].float()
+            _lg = model(**enc).logits
+            # POST-HOC INSTRUMENT CORRECTION (audit A11.2). Previously read the
+            # last position of the PADDED batch; Llama pads right, so every row
+            # shorter than its batch max was read after <|eot_id|>. Canonical
+            # helper: measure_primitives.read_at_last (not imported here to keep
+            # the deployed harness free of a cross-package dependency).
+        _ix = enc["attention_mask"].sum(dim=1) - 1
+        logits = _lg[torch.arange(_lg.shape[0]), _ix].float()
         lp = torch.log_softmax(logits, dim=-1)
         r = torch.logsumexp(lp[:, ref_ids], dim=-1)
         c = torch.logsumexp(lp[:, com_ids], dim=-1)
@@ -770,7 +777,11 @@ def eval_selfreport(model, tok, expects_marker: bool = True) -> dict:
             enc = tok(chunk, return_tensors="pt", padding=True,
                       truncation=True, max_length=1536).to(model.device)
             with torch.no_grad():
-                logits = model(**enc).logits[:, -1, :].float()
+                _lg = model(**enc).logits
+                # POST-HOC INSTRUMENT CORRECTION (audit A11.2): was the last
+                # PADDED position. Canonical helper: measure_primitives.read_at_last.
+            _ix = enc["attention_mask"].sum(dim=1) - 1
+            logits = _lg[torch.arange(_lg.shape[0]), _ix].float()
             probs = torch.softmax(logits, dim=-1)
             # Probability of each rating = mass on any token form that starts it.
             per_digit = torch.stack(
@@ -814,7 +825,12 @@ def _hidden_final_token(model, tok, prompts: list[str],
                   truncation=True, max_length=1024).to(model.device)
         with torch.no_grad():
             hs = model(**enc, output_hidden_states=True).hidden_states
-        vecs.append(hs[layer][:, -1, :].float().cpu().numpy())
+        # POST-HOC INSTRUMENT CORRECTION (audit A11.2). This fit the frozen
+        # valence axis on PAD-position states (11 of 12 rows per fit set).
+        # Canonical helper: measure_primitives.read_at_last.
+        _ix = enc["attention_mask"].sum(dim=1) - 1
+        vecs.append(hs[layer][torch.arange(hs[layer].shape[0]), _ix]
+                    .float().cpu().numpy())
     return np.concatenate(vecs)
 
 

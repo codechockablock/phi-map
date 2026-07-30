@@ -749,10 +749,44 @@ instrument. **A5b's numbers are artifacts; A5b's conclusion is independently
 confirmed.** The audit text is left standing with this pointer rather than rewritten,
 so the error and its correction are both on the record.
 
-The remaining 27 hits are in Arm G scripts. **Flagged, not assessed** — I have not
-verified whether those batch or run at batch size 1, and Arm G's decision-level
-results are already void for unrelated reasons (`RESEARCH_ARC.md` §14). They should
-not be relied on until checked.
+### A11.2b Remediation, bounded — and my impact claim was wrong
+
+**Correction.** A11.2 said the remaining hits were "flagged, not assessed" and that the
+honest figure was "close to all of them." That was an overstatement made without
+checking, and checking reverses it.
+
+**All 26 Arm G hits are false positives.** Every Arm G script tokenises through
+`pad_prompt_batch`, which fills `input_ids[index, -length:]` — i.e. it **left-pads**.
+Under left padding the final position *is* the last real token, so `[:, -1, :]` is
+correct there. `p2_harness.py:75` is likewise benign: a batch of one, no `padding=True`.
+
+**So only 3 of 31 hits were ever real**, all in `equanimity_factorial/train_eval.py`,
+which tokenises through HuggingFace with `padding=True` and Llama's default **right**
+padding.
+
+**Remediated** (the bounded scope: only sites that produced numbers cited in a doc):
+
+| site | function | fix |
+|---|---|---|
+| `train_eval.py` `refusal_margin` | first-token opener margin | reads `attention_mask.sum(1) - 1` |
+| `train_eval.py` `eval_selfreport` | rating digit read | same |
+| `train_eval.py` `_hidden_final_token` | fits `valence_direction.npz` | same |
+
+Patched inline rather than by importing `measure_primitives`, deliberately: the
+deployed harness stays free of a cross-package dependency that the Colab staging path
+would also have to carry. Each site names the canonical helper in a comment.
+`train_eval.py --self-test` passes after the change. The as-run version remains in git.
+
+**The 28 verified-correct sites are now hash-keyed exemptions, not silence.** Each
+carries its reason ("left-pads via `pad_prompt_batch`…"), and the exemption lapses
+automatically if the file changes. `measure_primitives.py --lint` is now clean:
+49 exempt, 0 violations.
+
+**Note what this means for the pattern.** Finding I's instances were found
+forensically, in the deployed equanimity harness. The repo's older Arm G code got the
+indexing *right* — it left-pads by construction. So this is not a repo-wide habit; it
+is specific to the newer code path that used HuggingFace's default padding without
+checking the side.
 
 ### A11.3 Mandatory fingerprinting, the durable fix
 

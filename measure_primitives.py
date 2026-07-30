@@ -55,6 +55,42 @@ LINT_EXEMPT = {
                "see valence_position_check.PROVENANCE.md"),
     "measure_primitives.py": dict(
         blob=None, reason="defines and tests the anti-pattern"),
+    # VERIFIED CORRECT, not excused. Checked in audit A11.2: every Arm G script
+    # left-pads, so the naive idiom reads the last real token there. Hash-keyed,
+    # so any edit lapses the exemption and forces a re-check.
+    "arm_g_allpos.py": dict(
+        blob="875f5b529d6f275fbb1f49629ef270fba2162f88",
+        reason="left-pads via pad_prompt_batch (input_ids[i, -length:]); [:, -1] IS the last real token"),
+    "arm_g_boundary.py": dict(
+        blob="f2deeae69537a013bd36078654d711967c1933a0",
+        reason="left-pads via pad_prompt_batch (input_ids[i, -length:]); [:, -1] IS the last real token"),
+    "arm_g_causal.py": dict(
+        blob="d6af7758b2e035eaa418cef85d3cfb12a5ca51a3",
+        reason="left-pads via pad_prompt_batch (input_ids[i, -length:]); [:, -1] IS the last real token"),
+    "arm_g_causal_dose_ablation.py": dict(
+        blob="d4dfdbd328fef0d19b5f7f1ff9e23300c3ab0dd5",
+        reason="left-pads via pad_prompt_batch (input_ids[i, -length:]); [:, -1] IS the last real token"),
+    "arm_g_causal_subspace.py": dict(
+        blob="df8d623ae5c76aa7bfb8b318a3c770f7810a6ec4",
+        reason="left-pads via pad_prompt_batch (input_ids[i, -length:]); [:, -1] IS the last real token"),
+    "arm_g_ceiling.py": dict(
+        blob="18ce3b77a062faa384611d13234465bf0d52b908",
+        reason="left-pads via pad_prompt_batch (input_ids[i, -length:]); [:, -1] IS the last real token"),
+    "arm_g_cross_layer.py": dict(
+        blob="299bfd6dfa1b8988c7624f665045e4521c3c81c9",
+        reason="left-pads via pad_prompt_batch (input_ids[i, -length:]); [:, -1] IS the last real token"),
+    "arm_g_dose.py": dict(
+        blob="2a3076baeef3355a8d4c8d807206e2f7b1e00c7e",
+        reason="left-pads via pad_prompt_batch (input_ids[i, -length:]); [:, -1] IS the last real token"),
+    "arm_g_order_crossover.py": dict(
+        blob="d51af3d41130d08c2374335d5c77aa441642995d",
+        reason="left-pads via pad_prompt_batch (input_ids[i, -length:]); [:, -1] IS the last real token"),
+    "p2_harness.py": dict(
+        blob="0f176717b4e50b23581f51a11e403760381c589a",
+        reason="batch of 1, no padding=True; [:, -1] is the only position"),
+    "valence_position_check_r3.py": dict(
+        blob="1fb7db0774acf377f089bd7aded999c27e92dbbc",
+        reason="prose mention in the module docstring, not a use"),
 }
 
 
