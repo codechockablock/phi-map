@@ -132,3 +132,15 @@ claim treats items as exchangeable; it is exact only under that model.
 - No claim about welfare, valence, or model experience.
 - B1 licenses only: "this readout method, on this model, collapses support under a
   direction-specific perturbation that matched-norm random controls do not detect."
+
+## Amendment (pre-data, 2026-07-30)
+
+Recorded before any experimental data were collected (the sole run attempt halted at
+the preflight budget guard). Engineering changes to the notebook after the original
+prereg commit: (1) hardware-selected dtype — fp16 on pre-Ampere GPUs, bf16 otherwise —
+after bf16 emulation on a T4 inflated the runtime ~10×; (2) budget gate recalibrated
+6→8 units as an anomaly threshold; (3) Google Drive checkpointing and resume added,
+reversing the earlier no-Drive delivery constraint at Joseph's direction. None of
+these touch the design, prompts, directions, α set, metrics, thresholds, or branch
+rules above, which stand as originally committed. Resumed runs that span GPU
+generations record per-cell dtype and flag mixed-dtype numerics in the output.
