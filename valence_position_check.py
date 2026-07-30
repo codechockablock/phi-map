@@ -196,7 +196,18 @@ def main():
             enc = tok(texts, return_tensors="pt", padding=True,
                       truncation=True, max_length=1024).to(model.device)
             with torch.no_grad():
-                lg = model(**enc).logits[:, -1, :].float()
+                logits = model(**enc).logits
+            # POST-HOC INSTRUMENT CORRECTION, logged in results §9.1.
+            # This previously read logits[:, -1, :] -- the last position of the
+            # PADDED batch. Llama pads right by default, so 21 of 24 probe
+            # readings were taken after an <|eot_id|> pad token rather than after
+            # the probe. That produced P1's 8.5e-6 single-turn digit mass and the
+            # retracted "0.46 on a 1-7 scale", and it is the whole of the 28x
+            # discrepancy against step4_run.digit_read.
+            # hidden_final_token, forty lines up in this same file, had the
+            # correct idiom the entire time. Use the same one here.
+            idx = enc["attention_mask"].sum(dim=1) - 1
+            lg = logits[torch.arange(logits.shape[0]), idx].float()
             pr = torch.softmax(lg, dim=-1)
             per = torch.stack([pr[:, digit_ids[d]].sum(dim=-1)
                                for d in range(1, 8)], dim=-1)  # (B, 7)

@@ -42,10 +42,17 @@ adapter reading at every support level sits 1.1–1.5 rating points below the ba
 prior, which is decisive at any n. The ρ is descriptive support only — at 8 clusters
 it could not have carried the claim by itself.
 
-The single most legible result in the run needs no statistics at all: the check's
+~~The single most legible result in the run needs no statistics at all: the check's
 single-turn neutral "prior rating" came out **0.46 on a 1–7 scale** — an
 out-of-range value, which proves the readout is arithmetic on nothing to any reader
-in one line.
+in one line.~~
+
+**RETRACTED in R3 (§9). The 0.46 is a padding bug in `valence_position_check.py`,
+not a result.** `prior_rating` read `logits[:, -1, :]` — the last position of the
+*padded* batch — so 21 of 24 probe readings were taken after an `<|eot_id|>` pad
+token rather than after the probe. The same defect explains the §6 28× discrepancy.
+No confirmatory quantity is affected; the branch and every verdict in §1–§5 stand.
+Details, blast radius, and the fix in §9.
 
 ## 1. Primary — ΔSupportMass, base vs the fixed mixture of 8 adapters
 
@@ -224,7 +231,19 @@ Noted without a claim: neutral adapters sit consistently higher on S (0.16–0.1
 base) than equanimity adapters (0.10–0.12×). Seed variance is large relative to
 these gaps and Factor B is unestimated; this is a descriptive row, not a contrast.
 
-## 6. The 28× instrument discrepancy — parked with a resolution condition
+## 6. The 28× instrument discrepancy — **RESOLVED in R3 (§9), at zero compute**
+
+> **R3 supersedes this section.** The discrepancy was a padding bug in
+> `valence_position_check.prior_rating`, found by reading the two code paths and
+> confirmed behaviourally without a GPU. The resolution condition below is
+> **discharged**, not parked. The section is preserved unedited beneath this banner
+> because it is the record of what was believed before the cause was found — and
+> because its own framing ("two implementations of nominally the same measurement,
+> disagreeing by more than an order of magnitude, in a study whose entire content is
+> that nominally-identical instruments silently differ") turned out to be exactly
+> right, including about this project's own code.
+
+### 6 (original text, preserved)
 
 The check's P1 single-turn base digit mass (8.5×10⁻⁶ dysphoric) and the runner's
 single-turn diagnostic (2.4×10⁻⁴) differ **~28×** while both being ≈0. Two
@@ -298,5 +317,119 @@ description written afterward. This one cost a headline, for ~6 compute units.
 2. **The digits partial-recovery at the marker** (7/8 at ≥0.25× base): is a
    marker-aligned rating read a *repairable* instrument? That is B2's question,
    scoped to one readout, and it is open rather than answered.
-3. The §6 28× instrument-variant discrepancy, with the resolution condition attached
-   there.
+3. ~~The §6 28× instrument-variant discrepancy~~ — **closed in R3 (§9).** Cause: a
+   padding bug in this project's own check code. Resolved at zero compute.
+
+---
+
+## 9. Revision R3 — the 28× resolved, the 0.46 retracted, and the training marginal re-verified
+
+Two post-review verifications, both zero compute, both local reads. **Neither changes
+the branch (B3) or any verdict in §1–§5.** One retracts a headline; one narrows a
+robustness claim.
+
+### 9.1 The 28× discrepancy was a padding bug in our own check code
+
+**Cause, found by reading the two code paths rather than by buying GPU time.**
+`valence_position_check.prior_rating` (the P1 addition) reads
+
+```python
+lg = model(**enc).logits[:, -1, :]     # last position of the PADDED batch
+```
+
+while `step4_run.digit_read` reads, via `_last_probs`,
+
+```python
+idx = enc["attention_mask"].sum(dim=1) - 1   # last NON-PAD position
+```
+
+Llama's tokenizer defaults to `padding_side="right"`, so for every probe shorter than
+its batch's longest, `logits[:, -1, :]` is the distribution *after a run of
+`<|eot_id|>` pad tokens*, not after the probe.
+
+**Confirmed behaviourally, not by inspection** (the standard this project holds; no
+model weights needed — tokenizer only):
+
+| probe set | batch | padded len | rows read at a PAD position |
+|---|---:|---:|---|
+| dysphoric | 0 | 40 | **7 / 8** |
+| dysphoric | 1 | 34 | **7 / 8** |
+| neutral | 0 | 30 | **7 / 8** |
+
+**21 of 24 readings** were taken after `<|eot_id|>`. Only the single longest probe in
+each batch was read at its true final position.
+
+**The bitter part, recorded rather than smoothed:** `hidden_final_token`, in the *same
+file*, does it correctly — `idx = enc["attention_mask"].sum(dim=1) - 1`, with an
+inline comment reading *"last NON-PAD position per row; left/right padding both
+handled."* The correct idiom was eight lines away and `prior_rating`, added later, did
+not reuse it. This is a third instance in this session of the session's own theme, and
+the second of them in code written for this audit.
+
+**Blast radius — everything load-bearing is clear, because the confirmatory path never
+used this function:**
+
+| quantity | implementation | status |
+|---|---|---|
+| §1 `refusal_openers` Δ | `step4_run._last_probs` | **unaffected** |
+| §1 `rating_digits` Δ (two-turn) | `step4_run.digit_read` | **unaffected** |
+| §1 `valence_axis` S | `V.hidden_final_token` / `V.support_mass` | **unaffected** |
+| §2 Q-B base two-turn prior 4.438 / 4.550 | `step4_run.digit_read` | **unaffected** |
+| §3 Q-C marker-aligned reads | `step4_run` | **unaffected** |
+| §4 valence D1–D4 | `hidden_final_token`, `support_mass` | **unaffected** |
+| §0/§6 "0.46 on a 1–7 scale" | `prior_rating` | **RETRACTED** |
+| P1 single-turn digit mass 8.5×10⁻⁶ | `prior_rating` | **RETRACTED** |
+
+The 0.46 was never evidence that a renormalised readout goes out of range on a
+collapsed support. It is the expected digit under a distribution read after a pad
+token. **The rhetorically best line in the results doc was an artifact of our own
+instrument**, which is precisely the failure the doc is about, and it is withdrawn
+rather than quietly requalified.
+
+**What this does not undo.** The *arithmetic* validity argument (prereg §2) is
+untouched: a value renormalised over a 0.2% support is tail arithmetic regardless.
+That claim never rested on the 0.46. And the genuine out-of-range demonstration, if
+one is wanted, now has to be earned on a correctly-read position or dropped.
+
+**Fix.** `prior_rating` now reads the last non-pad position, by delegating to the same
+index computation `hidden_final_token` uses. Logged as a **post-hoc instrument
+correction** to a file that was committed pre-data at `d6aac3e`: the registered
+protocol is unchanged, no confirmatory quantity used the corrected path, and the fix
+is recorded here rather than applied silently. Any future run of P1 produces different
+numbers from the ones in this document, by design.
+
+### 9.2 The training digit marginal — conclusion robust, one claim narrowed, provenance added
+
+R2 reported the training-data marginal as counts `2628/2152/1268/639/237/119/41`,
+E ≈ 2.19, "near-identical across cells (2.15–2.27)". An independent recount was run
+against `factorial_raw.jsonl`.
+
+**Reproduced exactly:** 8,264 rows; 6,700 answers present; **3** digit-initial answers.
+
+**Not reproduced:** the digit counts. Six extraction rules were tried
+(reasoning+answer, answer-only, reasoning-only, bare-digit, ±`content`, ±`prompt`);
+none yields R2's counts. Closest is prompt+reasoning+answer at
+`2552/1946/1323/604/287/143/38`. R2's "1 explicit `x/7` pattern" recounts as **0**
+under `\b[1-7]\s*/\s*7\b`. **The script that produced R2's numbers is not in the
+repo**, so a committed number had no committed provenance — the defect that
+`step4_run`'s harness fingerprint exists to prevent.
+
+**The conclusion is robust and stands.** Across every rule tried, E ∈ **[2.148,
+2.416]** — at least 2.02 below the base two-turn prior (4.44–4.55) and at least 0.58
+below the observed adapter band (3.0–3.4). §2 and §8.1's claim that the band matches
+**neither** candidate prior does not depend on the extraction rule.
+
+**One claim is narrowed.** "Near-identical across cells" is **not** robust. Per-cell
+spread by rule: 0.225 (reasoning+answer), 0.174 (answer-only), 0.312
+(reasoning-only) — against R2's stated 0.12. Under two of three rules `neutral-terse`
+lands at 2.39–2.41, outside R2's stated 2.15–2.27 band. Also, digit occurrences are
+heavily unbalanced across cells (478 / 1,632 / 882 / 3,613 under reasoning+answer),
+so the pooled marginal is dominated by `neutral-verbose` at ~55% of all occurrences.
+**Corrected statement: the pooled marginal is ≈2.15–2.42 depending on extraction
+rule, per-cell spread is ~0.17–0.31 rather than 0.12, and the pooled value is
+dominated by one cell.** The cross-cell comparison should not be described as
+near-identical.
+
+`training_digit_marginal.py` is added at repo root with the rule stated in code and a
+`--self-test`, so the number now has provenance and the disagreement is reproducible
+in both directions.
