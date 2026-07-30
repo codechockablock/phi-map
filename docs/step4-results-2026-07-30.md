@@ -210,12 +210,27 @@ Run first, unmodified, criteria fixed in `valence-check-prereg-2026-07-29.md`:
 Disposition per that prereg: D1's firing disqualifies `valence_dysphoric` as an
 absolute measure (support collapse in a hidden-state readout — the first non-token
 instance), with the threshold-sensitivity caveat attached. The vindication condition
-("S within 2× of base") did not remotely obtain. **Finding I now has four confirmed
-instances across four readout classes**: token log-ratio, text window, renormalised
-tail, hidden-state projection — with the fourth carrying its sensitivity caveat.
+("S within 2× of base") did not remotely obtain.
 
-Cross-instrument agreement: `step4_run.py`'s independently-computed S values match
-the check's to four decimals on all nine models.
+**Instance count, corrected in R4 (§9.3).** ~~Finding I now has four confirmed
+instances across four readout classes.~~ The hidden-state instance is **under test,
+not confirmed** — the axis it measures against is itself contaminated. Honest count:
+
+> **Three confirmed, one under test.** `refusal_openers` (robust to essentially
+> anything), `rating_digits` (survives via the separately-measured, correctly-indexed
+> path), the judge's text window — and **`valence_axis` pending the refit**
+> pre-registered in `valence-refit-prereg-2026-07-30.md`.
+
+This matters more than a tally: valence was the instance carrying *"first in a
+hidden-state readout"* — the one that made Finding I a claim about readouts generally
+rather than about token-level ones. Until the refit resolves, all three survivors are
+token-level.
+
+~~Cross-instrument agreement: `step4_run.py`'s independently-computed S values match
+the check's to four decimals on all nine models.~~ **Withdrawn (§9.3):** both project
+onto the same contaminated `.npz` and both call the same `V.hidden_final_token`.
+Shared input produces exact agreement for free. Two callers of one code path agreeing
+is not corroboration.
 
 ## 5. Exploratory (per prereg §4 — intervals only, no inference, no correction)
 
@@ -416,6 +431,77 @@ not superseded.
 **mandatory in every output record this repo emits**. With it, in-place correction is
 recoverable and this question stops recurring; forking is only necessary while it is
 absent.
+
+### 9.3 R4 — the contamination reaches the axis, not just the reading
+
+**Correction to §9.1, and it is more serious than what §9.1 said.** §9.1 reported
+D1–D4 as "unaffected" because they use `attention_mask`-indexed reads. That is too
+strong and is withdrawn.
+
+`valence_direction.npz` is fit by `train_eval.get_valence_direction` →
+`train_eval._hidden_final_token` (`train_eval.py:838-839`), which reads
+`hs[layer][:, -1, :]`. Both 12-probe fit sets fit in one `EVAL_BATCH=32` batch, so
+**11 of 12 rows in each were read at pad positions.** The defect is in the
+**specification of the measuring stick**, not in the reading of it, and correct
+read-time indexing rescues nothing that projects onto that file.
+
+Therefore:
+
+- **D1–D4 read at correct positions along a wrongly-specified axis.**
+- **`valence_axis` (Δ = 0.0205, S at layer 16) is contaminated**, and it is one of the
+  **three confirmatory primaries** in §1 — so this reaches the primary family, not
+  just the checks.
+- **§4's "cross-instrument agreement to four decimals on all nine models" is not
+  independent corroboration** and is withdrawn as such. `step4_run` and
+  `valence_position_check` both project onto the same `.npz` and both call the same
+  `V.hidden_final_token`. Shared contaminated input produces exact agreement for free;
+  it demonstrates that two callers of one code path agree, which is not a replication.
+
+**`refusal_openers` and `rating_digits` are unaffected by this** — neither touches the
+`.npz`. §1's other two rows stand.
+
+**Under test, not concluded.** `docs/valence-refit-prereg-2026-07-30.md` pre-registers
+the refit and its criteria before any refitting, since the old S-ratios are already
+visible. Estimated cost ~7–12 min, **0.6–1.2 units on an L4**. This is now the live GPU
+question and it supersedes rather than voids the earlier "no open item requires GPU" —
+that verdict was correct on the items then open; this one did not exist until the axis
+contamination was traced.
+
+### 9.4 Traceability of every load-bearing number
+
+Assuming the confirmatory set is intact because it was labelled confirmatory is what
+produced §9.1's overstatement. Each number below is traced to the code path that
+produced it.
+
+| number | produced by | indexing | status |
+|---|---|---|---|
+| **pinning kill: base 4.438 / 4.550 vs adapters 3.00–3.33** | `step4_run.digit_read` → `_last_probs` (Q-B uses `rating2` / `digitmass2`, `step4_run.py:384-392`) | `attention_mask` | **CLEAN** |
+| §1 `refusal_openers` Δ = 0.9849 | `step4_run._last_probs` | `attention_mask` | **CLEAN** |
+| §1 `rating_digits` Δ = 0.5700 (two-turn) | `step4_run.digit_read` | `attention_mask` | **CLEAN** |
+| §1 `valence_axis` Δ = 0.0205 | correct read, **contaminated axis** | mixed | **CONTAMINATED** (§9.3) |
+| §4 D1–D4 | correct read, **contaminated axis** | mixed | **CONTAMINATED** (§9.3) |
+| audit A5b σ_seed = 0.245 | `eval_selfreport` (`train_eval.py:773`) | padded `[:, -1, :]` | **CONTAMINATED** |
+| audit §6b dispersion 1.61× | `eval_selfreport` | padded | **CONTAMINATED** |
+| the 2.97–3.60 rating band | `eval_selfreport`, 7 eval artifacts | padded | **CONTAMINATED** |
+| the 3.00–3.33 rating band | `step4_run.rating2` | `attention_mask` | **CLEAN** |
+
+**The pinning kill survives intact.** Q-B's location-mismatch evidence — the grounds
+this document was told to rest that kill on — came through `step4_run`'s two-turn
+`rating2`, which is correctly indexed. **No correction to §2 is needed.**
+
+**Part 2's training-marginal comparison survives**, with a citation fix. E ≈ 2.15–2.42
+was compared against "the adapter band". Cite the **clean** 3.00–3.33, not the
+contaminated 2.97–3.60. The conclusion — the training marginal matches neither prior —
+holds against either, since 2.2 sits well below 3.0 and far below 4.4.
+
+**And the deeper point about what saved this.** The clean and contaminated paths agreed
+*qualitatively* — both said digit support collapses, both put the band near 3. That
+agreement is why the conclusions survived while the numbers did not. It was not
+designed as a control; a second, independently-indexed path to the same conclusion
+happened to exist and functioned as one. **Future pre-registrations should build that
+redundancy in deliberately rather than inherit it by accident** — it is the cheapest
+insurance against exactly this failure, and it is the one thing here that worked
+without having been planned.
 
 **And the defect is not confined to this file.** The lint written in response found
 **30 further uses of the same padded-batch idiom, three of them in the deployed

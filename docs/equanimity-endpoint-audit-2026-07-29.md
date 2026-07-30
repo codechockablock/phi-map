@@ -592,8 +592,10 @@ and how much probability mass the readout's support carries.
 | 1 | `refusal_margin` first-token support collapse, 96.6% → 4.7%/16.3% | token log-ratio | confirmed |
 | 2 | judge's fixed 400-char window vs answer offsets 0 / ~209 / ~1161 | text window | confirmed |
 | 3 | `digit_mass` collapse to 0.031 on one adapter; 3.4× within-cell range | renormalised tail | confirmed (A5b, caught by a built-in guard) |
-| 4 | valence read-position contamination | hidden-state projection | pre-registered, not run |
+| 4 | valence axis contamination | hidden-state projection | **UNDER TEST** — the axis itself is contaminated, see results 9.3; refit pre-registered in valence-refit-prereg-2026-07-30.md |
 | — | *(my own scalar-only survey filter reporting `selfreport` as `{}`)* | analysis script | retracted, A5 — same error class, mine |
+
+**Count: three confirmed, one under test.** Instance 4 was previously carried as confirmed; it is not, because the axis it measures against was fit on pad-position states (results 9.3). It was the only non-token instance, so until the refit resolves, all three survivors are token-level readouts.
 
 Instances 1-3 span three different readout classes, which is what makes this a pattern
 about position and support rather than about one instrument family. Instance 3 is the

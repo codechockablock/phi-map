@@ -27,6 +27,7 @@ Run:  python3 measure_primitives.py --self-test    # behavioural, no GPU, no net
 from __future__ import annotations
 
 import argparse
+import collections
 import hashlib
 import os
 import re
@@ -39,14 +40,56 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # when every row is the same length, which is exactly what padding rules out.
 ANTIPATTERN = re.compile(r"\[\s*:\s*,\s*-1\s*(,\s*:\s*)?\]")
 
-# Files exempt from the lint, with a REASON each. An exemption without a reason
-# is how a defect becomes permanent.
+# Exemptions are keyed by BLOB HASH, not by filename and not by a comment in the
+# source. A name-keyed or comment-keyed exemption silently keeps applying after
+# the file changes, which is how a defect becomes permanent. Hash-keying makes an
+# exemption lapse the moment the file is edited.
+#
+# `blob` is `git rev-parse <commit>:<path>` -- the git object id of the exact
+# content being excused. `None` means "any content" and is only acceptable for
+# this file, which defines the anti-pattern in order to test it.
 LINT_EXEMPT = {
-    "valence_position_check.py":
-        "as-run at d6aac3e, preserved unedited on purpose; see its header",
-    "measure_primitives.py":
-        "defines and tests the anti-pattern",
+    "valence_position_check.py": dict(
+        blob="1295f57979501643a14f16db0df9a6a3d40984aa",
+        reason="as-run at d6aac3e, preserved byte-exact on purpose; "
+               "see valence_position_check.PROVENANCE.md"),
+    "measure_primitives.py": dict(
+        blob=None, reason="defines and tests the anti-pattern"),
 }
+
+
+def _git_blob(rel: str) -> str:
+    """Blob id of the WORKING-TREE content, so an edit changes it immediately."""
+    try:
+        out = subprocess.run(["git", "-C", HERE, "hash-object", rel],
+                             capture_output=True, text=True, timeout=10)
+        return out.stdout.strip()
+    except Exception:
+        return ""
+
+
+def _exemption_for(rel: str) -> tuple[bool, str]:
+    """(is_exempt, note). Exemption lapses if the content no longer matches."""
+    base = os.path.basename(rel)
+    rec = LINT_EXEMPT.get(base)
+    if rec is None:
+        return False, ""
+    if rec["blob"] is None:
+        return True, rec["reason"]
+    actual = _git_blob(rel)
+    if actual == rec["blob"]:
+        return True, rec["reason"]
+    return False, (f"EXEMPTION LAPSED: {base} no longer matches blob "
+                   f"{rec['blob'][:12]} (now {actual[:12] or '?'}). "
+                   f"Original reason: {rec['reason']}")
+
+
+def _strip_comment(line: str) -> str:
+    """Drop the trailing comment. A prose MENTION of the anti-pattern is not a
+    USE of it -- and a lint that punishes documenting the defect teaches people
+    to stop documenting it. Naive on `#` inside string literals; that direction
+    of error only loses matches inside strings, which are not executed reads."""
+    return line.split("#", 1)[0]
 
 
 def last_real_index(attention_mask):
@@ -153,7 +196,64 @@ def _self_test() -> None:
     fp = fingerprint(__file__)
     assert "commit" in fp and "files" in fp and fp["files"], fp
     print(f"  fingerprint: commit={fp['commit']} files={list(fp['files'])}")
+
+    _lint_self_test()
     print("self-test OK")
+
+
+def _lint_self_test() -> None:
+    """The LINT needs its own test, or it is the string-matching defect one level up.
+
+    Known-bad fixtures it MUST flag; known-good fixtures it MUST NOT. Written as
+    fixtures rather than by asserting on the repo, so the test does not silently
+    pass when the repo happens to be clean.
+    """
+    must_flag = [
+        "logits = model(**enc).logits[:, -1, :].float()",
+        "h = hs[layer][:, -1, :]",
+        "x = out[:,-1,:]",
+        "y = t[ : , -1 , : ]",          # whitespace variants
+        "adjusted[:, -1, :] -= adj",
+    ]
+    # Deliberately flagged despite being sometimes-innocent. A lint that misses
+    # real cases is worse than one that over-flags, because over-flagging is
+    # handled by the hash-keyed exemption mechanism and under-flagging is silent.
+    must_flag += [
+        "a[:, -1]",   # 2-D column read: innocent for (batch, features), and
+                      # indistinguishable from a seq read without type info
+    ]
+    must_not_flag = [
+        "idx = enc['attention_mask'].sum(dim=1) - 1",
+        "t[torch.arange(t.shape[0]), idx]",
+        "last = seq[-1]",               # plain list indexing
+        "arr[:, :-1, :]",               # drop-last slice
+        "read_at_last(t, enc['attention_mask'])",
+    ]
+    for s in must_flag:
+        assert ANTIPATTERN.search(_strip_comment(s)), \
+            f"lint FAILED to flag known-bad: {s!r}"
+    for s in must_not_flag:
+        assert not ANTIPATTERN.search(_strip_comment(s)), \
+            f"lint WRONGLY flagged known-good: {s!r}"
+    # Prose mentions must NOT count as uses -- otherwise documenting the defect
+    # trips the lint, which is how a control teaches people to stop reading it.
+    for s in ["# this previously read logits[:, -1, :] which was wrong",
+              "    # see results 9.1: hs[layer][:, -1, :]"]:
+        assert not ANTIPATTERN.search(_strip_comment(s)), \
+            f"lint flagged a COMMENT mention: {s!r}"
+    print(f"  lint self-test: {len(must_flag)} known-bad flagged, "
+          f"{len(must_not_flag)} known-good passed")
+
+    # the exemption mechanism must LAPSE on content change
+    rec = LINT_EXEMPT["valence_position_check.py"]
+    ok, _ = _exemption_for("valence_position_check.py")
+    actual = _git_blob("valence_position_check.py")
+    if actual:
+        assert ok == (actual == rec["blob"]), (
+            "exemption did not track the blob hash")
+        print(f"  exemption: valence_position_check.py blob {actual[:12]} "
+              f"{'matches' if ok else 'DOES NOT MATCH'} -> "
+              f"{'exempt' if ok else 'exemption lapsed'}")
 
 
 def _lint() -> int:
@@ -164,26 +264,66 @@ def _lint() -> int:
                                  timeout=20).stdout.split()
     except Exception:
         tracked = []
-    hits, exempted = [], []
+    hits, exempted, lapsed = [], [], []
     for rel in tracked:
         p = os.path.join(HERE, rel)
         if not os.path.exists(p):
             continue
-        base = os.path.basename(rel)
+        ok, note = _exemption_for(rel)
         for n, line in enumerate(open(p, errors="ignore"), 1):
-            if ANTIPATTERN.search(line):
-                (exempted if base in LINT_EXEMPT else hits).append(
-                    (rel, n, line.strip()))
-    for rel, n, line in exempted:
-        print(f"  exempt  {rel}:{n}  ({LINT_EXEMPT[os.path.basename(rel)]})")
+            if ANTIPATTERN.search(_strip_comment(line)):
+                if ok:
+                    exempted.append((rel, n, note))
+                else:
+                    hits.append((rel, n, line.strip()))
+                    if note:
+                        lapsed.append(note)
+    for rel, n, note in exempted:
+        print(f"  exempt  {rel}:{n}  ({note})")
+    for note in dict.fromkeys(lapsed):
+        print(f"  !! {note}")
+    by_file = collections.Counter(rel for rel, _, _ in hits)
     for rel, n, line in hits:
         print(f"  FAIL    {rel}:{n}  {line}")
+
     if hits:
-        print(f"\n{len(hits)} un-exempted use(s) of the padded-batch anti-pattern.")
+        print(f"\n{len(hits)} un-exempted use(s) across {len(by_file)} file(s).")
         print("Use measure_primitives.read_at_last(tensor, enc['attention_mask']).")
+        _impact(by_file)
         return 1
     print(f"lint OK ({len(exempted)} exempt, 0 violations)")
     return 0
+
+
+def _impact(by_file) -> None:
+    """How many hits sit in code that produced a number cited in a doc?
+
+    "3 in the deployed harness" answers a different question from "how many
+    contaminated a result". This answers the second.
+    """
+    docs = []
+    for root, _, files in os.walk(os.path.join(HERE, "docs")):
+        docs += [os.path.join(root, f) for f in files if f.endswith(".md")]
+    docs += [os.path.join(HERE, f) for f in os.listdir(HERE) if f.endswith(".md")]
+    corpus = ""
+    for d in docs:
+        try:
+            corpus += open(d, errors="ignore").read()
+        except OSError:
+            pass
+    print("\n  impact — hits in code whose FILENAME is cited in a doc:")
+    cited = uncited = 0
+    for rel, n in sorted(by_file.items(), key=lambda kv: -kv[1]):
+        base = os.path.basename(rel)
+        is_cited = base in corpus
+        cited, uncited = (cited + n, uncited) if is_cited else (cited, uncited + n)
+        print(f"    {rel:44s} {n:2d} hit(s)   "
+              f"{'CITED in docs' if is_cited else 'not cited by name'}")
+    print(f"    -> {cited} hit(s) in doc-cited code, {uncited} not cited by name.")
+    print("    Caveat: 'not cited by name' is not 'produced nothing'. Arm G's")
+    print("    causal/subspace scripts have their RESULTS in RESEARCH_ARC by")
+    print("    section without the filename appearing. Treat the honest figure as")
+    print("    close to all of them, bounded below by the cited count.")
 
 
 def main() -> int:
