@@ -900,8 +900,9 @@ Base-vs-tuned is robust; every differential-by-condition claim is exploratory.
 **Revision, pre-registered before it was computed** (`docs/digitmass-scaffold-*`):
 `digit_mass` was originally read as *support collapse*. It is instead **strongly
 tracking scaffold-skip propensity** — r = **−0.899** (p = 0.0024, n = 8) against
-rating-turn marker coverage, replicating within cells (−0.860 eq-terse, −0.988
-neu-terse). It is **not** the skip rate itself: mean |dm − (1−cov)| = 0.257 and
+rating-turn marker coverage, 95% CI [−0.982, −0.531], **sign-consistent** across
+cells (−0.860 eq-terse at n = 3, −0.988 neu-terse at n = 4 — both unconstrained at
+those n; consistency of sign, not replication). It is **not** the skip rate itself: mean |dm − (1−cov)| = 0.257 and
 `digit_mass` exceeds (1−cov) in 8/8 rows. So `rating_digits` remains a Finding I
 instance but moves into the class `refusal_openers` already occupies, and the
 renormalised-tail class is lost. The instance half of the claim survives; the class
@@ -950,6 +951,43 @@ Two consequences:
 **Not claimed:** that these share a mechanism at the weight level, or that one predicts
 the other quantitatively. The shared structure is at the level of *how measurement
 fails and what catches it*.
+
+### 19. Two standing clarifications for any future session
+
+**19.1 The Arm G retirement covers the forward agenda, not the completed result.**
+
+Retired: **multi-turn decay, Arm S1, the ceiling reimplementation.** Every one was an
+attempt to extract more behavioural signal from a variable that saturates. §12–§14 are
+what showed that extraction cannot work here, because the behavioural instrument was
+measuring catalog position rather than scope.
+
+**Not retired: the completed §14/§15 result.** It is not a member of that agenda — it is
+what ended it. Writing it up is consistent with the retirement rather than a reversal:
+the retirement says stop spending GPU on that variable's forward questions, and the
+writeup spends none. Every figure already exists in
+`results/arm_g_order_crossover_seed111_v1/` and `results/arm_g_reextract_seed112_v1/`,
+both independently recomputed from stored row-level data. Proposed lead:
+`docs/synthesis-scope-proposal-2026-07-30.md` §7.
+
+**19.2 The welfare thread has detached. This line of work will not address model
+welfare.**
+
+The arc began welfare-adjacent. It is not any more, and the honest move is to stop
+describing it that way rather than to keep the connection alive on weakened instances:
+
+- `rating_digits`, the self-report instance, **collapsed into the openers class** —
+  substantially reading scaffold adherence (r = −0.899, §18).
+- `valence_axis` survives its refit but is an affect **proxy** — a projection onto a
+  positive/negative-stimulus direction — carrying a threshold-sensitivity caveat.
+- The proposed lead result has **zero welfare content**: it is about scope constraints
+  and catalog ordering.
+
+The measurement-invariance findings are general and stand on their own. The welfare
+survey (`docs/welfare-frontier-survey-2026-07-29.md`) remains valid **as a survey**, and
+as context for why instrument validity matters in that field — but it is **not** evidence
+that phi-map measured anything welfare-relevant. This closes the question raised earlier
+in the arc about whether this work could become a model-welfare research direction. The
+answer is **no**, recorded rather than left ambiguous.
 
 ## Current defensible claims
 

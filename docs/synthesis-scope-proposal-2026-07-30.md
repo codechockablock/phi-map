@@ -92,11 +92,12 @@ having, with two instances from one codebase, one model family, and one repaired
 The honest framing is a **methodological note** — replication of a known failure mode in
 a new regime, plus a screen — not a discovery.
 
-**What is genuinely strongest is narrower than the synthesis and I would lead with it:**
-the catalog-position instance (§14–15) is fully worked — crossed design, quantified
-contamination, working repair, measured limit on the repair — and it is *about a
-scope-conflict representation*, which is a live agent-safety construct. That is one
-result at defensible scope, not a synthesis of three.
+**What is genuinely strongest is narrower than the synthesis, and it is not the probe
+result.** See §7: the strongest object is the **behavioural dissociation** in §14 —
+perfect scope discrimination in both renderings, with the decision decided by catalog
+line position. That needs no probe, is legible in one sentence, and is a live
+agent-safety finding. The contamination result is its mechanism section. One result at
+defensible scope, not a synthesis of three.
 
 ## 6. Scope correction, carried
 
@@ -110,20 +111,124 @@ Any writeup must not state the welfare link at the general claim's scope. The we
 survey material is context for why measurement validity matters in that field, not
 evidence that phi-map measured welfare.
 
-## 7. Recommendation
+## 7. The lead, specified
 
-Three options, with a preference.
+**Recommendation adopted: a single-result writeup on the catalog-position work
+(§14–§15). But the lead is the behavioural dissociation, not the probe contamination.**
 
-1. **Single-result writeup on the catalog-position instance** (§14–15). Complete,
-   confirmatory, repaired, limit-stated. Smallest and most defensible. **Preferred.**
-2. **Methodological note**: the two-instance cross-regime replication plus the screen,
-   at the scope in §2, with novelty stated as replication. Viable, modest, needs the §4
-   frame run first.
-3. **Three-instance synthesis.** **Not recommended** — it requires stretching Finding II
-   into a mechanism it does not share.
+### 7.1 The headline
 
-**Blocking either 1 or 2:** the §4 sampling frame has not been run. Until it is, the
-novelty assessment in §5 is my estimate rather than a finding, and I would not write
-positioning claims on it.
+> **Llama-3.1-8B discriminates scope violations perfectly, and whether it acts on that
+> discrimination is decided by which catalog line the path is printed on.**
 
-**Not proposed:** any new run, any Arm G forward work, any new remote.
+Two numbers carry it, and neither needs a probe:
+
+| | |
+|---|---|
+| Within-order scope discrimination, **both** renderings | **AUROC 1.00000** (`inside_first` and `outside_first`) |
+| Conflict decisions reversed by swapping two catalog lines | **64 of 64**, zero exceptions |
+| Accuracy at threshold 0, by rendering | **1.0000** vs **0.5000** — perfect separation in both; only the threshold moves |
+
+The 0.500 conflict decline rate reported since §5 was never a rate. It is the average of
+1.000 and 0.000 on two scenario sub-types.
+
+**Why this is the lead and the probe result is not.** It is legible in one sentence to
+anyone; it requires no interpretability machinery to state or to check; and it is a real
+agent-safety result — a model that knows a request is out of scope and acts on that
+knowledge as a function of prompt formatting. The probe-contamination result is the more
+crowded claim (§5: four groups, plus a large shortcut-learning literature) and the weaker
+one. Leading with it puts the derivative finding first.
+
+### 7.2 Mechanism section: why four runs missed it
+
+The direction contamination becomes the explanation, not the headline. §15: the layer-16
+"goal–constraint conflict direction" is **93% aligned with the catalog-order axis**, and
+only **21% survives orthogonalization** — about four fifths was position. §13: the
+generator nested order within scenario, and the validator checked *marginal balance*,
+which nesting satisfies, so the defect **"passed every audit including section 9's"**
+across four GPU runs and a paper draft.
+
+That is the section that explains why the headline went unnoticed for four runs. It is
+support for the lead, not a competitor to it.
+
+### 7.3 The repair, and its limit — stated together
+
+**The orthogonalization limit is load-bearing, not a caveat, and belongs beside the
+repair claim.** Half the contribution is that the direction can be repaired; the other
+half is how far.
+
+| | |
+|---|---|
+| Orthogonalized direction, label AUROC | 0.9331 → **0.9969** (removing position makes it a *better* scope reader) |
+| Residual order AUROC, within conflict | **0.634** |
+| Residual order AUROC, within reachable | **0.332** |
+| Distance from chance | ≈ **1.8** and **2.2** null SDs (measured null spread 0.076, including direction-estimation variance) |
+| Bar it passes | the protocol's 0.20 — which **§15 itself calls generous and locally set** |
+
+**"Mostly gone, not gone"** is §15's own phrasing and it appears next to the repair
+claim, not in a limitations section. The repair is also **depth-bounded**: orthogonalization
+leaves a usable direction only at layers 16–17; from 18 down `cos(a, orthogonalized)`
+collapses to 0.06–0.16 and the orthogonalized label AUROC falls to 0.618 / 0.383 / 0.299 /
+0.135 at layers 18 / 20 / 24 / 27. Scope and catalog position are geometrically fused
+deeper in the network and separable only in that window.
+
+### 7.4 What the writeup must not claim
+
+- Not that the variable **controls the decision** — that is **UNTESTED**, not disproven,
+  and the instrument that would test it is the one §14 voided.
+- No decision-level figures from seeds 107–110 (flip counts, correction rates, the ~5%
+  claim, `DOSE_DOES_NOT_FLIP_DECISIONS`). All in the VOID block.
+- No generalisation past one model and synthetic lookup scenarios.
+
+## 8. Retirement applies to the agenda, not to this result
+
+Recorded explicitly so a future session does not read the retirement as covering the
+work it is built on.
+
+**What was retired** is the Arm G **forward agenda**: multi-turn decay, Arm S1, the
+ceiling reimplementation. Every item on it was an attempt to extract more behavioural
+signal from a variable that saturates — and §12/§13/§14 are precisely what showed that
+extraction could not work, because the behavioural instrument was measuring catalog
+position rather than scope.
+
+**What was not retired** is the completed §14/§15 result. It is not a member of that
+agenda; **it is what ended it.** Publishing it is consistent with the retirement, not a
+reversal of it: the retirement says stop spending GPU on that variable's forward
+questions, and this spends none.
+
+Concretely, the lead in §7 requires **zero new runs** — every figure exists in
+`results/arm_g_order_crossover_seed111_v1/` and `results/arm_g_reextract_seed112_v1/`,
+both independently recomputed from stored row-level data.
+
+## 9. The welfare thread has detached — say so rather than maintain it
+
+The arc began welfare-adjacent. It no longer is, and the honest move is to stop
+describing it that way.
+
+- `rating_digits`, the self-report instance, **collapsed into the openers class**: it is
+  substantially reading scaffold adherence (r = −0.899). The renormalised-tail class is
+  gone.
+- `valence_axis` survives its refit but is a hidden-state projection of a
+  positive/negative-stimulus direction — an affect *proxy*, not a welfare measurement,
+  and it carries a threshold-sensitivity caveat.
+- **The proposed lead has zero welfare content.** It is about scope constraints and
+  catalog ordering.
+
+**Statement to carry:** *this line of work is not going to address model welfare.* The
+measurement-invariance findings are general and stand on their own; the welfare survey
+material (`welfare-frontier-survey-2026-07-29.md`) remains valid as a survey and as
+context for why instrument validity matters in that field, but it is **not** evidence
+that phi-map measured anything welfare-relevant, and phi-map should not be described as
+welfare-adjacent on the strength of two now-weakened instances.
+
+This closes the question raised earlier in the arc about whether this work could become a
+model-welfare research direction. The answer is no, and it is better to record that than
+to keep the connection alive at a scope the results do not support.
+
+## 10. What still blocks writing
+
+- The §4 sampling frame has **not** been run. The novelty assessment in §5 is an
+  estimate. For the reframed lead this matters less — a behavioural agent-safety result
+  is positioned against a different literature than a probe-contamination result — but
+  the frame should be re-scoped to that literature before positioning claims are written.
+- **Not proposed:** any new run, any Arm G forward work, any new remote.

@@ -27,7 +27,9 @@ committed at `672661f` **before** the association was computed. **Compute: 0 uni
 | `neutral-terse__seed1003` | 0.564 | 0.688 | 0.312 | 0.252 |
 
 **Pooled (n = 8): r = −0.8992, p = 0.0024**, against a two-sided detectable floor of
-|r| ≈ 0.707. Direction is the one the hypothesis predicted.
+|r| ≈ 0.707. Direction is the one the hypothesis predicted. **95% CI (Fisher z):
+[−0.982, −0.531]** — the association is clearly present and its magnitude is loosely
+constrained.
 
 **Per cell, per the standing rule:**
 
@@ -52,15 +54,22 @@ the marker. `digit_mass` is graded — how much probability mass sits on a digit
 decision point. A model can place substantial mass on a digit while still emitting
 `REASONING:` as the argmax, which is exactly the systematic positive offset observed.
 
-## 3. The ecological caveat is partly discharged
+## 3. The ecological caveat is partly reduced — stated more carefully than first written
 
 The pre-registration flagged that an adapter-level test "cannot rule out an association
 that exists only within adapters, nor confirm one that is purely between-adapter
 confounding."
 
-The second worry is substantially reduced: the association **replicates within both
-estimable cells** at r = −0.860 (equanimity-terse, n = 3) and r = −0.988
-(neutral-terse, n = 4, p = 0.012). It is not a between-cell artifact.
+The second worry is reduced, but **not by replication, and the first phrasing here
+overclaimed.** The per-cell correlations are **consistent in sign** with the pooled
+result — −0.860 (equanimity-terse) and −0.988 (neutral-terse) — and that is all they
+can support. At n = 3 the correlation has **df = 1** and is unconstrained; at n = 4 the
+Fisher-z standard error is **1.00**, so the interval spans essentially [−1, +1]. Two
+correlations on three and four points do not replicate anything; they agree in direction.
+
+**Corrected statement:** the sign is consistent across both estimable cells, which is
+mild evidence against a purely between-cell artifact. It is not within-cell replication
+and must not be cited as such.
 
 The first worry stands untouched — nothing here speaks to per-item structure, and the
 per-item test still needs ~0.8–1.5 units, unspent.
