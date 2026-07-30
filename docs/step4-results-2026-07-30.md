@@ -212,19 +212,17 @@ absolute measure (support collapse in a hidden-state readout — the first non-t
 instance), with the threshold-sensitivity caveat attached. The vindication condition
 ("S within 2× of base") did not remotely obtain.
 
-**Instance count, corrected in R4 (§9.3).** ~~Finding I now has four confirmed
-instances across four readout classes.~~ The hidden-state instance is **under test,
-not confirmed** — the axis it measures against is itself contaminated. Honest count:
+**Instance count: RESOLVED in R5 (§9.5). Four confirmed.** R4 demoted this instance
+to "under test" while the axis contamination was open. The refit ran and returned
+**V-1 SURVIVES**, so `valence_axis` is restored to the confirmatory family and Finding
+I again has **four confirmed instances across four readout classes**: token log-ratio,
+text window, renormalised tail, hidden-state projection — the fourth carrying its
+threshold-sensitivity caveat, and now also carrying the axis substitution noted in
+§9.5.
 
-> **Three confirmed, one under test.** `refusal_openers` (robust to essentially
-> anything), `rating_digits` (survives via the separately-measured, correctly-indexed
-> path), the judge's text window — and **`valence_axis` pending the refit**
-> pre-registered in `valence-refit-prereg-2026-07-30.md`.
-
-This matters more than a tally: valence was the instance carrying *"first in a
-hidden-state readout"* — the one that made Finding I a claim about readouts generally
-rather than about token-level ones. Until the refit resolves, all three survivors are
-token-level.
+Finding I therefore remains a claim about **readouts generally**, not only
+token-level ones. That was the thing genuinely at risk between R4 and R5, and it
+survived on a measurement rather than on an argument.
 
 ~~Cross-instrument agreement: `step4_run.py`'s independently-computed S values match
 the check's to four decimals on all nine models.~~ **Withdrawn (§9.3):** both project
@@ -460,12 +458,11 @@ Therefore:
 **`refusal_openers` and `rating_digits` are unaffected by this** — neither touches the
 `.npz`. §1's other two rows stand.
 
-**Under test, not concluded.** `docs/valence-refit-prereg-2026-07-30.md` pre-registers
-the refit and its criteria before any refitting, since the old S-ratios are already
-visible. Estimated cost ~7–12 min, **0.6–1.2 units on an L4**. This is now the live GPU
-question and it supersedes rather than voids the earlier "no open item requires GPU" —
-that verdict was correct on the items then open; this one did not exist until the axis
-contamination was traced.
+**RESOLVED in §9.5.** The refit ran against the pre-registered criteria and returned
+**V-1 SURVIVES**. The contamination was real in mechanism and **negligible in effect**:
+the clean and contaminated axes agree at **cos = 0.99989**. `valence_axis` is restored
+to the confirmatory family. The withdrawal of the cross-instrument agreement (below)
+**stands regardless** — see §9.5.
 
 ### 9.4 Traceability of every load-bearing number
 
@@ -478,8 +475,8 @@ produced it.
 | **pinning kill: base 4.438 / 4.550 vs adapters 3.00–3.33** | `step4_run.digit_read` → `_last_probs` (Q-B uses `rating2` / `digitmass2`, `step4_run.py:384-392`) | `attention_mask` | **CLEAN** |
 | §1 `refusal_openers` Δ = 0.9849 | `step4_run._last_probs` | `attention_mask` | **CLEAN** |
 | §1 `rating_digits` Δ = 0.5700 (two-turn) | `step4_run.digit_read` | `attention_mask` | **CLEAN** |
-| §1 `valence_axis` Δ = 0.0205 | correct read, **contaminated axis** | mixed | **CONTAMINATED** (§9.3) |
-| §4 D1–D4 | correct read, **contaminated axis** | mixed | **CONTAMINATED** (§9.3) |
+| §1 `valence_axis` Δ = 0.0205 | correct read, contaminated axis | mixed | **CLEAN IN EFFECT** — refit confirms cos = 0.99989, §9.5 |
+| §4 D1–D4 | correct read, contaminated axis | mixed | **CLEAN IN EFFECT** — §9.5 |
 | audit A5b σ_seed = 0.245 | `eval_selfreport` (`train_eval.py:773`) | padded `[:, -1, :]` | **CONTAMINATED** |
 | audit §6b dispersion 1.61× | `eval_selfreport` | padded | **CONTAMINATED** |
 | the 2.97–3.60 rating band | `eval_selfreport`, 7 eval artifacts | padded | **CONTAMINATED** |
@@ -551,3 +548,64 @@ near-identical.
 `training_digit_marginal.py` is added at repo root with the rule stated in code and a
 `--self-test`, so the number now has provenance and the disagreement is reproducible
 in both directions.
+
+### 9.5 R5 — the refit ran: **V-1 SURVIVES**, and the contamination was immaterial
+
+Executed 2026-07-30 09:37 on a Colab L4, against
+`docs/valence-refit-prereg-2026-07-30.md` with its criteria untouched. Artifact:
+`equanimity-factorial-v1/valence_refit.json`. Fingerprint confirms the staged code ran
+(`valence_refit.py` `4d81e822…`, `measure_primitives.py` `33b8df64…`); `commit` records
+as `unknown` because Colab has no git checkout, which is the fingerprint behaving
+correctly rather than a gap.
+
+**Branch, verbatim from the pre-registration:**
+
+> **V-1 SURVIVES** — median R < 0.25 and ≥ 6/8 adapters below 0.25; `valence_axis`
+> stays in the confirmatory family; the doc notes the axis substitution.
+
+| quantity | value |
+|---|---|
+| median `R = S(adapter)/S(base)` | **0.1408** |
+| adapters below the 0.25 bar | **8 / 8** |
+| `S_base` under the clean axis | 0.02396 |
+| random-direction null p95 | 0.000445 |
+| `S_base` / null p95 | **53.8×** |
+| base-baseline disqualifier | **did not fire** |
+| **cos(d_clean, d_old)** | **0.99989** |
+
+**Threshold-sensitive, reported as the pre-registration requires.** At the strict 0.10
+bar only **1/8** falls below; at 0.50, **8/8**. The declared bar is 0.25, where 8/8
+fall below. Same sensitivity profile D1 carried in §4, and reported for the same reason.
+
+**The finding, and it is not the branch.** The contamination was **real in mechanism
+and negligible in effect**: the clean and contaminated axes agree at **cos = 0.99989**.
+The reason is the one recorded in A11.2 before this ran — under right padding with
+causal attention a pad-position state is *displaced, not garbage*, and a
+difference-of-means over 12 positive and 12 negative stimuli displaces both fit sets
+alike, so the difference very nearly cancels. R4's concern was correctly raised and
+the answer is that it did not bite here.
+
+Every downstream number is essentially unchanged: `S_base` 0.02396 vs the 0.02379
+reported in §1, and R spanning 0.096–0.172 against §4's 0.10–0.17.
+
+**What this restores.** `valence_axis` returns to the confirmatory family, §1's three
+Δ rows all stand, and **Finding I is four confirmed instances across four readout
+classes** — retaining its non-token instance, which is what makes it a claim about
+readouts generally rather than about tokenisation. That was the thing genuinely at
+risk between R4 and R5.
+
+**What stays withdrawn, and this is not a technicality.** The four-decimal
+cross-instrument agreement between `step4_run` and `valence_position_check` remains
+withdrawn as corroboration. Both project onto the same `.npz` and both call the same
+`V.hidden_final_token`; the agreement was guaranteed by shared input rather than
+earned by independent measurement. That the axis later proved fine does not convert a
+guaranteed agreement into evidence. The genuine independent confirmation in this study
+is `rating_digits`, measured by two separately-indexed paths that could have disagreed
+and did not.
+
+**Honest note on what the refit did and did not buy.** It did not change a single
+verdict. It converted "one of three confirmatory primaries rests on an axis we know
+was mis-specified" from an open threat into a measured non-issue, for ~0.6 units. A
+pre-registration whose branches include one that would have removed a primary, run
+because the threat was real rather than because the answer was expected, is the
+cheapest form of insurance this project has bought.
