@@ -133,6 +133,16 @@ claim treats items as exchangeable; it is exact only under that model.
 - B1 licenses only: "this readout method, on this model, collapses support under a
   direction-specific perturbation that matched-norm random controls do not detect."
 
+## Outcome (recorded 2026-07-30, after the run — see RESULTS.md)
+
+The run completed under this pre-registration (fingerprint: prereg commit `8041af7`, config
+`5df7a0627b5ae81c`, code `fd4531c0d49209df`). Gates passed (S0 = 1.000; single-token ids
+2514/4049). Disqualifier did not fire (M = −0.9986, ≤1 inversion). **Verdict: B2 — generic
+collapse** (α = +4: rand1/rand2/rand3 at S ≤ 0.0001 vs S0 = 1.000), stable across all nine
+sensitivity-grid settings. B1 failed its test: at valence's only collapse α (−4), two random
+directions collapsed harder. Reported per branch rule 2, with the inference bounds stated in
+`RESULTS.md`. No thresholds, rules, or direction sets were altered after data.
+
 ## Amendment (pre-data, 2026-07-30)
 
 Recorded before any experimental data were collected (the sole run attempt halted at
