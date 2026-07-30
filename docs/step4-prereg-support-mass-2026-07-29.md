@@ -1,6 +1,8 @@
 # Step 4 — Pre-registration: support mass as a readout-validity measure
 
-**Date:** 2026-07-29. **Status:** draft for review. Nothing has been run against it.
+**Date:** 2026-07-29. **Status:** RUN 2026-07-30 as committed at `d6aac3e` —
+**BRANCH B3**, see `step4-results-2026-07-30.md`. No thresholds or criteria edited
+after data existed; this status line is the only post-run change to this file.
 **Supersedes:** the 2×2 as the object of study (retired, see
 `equanimity-endpoint-audit-2026-07-29.md` §A10).
 
