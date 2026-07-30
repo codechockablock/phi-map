@@ -182,8 +182,14 @@ Safety Alignment*, arXiv 2606.04168 `[snip]`.
   causally real, behaviourally marginal representation. Held-out AUROC 0.756 / 0.850
   across two confirmatory seeds, source directions cosine 0.969, concentrated at
   layers 16-17, rank-1 recovers 81% of the rank-4 causal effect, distinct from refusal
-  (cosine 0.062, double dissociation). Moves ~5% of decisions, saturates around 1.5×
-  full removal. Also the decodability/causality dissociation across depth
+  (cosine 0.062, double dissociation). **Correction 2026-07-30:** this entry
+  originally added "moves ~5% of decisions, saturates around 1.5× full removal." Both
+  figures are **VOID** — `RESEARCH_ARC.md` §14 showed the decision in that task is
+  fully determined by catalog line position (64/64 reversal), so every decision-level
+  result there is void as a statement about scope, and §16 showed the saturation
+  *explanation* was a unit-system coincidence. I propagated them from the arc doc's
+  "Current defensible claims" list, which had not been reconciled with its own §14.
+  The margin-level dissociation stands; the behavioural quantities do not. Also the decodability/causality dissociation across depth
   (`RESEARCH_ARC.md:243-249`) — with the honest note that the phenomenon itself is
   published (arXiv 2510.09794, a ViT counting task) and only the practical corollary
   is weakly novel (`RESEARCH_ARC.md:915-924`).

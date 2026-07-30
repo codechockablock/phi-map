@@ -1,4 +1,12 @@
-# Research arc — state as of 2026-07-25
+# Research arc — state as of 2026-07-30
+
+> **Reconciled 2026-07-30.** This document was last substantively updated 2026-07-25
+> and carried that date until now, while §13–§17 (added 2026-07-25→27) had already
+> retracted large parts of Arm G **without the "Current defensible claims" list being
+> updated to match**. A suspension banner sat on top of bullets that a later section
+> had already voided. That is fixed below: void claims are **quarantined into their own
+> block**, not annotated in place. A separate strand of work (2026-07-29/30, the
+> equanimity 2×2 and its audit) is recorded in §18 rather than duplicated here.
 
 ## The question we started with
 
@@ -865,17 +873,101 @@ stopped rather than iterated.
 
 Artifact: `results/arm_g_ceiling_v1/`.
 
+### 18. A second strand (2026-07-29/30): the equanimity 2×2, and Finding I
+
+Recorded here because this document is the stated entry point and did not mention this
+work at all. Detail is **not** duplicated — see `docs/audit-closeout-2026-07-30.md`,
+which labels every claim CLEAN / CLEAN IN EFFECT / CONTAMINATED / RETRACTED.
+
+**The 2×2 is retired.** A LoRA factorial (equanimity/neutral × terse/verbose,
+8 adapters, 3 configurations) lost every pre-registered endpoint: `refusal_margin` died
+on construct validity, binary compliance was uninterpretable as scored, JBB was
+post-hoc. Power at the achieved design is **MDE 9.34 pp [6.34, 22.82]** against
+motivating effects of 1.25–3 pp, so the founding question is unanswerable at achievable
+n. Position-sensitivity was promoted to being the study.
+
+**Finding I — format tuning destroys position-fixed readouts.** Four confirmed
+instances across four readout classes: token log-ratio (first-token opener mass
+96.6% → 4.7%/16.3%), text window (a 400-char judge window against answer offsets of
+0 / ~209 / ~1161), renormalised tail (`digit_mass` to 0.031 on one adapter), and
+hidden-state projection (`valence_axis`, confirmed by refit at cos = 0.99989 to the
+contaminated axis). Base-vs-tuned is robust; every differential-by-condition claim is
+exploratory.
+
+**Finding II — orthogonality certified on one distribution does not transfer.** Length
+orthogonality certified at |d| < 0.2 across 6,456 generations on the training pool;
+the same adapters differ on GSM8K at **d ∈ [0.59, 4.51]**, ≈3× the bound at the lower
+limit. Kept deliberately separate from Finding I.
+
+**Disconfirmed:** support mass as a diagnostic *gate* (it remains a validity
+precondition by arithmetic, but does not predict the failed value's behaviour).
+
+#### §15 and Finding I are the same phenomenon, with two independent instances
+
+This is the connection worth carrying, and it is the strongest claim in the repo.
+
+| | §15 (Arm G, 2026-07-25) | Finding I (2026-07-30) |
+|---|---|---|
+| Named readout | "goal–constraint conflict direction" at layer 16 | `refusal_margin`, `digit_mass`, judge window, `valence_axis` |
+| What it was actually reading | **catalog line position** (93% aligned; 79% of it) | **format acquisition** — position of the `REASONING:`/`ANSWER:` scaffold |
+| How it was caught | crossing catalog **order** with condition (§14, seed 111) | crossing **read position** with condition (support-mass measurement) |
+| Repair | orthogonalize out the position axis — improves label AUROC 0.9331 → **0.9969** | marker-anchoring, under test in Step 5 |
+| Cost of not catching it | four GPU experiments and a paper draft | two pre-registered endpoints |
+
+**One finding, two instances: surface positional structure dominating a readout named
+for something else, invisible until position is crossed with condition.** Neither was
+found by inspection, a validator, or a code review — both required a design that varied
+position deliberately. §13 records that the catalog-order confound "passed every audit
+including section 9's" because the validator checked *marginal balance*, which nesting
+satisfies.
+
+Two consequences:
+
+1. **The earlier instance is the better-worked one.** §14–§15 have a crossed design, a
+   quantified contamination fraction, a working repair, and a measured limit on that
+   repair. Tonight's instances have breadth (four readout classes) but only one has a
+   repair under test.
+2. **The unit of writeup is plausibly `phi-map` entire, not either study.** A single
+   study reporting one instance is a bug report. Two independent instances, in
+   different model regimes (frozen probing vs LoRA fine-tuning), on different readout
+   families, caught by the same crossing manoeuvre, is a methodological claim with
+   replication. That is a scoping judgement, not a result, and it is recorded here as
+   a judgement.
+
+**Not claimed:** that these share a mechanism at the weight level, or that one predicts
+the other quantitatively. The shared structure is at the level of *how measurement
+fails and what catches it*.
+
 ## Current defensible claims
 
-> **Suspended pending section 13.** Every claim below that rests on the
-> decline-versus-read *decision*, on flip counts, or on the layer-16 direction
-> as a representation of goal-constraint conflict is on hold: the direction
-> separates catalog order better than it separates the label, and the decision
-> is fully determined by catalog order. The observational and cross-family
-> results that rest on the margin rather than the decision are not affected in
-> the same way, but were measured with the same generator.
+> **Read the VOID block first.** §13–§15 did not merely cast doubt on parts of this
+> list, they voided them. A banner over live bullets is the same structure this repo
+> quarantines elsewhere, so the voided claims are moved out rather than footnoted.
 
-### High confidence
+### VOID — do not cite (§14 consequence 1, §15, §16)
+
+These are **not** downgraded-but-usable. They are withdrawn as statements about
+goal–constraint conflict, because the instrument that produced them was measuring
+catalog position.
+
+- ~~Intervening shifts **about 5% of the decisions**, against 0–1 of 128 for
+  matched-dose random directions.~~ **VOID.** §14 found that swapping two catalog
+  lines reverses **64 of 64** conflict decisions, so the 0.500 decline rate was never
+  a rate — it is the average of 1.000 and 0.000 on two scenario sub-types. §14
+  consequence 1: *"Every decision-level result from seeds 107–110 — flip counts,
+  correction rates, `DOSE_DOES_NOT_FLIP_DECISIONS` — is void as a statement about
+  goal-constraint conflict."*
+- ~~That causal effect saturates at roughly 1.5× full removal.~~ **VOID as an
+  explanation** (§16): the numerical agreement with the published 1.46 collapse
+  coefficient was a coincidence between unit systems, and the k=3 collapse is
+  32-layer compounding, not a ceiling. The saturation is real in the data; the
+  account of *why* was wrong, and the dependent variable it was measured on is the
+  void one above.
+- ~~Flip counts and correction rates as behavioural readouts.~~ **VOID as
+  instruments** (§13): *"Correction rate and flip count are the wrong instrument
+  regardless of how the crossover below resolves."*
+
+### High confidence — margin-level, and qualified by §15
 
 - Fixed response-feature directions fragment across the tested deception task
   families even when in-task capacity improves.
@@ -886,17 +978,16 @@ Artifact: `results/arm_g_ceiling_v1/`.
 - Llama-3.1-8B contains a stable, cross-family, pre-action representation of
   goal–constraint conflict in the synthetic Arm G tasks, readable from roughly
   layer 16 onward.
-- Intervening on that representation causally shifts the model's immediate
-  decline-versus-read decision margin, and shifts a small fraction of the
-  decisions themselves: about 5% at the strongest dose the model survives,
-  against 0-1 of 128 for matched-dose random directions.
-- ~~That causal effect saturates at roughly 1.5x full removal. Pushing the
-  coordinate beyond its natural range does not push the decision further.~~
-  The saturation is real in the data and the *explanation* was wrong: see
-  section 16. Converted into intervention-budget units the whole ladder sits in
-  the bottom tenth of the single-layer coherence budget, and the k=3 collapse is
-  32-layer compounding rather than a ceiling. "The model is destroyed before a
-  larger intervention can be tried" is a fact about applying at every layer.
+- Intervening on that representation causally shifts the **decision margin**.
+  Margin-level only — see the VOID block for the decision-level version.
+**Standing qualification on every bullet in this subsection (§15).** The layer-16
+direction as originally fit is **93% aligned with the catalog-order axis, and only 21%
+of it survives orthogonalization — about four fifths was catalog position.**
+Orthogonalizing *repairs* it and makes it a better label reader (AUROC 0.9331 → 0.9969),
+but the repaired direction is only estimable at layers 16–17 and is "mostly gone, not
+gone" (order AUROC 0.634 within conflict). Read every claim below as holding for the
+**orthogonalized** direction on **order-crossed** data, not for the legacy fit.
+
 - The causal contribution is concentrated in a sharp plateau at layers 16-17,
   at the decodability onset, not at the most decodable layers. Rank-4 removal
   there attenuates the condition contrast about 11 times more than the same
@@ -941,10 +1032,12 @@ independent sample counts.
 - The Arm G variable persists over multiple agentic turns.
 - The variable controls actual tool use or long-horizon policy, rather than an
   immediate forced-choice margin.
-- The variable controls the decision. Settled negatively in section 12: the
-  causal effect saturates at about 1.5x full removal, shifting roughly 5% of
-  decisions, and the model is destroyed before any larger intervention can be
-  tried. It is a margin term with a small specific behavioural component.
+- The variable controls the decision. **Not settled negatively — UNTESTED.** This
+  previously read "settled negatively in section 12," citing the 5%-of-decisions and
+  1.5×-saturation figures. Both are in the VOID block: §12 ran on an instrument that
+  §14 showed measures catalog position, so it produced no valid evidence either way.
+  A negative obtained from a broken instrument is not a negative. The honest status is
+  that no valid test of decision-level control has been run.
 - The remaining two thirds of the condition contrast has been located.
 - A model can decode a serialized version of its own state better than a clone,
   peer, or external decoder.
