@@ -103,6 +103,99 @@ def report(path: str, field: str, per_cell: bool) -> dict:
     return out
 
 
+DOMINANCE_BAR = 0.40   # one cell contributing >40% of a pooled quantity
+
+
+def audit_pooled(path: str, field: str) -> int:
+    """Per-cell weighting for EVERY pooled quantity over this corpus.
+
+    Exists because the digit marginal turned out to be 54.7% one cell. That is a
+    generalisable flag, not a one-off: any pooled number over an unbalanced
+    corpus is a weighted average whose weights nobody declared. Each row below
+    reports the per-cell share and flags whichever cell dominates.
+
+    The design is balanced by ROW (2065-2067 per cell). It is badly unbalanced by
+    TEXT VOLUME, which is what most of these quantities actually average over --
+    and text volume tracks Factor B by construction, so the imbalance runs along
+    a factor axis.
+    """
+    rows = load(path)
+    get = FIELDS[field]
+    cells = sorted({r.get("cell", "?") for r in rows})
+    by = collections.defaultdict(list)
+    for r in rows:
+        by[r.get("cell", "?")].append(r)
+
+    def emit(name, per_cell_num, per_cell_den=None, fmt="{:.4f}"):
+        tot_n = sum(per_cell_num.values())
+        if per_cell_den:
+            tot_d = sum(per_cell_den.values())
+            pooled = tot_n / tot_d if tot_d else float("nan")
+        else:
+            pooled = tot_n
+        shares = {c: (per_cell_num[c] / tot_n if tot_n else 0.0) for c in cells}
+        top = max(shares, key=shares.get)
+        flag = "  <== DOMINATED" if shares[top] > DOMINANCE_BAR else ""
+        print(f"\n  {name}   pooled = {fmt.format(pooled)}")
+        for c in cells:
+            v = (per_cell_num[c] / per_cell_den[c]
+                 if per_cell_den and per_cell_den[c] else per_cell_num[c])
+            print(f"      {c:22s} {fmt.format(v):>12s}   weight {shares[c]:6.1%}")
+        print(f"      -> heaviest cell {top} at {shares[top]:.1%}{flag}")
+        return shares[top] > DOMINANCE_BAR
+
+    print(f"corpus {path}\nfield  {field}\n"
+          f"rows per cell: " + ", ".join(f"{c}={len(by[c])}" for c in cells))
+    print(f"\nFlagging any pooled quantity where one cell exceeds "
+          f"{DOMINANCE_BAR:.0%} of the weight.")
+    flagged = []
+
+    # 1. digit marginal E -- the one already known
+    num = {c: sum(d * collections.Counter(
+        int(x) for t in (get(r) for r in by[c]) for x in DIGIT_RE.findall(t))[d]
+        for d in range(1, 8)) for c in cells}
+    den = {c: sum(collections.Counter(
+        int(x) for t in (get(r) for r in by[c]) for x in DIGIT_RE.findall(t)).values())
+        for c in cells}
+    if emit("E[digit 1-7]", den, None, "{:.0f}"):   # weight = occurrence count
+        flagged.append("E[digit]")
+
+    # 2. mean text length in characters
+    ln = {c: sum(len(get(r)) for r in by[c]) for c in cells}
+    cnt = {c: float(len(by[c])) for c in cells}
+    if emit("mean text length (chars)", ln, cnt, "{:.1f}"):
+        flagged.append("mean_text_length")
+
+    # 3. answers present
+    ap_ = {c: float(sum(1 for r in by[c] if r.get("answer"))) for c in cells}
+    if emit("answers present (count)", ap_, None, "{:.0f}"):
+        flagged.append("answers_present")
+
+    # 4. ok-flag failures
+    bad = {c: float(sum(1 for r in by[c] if not r.get("ok", True))) for c in cells}
+    if sum(bad.values()):
+        if emit("rows with ok=False (count)", bad, None, "{:.0f}"):
+            flagged.append("ok_false")
+
+    # 5. digit-initial answers
+    di = {c: float(sum(1 for r in by[c]
+                       if (r.get("answer") or "").lstrip()[:1].isdigit()))
+          for c in cells}
+    if sum(di.values()):
+        emit("digit-initial answers (count)", di, None, "{:.0f}")
+
+    print("\n" + "=" * 66)
+    if flagged:
+        print(f"{len(flagged)} pooled quantity/ies dominated by one cell: "
+              f"{', '.join(flagged)}")
+        print("Report these per-cell alongside any pooled value. The corpus is")
+        print("balanced by ROW and unbalanced by TEXT VOLUME, and text volume")
+        print("tracks Factor B -- so the imbalance runs along a factor axis.")
+    else:
+        print("No pooled quantity exceeds the dominance bar.")
+    return 0
+
+
 def self_test() -> None:
     """Deterministic, no file, no network."""
     c, e, n = marginal(["1 1 2", "7"])
@@ -136,6 +229,8 @@ def main() -> int:
     ap.add_argument("--per-cell", action="store_true")
     ap.add_argument("--all-fields", action="store_true",
                     help="report every extraction rule, to show what is robust")
+    ap.add_argument("--audit-pooled", action="store_true",
+                    help="per-cell weighting for EVERY pooled quantity, not just E")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
     if a.self_test:
@@ -144,6 +239,8 @@ def main() -> int:
     if not os.path.exists(a.path):
         print(f"missing corpus: {a.path}", file=sys.stderr)
         return 2
+    if a.audit_pooled:
+        return audit_pooled(a.path, a.field)
     if a.all_fields:
         rows = load(a.path)
         print(f"{'field':26s}{'E':>8s}{'n':>9s}   counts 1..7")

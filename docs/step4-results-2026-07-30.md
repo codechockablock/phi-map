@@ -391,12 +391,44 @@ untouched: a value renormalised over a 0.2% support is tail arithmetic regardles
 That claim never rested on the 0.46. And the genuine out-of-range demonstration, if
 one is wanted, now has to be earned on a correctly-read position or dropped.
 
-**Fix.** `prior_rating` now reads the last non-pad position, by delegating to the same
-index computation `hidden_final_token` uses. Logged as a **post-hoc instrument
-correction** to a file that was committed pre-data at `d6aac3e`: the registered
-protocol is unchanged, no confirmatory quantity used the corrected path, and the fix
-is recorded here rather than applied silently. Any future run of P1 produces different
-numbers from the ones in this document, by design.
+**Registered status, settled by `git` rather than by recollection.** `prior_rating`
+**was present at `d6aac3e`** (the as-run commit; the file has exactly two commits), and
+P1 **was** pre-registered — `docs/valence-check-prereg-2026-07-29.md` §6b at that same
+commit carries an explicit "**PRE-REGISTERED CRITERION P1**". So this is not a fork of
+an unregistered diagnostic. It is a pre-registered instrument in which **one of five
+registered criteria (P1) ran on a broken path while D1–D4 did not** — D1–D4 use
+`hidden_final_token` / `support_mass`, both `attention_mask`-indexed.
+
+**Fix, as a fork rather than an in-place edit.**
+
+| file | status |
+|---|---|
+| `valence_position_check.py` | **as-run, pre-registered**, byte-identical to `d6aac3e` (blob `1295f579…`), defect intact and deliberately unfixed |
+| `valence_position_check_r3.py` | **post-hoc, NO registered status** until a future pre-registration adopts it by name and states its criteria first |
+
+Each file's header points at the other. The as-run bytes are recoverable with
+`git show d6aac3e:valence_position_check.py`. Running the R3 copy produces different P1
+numbers than this document reports — by design; the doc's P1 figures are **retracted**,
+not superseded.
+
+**The durable fix is fingerprinting, not forking.** `measure_primitives.fingerprint()`
+(commit SHA + SHA-256 of each executing source file, with a `-dirty` marker) is now
+**mandatory in every output record this repo emits**. With it, in-place correction is
+recoverable and this question stops recurring; forking is only necessary while it is
+absent.
+
+**And the defect is not confined to this file.** The lint written in response found
+**30 further uses of the same padded-batch idiom, three of them in the deployed
+harness** — including `eval_selfreport`'s digit read, which produced `digit_mass` in
+all seven eval artifacts, and the state capture used to fit `valence_direction.npz`.
+Full triage, and the honest split between which conclusions survive and which
+interpretations do not, is in `equanimity-endpoint-audit-2026-07-29.md` §A11.
+
+**None of that reaches this document's confirmatory numbers**, which come from
+`step4_run`'s `attention_mask`-indexed paths — but it does mean §1's `rating_digits`
+result now carries extra weight: it is the *correctly-indexed* confirmation that digit
+support genuinely collapses (0.18–0.64 vs base 0.983), independent of the pad-position
+measurements that first suggested it.
 
 ### 9.2 The training digit marginal — conclusion robust, one claim narrowed, provenance added
 

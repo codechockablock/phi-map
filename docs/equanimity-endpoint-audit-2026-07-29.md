@@ -680,6 +680,110 @@ counts.
 
 ---
 
+## A11. The audit's own instrumentation — a stated limitation, NOT evidence
+
+**This section is about defects in code written to perform this audit. It is
+deliberately quarantined from the findings.** Bugs in our measurement code are a
+limitation of our instrumentation; they are **not data about published metrics**, not
+evidence for Finding I, and must never be cited as such. Finding I rests on the
+forensic instances in §A9, each measured by a code path independently verified at the
+time. This section is the honest disclosure that sits beside them, not more of them.
+
+### A11.1 The pattern: new measurement code not reusing a validated primitive
+
+Three defects this session, twice in code the audit itself wrote:
+
+| # | Defect | Where | How found |
+|---|---|---|---|
+| 1 | scalar-only dict filter dropped every nested stage; absence reported as data | my survey script | reading a second artifact with a recursive walker (§A5) |
+| 2 | `prior_rating` read `logits[:, -1, :]` — the padded batch's last position | `valence_position_check.py` (audit-written, pre-registered as P1) | diffing two implementations of one measurement (results §9.1) |
+| 3 | 30 further uses of the same padded-batch idiom, three of them in the **deployed** harness | repo-wide | the lint written in response to #2 |
+
+**The common cause is not carelessness about a known hazard.** In every case the
+correct primitive already existed nearby and the new code did not reuse it — most
+starkly in #2, where `hidden_final_token` sits forty lines above `prior_rating` in the
+same file, doing it correctly, under a comment that names the hazard.
+
+**Structural fix, not ad hoc patching.** `measure_primitives.py` provides
+`last_real_index()` / `read_at_last()` and a **behavioural** self-test that builds a
+right-padded batch and demonstrates the naive idiom reads the wrong row 2 of 3 times.
+A textual grep would have proved nothing about behaviour — that is the defect class
+that produced the `eos_reached` nan and the string-matching self-test. The grep is
+present too, as a **lint** (`--lint`), which is the appropriate role for it: it
+enumerates suspects, the behavioural test proves the helper is right.
+
+### A11.2 What the lint found, and the honest impact split
+
+30 un-exempted uses. **Three are in the deployed harness and are live defects** —
+each confirmed to batch with `padding=True` and then index `[:, -1, :]`, with
+`EVAL_BATCH = 32` and every probe set (16 / 8 / 6 / 12 / 12) fitting in a single
+batch, so **only the longest row in each set was read at its intended position**:
+
+| site | function | what it produced |
+|---|---|---|
+| `train_eval.py:638` | `refusal_margin` | the endpoint already dead on construct validity (§3.1) — it had a **second, independent** defect |
+| `train_eval.py:773` | `eval_selfreport` digit read | **`digit_mass` and every self-report rating in all seven eval artifacts** |
+| `train_eval.py:817` | `_hidden_final_token` | the states used to **fit `valence_direction.npz`**, the frozen measuring stick |
+
+**A necessary nuance, or this gets overstated.** With right-padding and causal
+attention, a pad-position hidden state is *not* garbage — it attends to every real
+token before it. The read is a coherent state taken *after N end-of-turn tokens*
+rather than at the end of the prompt. So these are **systematically displaced,
+row-dependent read positions**, not noise. That is why the numbers looked coherent,
+and why an absolute value like the retracted 0.46 could still come out absurd. The
+displacement varies by row, because it depends on that row's length relative to its
+batch maximum — an arbitrary quantity.
+
+**Impact on §A5b, my strongest artifact-level finding, stated plainly.** The
+`digit_mass` values (0.031 collapse, 3.4× within-cell range) come from
+`train_eval.py:773` and are therefore pad-position measurements. **The interpretation
+I gave — "support collapse at the rating position" — is not what was measured.**
+
+What rescues the conclusion is independent: the Step 4 run measured two-turn digit
+support with `step4_run.digit_read`, which indexes by `attention_mask`, and found
+adapter support at **0.18–0.64 against a base of 0.983** (results §1). So digit
+support really does collapse under format tuning — confirmed by a correctly-indexed
+instrument. **A5b's numbers are artifacts; A5b's conclusion is independently
+confirmed.** The audit text is left standing with this pointer rather than rewritten,
+so the error and its correction are both on the record.
+
+The remaining 27 hits are in Arm G scripts. **Flagged, not assessed** — I have not
+verified whether those batch or run at batch size 1, and Arm G's decision-level
+results are already void for unrelated reasons (`RESEARCH_ARC.md` §14). They should
+not be relied on until checked.
+
+### A11.3 Mandatory fingerprinting, the durable fix
+
+The reason this question kept recurring is that artifacts on disk did not say which
+code produced them. `measure_primitives.fingerprint()` returns the commit SHA (with a
+`-dirty` marker when the tree is unclean) plus a SHA-256 of each executing source
+file, and it is **required in every output record this repo emits going forward**.
+With it, an in-place correction is recoverable and forking is unnecessary; without it,
+forking is doing that job by hand.
+
+## A12. Pooled quantities: cell-weighting audit
+
+The training digit marginal turned out to be **54.7% one cell**. That is a
+generalisable flag, so every pooled quantity over the same corpus was audited
+(`training_digit_marginal.py --audit-pooled`, dominance bar 40%):
+
+| pooled quantity | pooled value | heaviest cell | flagged |
+|---|---:|---|---|
+| E[digit 1-7] | 2.230 | neutral-verbose **54.7%** | **yes** |
+| mean text length | 1100.0 chars | neutral-verbose 35.8% | no |
+| answers present | 6,700 | 25.0% (perfectly balanced) | no |
+| rows with `ok=False` | 1,564 | 25.0% (perfectly balanced) | no |
+| digit-initial answers | 3 | neutral-terse 66.7% | n=3, ignore |
+
+**The design is balanced by ROW (2,065–2,067 per cell) and unbalanced by TEXT
+VOLUME**, and text volume tracks Factor B by construction — so the imbalance runs
+along a factor axis. Note also that E[digit]'s 54.7% exceeds neutral-verbose's 35.8%
+share of characters, so digit occurrences are concentrated there beyond what text
+volume alone explains.
+
+**Standing rule adopted:** any pooled quantity over an unbalanced corpus is a weighted
+average whose weights nobody declared. Report per-cell alongside every pooled value.
+
 ## 7. Ambiguities I am not resolving on my own
 
 Per the escalation rule.
