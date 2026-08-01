@@ -1,7 +1,9 @@
 # phi-map
 
-**Status: frozen, 2026-07-30.** No further work is planned. The repository is kept
-for the record and for the one result worth writing up.
+**Status: frozen, 2026-07-30**, with one exception: branch `olmo3-replication`
+carries a cross-model replication of the §14–§15 scope-conflict result on Olmo 3 7B
+(opened 2026-07-31 by explicit decision, under the corrected crossed-order protocol).
+The frozen arc itself is unchanged; no other work is planned.
 
 Research repo that began as one question — *is deception one thing inside a
 model and many things outside it?* — and ended up somewhere narrower and better
