@@ -1,0 +1,142 @@
+{
+ "protocol": "OLMO3_PHASE3_V1",
+ "model": "allenai/Olmo-3-7B-Instruct",
+ "revision": "6e5971d9eba42665f5bd5a0fcf047f299ce1dccc",
+ "layer": 24,
+ "fit_family": "release_records",
+ "seeds": [
+  111,
+  211
+ ],
+ "dtype": "torch.bfloat16",
+ "results": {
+  "s111": {
+   "cond_raw": 0.69268798828125,
+   "cond_orth": 0.69189453125,
+   "order_raw": 0.59228515625,
+   "order_orth": 0.58770751953125,
+   "shuf_p975": 0.5851058959960938,
+   "rand_p975": 0.61873779296875,
+   "cond_orth_ci": [
+    0.6275874583410006,
+    0.7518220581348907
+   ],
+   "n_train": 128,
+   "n_eval": 256
+  },
+  "s211": {
+   "cond_raw": 0.62518310546875,
+   "cond_orth": 0.62109375,
+   "order_raw": 0.58203125,
+   "order_orth": 0.563720703125,
+   "shuf_p975": 0.6043701171875,
+   "rand_p975": 0.60927734375,
+   "cond_orth_ci": [
+    0.5527381943580504,
+    0.6907257012893167
+   ],
+   "n_train": 128,
+   "n_eval": 256
+  },
+  "cosine_raw": 0.3375372886657715,
+  "cosine_orth": 0.31822633743286133,
+  "sweep_spearman": 0.9207887700534759
+ },
+ "verdict": {
+  "branch": "R3_SIGNAL_NOT_OBJECT",
+  "reasons": [
+   "margins {'s111': 0.10678863525390625, 's211': 0.0167236328125}",
+   "cosine 0.318",
+   "margin_ok=False cosine_ok=False"
+  ]
+ },
+ "sensitivity": {
+  "base": "R3_SIGNAL_NOT_OBJECT",
+  "grid": {
+   "margin=0.05": "R3_SIGNAL_NOT_OBJECT",
+   "margin=0.15": "R3_SIGNAL_NOT_OBJECT",
+   "order=0.6": "R3_SIGNAL_NOT_OBJECT",
+   "order=0.7": "R3_SIGNAL_NOT_OBJECT",
+   "retention=0.7": "R3_SIGNAL_NOT_OBJECT",
+   "retention=0.9": "R3_SIGNAL_NOT_OBJECT"
+  },
+  "fragile": false
+ },
+ "reference_6d_encoder": 0.509,
+ "reference_note": "6-d encoder is a fixed Llama-side reference; not rerunnable here (output clamped to READY)",
+ "scen_sha": "523f0fbb2284d3e03348c3087ef5dad0aff5d979d004502eaf1a2cfc0a3128fd",
+ "eval_sha": "11e593c2b0e7158f0650049460f8508b57ea58862a2a5c7eb05da72b0efb9d0c",
+ "curves": {
+  "c111": [
+   0.5133,
+   0.4276,
+   0.4659,
+   0.4567,
+   0.4434,
+   0.4438,
+   0.444,
+   0.62,
+   0.5946,
+   0.5964,
+   0.5769,
+   0.5326,
+   0.5086,
+   0.4991,
+   0.5023,
+   0.5197,
+   0.5005,
+   0.5273,
+   0.563,
+   0.6099,
+   0.6149,
+   0.7561,
+   0.7545,
+   0.7551,
+   0.7686,
+   0.7619,
+   0.7469,
+   0.7374,
+   0.7314,
+   0.7237,
+   0.7062,
+   0.7181,
+   0.7147
+  ],
+  "c211": [
+   0.5379,
+   0.5151,
+   0.5378,
+   0.5155,
+   0.5168,
+   0.5402,
+   0.5677,
+   0.5934,
+   0.5877,
+   0.5947,
+   0.5801,
+   0.5482,
+   0.5534,
+   0.5736,
+   0.571,
+   0.594,
+   0.5888,
+   0.6057,
+   0.6324,
+   0.6414,
+   0.6271,
+   0.7323,
+   0.7313,
+   0.7369,
+   0.7325,
+   0.7302,
+   0.7287,
+   0.7277,
+   0.7385,
+   0.7285,
+   0.6945,
+   0.6274,
+   0.6131
+  ]
+ },
+ "wall_s": 177.4
+}
