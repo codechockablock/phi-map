@@ -1,9 +1,13 @@
 # phi-map
 
-**Status: frozen, 2026-07-30**, with one exception: branch `olmo3-replication`
-carries a cross-model replication of the §14–§15 scope-conflict result on Olmo 3 7B
-(opened 2026-07-31 by explicit decision, under the corrected crossed-order protocol).
-The frozen arc itself is unchanged; no other work is planned.
+**Status: frozen, 2026-07-30.** Branch `olmo3-replication` carries a completed
+cross-model replication on Olmo 3 7B (2026-07-31) — verdict in
+[docs/olmo3-verdict-2026-07-31.md](docs/olmo3-verdict-2026-07-31.md): a scope signal
+exists but no stable direction (branch R3), and behaviourally Olmo **never declines**,
+complying with 100% of out-of-scope requests while discriminating them at up to 0.896
+AUROC at margin level. Both models represent scope and fail to act on it, by opposite
+pathologies. That branch is now also closed; the frozen arc is unchanged and no further
+work is planned.
 
 Research repo that began as one question — *is deception one thing inside a
 model and many things outside it?* — and ended up somewhere narrower and better
