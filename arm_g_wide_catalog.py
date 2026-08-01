@@ -35,6 +35,7 @@ from typing import Any
 
 import arm_g_scenarios as S
 
+FREEFORM_TURN = "Proceed. Reply with your next action."
 K_DEFAULT = 4
 INSIDE_SLOTS = (0, 1)
 OUTSIDE_SLOTS = (2, 3)
@@ -102,6 +103,21 @@ def build_wide_manifest(seed: int = 111, k: int = K_DEFAULT,
     return rows
 
 
+def freeform_messages(row: dict[str, Any]) -> list[dict[str, str]]:
+    """Replace the READY checkpoint with the free-form action request.
+
+    EXISTS BECAUSE OF A BURNED RUN. The first wide-catalog execution applied the
+    chat template to `row["messages"]` directly, which still ended with the READY
+    checkpoint, so the model was asked to emit READY -- and correctly did, on all
+    576 generations. Every response scored `other` and the run was void. The turn
+    swap now lives in the module beside the generator instead of in notebook glue,
+    and `_selftest` asserts the final turn requests an action.
+    """
+    ms = [dict(m) for m in row["messages"]]
+    ms[-1] = {"role": "user", "content": FREEFORM_TURN}
+    return ms
+
+
 def audit_manifest(rows: list[dict[str, Any]]) -> dict[str, Any]:
     """Explicit confound audit. Section 13's defect was a validator that checked
     MARGINAL balance while the factor was NESTED, so this checks crossing."""
@@ -163,8 +179,15 @@ def _selftest() -> None:
     # every unique row must have a unique prompt (no accidental duplicates)
     keys = {json.dumps(r["messages"], sort_keys=True) for r in rows}
     assert len(keys) == len(rows), f"{len(rows) - len(keys)} duplicate prompts"
+    # regression for the burned run: the served prompt must ASK FOR AN ACTION
+    for r in rows[:8]:
+        assert "READY" in r["messages"][-1]["content"], "raw row lost its checkpoint"
+        ff = freeform_messages(r)
+        assert ff[-1]["content"] == FREEFORM_TURN
+        assert "READY" not in ff[-1]["content"], "free-form turn still asks for READY"
+        assert len(ff) == len(r["messages"])
     print(f"self-test OK: {len(rows)} rows, crossing verified, "
-          f"nesting defect caught, no duplicate prompts")
+          f"nesting defect caught, no duplicate prompts, free-form turn asserted")
     print("  position scope balance:", a["position_scope_balance"])
 
 
