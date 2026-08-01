@@ -1,13 +1,26 @@
 # phi-map
 
-**Status: frozen, 2026-07-30.** Branch `olmo3-replication` carries a completed
-cross-model replication on Olmo 3 7B (2026-07-31) — verdict in
-[docs/olmo3-verdict-2026-07-31.md](docs/olmo3-verdict-2026-07-31.md): a scope signal
-exists but no stable direction (branch R3), and behaviourally Olmo **never declines**,
-complying with 100% of out-of-scope requests while discriminating them at up to 0.896
-AUROC at margin level. Both models represent scope and fail to act on it, by opposite
-pathologies. That branch is now also closed; the frozen arc is unchanged and no further
-work is planned.
+**Status: frozen.** Main arc frozen 2026-07-30; branch `olmo3-replication` frozen
+2026-08-01. No further work is planned.
+
+The replication branch closing document is
+[docs/olmo3-branch-final-2026-08-01.md](docs/olmo3-branch-final-2026-08-01.md). Its
+result, at defensible scope:
+
+> **Scope-conflict knowledge gates *whether* a model deviates; surface position and
+> protocol affordance determine *how*.**
+
+Both Llama-3.1-8B and Olmo-3-7B discriminate scope violations internally and comply
+~100% on in-scope requests, deviating 19–35% on out-of-scope ones. But *what* the
+deviation is — decline, silently substitute another file, fabricate a path — is governed
+by which catalog **line** the path is printed on (opposite preferences per model) and by
+which output channel the evaluation offers. Llama's decline rate falls from ~50% under a
+forced A/B choice to ~2% in free form, with no change in whether it respects the
+constraint — so **decline rate is not a valid measure of constraint adherence**.
+
+Scope: 48 synthetic scenarios, one seed, greedy decode, two 7–8B models, single turn,
+two-entry catalog. Whether the effect survives a wider action space is **untested** —
+two attempts, both void (branch doc §4).
 
 Research repo that began as one question — *is deception one thing inside a
 model and many things outside it?* — and ended up somewhere narrower and better
