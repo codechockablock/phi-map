@@ -62,6 +62,9 @@ PROMPT = ("Extract the value corresponding to the specified key in the JSON "
           "Reply with the value only.")
 
 UUID_RE = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+# Loose: a hex-and-dash run the model clearly meant as a UUID but got wrong --
+# dropped or transposed characters. Scored WRONG, not unscorable.
+UUID_LOOSE = re.compile(r"[0-9a-f]{4,}(?:-[0-9a-f]{2,}){2,}")
 
 
 def _uuid(rng: random.Random) -> str:
@@ -96,23 +99,43 @@ def build_trials(seed: int = 1101, n_pairs: int = N_PAIRS,
     return rows
 
 
-def score_one(completion: str, gold_key: str, gold_value: str) -> dict[str, Any]:
-    """Mechanical. No judge, no fuzzy match.
+def score_one(completion: str, gold_key: str, gold_value: str,
+              hit_cap: bool = False) -> dict[str, Any]:
+    """Mechanical. No judge, no fuzzy match. Three outcomes, not two.
 
     The queried key is itself a UUID, so a model that echoes the key before
     answering would be scored on the echo. Strip the key first, then take the
-    FIRST remaining UUID -- taking `gold_value in completion` instead would count
-    a model that dumps several candidates as correct.
+    FIRST remaining UUID -- `gold_value in completion` would instead count a
+    model that dumps several candidates as correct.
 
-    `scorable` is the reachability precondition: a completion with no candidate
-    UUID at all is not a wrong retrieval, it is an unreadable trial, and a
-    position curve built on unreadable trials measures nothing.
+    WHY THREE OUTCOMES. Hand verification on the first row showed one bucket
+    absorbing three different events:
+
+      1. `...4488d6be-c497-b40`  -- a CORRECT retrieval cut off by the token
+         cap. Scoring this wrong would blame the model for my max_new_tokens.
+         `truncated` -> excluded from accuracy and separately gated.
+      2. `...c90842a1ec0`        -- completed, one character dropped. A genuine
+         wrong answer. Previously scored unscorable, which INFLATES accuracy,
+         because `curve()` divides by scorable trials only. If transcription
+         sloppiness varies with position, that is a position-dependent bias in
+         the denominator of the very curve being measured.
+      3. a refusal or non-answer -- the only real `unscorable`.
+
+    `truncated` dominates: a cut-off generation cannot be judged either way.
     """
     cands = [u for u in UUID_RE.findall(completion) if u != gold_key]
-    if not cands:
-        return dict(scorable=False, correct=False, n_candidates=0, emitted=None)
-    return dict(scorable=True, correct=cands[0] == gold_value,
-                n_candidates=len(cands), emitted=cands[0])
+    if cands:
+        return dict(scorable=True, truncated=False, correct=cands[0] == gold_value,
+                    malformed=False, n_candidates=len(cands), emitted=cands[0])
+    if hit_cap:
+        return dict(scorable=False, truncated=True, correct=False,
+                    malformed=False, n_candidates=0, emitted=None)
+    loose = [u for u in UUID_LOOSE.findall(completion) if u not in gold_key]
+    if loose:
+        return dict(scorable=True, truncated=False, correct=False,
+                    malformed=True, n_candidates=len(loose), emitted=loose[0])
+    return dict(scorable=False, truncated=False, correct=False,
+                malformed=False, n_candidates=0, emitted=None)
 
 
 def curve(scored: list[dict[str, Any]]) -> dict[int, float]:
@@ -133,10 +156,12 @@ def curve(scored: list[dict[str, Any]]) -> dict[int, float]:
 # returns. Void branches precede shape branches -- an unreachable task cannot
 # have a shape.
 
-VOID_VERDICTS = frozenset({"V_UNSCORABLE", "V_TASK_UNREACHABLE", "V_UNREADABLE"})
+VOID_VERDICTS = frozenset({"V_UNSCORABLE", "V_TASK_UNREACHABLE", "V_UNREADABLE",
+                           "V_TRUNCATED"})
 
-BARS = dict(index=0.10, scorable=0.75, ceiling=0.20)
-SENS = dict(index=(0.05, 0.15), scorable=(0.60, 0.85), ceiling=(0.10, 0.30))
+BARS = dict(index=0.10, scorable=0.75, ceiling=0.20, truncated=0.05)
+SENS = dict(index=(0.05, 0.15), scorable=(0.60, 0.85), ceiling=(0.10, 0.30),
+            truncated=(0.02, 0.10))
 
 
 def classify(c: dict[int, float], bars: dict = BARS) -> dict[str, Any]:
@@ -184,7 +209,16 @@ def evaluate(m: dict[str, Any], bars: dict = BARS) -> dict[str, Any]:
     per: dict[str, Any] = {}
     for key, d in m.items():
         sf = d.get("scorable_frac", 1.0)
+        tf = d.get("truncated_frac", 0.0)
         c = d.get("curve") or {}
+        # Truncation is MY instrument, not the model's behaviour, and a cut-off
+        # generation cannot be judged either way. It voids before anything else.
+        if tf > bars["truncated"]:
+            per[key] = dict(verdict="V_TRUNCATED",
+                            reasons=[f"truncated {tf:.3f} > {bars['truncated']}; "
+                                     f"raise max_new_tokens and re-generate -- "
+                                     f"re-scoring cannot recover a cut-off answer"])
+            continue
         if sf < bars["scorable"]:
             per[key] = dict(verdict="V_UNSCORABLE",
                             reasons=[f"scorable {sf:.3f} < {bars['scorable']}"])
@@ -321,7 +355,25 @@ def _selftest() -> None:
         "first non-key candidate wins; a dump of guesses is not a retrieval"
     s = score_one("I cannot find that key.", k, v)
     assert s["scorable"] is False and s["correct"] is False
+    assert s["truncated"] is False and s["malformed"] is False, "a refusal is not truncation"
     assert score_one(f"{v} {other}", k, v)["n_candidates"] == 2
+
+    # REGRESSIONS from the first real row's hand verification. Verbatim strings.
+    gk = "db1f8029-537a-1f3c-e6c2-f30a4c7c0b27"
+    gv = "4488d6be-c497-b402-bc02-0fac14dac41e"
+    cut = score_one(f'The value associated with the key "{gk}" is:\n\n4488d6be-c497-b40',
+                    gk, gv, hit_cap=True)
+    assert cut["truncated"] and not cut["scorable"] and not cut["correct"], cut
+    # ...and the SAME text without the cap flag is a wrong answer, not truncation
+    nocap = score_one(f'The value associated with the key "{gk}" is:\n\n4488d6be-c497-b40',
+                      gk, gv, hit_cap=False)
+    assert nocap["scorable"] and nocap["malformed"] and not nocap["correct"], nocap
+
+    gv2 = "c2474905-700e-d3b4-ed43-c90842a1ec02"
+    near = score_one('The value is:\n\n"c2474905-700e-d3b4-ed43-c90842a1ec0"',
+                     _uuid(random.Random(3)), gv2)
+    assert near["scorable"] and not near["correct"] and near["malformed"], \
+        "a dropped character is a WRONG retrieval; scoring it unscorable inflates accuracy"
 
     # curve + classify
     def mk(d):
@@ -347,8 +399,8 @@ def _selftest() -> None:
     assert r["first"] - r["interior_min"] > BARS["index"], \
         "fixture no longer exercises the bias it was written for"
 
-    def row(c, sf=1.0):
-        return dict(curve=c, scorable_frac=sf)
+    def row(c, sf=1.0, tf=0.0):
+        return dict(curve=c, scorable_frac=sf, truncated_frac=tf)
 
     # anchor gate fires BEFORE any driver claim
     bad = evaluate({"llama2-7b": row(u), "llama2-13b": row(u)})
@@ -375,6 +427,14 @@ def _selftest() -> None:
     e4 = evaluate({**ok, "olmo3-7b": row(mk({0: .05, 10: .03, 20: .02, 49: .04}))})
     assert e4["per_model"]["olmo3-7b"]["verdict"] == "V_TASK_UNREACHABLE"
     assert e4["driver"] is None, e4
+    # truncation voids, and voids FIRST -- it is my instrument, not the model
+    e5 = evaluate({**ok, "olmo3-7b": row(u, tf=0.20)})
+    assert e5["per_model"]["olmo3-7b"]["verdict"] == "V_TRUNCATED", e5
+    assert e5["driver"] is None, e5
+    # a healthy curve with an unhealthy truncation rate must still void
+    e6 = evaluate({**ok, "llama2-13b": row(u, sf=0.99, tf=0.30)})
+    assert e6["per_model"]["llama2-13b"]["verdict"] == "V_TRUNCATED"
+    assert e6["anchor_gate"]["status"] == "ANCHOR_FAILED", e6
     # THE REGRESSION THAT MOTIVATED VOID_VERDICTS: three unreadable models must
     # never return PARAMETER_COUNT ("no model showed primacy" from no data)
     allvoid = evaluate({"llama2-7b": row(r_only), "llama2-13b": row(u),

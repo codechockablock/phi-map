@@ -47,9 +47,10 @@ CONFIRMED_BUDGET_HOURS = 1.5     # per row; anomaly threshold, not a target
 import torch, time
 T0 = time.time()
 assert torch.cuda.is_available(), "no GPU"
-p = torch.cuda.get_device_properties(0)
-GIB = p.total_memory / 1024**3
-print(p.name, round(GIB, 1), "GiB")
+_props = torch.cuda.get_device_properties(0)
+GPU_NAME = _props.name                    # bound once; `p` gets shadowed later
+GIB = _props.total_memory / 1024**3
+print(GPU_NAME, round(GIB, 1), "GiB")
 
 # 13B fp16/bf16 needs ~26GB of weights alone.
 if MODEL_KEY == "llama2-13b":
@@ -240,7 +241,12 @@ import collections
 # GQA) and its KV cache at batch 8 x ~2600 tokens is ~17 GB on top of 26 GB of
 # weights -- over a 40 GB card. The warm-up probe below settles it empirically
 # instead of trusting that arithmetic.
-BATCH, MAXNEW = 4, 64
+#
+# MAXNEW is 192, not 64. Llama-2 answers verbosely -- 'The value associated with
+# the key "<36-char uuid>" is:' is ~65 tokens BEFORE the answer starts, so 64
+# truncated correct retrievals mid-UUID. A cut-off answer cannot be scored
+# either way and re-scoring cannot recover it, so this is regenerate-only.
+BATCH, MAXNEW = 4, 192
 CKPT = f"gen_{MODEL_KEY}_{CFG_HASH}.json"
 
 done = fetch(CKPT) or {}
@@ -310,10 +316,18 @@ for pos in sorted(by_pos):
             g = model.generate(**enc, max_new_tokens=MAXNEW, do_sample=False,
                                pad_token_id=tok.pad_token_id)
         new = g[:, enc["input_ids"].shape[1]:]
-        outs += [tok.decode(s, skip_special_tokens=True) for s in new]
+        for s in new:
+            ids = s.tolist()
+            outs.append(dict(
+                text=tok.decode(s, skip_special_tokens=True),
+                # hit the cap == produced MAXNEW tokens and never emitted EOS.
+                # Without this flag a truncated CORRECT retrieval is scored as a
+                # model error instead of an instrument limit.
+                hit_cap=bool(len(ids) >= MAXNEW and tok.eos_token_id not in ids)))
         budget_check(f"pos {pos} batch {i}")
     done[str(pos)] = [dict(gold_key=r["gold_key"], gold_value=r["gold_value"],
-                           trial=r["trial"], text=t) for r, t in zip(rows, outs)]
+                           trial=r["trial"], text=o["text"], hit_cap=o["hit_cap"])
+                      for r, o in zip(rows, outs)]
     persist(CKPT, json.dumps(done).encode())     # after EVERY block
     print(f"  pos {pos:3d} done  {len(outs)} gens  {elapsed_h():.2f}h  persisted")
 print("generation complete", f"{elapsed_h():.2f}h")
@@ -323,20 +337,43 @@ code('''# [8] score, curve, per-model verdict
 scored = []
 for pos, recs in done.items():
     for r in recs:
-        s = PL.score_one(r["text"], r["gold_key"], r["gold_value"])
+        s = PL.score_one(r["text"], r["gold_key"], r["gold_value"],
+                         hit_cap=r.get("hit_cap", False))
         s["gold_position"] = int(pos)
         scored.append(s)
 
 curve = PL.curve(scored)
-scorable_frac = sum(s["scorable"] for s in scored) / len(scored)
-row_result = dict(curve={str(k): v for k, v in curve.items()},
-                  scorable_frac=scorable_frac, n=len(scored))
-verdict = PL.classify(curve) if scorable_frac >= PL.BARS["scorable"] else \\
-          dict(verdict="V_UNSCORABLE", reasons=[f"scorable {scorable_frac:.3f}"])
+n = len(scored)
+scorable_frac = sum(s["scorable"] for s in scored) / n
+truncated_frac = sum(s["truncated"] for s in scored) / n
+malformed_frac = sum(s["malformed"] for s in scored) / n
+# Single-row verdict via the same committed adjudicator the ladder uses, so a
+# row cannot be judged by one rule here and another rule in aggregate.
+# NOTE: evaluate() gets INT position keys. row_result stringifies them for JSON,
+# and string keys would sort lexicographically -- '5' after '49' -- silently
+# making position 5 the curve's "last" point.
+verdict = PL.evaluate({MODEL_KEY: dict(
+    curve=curve, scorable_frac=scorable_frac,
+    truncated_frac=truncated_frac)})["per_model"][MODEL_KEY]
 
-print(f"scorable {scorable_frac:.4f}  n={len(scored)}")
-for p in sorted(curve):
-    print(f"  pos {p:3d}  acc {curve[p]:.4f}")
+row_result = dict(curve={str(k): v for k, v in curve.items()},
+                  scorable_frac=scorable_frac, truncated_frac=truncated_frac,
+                  malformed_frac=malformed_frac, n=n)
+
+print(f"scorable {scorable_frac:.4f}  truncated {truncated_frac:.4f}  "
+      f"malformed {malformed_frac:.4f}  n={n}")
+if truncated_frac > PL.BARS["truncated"]:
+    print(f"  !! truncation above {PL.BARS['truncated']} -- raise MAXNEW and "
+          f"RE-GENERATE; re-scoring cannot recover a cut-off answer")
+# truncation must not vary with position, or it biases the curve itself
+import collections as _c
+_t = _c.Counter(); _d = _c.Counter()
+for s in scored:
+    _d[s["gold_position"]] += 1; _t[s["gold_position"]] += int(s["truncated"])
+print("  truncation by position:",
+      {q: round(_t[q] / _d[q], 3) for q in sorted(_d)})
+for pos_ in sorted(curve):
+    print(f"  pos {pos_:3d}  acc {curve[pos_]:.4f}")
 print("\\nverdict:", json.dumps(verdict, indent=1))
 if MODEL_KEY in PL.ANCHOR_PREDICTION:
     want = PL.ANCHOR_PREDICTION[MODEL_KEY]
@@ -346,11 +383,16 @@ if MODEL_KEY in PL.ANCHOR_PREDICTION:
 
 code('''# [9] hand verification + persist the row
 print("=" * 78, "\\nHAND VERIFICATION: 3 generations per outcome\\n", "=" * 78)
-buckets = {"correct": [], "wrong": [], "unscorable": []}
+buckets = {"correct": [], "wrong": [], "malformed": [], "truncated": [],
+           "unscorable": []}
 for pos, recs in done.items():
     for r in recs:
-        s = PL.score_one(r["text"], r["gold_key"], r["gold_value"])
-        b = "unscorable" if not s["scorable"] else ("correct" if s["correct"] else "wrong")
+        s = PL.score_one(r["text"], r["gold_key"], r["gold_value"],
+                         hit_cap=r.get("hit_cap", False))
+        b = ("truncated" if s["truncated"] else
+             "malformed" if s["malformed"] else
+             "unscorable" if not s["scorable"] else
+             "correct" if s["correct"] else "wrong")
         if len(buckets[b]) < 3:
             buckets[b].append((pos, r, s))
 for b, items in buckets.items():
@@ -363,7 +405,7 @@ summary = dict(protocol="POSITION_LADDER_V1", config=CONFIG, cfg_hash=CFG_HASH,
                result=row_result, verdict=verdict,
                anchor_prediction=PL.ANCHOR_PREDICTION.get(MODEL_KEY),
                batch=BATCH_USED, peak_gib=PEAK_GIB, max_new_tokens=MAXNEW,
-               wall_h=round(elapsed_h(), 3), gpu=p.name)
+               wall_h=round(elapsed_h(), 3), gpu=GPU_NAME)
 blob = json.dumps(summary, indent=1).encode()
 persist(f"row_{MODEL_KEY}_{CFG_HASH}.json", blob)
 print("\\nsha256:", hashlib.sha256(blob).hexdigest()[:16])
