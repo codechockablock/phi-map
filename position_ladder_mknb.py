@@ -89,7 +89,21 @@ PL_SRC = {SRC!r}
 assert hashlib.sha256(PL_SRC.encode()).hexdigest() == PL_SHA, "artifact drift"
 pathlib.Path("position_ladder.py").write_text(PL_SRC)
 
+# Writing the file does NOT replace an already-imported module. Re-running this
+# cell in a live runtime otherwise leaves the OLD adjudicator in sys.modules,
+# and the notebook then scores new data with stale rules -- which is exactly how
+# this cell first failed (score_one() got an unexpected keyword argument).
+import sys, importlib, inspect
+sys.modules.pop("position_ladder", None)
 import position_ladder as PL
+importlib.reload(PL)
+
+# BEHAVIOURAL check, not a hash: the module actually in memory must expose the
+# current interface. A sha on the file says nothing about what got imported.
+assert "hit_cap" in inspect.signature(PL.score_one).parameters, \\
+    "stale position_ladder in memory -- restart the runtime"
+assert "V_TRUNCATED" in PL.VOID_VERDICTS, "stale adjudicator in memory"
+
 PL._selftest()
 print("\\nadjudicator self-test passed on this box; sha", PL_SHA[:16])
 ''')
@@ -334,11 +348,20 @@ print("generation complete", f"{elapsed_h():.2f}h")
 ''')
 
 code('''# [8] score, curve, per-model verdict
+# A checkpoint without hit_cap predates truncation tracking. Defaulting it to
+# False would silently score every cut-off generation as a wrong answer -- the
+# precise contamination this rewrite exists to remove -- so refuse it instead.
+_stale = [p for p, recs in done.items() if recs and "hit_cap" not in recs[0]]
+assert not _stale, (
+    f"position blocks {_stale[:5]} were generated before hit_cap tracking "
+    f"(max_new_tokens=64). Re-scoring cannot recover a truncated answer: delete "
+    f"{CKPT} from the dataset repo and re-generate this row.")
+
 scored = []
 for pos, recs in done.items():
     for r in recs:
         s = PL.score_one(r["text"], r["gold_key"], r["gold_value"],
-                         hit_cap=r.get("hit_cap", False))
+                         hit_cap=r["hit_cap"])
         s["gold_position"] = int(pos)
         scored.append(s)
 
@@ -388,7 +411,7 @@ buckets = {"correct": [], "wrong": [], "malformed": [], "truncated": [],
 for pos, recs in done.items():
     for r in recs:
         s = PL.score_one(r["text"], r["gold_key"], r["gold_value"],
-                         hit_cap=r.get("hit_cap", False))
+                         hit_cap=r["hit_cap"])
         b = ("truncated" if s["truncated"] else
              "malformed" if s["malformed"] else
              "unscorable" if not s["scorable"] else
