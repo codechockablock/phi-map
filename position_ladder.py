@@ -140,18 +140,26 @@ SENS = dict(index=(0.05, 0.15), scorable=(0.60, 0.85), ceiling=(0.10, 0.30))
 
 
 def classify(c: dict[int, float], bars: dict = BARS) -> dict[str, Any]:
-    """Curve shape from endpoint lift over the interior minimum.
+    """Curve shape from endpoint lift over the interior MEAN.
 
-    Endpoint-minus-interior-minimum, not endpoint-minus-mean: the U-shape claim
-    is specifically that the ENDS beat the WORST INTERIOR point. A mean baseline
-    would let a monotone rising curve score as recency.
+    NOT the interior minimum. The minimum of 8 noisy position estimates is a
+    downward-biased statistic -- at n=200/position it sits roughly 1.5 SE below
+    the true interior level, which inflates BOTH indices by ~5pp against a 10pp
+    bar and pushes genuinely flat curves into U_SHAPE. The mean is unbiased and
+    pools 8x the data, so its own error is negligible beside the endpoints'.
+
+    The reason a min baseline looked attractive -- that a mean baseline lets a
+    monotone rise read as recency -- is not a defect: Liu et al.'s 7B curve IS
+    essentially a monotone rise toward the end, and RECENCY_ONLY is the correct
+    reading of it. A monotone rise also scores NEGATIVE primacy here, so it can
+    never be mistaken for a U.
     """
     if len(c) < 3:
         return dict(verdict="V_UNREADABLE", reasons=[f"only {len(c)} positions"])
     ps = sorted(c)
     first, last = c[ps[0]], c[ps[-1]]
     interior = [c[p] for p in ps[1:-1]]
-    floor = min(interior)
+    floor = sum(interior) / len(interior)
     prim, rec = first - floor, last - floor
     if prim >= bars["index"] and rec >= bars["index"]:
         v = "U_SHAPE"
@@ -162,8 +170,9 @@ def classify(c: dict[int, float], bars: dict = BARS) -> dict[str, Any]:
     else:
         v = "FLAT"
     return dict(verdict=v, primacy_index=round(prim, 4), recency_index=round(rec, 4),
-                interior_floor=round(floor, 4), first=round(first, 4),
-                last=round(last, 4), curve={p: round(c[p], 4) for p in ps})
+                interior_mean=round(floor, 4), interior_min=round(min(interior), 4),
+                first=round(first, 4), last=round(last, 4),
+                curve={p: round(c[p], 4) for p in ps})
 
 
 def evaluate(m: dict[str, Any], bars: dict = BARS) -> dict[str, Any]:
@@ -324,9 +333,19 @@ def _selftest() -> None:
     p_only = mk({0: .80, 10: .38, 20: .35, 30: .40, 40: .42, 49: .40})
     assert classify(p_only)["verdict"] == "PRIMACY_ONLY"
     assert classify(mk({0: .5, 10: .48, 20: .47, 30: .5, 49: .52}))["verdict"] == "FLAT"
-    # a monotone rise must NOT read as recency-with-primacy
-    assert classify(mk({0: .2, 10: .3, 20: .4, 30: .5, 40: .6, 49: .7}))["verdict"] \
-        == "RECENCY_ONLY"
+    # a monotone rise must NOT read as recency-with-primacy, and must score
+    # NEGATIVE primacy so it can never drift into U_SHAPE
+    mono = classify(mk({0: .2, 10: .3, 20: .4, 30: .5, 40: .6, 49: .7}))
+    assert mono["verdict"] == "RECENCY_ONLY" and mono["primacy_index"] < 0, mono
+
+    # REGRESSION for the min-baseline bias: a flat curve whose interior has one
+    # unlucky low position must stay FLAT. Against interior MIN both indices
+    # would clear 0.10 and this would have read as a U-shape.
+    noisy_flat = mk({0: .50, 10: .49, 20: .38, 30: .50, 40: .51, 49: .52})
+    r = classify(noisy_flat)
+    assert r["verdict"] == "FLAT", r
+    assert r["first"] - r["interior_min"] > BARS["index"], \
+        "fixture no longer exercises the bias it was written for"
 
     def row(c, sf=1.0):
         return dict(curve=c, scorable_frac=sf)
