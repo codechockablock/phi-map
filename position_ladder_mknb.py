@@ -31,10 +31,13 @@ A100 assumed for all four rows so dtype is constant. Est. **~0.3 unit-hours per
 7-8B row, ~0.5 for 13B**; `CONFIRMED_BUDGET` is per-row and also enforced
 *during* the loop, not only at startup.
 
-**Runtime:** A100 ships with ~83 GB system RAM, so there is no high-RAM toggle to
-set. RAM is not the constraint — VRAM is, and cell [5] asserts that no layer got
-offloaded to CPU or disk, because `device_map="auto"` degrades silently rather
-than failing.
+**Runtime:** system RAM is not the constraint — weights stream shard-by-shard to
+GPU, so peak host RAM stays near one shard. **VRAM is the constraint.** On a
+40 GB A100, Llama-2-13B (26 GB of bf16 weights, MHA so no GQA on the KV cache)
+leaves little room: `BATCH = 4`, and cell [7] runs a warm-up probe at the worst-
+case prompt length that fails in seconds rather than OOMing mid-run. Cell [5]
+separately asserts nothing was offloaded to CPU or disk, since `device_map="auto"`
+degrades silently instead of failing.
 """)
 
 code('''# [1] preflight -- MODEL_KEY is the only thing you set
@@ -218,12 +221,38 @@ print("config hash", CFG_HASH)
 
 code('''# [7] generate -- greedy, checkpointed after EVERY position block
 import collections
-BATCH, MAXNEW = 8, 64
+# BATCH is a THROUGHPUT knob, not a design parameter: greedy decoding with
+# left-padding means batch composition does not change any row's answer. It is
+# held constant across models anyway so the rows stay strictly comparable.
+#
+# It is 4, not 8, because Llama-2-13B is MHA (40 layers x 40 heads x 128, no
+# GQA) and its KV cache at batch 8 x ~2600 tokens is ~17 GB on top of 26 GB of
+# weights -- over a 40 GB card. The warm-up probe below settles it empirically
+# instead of trusting that arithmetic.
+BATCH, MAXNEW = 4, 64
 CKPT = f"gen_{MODEL_KEY}_{CFG_HASH}.json"
 
 done = fetch(CKPT) or {}
 if done:
     print(f"resuming: {len(done)} position blocks already persisted")
+
+# WARM-UP PROBE: one real batch at the real size and the real prompt length,
+# measuring peak VRAM. Fails in seconds instead of OOMing 300 batches into the
+# 13B row. The longest prompt is the worst case, so probe that one.
+torch.cuda.reset_peak_memory_stats()
+_probe = sorted(trials, key=lambda r: -len(r["prompt"]))[:BATCH]
+_enc = tok([served(r) for r in _probe], return_tensors="pt", padding=True,
+           add_special_tokens=False).to(model.device)
+with torch.no_grad():
+    model.generate(**_enc, max_new_tokens=MAXNEW, do_sample=False,
+                   pad_token_id=tok.pad_token_id)
+PEAK = torch.cuda.max_memory_allocated() / 1024**3
+print(f"warm-up: {_enc['input_ids'].shape} peak {PEAK:.1f} / {GIB:.1f} GiB "
+      f"({100 * PEAK / GIB:.0f}%)")
+assert PEAK < 0.90 * GIB, (
+    f"peak {PEAK:.1f} GiB is >90% of {GIB:.1f}; lower BATCH and re-run. Do NOT "
+    f"quantize and do not shorten the prompt -- N is fixed by the ladder.")
+del _enc; torch.cuda.empty_cache()
 
 by_pos = collections.defaultdict(list)
 for r in trials:
