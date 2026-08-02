@@ -129,18 +129,29 @@ code('''# [4] PHASE 0 -- access gate for ALL FOUR repos, then pin N
 from huggingface_hub import model_info
 from transformers import AutoTokenizer
 
+# model_info() is NOT a sufficient probe: repo metadata and SHA are PUBLIC for
+# gated repos, so it returns 200 for a repo you cannot read. This gate printed
+# four "ok"s and then 403'd on the very next line -- the gate checked what it
+# could check instead of what mattered, which is the failure it exists to
+# prevent. Resolve an actual FILE, which is the operation that is gated.
+from huggingface_hub import hf_hub_download
+
 bad = []
 for k, spec in PL.LADDER.items():
     try:
-        info = model_info(spec["hf"], token=HF_TOKEN)
-        print(f"  ok    {k:12s} {spec['hf']}  @{info.sha[:12]}")
+        hf_hub_download(spec["hf"], "config.json", token=HF_TOKEN)   # ~1 KB
+        sha = model_info(spec["hf"], token=HF_TOKEN).sha
+        print(f"  ok    {k:12s} {spec['hf']}  @{sha[:12]}")
     except Exception as e:
         bad.append((k, spec["hf"], type(e).__name__))
-        print(f"  FAIL  {k:12s} {spec['hf']}  {type(e).__name__}")
+        print(f"  FAIL  {k:12s} {spec['hf']}  {type(e).__name__}: "
+              f"{str(e).splitlines()[0][:90]}")
 assert not bad, (
-    f"gated/unavailable: {bad}. Accept the licence on huggingface.co under the "
-    "same account as HF_TOKEN, then re-run. Failing here costs nothing; failing "
-    "at load time costs the rows already run.")
+    f"cannot READ {[b[0] for b in bad]}. Request access on huggingface.co under "
+    f"the same account as HF_TOKEN: " + ", ".join(f"https://huggingface.co/{b[1]}"
+                                                   for b in bad) +
+    ". Meta gates by approval, not by clickthrough, so this can take a while. "
+    "Failing here costs nothing; failing at load time costs the rows already run.")
 
 # N is a context-window fact, fixed once by Llama-2's 4096 window -- the binding
 # constraint for the WHOLE ladder -- and identical for every row.
