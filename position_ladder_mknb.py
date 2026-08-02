@@ -247,23 +247,52 @@ done = fetch(CKPT) or {}
 if done:
     print(f"resuming: {len(done)} position blocks already persisted")
 
-# WARM-UP PROBE: one real batch at the real size and the real prompt length,
-# measuring peak VRAM. Fails in seconds instead of OOMing 300 batches into the
-# 13B row. The longest prompt is the worst case, so probe that one.
-torch.cuda.reset_peak_memory_stats()
-_probe = sorted(trials, key=lambda r: -len(r["prompt"]))[:BATCH]
-_enc = tok([served(r) for r in _probe], return_tensors="pt", padding=True,
-           add_special_tokens=False).to(model.device)
-with torch.no_grad():
-    model.generate(**_enc, max_new_tokens=MAXNEW, do_sample=False,
-                   pad_token_id=tok.pad_token_id)
-PEAK = torch.cuda.max_memory_allocated() / 1024**3
-print(f"warm-up: {_enc['input_ids'].shape} peak {PEAK:.1f} / {GIB:.1f} GiB "
-      f"({100 * PEAK / GIB:.0f}%)")
-assert PEAK < 0.90 * GIB, (
-    f"peak {PEAK:.1f} GiB is >90% of {GIB:.1f}; lower BATCH and re-run. Do NOT "
-    f"quantize and do not shorten the prompt -- N is fixed by the ladder.")
-del _enc; torch.cuda.empty_cache()
+# WARM-UP PROBE: real batch, real worst-case prompt length, measured peak VRAM.
+# Fails in seconds instead of OOMing 300 batches in. Backs off automatically:
+# Llama-2-13B at batch 4 lands ~38 GiB on a 40 GiB card and would otherwise
+# force a manual re-run.
+#
+# BATCH is a throughput knob, NOT a design parameter -- greedy decoding with
+# left-padding makes each sequence's forward pass independent, so batch size
+# cannot change which UUID a row retrieves. It is therefore allowed to vary per
+# model, is recorded in CONFIG, and is deliberately NOT one of the fields the
+# aggregator's comparability guard checks. N, dtype, seed and trial count are
+# design parameters and are held fixed.
+_probe_rows = sorted(trials, key=lambda r: -len(r["prompt"]))
+while True:
+    torch.cuda.empty_cache(); torch.cuda.reset_peak_memory_stats()
+    try:
+        _enc = tok([served(r) for r in _probe_rows[:BATCH]], return_tensors="pt",
+                   padding=True, add_special_tokens=False).to(model.device)
+        # Silent truncation would delete the FRONT of the JSON and hand back a
+        # clean recency curve that looks like a result. Assert, do not hope.
+        _ctx = 4096 if MODEL_KEY.startswith("llama2") else 8192
+        assert _enc["input_ids"].shape[1] + MAXNEW <= _ctx, (
+            f"worst-case prompt {_enc['input_ids'].shape[1]} + {MAXNEW} new "
+            f"exceeds the {_ctx} window; N was mis-selected at Phase 0")
+        with torch.no_grad():
+            model.generate(**_enc, max_new_tokens=MAXNEW, do_sample=False,
+                           pad_token_id=tok.pad_token_id)
+        PEAK = torch.cuda.max_memory_allocated() / 1024**3
+        ok = PEAK < 0.90 * GIB
+    except torch.cuda.OutOfMemoryError:
+        PEAK, ok = float("inf"), False
+    print(f"warm-up: batch {BATCH} len {_probe_rows[0] and _enc['input_ids'].shape[1]} "
+          f"peak {PEAK:.1f} / {GIB:.1f} GiB ({100 * PEAK / GIB:.0f}%) "
+          f"{'ok' if ok else 'too high, halving'}")
+    del _enc
+    if ok:
+        break
+    BATCH //= 2
+    assert BATCH >= 1, (
+        f"cannot fit even batch 1 in {GIB:.1f} GiB. Use a larger GPU. Do NOT "
+        f"quantize -- especially not on an anchor row -- and do not shorten the "
+        f"prompt, since N is fixed by the ladder.")
+torch.cuda.empty_cache()
+# Recorded separately, NOT folded into CONFIG: CFG_HASH is already computed and
+# keys the resume checkpoint, so a run that backs off to a smaller batch must
+# still resume the same file rather than starting over under a new key.
+BATCH_USED, PEAK_GIB = BATCH, round(PEAK, 2)
 
 by_pos = collections.defaultdict(list)
 for r in trials:
@@ -333,6 +362,7 @@ for b, items in buckets.items():
 summary = dict(protocol="POSITION_LADDER_V1", config=CONFIG, cfg_hash=CFG_HASH,
                result=row_result, verdict=verdict,
                anchor_prediction=PL.ANCHOR_PREDICTION.get(MODEL_KEY),
+               batch=BATCH_USED, peak_gib=PEAK_GIB, max_new_tokens=MAXNEW,
                wall_h=round(elapsed_h(), 3), gpu=p.name)
 blob = json.dumps(summary, indent=1).encode()
 persist(f"row_{MODEL_KEY}_{CFG_HASH}.json", blob)
