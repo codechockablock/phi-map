@@ -3,6 +3,26 @@
 **Status: frozen, 2026-07-30.** No further work is planned. The repository is kept
 for the record and for the one result worth writing up.
 
+## Start here — ten seconds, no GPU
+
+```bash
+python demo/decline_rate_is_not_a_metric.py
+```
+
+Decline rate is a standard evaluation endpoint. On this task the same underlying
+behaviour reads anywhere from **1.000 to 0.000** on the same model, the same scenarios
+and the same seed — moved only by which line of a file catalog a path landed on and
+whether the answer was multiple choice. Both are properties of the harness. Neither
+would show up in a regression test.
+
+Swapping two catalog lines reverses **64 of 64** decisions. The run that established
+that was pre-registered against the author's own prior result, with committed numeric
+predictions for both competing accounts — and it invalidated four earlier runs, which
+are now in the VOID block of [RESEARCH_ARC.md](RESEARCH_ARC.md).
+
+Every number the demo prints is read live from a committed artifact and cites its
+source file. See [demo/CAPABILITY_BRIEF.md](demo/CAPABILITY_BRIEF.md).
+
 Research repo that began as one question — *is deception one thing inside a
 model and many things outside it?* — and ended up somewhere narrower and better
 supported.
